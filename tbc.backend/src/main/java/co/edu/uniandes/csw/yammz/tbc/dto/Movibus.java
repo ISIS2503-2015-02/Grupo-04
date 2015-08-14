@@ -15,7 +15,24 @@ public class Movibus extends Vehiculo {
     // Atributos
     //-----------------------------------------------------------
     
-    public Movibus() {
-        
+    private PedidoMovibus pedidoMovibus;
+    
+    public Movibus(Direccion posicion) {
+        super(posicion);
+        this.pedidoMovibus=null;
+    }
+    
+    public PedidoMovibus getPedidoMovibus() {
+        return pedidoMovibus;
+    }
+    
+    public void liberarMovibus() {
+        pedidoMovibus=null;
+        this.setEstado(DISPONIBLE);
+    }
+    
+    public void reservarMovibus(PedidoMovibus pedidoMovibus) {
+        this.pedidoMovibus=pedidoMovibus;
+        this.setEstado(OCUPADO);
     }
 }

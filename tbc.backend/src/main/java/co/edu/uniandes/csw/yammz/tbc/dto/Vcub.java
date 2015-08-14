@@ -11,7 +11,18 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  */
 public class Vcub extends Vehiculo {
     
-    public Vcub() {
-        
+    private Usuario usuario;
+    
+    public Vcub(Direccion posicion) {
+        super(posicion);
+        usuario=null;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario=usuario;
     }
 }

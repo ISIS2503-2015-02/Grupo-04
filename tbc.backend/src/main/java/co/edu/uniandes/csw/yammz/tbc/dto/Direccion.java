@@ -17,21 +17,44 @@ public class Direccion {
     
     private int numero;
     
-    public Direccion(int calle, int carrera, int numero) {
+    private String detalles;
+    
+    public Direccion(int calle, int carrera, int numero, String detalles) {
         this.calle=calle;
         this.carrera=carrera;
         this.numero=numero;
+        this.detalles=detalles;
     }
     
     public int getCalle() {
         return calle;
     }
     
+    public void setCalle(int calle) {
+        this.calle=calle;
+    }
+    
     public int getCarrera() {
         return carrera;
     }
     
+    public void setCarrera(int carrera) {
+        this.carrera=carrera;
+    }
+    
     public int getNumero() {
         return numero;
+    }
+    
+    public void setNumero(int numero) {
+        this.numero=numero;
+    }
+    
+    public String getDetalles() {
+        return detalles;
+    }
+    
+    public void setDetalles(String detalles) {
+        this.detalles=detalles;
     }
 }

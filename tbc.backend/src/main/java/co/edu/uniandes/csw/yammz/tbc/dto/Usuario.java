@@ -11,9 +11,9 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  */
 public class Usuario {
     
-    private String nombre;
+    private final String nombre;
     
-    private String cedula;
+    private final String cedula;
     
     private String celular;
     

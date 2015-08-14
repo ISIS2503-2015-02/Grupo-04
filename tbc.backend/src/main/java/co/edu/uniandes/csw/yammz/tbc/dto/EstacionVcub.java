@@ -13,9 +13,9 @@ import java.util.LinkedList;
  */
 public class EstacionVcub {
     
-    private int capacidad;
+    private final int capacidad;
         
-    private LinkedList<Vcub> vcubs;
+    private final LinkedList<Vcub> vcubs;
     
     public EstacionVcub(int capacidad) {
         this.capacidad=capacidad;
@@ -38,7 +38,8 @@ public class EstacionVcub {
         vcubs.add(vcub);
     }
     
-    public Vcub prestarVcub() {
-        return vcubs.remove();
+    public Vcub prestarVcub(Usuario usuario) {
+        Vcub vcub = vcubs.remove();
+        return vcub;
     }
 }

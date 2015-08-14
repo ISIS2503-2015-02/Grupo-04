@@ -53,6 +53,12 @@ public class Vehiculo {
     // Metodos
     //-----------------------------------------------------------
     
+    public Vehiculo(Direccion posicion) {
+        this.posicion=posicion;
+        estado=DISPONIBLE;
+        kilometraje=0;
+    }
+    
     /**
      * Metodo encargado de obtener la posicion del vehiculo
      * @return posicion

@@ -39,7 +39,8 @@ public class Tranvia extends Vehiculo {
      */
     private int linea;
     
-    public Tranvia(int linea) {
+    public Tranvia(Direccion posicion,int linea) {
+        super(posicion);
         this.linea=linea;
     }
     
