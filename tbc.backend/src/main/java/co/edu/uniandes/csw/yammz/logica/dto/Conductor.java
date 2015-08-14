@@ -6,12 +6,9 @@
 package co.edu.uniandes.csw.yammz.logica.dto;
 
 /**
- * Clase que representa un vcub en el sistema
- * @author cf.agudelo12
+ *
+ * @author cfagu
  */
-public class Vcub extends Vehiculo {
+public class Conductor {
     
-    public Vcub() {
-        
-    }
 }

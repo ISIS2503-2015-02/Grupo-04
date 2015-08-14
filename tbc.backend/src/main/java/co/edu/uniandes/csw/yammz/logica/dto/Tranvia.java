@@ -9,21 +9,30 @@ package co.edu.uniandes.csw.yammz.logica.dto;
  * Clase que representa un tranvia electrico en el sistema
  * @author cf.agudelo12
  */
-public class Tranvia {
+public class Tranvia extends Vehiculo {
+    
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_A=0;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_B=1;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_C=2;
     
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
-    
-    /**
-     * Posicion del tranvia
-     */
-    private String posicion;
-    
-    /**
-     * Estado del tranvia
-     */
-    private int estado;
     
     /**
      * Linea asignada al tranvia
@@ -31,22 +40,8 @@ public class Tranvia {
     private int linea;
     
     public Tranvia() {
- 
-    }
-        
-    public String getPosicion() {
-        return posicion;
+
     }
     
-    public void setPosicion(String posicion) {
-        this.posicion=posicion;
-    }
     
-    public int getEstado() {
-        return estado;
-    }
-    
-    public void setEstado(int estado) {
-        this.estado=estado;
-    }
 }

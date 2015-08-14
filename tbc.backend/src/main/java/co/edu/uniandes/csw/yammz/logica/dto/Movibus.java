@@ -9,22 +9,12 @@ package co.edu.uniandes.csw.yammz.logica.dto;
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
  */
-public class Movibus {
+public class Movibus extends Vehiculo {
     
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
     
-    /**
-     * Posicion del movibus
-     */
-    private String posicion;
-    
-    /**
-     * Estado del movibus
-     */
-    private int estado;
-
     public Movibus() {
         
     }
