@@ -14,11 +14,23 @@ import java.util.LinkedList;
  */
 public class PedidoMovibus {
     
-    private int estado;
-    
     private Date fechaPedido;
     
     private Date fechaEjecucion;
     
     private LinkedList<Direccion> ruta;
+    
+    private int tiempoEstimado;
+    
+    private int tiempoReal;
+    
+    public Usuario usuario; 
+    
+    public PedidoMovibus(Date fechaEjecucion,int tiempoEstimado,Usuario usuario) {
+        fechaPedido=new Date();
+        this.fechaEjecucion=fechaEjecucion;
+        this.tiempoEstimado=tiempoEstimado;
+        this.usuario=usuario;
+    }
+   
 }
