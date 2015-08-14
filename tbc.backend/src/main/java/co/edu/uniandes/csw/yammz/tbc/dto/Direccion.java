@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.yammz.logica.dto;
+package co.edu.uniandes.csw.yammz.tbc.dto;
 
 /**
  * Clase que representa la información de una direccion en la ciudad

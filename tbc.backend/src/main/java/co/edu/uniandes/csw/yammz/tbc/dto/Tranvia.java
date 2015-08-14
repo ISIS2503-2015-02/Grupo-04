@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.yammz.logica.dto;
+package co.edu.uniandes.csw.yammz.tbc.dto;
 
 /**
  * Clase que representa un tranvia electrico en el sistema
@@ -39,9 +39,15 @@ public class Tranvia extends Vehiculo {
      */
     private int linea;
     
-    public Tranvia() {
-
+    public Tranvia(int linea) {
+        this.linea=linea;
     }
     
+    public int getLinea() {
+        return linea;
+    }
     
+    public void setLinea(int linea) {
+        this.linea=linea;
+    }
 }
