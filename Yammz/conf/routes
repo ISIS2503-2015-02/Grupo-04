@@ -5,7 +5,6 @@
 # Home page
 GET     /                           controllers.Application.index()
 
-
 # API
 
 #POST        /usuario                controllers.UsuarioController.create()
@@ -35,6 +34,7 @@ POST        /tranvia/emergencia      controllers.TranviaController.reportarAccid
 GET         /reportes                controllers.ReporteController.getAll()
 
 GET         /reporte/:id             controllers.ReporteController.get(id : Long)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

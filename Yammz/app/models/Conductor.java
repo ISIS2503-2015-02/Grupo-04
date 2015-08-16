@@ -13,7 +13,9 @@ import javax.persistence.*;
  */
 @Entity
 public class Conductor extends Model{
-    
+    @Id
+    private long id;
+
     private final String nombre;
     
     private final String cedula;
