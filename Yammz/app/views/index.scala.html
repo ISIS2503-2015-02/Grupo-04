@@ -2,6 +2,9 @@
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message, style = "Java")
+    <form accion="@routes.TranviaController.create()" method="post">
+        <input type="text" name="name"/>
+        <Button> Agregar Tranvia</Button>
+    </form>
 
 }

@@ -4,22 +4,25 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+POST    /tranvia                    controllers.TranviaController.create()
 
 # API
 
-POST        /usuario                controllers.UsuarioController.create()
+#POST        /usuario                controllers.UsuarioController.create()
 
-GET         /usuario                controllers.UsuarioController.read()
+#GET         /usuario                controllers.UsuarioController.read()
 
-POST        /estacionvcub           controllers.EstacionVcubController.create()
+#POST        /estacionvcub           controllers.EstacionVcubController.create()
 
-GET         /estacionvcub           controllers.EstacionVcubController.read()
+#GET         /estacionvcub           controllers.EstacionVcubController.read()
 
-POST        /movibus                controllers.MovibusController.create()
+#POST        /movibus                controllers.MovibusController.create()
 
-GET         /movibus                controllers.MovibusController.read()
+#GET         /movibus                controllers.MovibusController.read()
 
-GET         /movibus/:id            controllers.MovibusController.get(id : Long)
+#GET         /movibus/:id            controllers.MovibusController.get(id : Long)
+
+
 
 
 # Map static resources from the /public folder to the /assets URL path
