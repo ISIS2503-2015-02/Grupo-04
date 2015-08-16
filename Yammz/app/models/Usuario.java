@@ -10,6 +10,10 @@ package models;
  * @author cf.agudelo12
  */
 public class Usuario {
+
+    //---------------------------------------------------------------------
+    //Atributos
+    //---------------------------------------------------------------------
     
     private final String nombre;
     
@@ -18,8 +22,14 @@ public class Usuario {
     private String celular;
     
     private String correo;
+
+    private int vCubsEnUso;
     
     private long tarjetaBancaria;
+
+    //---------------------------------------------------------------------
+    //Constructor
+    //---------------------------------------------------------------------
     
     public Usuario(String nombre,String cedula,String celular,String correo,long tarjetaBancaria) {
         this.nombre=nombre;
@@ -27,8 +37,13 @@ public class Usuario {
         this.celular=celular;
         this.correo=correo;
         this.tarjetaBancaria=tarjetaBancaria;
+        this.vCubsEnUso=0;
     }
-    
+
+    //---------------------------------------------------------------------
+    //Metodos
+    //---------------------------------------------------------------------
+
     public String getNombre() {
         return nombre;
     }
@@ -51,6 +66,28 @@ public class Usuario {
     
     public void setCorreo(String correo) {
         this.correo=correo;
+    }
+
+    public int getvCubsWnUso() {
+        return vCubsEnUso;
+    }
+
+    public void setvCubsEnUso(int vcubs) {
+        this.vCubsEnUso=vcubs;
+    }
+
+    /**
+     * Metodo que se encarga de aumentar en valor de 1 el numero de vCubs en uso por el usuario
+     */
+    public void agregarvCubEnUso() {
+        this.vCubsEnUso++;
+    }
+
+    /**
+     * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
+     */
+    public void devolvervCubEnUso() {
+        this.vCubsEnUso--;
     }
     
     public long getTarjetaBancaria() {
