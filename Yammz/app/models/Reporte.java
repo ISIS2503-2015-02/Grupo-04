@@ -1,9 +1,13 @@
 package models;
 
+import com.avaje.ebean.Model;
+import javax.persistence.*;
+
 /**
  * Created by g.martinez10 on 15/08/2015.
  */
-public class Reporte {
+@Entity
+public class Reporte extends Model{
 
 
     //---------------------------------------------------------------------
@@ -30,7 +34,7 @@ public class Reporte {
     private String tipoReporte;
 
     /**
-     * Descripción del reporte.
+     * Descripciï¿½n del reporte.
      */
     private String descripcion;
 
@@ -52,7 +56,8 @@ public class Reporte {
         if(tipoRep.equals(PEDIDO_BICICLETAS))
         {
             this.tipoReporte=PEDIDO_BICICLETAS;
-        }else
+        }
+        else
         {
             this.tipoReporte=EMERGENCIA_TRANVIA;
         }

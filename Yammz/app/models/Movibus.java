@@ -6,13 +6,13 @@
 package models;
 
 
-import com.avaje.ebean.Model;
+import javax.persistence.Entity;
 /**
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
  */
 @Entity
-public class Movibus extends Vehiculo extends Model{
+public class Movibus extends Vehiculo{
     
     //-----------------------------------------------------------
     // Atributos

@@ -8,7 +8,7 @@ package models;
 import java.util.LinkedList;
 
 import com.avaje.ebean.Model;
-
+import javax.persistence.*;
 /**
  *
  * @author cfagu

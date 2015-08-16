@@ -6,13 +6,13 @@
 package models;
 
 
-import com.avaje.ebean.Model;
+import javax.persistence.Entity;
 /**
  * Clase que representa un tranvia electrico en el sistema
  * @author cf.agudelo12
  */
 @Entity
-public class Tranvia extends Vehiculo extends Model{
+public class Tranvia extends Vehiculo{
     
     //-----------------------------------------------------------
     // Constantes

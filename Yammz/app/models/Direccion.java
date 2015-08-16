@@ -5,8 +5,8 @@
  */
 package models;
 
-
 import com.avaje.ebean.Model;
+import javax.persistence.*;
 /**
  * Clase que representa la información de una direccion en la ciudad
  * @author cf.agudelo12
