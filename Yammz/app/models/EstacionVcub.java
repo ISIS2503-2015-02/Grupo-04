@@ -25,6 +25,14 @@ public class EstacionVcub extends Model{
      * Cantidad actual de vcbus en la estacion.
      */
     private int vcubs;
+    /**
+     * Nombre estacion.
+     */
+    private String nombre;
+    /**
+     * Identificador de la esta estacion.
+     */
+    private int id;
 
     //------------------------------------------------------
     // Constructores
@@ -39,7 +47,7 @@ public class EstacionVcub extends Model{
      * Constructor con parametros.
      * @param capacidad Capacidad de la estacion.
      */
-    public EstacionVcub(int capacidad) {
+    public EstacionVcub(int capacidad,String nombre,int id) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
     }
@@ -62,6 +70,22 @@ public class EstacionVcub extends Model{
      */
     public int getVcubs() {
         return vcubs;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

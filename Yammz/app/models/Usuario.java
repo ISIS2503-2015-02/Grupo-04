@@ -13,26 +13,48 @@ package models;
 public class Usuario extends Model{
 
     //---------------------------------------------------------------------
-    //Atributos
+    // Atributos
     //---------------------------------------------------------------------
-    
-    private final String nombre;
-    
-    private final String cedula;
-    
-    private String celular;
-    
+
+    /**
+     * Nombre del usuario.
+     */
+    private String nombre;
+
+    /**
+     * Numbero de la cedula.
+     */
+    private int cedula;
+
+    /**
+     * Numero del celular.
+     */
+    private int celular;
+
+    /**
+     * Correo del usuario.
+     */
     private String correo;
 
+    /**
+     * Numero de biciletas vCubs que tiene prestadas a su nombre.
+     */
     private int vCubsEnUso;
-    
+
+    /**
+     * Numero de su tarjeta bancaria.
+     */
     private long tarjetaBancaria;
 
     //---------------------------------------------------------------------
-    //Constructor
+    // Constructor
     //---------------------------------------------------------------------
-    
-    public Usuario(String nombre,String cedula,String celular,String correo,long tarjetaBancaria) {
+
+    public Usuario(){
+
+    }
+
+    public Usuario(String nombre,int cedula,int celular,String correo,long tarjetaBancaria) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
@@ -42,22 +64,25 @@ public class Usuario extends Model{
     }
 
     //---------------------------------------------------------------------
-    //Metodos
+    // Metodos
     //---------------------------------------------------------------------
 
     public String getNombre() {
         return nombre;
     }
     
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
+    public void setCedula(int cedula) {
+    this.cedula=cedula;
+}
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
     
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular=celular;
     }
     
@@ -77,6 +102,13 @@ public class Usuario extends Model{
         this.vCubsEnUso=vcubs;
     }
 
+    public long getTarjetaBancaria() {
+        return tarjetaBancaria;
+    }
+
+    public void setTarjetaBancaria(long tarjetaBancaria) {
+        this.tarjetaBancaria=tarjetaBancaria;
+    }
     /**
      * Metodo que se encarga de aumentar en valor de 1 el numero de vCubs en uso por el usuario
      */
@@ -90,12 +122,5 @@ public class Usuario extends Model{
     public void devolvervCubEnUso() {
         this.vCubsEnUso--;
     }
-    
-    public long getTarjetaBancaria() {
-        return tarjetaBancaria;
-    }
-    
-    public void setTarjetaBancaria(long tarjetaBancaria) {
-        this.tarjetaBancaria=tarjetaBancaria;
-    }
+
 }
