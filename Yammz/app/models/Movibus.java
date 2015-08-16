@@ -9,6 +9,8 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
@@ -38,6 +40,9 @@ public class Movibus extends Model {
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
+
+    @Id
+    private long id;
 
     /**
      * Posicion del vehiculo

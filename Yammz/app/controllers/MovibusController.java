@@ -7,7 +7,6 @@ import models.Movibus;
 import models.PedidoMovibus;
 import play.libs.Json;
 import play.mvc.BodyParser;
-import play.mvc.Controller;
 import play.mvc.Result;
 
 import java.util.List;
@@ -45,13 +44,5 @@ public class MovibusController {
         else {
             return ok(Json.toJson(movibus));
         }
-    }
-
-    public Result registrarPedido() {
-        JsonNode j = request().body().asJson();
-        PedidoMovibus pedidoMovibus = Json.fromJson(j, PedidoMovibus.class);
-        Movibus movibus = (Movibus) new Model.Finder(String.class, Movibus.class).all().remove(0);
-        movibus.reservarMovibus(pedidoMovibus);
-        return ok(Json.toJson(movibus));
     }
 }

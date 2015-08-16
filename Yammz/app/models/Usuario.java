@@ -43,7 +43,7 @@ public class Usuario extends Model{
     /**
      * Numero de biciletas vCubs que tiene prestadas a su nombre.
      */
-    private int vCubsEnUso;
+    private int vcubsEnUso;
 
     /**
      * Numero de su tarjeta bancaria.
@@ -54,17 +54,13 @@ public class Usuario extends Model{
     // Constructor
     //---------------------------------------------------------------------
 
-    public Usuario(){
-
-    }
-
     public Usuario(String nombre,int cedula,int celular,String correo,long tarjetaBancaria) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
         this.correo=correo;
         this.tarjetaBancaria=tarjetaBancaria;
-        this.vCubsEnUso=0;
+        this.vcubsEnUso=0;
     }
 
     //---------------------------------------------------------------------
@@ -98,12 +94,12 @@ public class Usuario extends Model{
         this.correo=correo;
     }
 
-    public int getvCubsWnUso() {
-        return vCubsEnUso;
+    public int getvcubsEnUso() {
+        return vcubsEnUso;
     }
 
     public void setvCubsEnUso(int vcubs) {
-        this.vCubsEnUso=vcubs;
+        this.vcubsEnUso=vcubs;
     }
 
     public long getTarjetaBancaria() {
@@ -117,14 +113,14 @@ public class Usuario extends Model{
      * Metodo que se encarga de aumentar en valor de 1 el numero de vCubs en uso por el usuario
      */
     public void agregarvCubEnUso() {
-        this.vCubsEnUso++;
+        this.vcubsEnUso++;
     }
 
     /**
      * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
      */
     public void devolvervCubEnUso() {
-        this.vCubsEnUso--;
+        this.vcubsEnUso--;
     }
 
 }
