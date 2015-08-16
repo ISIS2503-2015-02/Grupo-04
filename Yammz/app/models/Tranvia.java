@@ -10,6 +10,10 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+
+
+
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,9 +48,11 @@ public class Tranvia extends Model {
     // Atributos
     //-----------------------------------------------------------
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
 
     /**
      * Posicion del vehiculo
@@ -180,7 +186,9 @@ public class Tranvia extends Model {
     public void update(Tranvia nuevoTranvia) {
         this.setPosicion((nuevoTranvia.getPosicion()));
         this.setEstado(nuevoTranvia.getEstado());
+        System.out.print(getEstado() + "\n");
         this.setKilometraje(nuevoTranvia.getKilometraje());
+        System.out.print(getKilometraje() + "\n");
         this.setLinea(nuevoTranvia.getLinea());
     }
 

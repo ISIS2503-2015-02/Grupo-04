@@ -29,7 +29,7 @@ public class TranviaController extends Controller{
         return ok(Json.toJson(tranvia));
     }
 
-    public Result get(){
+    public Result read(){
         List<Tranvia> tranvias = new Model.Finder(String.class, Tranvia.class).all();
         return ok(Json.toJson(tranvias));
     }
@@ -60,8 +60,12 @@ public class TranviaController extends Controller{
         }
     }
 
-    public Result reportarAccidente(String descripcion, int id)
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result reportarAccidente()
     {
+        JsonNode j = request().body().asJson();
+        String descripcion = j.findPath("descripcion").asText();
+        int id= j.findPath("id").asInt();
         Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,id);
         reporte.save();
         return ok("La emergencia fue registrada");

@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class ReporteController extends Controller {
 
-    public Result get(){
+    public Result read(){
         List<Reporte> reportes = new Model.Finder(String.class, Reporte.class).all();
         return ok(Json.toJson(reportes));
     }
 
-    public Result get(Long id) {
+    public Result get(Long id){
         Reporte reporte = (Reporte) new Model.Finder(Long.class, Reporte.class).byId(id);
         ObjectNode result = Json.newObject();
         if(reporte == null)
