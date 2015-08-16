@@ -24,17 +24,17 @@ GET     /                           controllers.Application.index()
 
 POST        /tranvia                 controllers.TranviaController.create()
 
-GET         /tranvias                controllers.TranviaController.get()
+GET         /tranvias                controllers.TranviaController.getAll()
 
-GET         /tranvia/{id}            controllers.TranviaController.get(id : int)
+GET         /tranvia/:id             controllers.TranviaController.get(id : Long)
 
-UPDATE      /tranvia                 controllers.TranviaController.update(id : int)
+PUT         /tranvia/update/:id      controllers.TranviaController.update(id : Long )
 
-POST        /tranvia/{id}            controllers.TranviaController.reportarAccidente(descripcion : String, id : int)
+POST        /tranvia/emergencia      controllers.TranviaController.reportarAccidente()
 
-GET         /reportes                controllers.ReporteController.get()
+GET         /reportes                controllers.ReporteController.getAll()
 
-GET         /reporte/{id}            controllers.ReporteController.get(id : int)s
+GET         /reporte/:id             controllers.ReporteController.get(id : Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

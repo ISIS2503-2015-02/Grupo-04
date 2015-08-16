@@ -10,6 +10,10 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Clase que representa un tranvia electrico en el sistema
  * @author cf.agudelo12
@@ -55,6 +59,8 @@ public class Tranvia extends Model {
      */
     private int kilometraje;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     //-----------------------------------------------------------
     // Constantes
@@ -171,7 +177,9 @@ public class Tranvia extends Model {
     public void update(Tranvia nuevoTranvia) {
         this.setPosicion((nuevoTranvia.getPosicion()));
         this.setEstado(nuevoTranvia.getEstado());
+        System.out.print(getEstado() + "\n");
         this.setKilometraje(nuevoTranvia.getKilometraje());
+        System.out.print(getKilometraje() + "\n");
         this.setLinea(nuevoTranvia.getLinea());
     }
 
