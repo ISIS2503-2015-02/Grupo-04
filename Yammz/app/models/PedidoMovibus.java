@@ -12,7 +12,8 @@ import java.util.LinkedList;
  * 
  * @author cfagu
  */
-public class PedidoMovibus {
+@Entity
+public class PedidoMovibus extends Model{
     
     private final Date fechaPedido;
     

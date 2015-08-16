@@ -9,7 +9,8 @@ package models;
  * Clase que representa la información de una direccion en la ciudad
  * @author cf.agudelo12
  */
-public class Direccion {
+@Entity
+public class Direccion extends Model{
     
     private int calle;
     

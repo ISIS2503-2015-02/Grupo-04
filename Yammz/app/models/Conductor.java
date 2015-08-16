@@ -9,7 +9,8 @@ package models;
  *
  * @author cfagu
  */
-public class Conductor {
+@Entity
+public class Conductor extends Model{
     
     private final String nombre;
     

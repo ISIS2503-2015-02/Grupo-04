@@ -11,7 +11,8 @@ import java.util.LinkedList;
  *
  * @author cfagu
  */
-public class EstacionVcub {
+@Entity
+public class EstacionVcub extends Model{
     //------------------------------------------------------
     // Atributos
     //------------------------------------------------------

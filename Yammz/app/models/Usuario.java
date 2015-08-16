@@ -9,7 +9,8 @@ package models;
  *
  * @author cf.agudelo12
  */
-public class Usuario {
+@Entity
+public class Usuario extends Model{
 
     //---------------------------------------------------------------------
     //Atributos

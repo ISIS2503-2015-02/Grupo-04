@@ -9,7 +9,8 @@ package models;
  * Clase que representa un tranvia electrico en el sistema
  * @author cf.agudelo12
  */
-public class Tranvia extends Vehiculo {
+@Entity
+public class Tranvia extends Vehiculo extends Model{
     
     //-----------------------------------------------------------
     // Constantes

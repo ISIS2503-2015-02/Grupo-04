@@ -9,7 +9,8 @@ package models;
  * 
  * @author cfagu
  */
-public class Vehiculo {
+@Entity
+public class Vehiculo extends Model{
     
     //-----------------------------------------------------------
     // Constantes

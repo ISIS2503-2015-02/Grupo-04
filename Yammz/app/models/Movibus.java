@@ -9,7 +9,8 @@ package models;
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
  */
-public class Movibus extends Vehiculo {
+@Entity
+public class Movibus extends Vehiculo extends Model{
     
     //-----------------------------------------------------------
     // Atributos
