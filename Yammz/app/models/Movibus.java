@@ -15,10 +15,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Movibus extends Model {
-    
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
+
     //-----------------------------------------------------------
     // Constantes
     //-----------------------------------------------------------
@@ -57,6 +54,9 @@ public class Movibus extends Model {
      */
     private int kilometraje;
 
+    /**
+     * Pedido del movibus
+     */
     private PedidoMovibus pedidoMovibus;
     
     public Movibus(Direccion posicion) {
@@ -65,18 +65,7 @@ public class Movibus extends Model {
         estado=DISPONIBLE;
         kilometraje=0;
     }
-    
-    public PedidoMovibus getPedidoMovibus() {
-        return pedidoMovibus;
-    }
-    
-    public void liberarMovibus() {
-        pedidoMovibus=null;
-    }
-    
-    public void reservarMovibus(PedidoMovibus pedidoMovibus) {
-        this.pedidoMovibus=pedidoMovibus;
-    }
+
     /**
      * Metodo encargado de obtener la posicion del vehiculo
      * @return posicion
@@ -122,5 +111,18 @@ public class Movibus extends Model {
      */
     public void revisarVehiculo() {
         kilometraje=0;
+    }
+
+    public PedidoMovibus getPedidoMovibus() {
+        return pedidoMovibus;
+    }
+    
+    public void liberarMovibus() {
+        pedidoMovibus=null;
+    }
+    
+    public void reservarMovibus(PedidoMovibus pedidoMovibus) {
+        this.pedidoMovibus=pedidoMovibus;
+        this.estado=OCUPADO;
     }
 }
