@@ -1,8 +1,9 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Tranvia;
-import play.data.Form;
-import play.db.ebean.Transactional;
+import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -15,12 +16,12 @@ public class TranviaController extends Controller{
      * Metodo encargado de crear un tranvia
      * @return si se logra crear el tranvia
      */
-    @Transactional
-    public Result create(){
-        Tranvia tranvia= Form.form(Tranvia.class).bindFromRequest().get();
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result create() {
+        JsonNode j = request().body().asJson();
+        Tranvia tranvia = Json.fromJson(j, Tranvia.class);
         tranvia.save();
-
-        return ok("Se ha creado el nuevo tranvia");
+        return ok(Json.toJson(tranvia));
     }
 
 
