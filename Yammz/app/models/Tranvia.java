@@ -7,6 +7,7 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -58,6 +59,8 @@ public class Tranvia extends Model {
      * Kilometraje del vehiculo transcurrido desde revision
      */
     private int kilometraje;
+
+    private int id;
     //-----------------------------------------------------------
     // Constantes
     //-----------------------------------------------------------
@@ -109,6 +112,8 @@ public class Tranvia extends Model {
         return posicion;
     }
 
+    public int getId(){ return id;}
+    public void setId(int id){this.id=id;}
     /**
      * Metodo encargado de cambiar la posicion del vehiculo
      * @param posicion
@@ -126,13 +131,20 @@ public class Tranvia extends Model {
     }
 
     /**
+     * Metodo encargado de cambiar el kilometraje del vehiculo
+     * @param kilometraje
+     */
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje=kilometraje;
+    }
+
+    /**
      * Metodo encargado de cambiar el estado del vehiculo
      * @param estado
      */
     public void setEstado(int estado) {
         this.estado=estado;
     }
-
     /**
      * Metodo encargado de obtener el kilometraje del vehiculo
      * @return kilometraje
@@ -147,4 +159,25 @@ public class Tranvia extends Model {
     public void revisarVehiculo() {
         kilometraje=0;
     }
+
+    /**
+     * Crea un objeto Tranvia apartir de un nodo Json
+     * @param j Nodo Json con atributos y valores de un objeto Tranvia
+     */
+    public static Tranvia bind(JsonNode j) {
+        Direccion posicion = null;
+        int estado = j.findPath("estado").asInt();
+        int kilometraje = j.findPath("kilometraje").asInt();
+        int linea = j.findPath("linea").asInt();
+        Tranvia tranvia = new Tranvia(posicion, linea);
+        return tranvia;
+    }
+
+    public void update(Tranvia nuevoTranvia) {
+        this.setPosicion((nuevoTranvia.getPosicion()));
+        this.setEstado(nuevoTranvia.getEstado());
+        this.setKilometraje(nuevoTranvia.getKilometraje());
+        this.setLinea(nuevoTranvia.getLinea());
+    }
+
 }
