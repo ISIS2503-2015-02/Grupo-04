@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ReporteController extends Controller {
 
-    public Result getAll(){
+    public Result read(){
         List<Reporte> reportes = new Model.Finder(String.class, Reporte.class).all();
         return ok(Json.toJson(reportes));
     }

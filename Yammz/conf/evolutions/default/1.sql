@@ -4,10 +4,12 @@
 # --- !Ups
 
 create table conductor (
+  id                        bigint not null,
   nombre                    varchar(255),
   cedula                    varchar(255),
   celular                   varchar(255),
-  correo                    varchar(255))
+  correo                    varchar(255),
+  constraint pk_conductor primary key (id))
 ;
 
 create table direccion (
@@ -18,15 +20,18 @@ create table direccion (
 ;
 
 create table estacion_vcub (
+  id                        bigint not null,
   capacidad                 integer,
   vcubs                     integer,
   nombre                    varchar(255),
-  id                        integer)
+  constraint pk_estacion_vcub primary key (id))
 ;
 
 create table movibus (
+  id                        bigint not null,
   estado                    integer,
-  kilometraje               integer)
+  kilometraje               integer,
+  constraint pk_movibus primary key (id))
 ;
 
 create table pedido_movibus (
@@ -56,7 +61,7 @@ create table usuario (
   cedula                    integer,
   celular                   integer,
   correo                    varchar(255),
-  v_cubs_en_uso             integer,
+  vcubs_en_uso              integer,
   tarjeta_bancaria          bigint)
 ;
 
@@ -64,6 +69,12 @@ create table vehiculo (
   estado                    integer,
   kilometraje               integer)
 ;
+
+create sequence conductor_seq;
+
+create sequence estacion_vcub_seq;
+
+create sequence movibus_seq;
 
 
 
@@ -91,4 +102,10 @@ drop table if exists usuario;
 drop table if exists vehiculo;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists conductor_seq;
+
+drop sequence if exists estacion_vcub_seq;
+
+drop sequence if exists movibus_seq;
 

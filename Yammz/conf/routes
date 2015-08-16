@@ -23,7 +23,7 @@ GET     /                           controllers.Application.index()
 
 POST        /tranvia                 controllers.TranviaController.create()
 
-GET         /tranvias                controllers.TranviaController.getAll()
+GET         /tranvias                controllers.TranviaController.read()
 
 GET         /tranvia/:id             controllers.TranviaController.get(id : Long)
 
@@ -31,7 +31,7 @@ PUT         /tranvia/update/:id      controllers.TranviaController.update(id : L
 
 POST        /tranvia/emergencia      controllers.TranviaController.reportarAccidente()
 
-GET         /reportes                controllers.ReporteController.getAll()
+GET         /reportes                controllers.ReporteController.read()
 
 GET         /reporte/:id             controllers.ReporteController.get(id : Long)
 

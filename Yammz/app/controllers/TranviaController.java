@@ -29,7 +29,7 @@ public class TranviaController extends Controller{
         return ok(Json.toJson(tranvia));
     }
 
-    public Result getAll(){
+    public Result read(){
         List<Tranvia> tranvias = new Model.Finder(String.class, Tranvia.class).all();
         return ok(Json.toJson(tranvias));
     }
