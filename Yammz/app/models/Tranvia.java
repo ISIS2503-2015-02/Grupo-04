@@ -5,6 +5,8 @@
  */
 package models;
 
+
+import com.avaje.ebean.Model;
 /**
  * Clase que representa un tranvia electrico en el sistema
  * @author cf.agudelo12

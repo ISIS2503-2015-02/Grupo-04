@@ -5,6 +5,7 @@
  */
 package models;
 
+import com.avaje.ebean.Model;
 /**
  *
  * @author cfagu

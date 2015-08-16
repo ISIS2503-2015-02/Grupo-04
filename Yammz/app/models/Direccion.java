@@ -5,6 +5,8 @@
  */
 package models;
 
+
+import com.avaje.ebean.Model;
 /**
  * Clase que representa la información de una direccion en la ciudad
  * @author cf.agudelo12

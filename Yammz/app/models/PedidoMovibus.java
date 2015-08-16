@@ -8,6 +8,8 @@ package models;
 import java.util.Date;
 import java.util.LinkedList;
 
+import com.avaje.ebean.Model;
+
 /**
  * 
  * @author cfagu

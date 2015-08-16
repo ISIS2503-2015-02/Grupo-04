@@ -5,6 +5,8 @@
  */
 package models;
 
+
+import com.avaje.ebean.Model;
 /**
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
