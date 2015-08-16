@@ -7,39 +7,115 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
 
 import java.util.LinkedList;
 
+import javax.persistence.*;
 /**
- * 
+ *
  * @author cfagu
  */
+@Entity
 public class EstacionVcub {
-    
-    private final int capacidad;
-        
-    private final LinkedList<Vcub> vcubs;
-    
-    public EstacionVcub(int capacidad) {
-        this.capacidad=capacidad;
-        vcubs=new LinkedList<>();
+    //------------------------------------------------------
+    // Atributos
+    //------------------------------------------------------
+    /**
+     * Capacidad de vcubs.
+     */
+    private int capacidad;
+
+    /**
+     * Cantidad actual de vcbus en la estacion.
+     */
+    private int vcubs;
+    /**
+     * Nombre estacion.
+     */
+    private String nombre;
+    /**
+     * Identificador de la esta estacion.
+     */
+    private int id;
+
+    //------------------------------------------------------
+    // Constructores
+    //------------------------------------------------------
+    /**
+     * Constructor sin parametros.
+     */
+    public EstacionVcub() {
     }
-    
+
+    /**
+     * Constructor con parametros.
+     * @param capacidad Capacidad de la estacion.
+     */
+    public EstacionVcub(int capacidad,String nombre,int id) {
+        this.capacidad=capacidad;
+        this.vcubs=capacidad;
+    }
+
+
+    //------------------------------------------------------
+    // Metodos
+    //------------------------------------------------------
+    /**
+     * Devuelve la capacidad de la estacion.
+     * @return int capacidad
+     */
     public int getCapacidad() {
         return capacidad;
     }
-    
-    public LinkedList<Vcub> getVcubs() {
+
+    /**
+     * Devuelve la cantidad de vcubs en la estacion.
+     * @return int cantidadVcubs
+     */
+    public int getVcubs() {
         return vcubs;
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Verifica si la cantidad de vcubs baja del 10% de la capacidad.
+     * @return true si necesita solicitar vcubs, false de lo contrario.
+     */
     public boolean solicitarVcbus() {
-        return vcubs.size()/capacidad<=0.1;
+        return vcubs/capacidad<=0.1;
     }
-    
-    public void agregarVcub(Vcub vcub) {
-        vcubs.add(vcub);
+
+    /**
+     * Agrega la cantidad de vcubs a la estacion.
+     * @param vcub Capacidad de vcubs que llegan a la estacion.
+     */
+    public void agregarVcub(int vcub) {
+        vcubs+=vcub;
     }
-    
-    public Vcub prestarVcub(Usuario usuario) {
-        Vcub vcub = vcubs.remove();
-        return vcub;
+
+    /**
+     * Presta una vcub de la estacion.
+     */
+    public void prestarVcub() {
+        vcubs--;
+    }
+
+    /**
+     * Restituye una vcub de la estacion.
+     */
+    public void restituirVcub() {
+        vcubs++;
     }
 }

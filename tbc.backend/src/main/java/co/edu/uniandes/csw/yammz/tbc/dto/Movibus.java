@@ -9,7 +9,7 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  * Clase que representa un movibus en el sistema
  * @author cf.agudelo12
  */
-public class Movibus extends Vehiculo {
+public class Movibus extends Vehiculo{
     
     //-----------------------------------------------------------
     // Atributos
@@ -25,7 +25,11 @@ public class Movibus extends Vehiculo {
     public PedidoMovibus getPedidoMovibus() {
         return pedidoMovibus;
     }
-    
+    /*
+    public void setPedidoMovibus(PedidoMovibus pedidoMovibus) {
+        this.pedidoMovibus=pedidoMovibus;
+    }*/
+
     public void liberarMovibus() {
         pedidoMovibus=null;
         this.setEstado(DISPONIBLE);

@@ -11,36 +11,21 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  */
 public class Direccion {
     
-    private int calle;
-    
-    private int carrera;
+    private int principal;
     
     private int numero;
     
     private String detalles;
     
-    public Direccion(int calle, int carrera, int numero, String detalles) {
-        this.calle=calle;
-        this.carrera=carrera;
+    public Direccion(int principal, int numero, String detalles) {
+        this.principal=principal;
         this.numero=numero;
         this.detalles=detalles;
     }
     
-    public int getCalle() {
-        return calle;
-    }
+    public int getPrincipal() { return principal; }
     
-    public void setCalle(int calle) {
-        this.calle=calle;
-    }
-    
-    public int getCarrera() {
-        return carrera;
-    }
-    
-    public void setCarrera(int carrera) {
-        this.carrera=carrera;
-    }
+    public void setPrincipal(int principal) { this.principal=principal; }
     
     public int getNumero() {
         return numero;
