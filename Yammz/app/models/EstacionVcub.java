@@ -20,6 +20,7 @@ public class EstacionVcub extends Model{
     //------------------------------------------------------
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
     /**

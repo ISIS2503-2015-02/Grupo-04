@@ -7,8 +7,11 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -42,7 +45,8 @@ public class Movibus extends Model {
     //-----------------------------------------------------------
 
     @Id
-    private long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * Posicion del vehiculo
@@ -65,10 +69,18 @@ public class Movibus extends Model {
     private PedidoMovibus pedidoMovibus;
     
     public Movibus(Direccion posicion) {
-        this.pedidoMovibus=null;
+        pedidoMovibus=null;
         this.posicion=posicion;
         estado=DISPONIBLE;
         kilometraje=0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id=id;
     }
 
     /**
@@ -111,6 +123,8 @@ public class Movibus extends Model {
         return kilometraje;
     }
 
+    public void setKilometraje(int kilometraje) {this.kilometraje=kilometraje;}
+
     /**
      * Metodo encargado de registrar la revision de un vehiculo
      */
@@ -129,5 +143,18 @@ public class Movibus extends Model {
     public void reservarMovibus(PedidoMovibus pedidoMovibus) {
         this.pedidoMovibus=pedidoMovibus;
         this.estado=OCUPADO;
+    }
+
+    public static Movibus bind(JsonNode j) {
+        Direccion posicion = null;
+        int estado = j.findPath("estado").asInt();
+        PedidoMovibus pedidoMovibus = null;
+        return new Movibus(posicion);
+    }
+
+    public void update(Movibus movibus) {
+        this.setEstado(movibus.getEstado());
+        this.setPosicion(movibus.getPosicion());
+        this.setKilometraje(movibus.getKilometraje());
     }
 }

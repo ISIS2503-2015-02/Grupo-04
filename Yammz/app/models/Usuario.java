@@ -7,8 +7,13 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author cf.agudelo12
@@ -19,6 +24,10 @@ public class Usuario extends Model{
     //---------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
 
     /**
      * Nombre del usuario.
@@ -94,11 +103,11 @@ public class Usuario extends Model{
         this.correo=correo;
     }
 
-    public int getvcubsEnUso() {
+    public int getVcubsEnUso() {
         return vcubsEnUso;
     }
 
-    public void setvCubsEnUso(int vcubs) {
+    public void setVcubsEnUso(int vcubs) {
         this.vcubsEnUso=vcubs;
     }
 
@@ -112,15 +121,31 @@ public class Usuario extends Model{
     /**
      * Metodo que se encarga de aumentar en valor de 1 el numero de vCubs en uso por el usuario
      */
-    public void agregarvCubEnUso() {
+    public void agregarVcubEnUso() {
         this.vcubsEnUso++;
     }
 
     /**
      * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
      */
-    public void devolvervCubEnUso() {
+    public void devolverVcubEnUso() {
         this.vcubsEnUso--;
     }
 
+    public static Usuario bind(JsonNode j) {
+        String nombre=j.findPath("nombre").asText();
+        int cedula=j.findPath("cedula").asInt();
+        int celular=j.findPath("celular").asInt();
+        String correo=j.findPath("correo").asText();
+        long tarjetaBancaria=j.findPath("tarjetaBancaria").asLong();
+        return new Usuario(nombre,cedula,celular,correo,tarjetaBancaria);
+    }
+
+    public void update(Usuario usuario) {
+        this.setCedula(usuario.getCedula());
+        this.setCelular(usuario.getCelular());
+        this.setCorreo(usuario.getCorreo());
+        this.setTarjetaBancaria(usuario.getTarjetaBancaria());
+        this.setVcubsEnUso(usuario.getVcubsEnUso());
+    }
 }

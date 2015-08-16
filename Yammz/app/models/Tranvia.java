@@ -10,6 +10,8 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -43,6 +45,7 @@ public class Tranvia extends Model {
     //-----------------------------------------------------------
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
     /**
@@ -60,7 +63,6 @@ public class Tranvia extends Model {
      */
     private int kilometraje;
 
-    private int id;
     //-----------------------------------------------------------
     // Constantes
     //-----------------------------------------------------------
@@ -112,8 +114,10 @@ public class Tranvia extends Model {
         return posicion;
     }
 
-    public int getId(){ return id;}
-    public void setId(int id){this.id=id;}
+    public long getId(){ return id;}
+
+    public void setId(long id){this.id=id;}
+
     /**
      * Metodo encargado de cambiar la posicion del vehiculo
      * @param posicion

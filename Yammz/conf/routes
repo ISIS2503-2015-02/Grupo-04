@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index()
 POST    /tranvia                    controllers.TranviaController.create()
+GET     /movibus                controllers.MovibusController.read()
+POST     /movibus                controllers.MovibusController.create()
 
 # API
 
