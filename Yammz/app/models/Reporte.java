@@ -1,7 +1,8 @@
 package models;
 
 import com.avaje.ebean.Model;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
 
 /**
  * Created by g.martinez10 on 15/08/2015.
@@ -17,12 +18,12 @@ public class Reporte extends Model{
     /**
      * Constante que define que si el reporte es para realizar un pedido de biciletas a una estacion
      */
-    private final String PEDIDO_BICICLETAS="Pedidoo bicicletas";
+    public final static String PEDIDO_BICICLETAS="Pedidoo bicicletas";
 
     /**
      * Constante que define que si el reporte es para reportar una emergencia de un tranvia
      */
-    private final String EMERGENCIA_TRANVIA="Emergencia Tranvia";
+    public final static String EMERGENCIA_TRANVIA="Emergencia Tranvia";
 
     //---------------------------------------------------------------------
     // Atributos
@@ -42,6 +43,7 @@ public class Reporte extends Model{
      * Identificador de la estacion o tranvia que creo el reporte.
      */
     private int id;
+
 
     //---------------------------------------------------------------------
     // Constructores
