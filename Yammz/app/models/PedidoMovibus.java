@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+
 import javax.persistence.*;
 
 /**
@@ -34,14 +36,14 @@ public class PedidoMovibus extends Model{
     
     public Conductor conductor;
     
-    public PedidoMovibus(Date fechaEjecucion,int tiempoEstimado,Usuario usuario,Movibus movibus,Conductor conductor) {
+    public PedidoMovibus() {
+        ruta=new LinkedList<>();
         fechaPedido=new Date();
-        this.fechaEjecucion=fechaEjecucion;
-        this.tiempoEstimado=tiempoEstimado;
-        this.usuario=usuario;
-        this.movibus=movibus;
-        this.conductor=conductor;
-        movibus.reservarMovibus(this);
+        this.fechaEjecucion=null;
+        this.tiempoEstimado=0;
+        this.usuario=null;
+        this.movibus=null;
+        this.conductor=null;
     }
    
     public Date getFechaPedido() {
@@ -74,5 +76,30 @@ public class PedidoMovibus extends Model{
     
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario=usuario;
+    }
+
+    public Movibus getMovibus() {
+        return movibus;
+    }
+    
+    public  void setMovibus(Movibus movibus) {
+        this.movibus=movibus;
+    }
+
+    public Conductor getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Conductor conductor) {
+        this.conductor=conductor;
+    }
+
+    public static PedidoMovibus bind(JsonNode j) {
+        int tiempoEstimado=j.findPath("tiempoEstimado").asInt();
+        return new PedidoMovibus();
     }
 }

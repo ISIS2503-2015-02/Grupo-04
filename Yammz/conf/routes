@@ -5,11 +5,23 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+GET         /movibus                 controllers.MovibusController.read()
 
-GET     /movibus                controllers.MovibusController.read()
-POST     /movibus                controllers.MovibusController.create()
+POST        /movibus                 controllers.MovibusController.create()
 
+POST        /usuario                 controllers.UsuarioController.create()
 
+GET         /usuario                 controllers.UsuarioController.read()
+
+GET         /usuario/:id             controllers.UsuarioController.get(id : Long)
+
+POST        /usuario/:id/solicitarMovibus      controllers.UsuarioController.solicitarMovibus(id : Long)
+
+POST        /conductor               controllers.ConductorController.create()
+
+GET         /conductor               controllers.ConductorController.read()
+
+GET         /conductor/:id           controllers.ConductorController.get(id : Long)
 
 # API
 

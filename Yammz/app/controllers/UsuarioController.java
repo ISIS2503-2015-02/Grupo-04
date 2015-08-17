@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Conductor;
 import models.Movibus;
 import models.PedidoMovibus;
 import models.Usuario;
@@ -42,11 +43,17 @@ public class UsuarioController {
         }
     }
 
-    public Result solicitarMovibus() {
+    public Result solicitarMovibus(Long id) {
         JsonNode j = request().body().asJson();
+        Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
         PedidoMovibus pedidoMovibus = Json.fromJson(j, PedidoMovibus.class);
         Movibus movibus = (Movibus) new Model.Finder(String.class, Movibus.class).all().remove(0);
         movibus.reservarMovibus(pedidoMovibus);
-        return ok(Json.toJson(movibus));
+        Conductor conductor = (Conductor) new Model.Finder(String.class, Conductor.class).all().remove(0);
+        pedidoMovibus.save();
+        pedidoMovibus.setConductor(conductor);
+        pedidoMovibus.setMovibus(movibus);
+        pedidoMovibus.setUsuario(usuario);
+        return ok(Json.toJson(pedidoMovibus));
     }
 }

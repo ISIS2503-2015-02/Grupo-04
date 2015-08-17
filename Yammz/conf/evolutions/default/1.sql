@@ -4,10 +4,10 @@
 # --- !Ups
 
 create table conductor (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   nombre                    varchar(255),
-  cedula                    varchar(255),
-  celular                   varchar(255),
+  cedula                    integer,
+  celular                   integer,
   correo                    varchar(255),
   constraint pk_conductor primary key (id))
 ;
@@ -20,7 +20,7 @@ create table direccion (
 ;
 
 create table estacion_vcub (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   capacidad                 integer,
   vcubs                     integer,
   nombre                    varchar(255),
@@ -28,7 +28,7 @@ create table estacion_vcub (
 ;
 
 create table movibus (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   estado                    integer,
   kilometraje               integer,
   constraint pk_movibus primary key (id))
@@ -49,7 +49,7 @@ create table reporte (
 ;
 
 create table tranvia (
-  id                        integer auto_increment not null,
+  id                        bigint auto_increment not null,
   estado                    integer,
   kilometraje               integer,
   linea                     integer,
@@ -57,24 +57,20 @@ create table tranvia (
 ;
 
 create table usuario (
+  id                        bigint auto_increment not null,
   nombre                    varchar(255),
   cedula                    integer,
   celular                   integer,
   correo                    varchar(255),
   vcubs_en_uso              integer,
-  tarjeta_bancaria          bigint)
+  tarjeta_bancaria          bigint,
+  constraint pk_usuario primary key (id))
 ;
 
 create table vehiculo (
   estado                    integer,
   kilometraje               integer)
 ;
-
-create sequence conductor_seq;
-
-create sequence estacion_vcub_seq;
-
-create sequence movibus_seq;
 
 
 
@@ -102,10 +98,4 @@ drop table if exists usuario;
 drop table if exists vehiculo;
 
 SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists conductor_seq;
-
-drop sequence if exists estacion_vcub_seq;
-
-drop sequence if exists movibus_seq;
 

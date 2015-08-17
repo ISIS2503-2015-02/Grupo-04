@@ -62,14 +62,8 @@ public class Movibus extends Model {
      * Kilometraje del vehiculo transcurrido desde revision
      */
     private int kilometraje;
-
-    /**
-     * Pedido del movibus
-     */
-    private PedidoMovibus pedidoMovibus;
     
     public Movibus(Direccion posicion) {
-        pedidoMovibus=null;
         this.posicion=posicion;
         estado=DISPONIBLE;
         kilometraje=0;
@@ -132,16 +126,7 @@ public class Movibus extends Model {
         kilometraje=0;
     }
 
-    public PedidoMovibus getPedidoMovibus() {
-        return pedidoMovibus;
-    }
-    
-    public void liberarMovibus() {
-        pedidoMovibus=null;
-    }
-    
     public void reservarMovibus(PedidoMovibus pedidoMovibus) {
-        this.pedidoMovibus=pedidoMovibus;
         this.estado=OCUPADO;
     }
 
