@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.yammz.tbc.persistencia.mock;
 
+import co.edu.uniandes.csw.yammz.tbc.dto.Conductor;
 import co.edu.uniandes.csw.yammz.tbc.dto.EstacionVcub;
 import co.edu.uniandes.csw.yammz.tbc.dto.Movibus;
 import co.edu.uniandes.csw.yammz.tbc.dto.PedidoMovibus;
@@ -12,7 +13,6 @@ import co.edu.uniandes.csw.yammz.tbc.dto.Reporte;
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioPersistenciaMockLocal;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,6 +24,8 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     private static ArrayList<EstacionVcub> estacionesVcub;
     
     private static ArrayList<Movibus> movibuses;
+    
+    private static ArrayList<Conductor> conductores;
     
     private static ArrayList<PedidoMovibus> pedidosMovibus;
     
@@ -37,6 +39,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     public ServicioPersistenciaMock() {
         estacionesVcub=new ArrayList();
         movibuses=new ArrayList();
+        conductores=new ArrayList();
         pedidosMovibus=new ArrayList();
         reportes=new ArrayList();    
         tranvias=new ArrayList();        
@@ -51,8 +54,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
      * @param obj Objeto que representa la instancia de la entidad que se quiere crear.
      */
     @Override
-    public void create(Object obj)
-    {
+    public void create(Object obj) {
         if (obj instanceof Tranvia) {
             Tranvia t = (Tranvia) obj;
             t.setId(tranvias.size()+1);
@@ -60,8 +62,18 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
         }
         else if(obj instanceof Movibus) {
             Movibus movibus = (Movibus) obj;
-            movibus.setId(movibuses.size());
+            movibus.setId(movibuses.size()+1);
             movibuses.add(movibus);
+        }
+        else if(obj instanceof PedidoMovibus) {
+            PedidoMovibus pedidoMovibus = (PedidoMovibus) obj;
+            pedidoMovibus.setId(pedidosMovibus.size()+1);
+            pedidosMovibus.add(pedidoMovibus);
+        }
+        else if(obj instanceof Conductor) {
+            Conductor conductor = (Conductor) obj;
+            conductor.setId(conductores.size()+1);
+            conductores.add(conductor);
         }
     }
 
@@ -70,19 +82,20 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
      * @return list Listado de todos los objetos de una clase dada que se encuentran en el sistema.
      */
     @Override
-    public List findAll(Class c)
-    {
-        if (c.equals(Tranvia.class))
-        {
+    public List findAll(Class c) {
+        if (c.equals(Tranvia.class)) {
             return tranvias;
         } 
         else if(c.equals(Movibus.class)) {
             return movibuses;
         }
-        else
-        {
-            return null;
+        else if(c.equals(PedidoMovibus.class)) {
+            return pedidosMovibus;
         }
+        else if(c.equals(Conductor.class)) {
+            return conductores;
+        }
+        return null;
     }
 
     @Override
@@ -92,6 +105,22 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 Movibus movibus = (Movibus) v;
                 if (movibus.getId()==id) {
                     return movibus;
+                }
+            }
+        }
+        else if(c.equals(PedidoMovibus.class)) {
+            for (Object v : findAll(c)) {
+                PedidoMovibus pedidoMovibus = (PedidoMovibus) v;
+                if (pedidoMovibus.getId()==id) {
+                    return pedidoMovibus;
+                }
+            }
+        }
+        else if(c.equals(Conductor.class)) {
+            for (Object v : findAll(c)) {
+                Conductor conductor = (Conductor) v;
+                if (conductor.getId()==id) {
+                    return conductor;
                 }
             }
         }
@@ -111,16 +140,27 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 }
             }
         }
+        else if(obj instanceof Conductor) {
+            Conductor editar = (Conductor) obj;
+            Conductor conductor;
+            for (int i = 0; i < conductores.size(); i++) {
+                conductor = conductores.get(i);
+                if (conductor.getId()==editar.getId()) {
+                    conductores.set(i, editar);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public void delete(Object obj) {
-        if (obj instanceof Movibus) {
-            Movibus movibusABorrar = (Movibus) obj;
-            for (int e = 0; e < movibuses.size(); e++) {
-                Movibus movibus = (Movibus) movibuses.get(e);
-                if (movibus.getId()== movibusABorrar.getId()) {
-                    movibuses.remove(e);
+        if (obj instanceof Conductor) {
+            Conductor conductorABorrar = (Conductor) obj;
+            for (int e = 0; e < conductores.size(); e++) {
+                Conductor conductor = (Conductor) conductores.get(e);
+                if (conductor.getId()== conductorABorrar.getId()) {
+                    conductores.remove(e);
                     break;
                 }
             }

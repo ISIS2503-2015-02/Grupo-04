@@ -11,7 +11,7 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  */
 public class Conductor {
  
-    private Long id;
+    private long id;
 
     private final String nombre;
     
@@ -21,18 +21,25 @@ public class Conductor {
     
     private String correo;
     
-    public Conductor(String nombre,int cedula,int celular,String correo) {
+    public Conductor() {
+        nombre=null;
+        correo=null;
+        cedula=0;
+    }
+    
+    public Conductor(long id,String nombre,int cedula,int celular,String correo) {
+        this.id=id;
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
         this.correo=correo;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id=id;
     }
 

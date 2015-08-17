@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class PedidoMovibus {
 
-    private Long id;
+    private long id;
 
     private final Date fechaPedido;
     
@@ -22,7 +22,7 @@ public class PedidoMovibus {
     
     private LinkedList<Direccion> ruta;
     
-    private final int tiempoEstimado;
+    private int tiempoEstimado;
     
     private int tiempoReal;
 
@@ -47,12 +47,24 @@ public class PedidoMovibus {
         direccionUsuario=null;
         direccionDestino=null;
     }
+    
+    public PedidoMovibus(Date fechaEjecucion, Direccion direccionUsuario, Direccion direccionDestino) {
+        ruta=new LinkedList<>();
+        fechaPedido=new Date();
+        this.fechaEjecucion=fechaEjecucion;
+        tiempoEstimado=0;
+        usuario=null;
+        movibus=null;
+        conductor=null;
+        this.direccionUsuario=direccionUsuario;
+        this.direccionDestino=direccionDestino;
+    }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id=id;
     }
 
@@ -70,6 +82,10 @@ public class PedidoMovibus {
     
     public int getTiempoEstimado() {
         return tiempoEstimado;
+    }
+    
+    public void setTiempoEstimado(int tiempoEstimado) {
+        this.tiempoEstimado=tiempoEstimado;
     }
     
     public int getTiempoReal() {
