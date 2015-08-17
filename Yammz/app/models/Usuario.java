@@ -76,6 +76,14 @@ public class Usuario extends Model{
     // Metodos
     //---------------------------------------------------------------------
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id=id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -83,6 +91,7 @@ public class Usuario extends Model{
     public int getCedula() {
         return cedula;
     }
+
     public void setCedula(int cedula) {
     this.cedula=cedula;
 }

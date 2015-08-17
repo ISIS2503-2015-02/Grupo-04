@@ -19,7 +19,11 @@ import javax.persistence.*;
  */
 @Entity
 public class PedidoMovibus extends Model{
-    
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
     private final Date fechaPedido;
     
     private final Date fechaEjecucion;
@@ -29,23 +33,37 @@ public class PedidoMovibus extends Model{
     private final int tiempoEstimado;
     
     private int tiempoReal;
-    
-    public Usuario usuario; 
-    
-    public Movibus movibus;
-    
-    public Conductor conductor;
-    
+
+    private Usuario usuario;
+
+    private Movibus movibus;
+
+    private Conductor conductor;
+
+    private Direccion direccionUsuario;
+
+    private Direccion direccionDestino;
+
     public PedidoMovibus() {
         ruta=new LinkedList<>();
         fechaPedido=new Date();
-        this.fechaEjecucion=null;
-        this.tiempoEstimado=0;
-        this.usuario=null;
-        this.movibus=null;
-        this.conductor=null;
+        fechaEjecucion=null;
+        tiempoEstimado=0;
+        usuario=null;
+        movibus=null;
+        conductor=null;
+        direccionUsuario=null;
+        direccionDestino=null;
     }
-   
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id=id;
+    }
+
     public Date getFechaPedido() {
         return fechaPedido;
     }
@@ -98,8 +116,23 @@ public class PedidoMovibus extends Model{
         this.conductor=conductor;
     }
 
+    public Direccion getDireccionUsuario() {
+        return direccionUsuario;
+    }
+
+    public void setDireccionUsuario(Direccion direccionUsuario) {
+        this.direccionUsuario=direccionUsuario;
+    }
+
+    public Direccion getDireccionDestino() {
+        return direccionDestino;
+    }
+
+    public void setDireccionDestino(Direccion direccionDestino) {
+        this.direccionDestino=direccionDestino;
+    }
+
     public static PedidoMovibus bind(JsonNode j) {
-        int tiempoEstimado=j.findPath("tiempoEstimado").asInt();
         return new PedidoMovibus();
     }
 }
