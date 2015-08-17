@@ -99,37 +99,23 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     }
 
     @Override
-    public Object findById(Class c, long id) {
-        if (c.equals(Movibus.class)) {
-            for (Object v : findAll(c)) {
-                Movibus movibus = (Movibus) v;
-                if (movibus.getId()==id) {
-                    return movibus;
-                }
-            }
-        }
-        else if(c.equals(PedidoMovibus.class)) {
-            for (Object v : findAll(c)) {
-                PedidoMovibus pedidoMovibus = (PedidoMovibus) v;
-                if (pedidoMovibus.getId()==id) {
-                    return pedidoMovibus;
-                }
-            }
-        }
-        else if(c.equals(Conductor.class)) {
-            for (Object v : findAll(c)) {
-                Conductor conductor = (Conductor) v;
-                if (conductor.getId()==id) {
-                    return conductor;
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
     public void update(Object obj) {
-        if (obj instanceof Movibus) {
+        if (obj instanceof Tranvia)
+        {
+            Tranvia editar = (Tranvia) obj;
+            Tranvia tranvia;
+            for (int i = 0; i < tranvias.size(); i++)
+            {
+                tranvia = tranvias.get(i);
+                if (tranvia.getId() == editar.getId())
+                {
+                    tranvias.set(i, editar);
+                    break;
+                }
+
+            }
+        }
+        else if (obj instanceof Movibus) {
             Movibus editar = (Movibus) obj;
             Movibus movibus;
             for (int i = 0; i < movibuses.size(); i++) {
@@ -161,9 +147,52 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 Conductor conductor = (Conductor) conductores.get(e);
                 if (conductor.getId()== conductorABorrar.getId()) {
                     conductores.remove(e);
+                }
+            }
+        }
+        if (obj instanceof Tranvia)
+        {
+            Tranvia tranviaABorrar = (Tranvia) obj;
+            for (int e = 0; e < tranvias.size(); e++)
+            {
+                Tranvia ven = (Tranvia) tranvias.get(e);
+                if (ven.getId() == tranviaABorrar.getId())
+                {
+                    tranvias.remove(e);
+                    break;
+                }
+            }
+        } 
+        if (obj instanceof Movibus) {
+            Movibus movibusABorrar = (Movibus) obj;
+            for (int e = 0; e < movibuses.size(); e++) {
+                Movibus movibus = (Movibus) movibuses.get(e);
+                if (movibus.getId()== movibusABorrar.getId()) {
+                    movibuses.remove(e);
                     break;
                 }
             }
         }
+    }
+
+    @Override
+    public Object findById(Class c, long id) {
+        if (c.equals(Tranvia.class)){
+            for (Object v : findAll(c)) {
+                Tranvia t = (Tranvia) v;
+                if(t.getId()==id){
+                    return t;
+                }
+            }
+        }
+        else if (c.equals(Movibus.class)) {
+            for (Object v : findAll(c)) {
+                Movibus movibus = (Movibus) v;
+                if (movibus.getId()==id) {
+                    return movibus;
+                }
+            }
+        }
+        return null;
     }
 }
