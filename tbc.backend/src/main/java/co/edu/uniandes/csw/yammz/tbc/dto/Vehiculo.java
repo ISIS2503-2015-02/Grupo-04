@@ -48,6 +48,8 @@ public class Vehiculo {
      * Kilometraje del vehiculo transcurrido desde revision
      */
     private int kilometraje;
+    
+    private Long id;
   
     //-----------------------------------------------------------
     // Metodos
@@ -104,5 +106,13 @@ public class Vehiculo {
      */
     public void revisarVehiculo() {
         kilometraje=0;
+    }
+       /**
+     * Modifica el número de identificación delvehiculo
+     * @param id Nuevo número de identificación
+     */
+    public void setIdentificacion(long id)
+    {
+        this.id = id;
     }
 }

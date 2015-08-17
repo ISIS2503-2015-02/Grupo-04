@@ -51,4 +51,6 @@ public class Tranvia extends Vehiculo {
     public void setLinea(int linea) {
         this.linea=linea;
     }
+    
+ 
 }

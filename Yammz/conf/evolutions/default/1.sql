@@ -35,10 +35,12 @@ create table movibus (
 ;
 
 create table pedido_movibus (
+  id                        bigint auto_increment not null,
   fecha_pedido              timestamp,
   fecha_ejecucion           timestamp,
   tiempo_estimado           integer,
-  tiempo_real               integer)
+  tiempo_real               integer,
+  constraint pk_pedido_movibus primary key (id))
 ;
 
 create table reporte (
