@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.yammz.tbc.persistencia.mock;
 
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
 import co.edu.uniandes.csw.yammz.tbc.interfaces.IServicioPersistenciaMockLocal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     
     private static LinkedList reportes;
     
-    private static LinkedList tranvias;
+    private static ArrayList<Tranvia> tranvias;
     
     /**
      * Constructor de la clase. Inicializa los atributos.
