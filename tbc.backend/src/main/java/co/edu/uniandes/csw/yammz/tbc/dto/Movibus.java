@@ -34,7 +34,7 @@ public class Movibus {
     // Atributos
     //-----------------------------------------------------------
 
-    private Long id;
+    private long id;
 
     /**
      * Posicion del vehiculo
@@ -51,17 +51,22 @@ public class Movibus {
      */
     private int kilometraje;
     
-    public Movibus(Direccion posicion) {
+    public Movibus() {
+        
+    }
+    
+    public Movibus(long id, Direccion posicion) {
+        this.id=id;
         this.posicion=posicion;
         estado=DISPONIBLE;
         kilometraje=0;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id=id;
     }
 
@@ -105,7 +110,9 @@ public class Movibus {
         return kilometraje;
     }
 
-    public void setKilometraje(int kilometraje) {this.kilometraje=kilometraje;}
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje=kilometraje;
+    }
 
     /**
      * Metodo encargado de registrar la revision de un vehiculo

@@ -36,7 +36,6 @@ public class TranviaService {
     @Path("tranvias/")
     public List<Tranvia> getTodosLosTranvias() {
         return tranviaEjb.darTranvias();
- 
     }
     
     @POST

@@ -21,13 +21,13 @@ import java.util.List;
  */
 public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal {
     
-    private static LinkedList<EstacionVcub> estacionesVcub;
+    private static ArrayList<EstacionVcub> estacionesVcub;
     
-    private static LinkedList<Movibus> movibuses;
+    private static ArrayList<Movibus> movibuses;
     
-    private static LinkedList<PedidoMovibus> pedidosMovibus;
+    private static ArrayList<PedidoMovibus> pedidosMovibus;
     
-    private static LinkedList<Reporte> reportes;
+    private static ArrayList<Reporte> reportes;
     
     private static ArrayList<Tranvia> tranvias;
     
@@ -35,10 +35,10 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
      * Constructor de la clase. Inicializa los atributos.
      */
     public ServicioPersistenciaMock() {
-        estacionesVcub=new LinkedList();
-        movibuses=new LinkedList();
-        pedidosMovibus=new LinkedList();
-        reportes=new LinkedList();    
+        estacionesVcub=new ArrayList();
+        movibuses=new ArrayList();
+        pedidosMovibus=new ArrayList();
+        reportes=new ArrayList();    
         tranvias=new ArrayList();        
     }
   
@@ -53,11 +53,15 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     @Override
     public void create(Object obj)
     {
-        if (obj instanceof Tranvia)
-        {
+        if (obj instanceof Tranvia) {
             Tranvia t = (Tranvia) obj;
             t.setId(tranvias.size()+1);
             tranvias.add(t);
+        }
+        else if(obj instanceof Movibus) {
+            Movibus movibus = (Movibus) obj;
+            movibus.setId(movibuses.size());
+            movibuses.add(movibus);
         }
     }
 
@@ -68,31 +72,16 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     @Override
     public List findAll(Class c)
     {
-        if (c.equals(Tranvia.class))
-        {
+        if (c.equals(Tranvia.class)){
             return tranvias;
         } 
-        else
-        {
+        else if(c.equals(Movibus.class)) {
+            return movibuses;
+        }
+        else{
             return null;
         }
-    }
-
-    @Override
-    public Object findById(Class c, Object id) {
-        if (c.equals(Tranvia.class))
-        {
-            for (Object v : findAll(c))
-            {
-                Tranvia t = (Tranvia) v;
-                if (t.getId() == Long.parseLong(id.toString()))
-                {
-                    return t;
-                }
-            }
-        } 
-        return null;
-    }    
+    }  
 
     @Override
     public void update(Object obj) {
@@ -110,7 +99,17 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 }
 
             }
-
+        }
+        else if (obj instanceof Movibus) {
+            Movibus editar = (Movibus) obj;
+            Movibus movibus;
+            for (int i = 0; i < movibuses.size(); i++) {
+                movibus = movibuses.get(i);
+                if (movibus.getId()==editar.getId()) {
+                    movibuses.set(i, editar);
+                    break;
+                }
+            }
         }
     }
 
@@ -130,5 +129,36 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 }
             }
         } 
+        if (obj instanceof Movibus) {
+            Movibus movibusABorrar = (Movibus) obj;
+            for (int e = 0; e < movibuses.size(); e++) {
+                Movibus movibus = (Movibus) movibuses.get(e);
+                if (movibus.getId()== movibusABorrar.getId()) {
+                    movibuses.remove(e);
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public Object findById(Class c, long id) {
+        if (c.equals(Tranvia.class)){
+            for (Object v : findAll(c)) {
+                Tranvia t = (Tranvia) v;
+                if(t.getId()==id){
+                    return t;
+                }
+            }
+        }
+        else if (c.equals(Movibus.class)) {
+            for (Object v : findAll(c)) {
+                Movibus movibus = (Movibus) v;
+                if (movibus.getId()==id) {
+                    return movibus;
+                }
+            }
+        }
+        return null;
     }
 }

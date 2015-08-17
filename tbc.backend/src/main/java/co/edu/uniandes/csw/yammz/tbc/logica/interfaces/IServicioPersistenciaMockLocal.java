@@ -23,7 +23,7 @@ public interface IServicioPersistenciaMockLocal {
      */
     public java.util.List findAll(java.lang.Class c);
     
-    public Object findById(Class c, Object id);
+    public Object findById(Class c, long id);
     
     public void update(java.lang.Object obj);
     
