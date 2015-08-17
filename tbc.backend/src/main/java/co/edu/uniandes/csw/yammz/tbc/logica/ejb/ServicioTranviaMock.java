@@ -6,8 +6,8 @@
 package co.edu.uniandes.csw.yammz.tbc.logica.ejb;
 
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
-import co.edu.uniandes.csw.yammz.tbc.interfaces.IServicioPersistenciaMockLocal;
-import co.edu.uniandes.csw.yammz.tbc.interfaces.IServicioTranviaMockLocal;
+import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioPersistenciaMockLocal;
+import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioTranviaMockLocal;
 import co.edu.uniandes.csw.yammz.tbc.persistencia.mock.ServicioPersistenciaMock;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -18,6 +18,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ServicioTranviaMock implements IServicioTranviaMockLocal{
+    
     private IServicioPersistenciaMockLocal persistencia;
 
     public ServicioTranviaMock()
@@ -27,7 +28,7 @@ public class ServicioTranviaMock implements IServicioTranviaMockLocal{
  
     public void agregarTranvia(Tranvia tranvia)
     {
-            persistencia.create(tranvia);
+        persistencia.create(tranvia);
     }
    
     public List<Tranvia> darTranvias()

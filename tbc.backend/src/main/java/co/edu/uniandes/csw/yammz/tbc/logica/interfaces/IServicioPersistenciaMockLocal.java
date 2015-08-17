@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.yammz.tbc.interfaces;
+package co.edu.uniandes.csw.yammz.tbc.logica.interfaces;
 
 /**
  *
@@ -22,5 +22,10 @@ public interface IServicioPersistenciaMockLocal {
      * @return list Listado de todos los objetos de una clase.
      */
     public java.util.List findAll(java.lang.Class c);
-
+    
+    public Object findById(Class c, Object id);
+    
+    public void update(java.lang.Object obj);
+    
+    public void delete(java.lang.Object obj);
 }

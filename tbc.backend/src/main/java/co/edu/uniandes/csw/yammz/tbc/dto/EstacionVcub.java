@@ -7,16 +7,17 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
 
 import java.util.LinkedList;
 
-import javax.persistence.*;
 /**
  *
  * @author cfagu
  */
-@Entity
 public class EstacionVcub {
     //------------------------------------------------------
     // Atributos
     //------------------------------------------------------
+    
+    private long id;
+
     /**
      * Capacidad de vcubs.
      */
@@ -30,10 +31,6 @@ public class EstacionVcub {
      * Nombre estacion.
      */
     private String nombre;
-    /**
-     * Identificador de la esta estacion.
-     */
-    private int id;
 
     //------------------------------------------------------
     // Constructores
@@ -48,7 +45,7 @@ public class EstacionVcub {
      * Constructor con parametros.
      * @param capacidad Capacidad de la estacion.
      */
-    public EstacionVcub(int capacidad,String nombre,int id) {
+    public EstacionVcub(int capacidad,String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
     }
@@ -79,14 +76,6 @@ public class EstacionVcub {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

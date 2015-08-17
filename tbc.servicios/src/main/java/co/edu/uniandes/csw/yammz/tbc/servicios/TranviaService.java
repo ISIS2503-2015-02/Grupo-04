@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.yammz.tbc.servicios;
 
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
-import co.edu.uniandes.csw.yammz.tbc.interfaces.IServicioTranviaMockLocal;
+import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioTranviaMockLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -38,11 +38,9 @@ public class TranviaService {
     
     @POST
     @Path("agregar/") 
-    public List<Tranvia> agregarTranvias(List<Tranvia> us) {
-        for (Tranvia tranvia : us) {
-            tranviaEjb.agregarTranvia(tranvia);
-        }        
-        return us;
+    public Tranvia agregarTranvia(Tranvia tranvia) {
+        tranviaEjb.agregarTranvia(tranvia);   
+        return tranvia;
     }
  
 }

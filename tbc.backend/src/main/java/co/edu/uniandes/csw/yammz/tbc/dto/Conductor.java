@@ -10,35 +10,45 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  * @author cfagu
  */
 public class Conductor {
-    
+ 
+    private Long id;
+
     private final String nombre;
     
-    private final String cedula;
+    private final int cedula;
     
-    private String celular;
+    private int celular;
     
     private String correo;
     
-    public Conductor(String nombre,String cedula,String celular,String correo,int tipo) {
+    public Conductor(String nombre,int cedula,int celular,String correo) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
         this.correo=correo;
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id=id;
+    }
+
     public String getNombre() {
         return nombre;
     }
     
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
     
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular=celular;
     }
     

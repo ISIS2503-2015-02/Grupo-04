@@ -11,24 +11,7 @@ package co.edu.uniandes.csw.yammz.tbc.dto;
  */
 public class Vehiculo {
     
-    //-----------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------
     
-    /**
-     * Constante que representa el estado ocupado
-     */
-    public final static int OCUPADO=0;
-    
-    /**
-     * Constante que representa el estado disponible
-     */
-    public final static int DISPONIBLE=1;
-    
-    /**
-     * Constante que representa el estado problema
-     */
-    public final static int PROBLEMA=2;
     
     //-----------------------------------------------------------
     // Atributos
@@ -57,7 +40,7 @@ public class Vehiculo {
     
     public Vehiculo(Direccion posicion) {
         this.posicion=posicion;
-        estado=DISPONIBLE;
+
         kilometraje=0;
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.yammz.tbc.interfaces;
+package co.edu.uniandes.csw.yammz.tbc.logica.interfaces;
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
 import java.util.List;
 import javax.ejb.Local;

@@ -13,7 +13,9 @@ import java.util.LinkedList;
  * @author cfagu
  */
 public class PedidoMovibus {
-    
+
+    private Long id;
+
     private final Date fechaPedido;
     
     private final Date fechaEjecucion;
@@ -23,23 +25,37 @@ public class PedidoMovibus {
     private final int tiempoEstimado;
     
     private int tiempoReal;
-    
-    public Usuario usuario; 
-    
-    public Movibus movibus;
-    
-    public Conductor conductor;
-    
-    public PedidoMovibus(Date fechaEjecucion,int tiempoEstimado,Usuario usuario,Movibus movibus,Conductor conductor) {
+
+    private Usuario usuario;
+
+    private Movibus movibus;
+
+    private Conductor conductor;
+
+    private Direccion direccionUsuario;
+
+    private Direccion direccionDestino;
+
+    public PedidoMovibus() {
+        ruta=new LinkedList<>();
         fechaPedido=new Date();
-        this.fechaEjecucion=fechaEjecucion;
-        this.tiempoEstimado=tiempoEstimado;
-        this.usuario=usuario;
-        this.movibus=movibus;
-        this.conductor=conductor;
-        movibus.reservarMovibus(this);
+        fechaEjecucion=null;
+        tiempoEstimado=0;
+        usuario=null;
+        movibus=null;
+        conductor=null;
+        direccionUsuario=null;
+        direccionDestino=null;
     }
-   
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id=id;
+    }
+
     public Date getFechaPedido() {
         return fechaPedido;
     }
@@ -70,5 +86,41 @@ public class PedidoMovibus {
     
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario=usuario;
+    }
+
+    public Movibus getMovibus() {
+        return movibus;
+    }
+    
+    public  void setMovibus(Movibus movibus) {
+        this.movibus=movibus;
+    }
+
+    public Conductor getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Conductor conductor) {
+        this.conductor=conductor;
+    }
+
+    public Direccion getDireccionUsuario() {
+        return direccionUsuario;
+    }
+
+    public void setDireccionUsuario(Direccion direccionUsuario) {
+        this.direccionUsuario=direccionUsuario;
+    }
+
+    public Direccion getDireccionDestino() {
+        return direccionDestino;
+    }
+
+    public void setDireccionDestino(Direccion direccionDestino) {
+        this.direccionDestino=direccionDestino;
     }
 }
