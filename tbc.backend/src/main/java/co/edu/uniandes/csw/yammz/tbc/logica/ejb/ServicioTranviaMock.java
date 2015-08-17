@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.yammz.tbc.logica.ejb;
 
+import co.edu.uniandes.csw.yammz.tbc.dto.Reporte;
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioPersistenciaMockLocal;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioTranviaMockLocal;
@@ -21,20 +22,32 @@ public class ServicioTranviaMock implements IServicioTranviaMockLocal{
     
     private IServicioPersistenciaMockLocal persistencia;
 
-    public ServicioTranviaMock()
-    {
+    public ServicioTranviaMock(){
         persistencia= new ServicioPersistenciaMock();
     }
  
-    public void agregarTranvia(Tranvia tranvia)
-    {
+    public void agregarTranvia(Tranvia tranvia){
         persistencia.create(tranvia);
     }
    
-    public List<Tranvia> darTranvias()
-    {
+    public List<Tranvia> darTranvias(){
         return persistencia.findAll(Tranvia.class);
     }
 
+    @Override
+    public void agregarReporte(Reporte reporte) {
+       persistencia.create(reporte);
+    }
+
+    @Override
+    public void actualizarTranvia(Tranvia tranvia) {
+        persistencia.update(tranvia);
+    }
+
+    @Override
+    public void eliminarTranvia(long id){
+        Tranvia t=(Tranvia) persistencia.findById(Tranvia.class, id);
+        persistencia.delete(t);
+    }
     
 }

@@ -80,16 +80,55 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
 
     @Override
     public Object findById(Class c, Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        if (c.equals(Tranvia.class))
+        {
+            for (Object v : findAll(c))
+            {
+                Tranvia t = (Tranvia) v;
+                if (t.getId() == Long.parseLong(id.toString()))
+                {
+                    return t;
+                }
+            }
+        } 
+        return null;
+    }    
 
     @Override
     public void update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (obj instanceof Tranvia)
+        {
+            Tranvia editar = (Tranvia) obj;
+            Tranvia tranvia;
+            for (int i = 0; i < tranvias.size(); i++)
+            {
+                tranvia = tranvias.get(i);
+                if (tranvia.getId() == editar.getId())
+                {
+                    tranvias.set(i, editar);
+                    break;
+                }
+
+            }
+
+        }
     }
 
     @Override
     public void delete(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         if (obj instanceof Tranvia)
+        {
+            Tranvia tranviaABorrar = (Tranvia) obj;
+
+            for (int e = 0; e < tranvias.size(); e++)
+            {
+                Tranvia ven = (Tranvia) tranvias.get(e);
+                if (ven.getId() == tranviaABorrar.getId())
+                {
+                    tranvias.remove(e);
+                    break;
+                }
+            }
+        } 
     }
 }

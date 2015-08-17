@@ -5,14 +5,17 @@
  */
 package co.edu.uniandes.csw.yammz.tbc.servicios;
 
+import co.edu.uniandes.csw.yammz.tbc.dto.Reporte;
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioTranviaMockLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -42,5 +45,25 @@ public class TranviaService {
         tranviaEjb.agregarTranvia(tranvia);   
         return tranvia;
     }
- 
+    
+    @POST
+    @Path("agregarReporte/") 
+    public Reporte reportarAccidente(Reporte reporte) {
+        tranviaEjb.agregarReporte(reporte);   
+        return reporte;
+    }
+    
+    @PUT
+    @Path("actualizarTranvia/") 
+    public Tranvia actualizarTranvia(Tranvia tranvia) {
+        tranviaEjb.actualizarTranvia(tranvia);   
+        return tranvia;
+    }
+    
+    @DELETE
+    @Path("tranvia/") 
+    public Tranvia eliminarTranvia(Tranvia tranvia) {
+        tranviaEjb.eliminarTranvia(tranvia.getId());   
+        return tranvia;
+    }
 }
