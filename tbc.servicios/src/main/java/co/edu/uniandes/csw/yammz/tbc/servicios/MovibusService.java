@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.yammz.tbc.servicios;
 
-import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
-import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioTranviaMockLocal;
+import co.edu.uniandes.csw.yammz.tbc.dto.Movibus;
+import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioMovibusMockLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,31 +14,36 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author sy.velasquez10
+ * @author cfagu
  */
-@Path("/Tranvia")
+@Path("/Movibus")
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class TranviaService {
+public class MovibusService {
     @EJB
-    private IServicioTranviaMockLocal tranviaEjb;
+    private IServicioMovibusMockLocal movibusEjb;
     
     @GET
-    @Path("tranvias/")
-    public List<Tranvia> getTodosLosTranvias() {
-        return tranviaEjb.darTranvias();
+    public List<Movibus> getMovibuses() {
+        return movibusEjb.darMovibuses();
     }
     
     @POST
-    @Path("agregar/") 
-    public Tranvia agregarTranvia(Tranvia tranvia) {
-        tranviaEjb.agregarTranvia(tranvia);   
-        return tranvia;
+    public Movibus agregarMovibus(Movibus movibus) {
+        movibusEjb.agregarMovibus(movibus);   
+        return movibus;
+    }
+    
+    @GET
+    @Path("{id}")
+    public Movibus getMovibus(@PathParam("id") long id) {
+        return movibusEjb.darMovibus(id);
     }
 }
