@@ -6,15 +6,15 @@
 package co.edu.uniandes.csw.yammz.tbc.servicios;
 
 import co.edu.uniandes.csw.yammz.tbc.dto.Conductor;
-import co.edu.uniandes.csw.yammz.tbc.dto.Movibus;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioConductorMockLocal;
-import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioMovibusMockLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,7 +33,7 @@ public class ConductorService {
     private IServicioConductorMockLocal conductorEjb;
     
     @GET
-    public List<Conductor> getConductor() {
+    public List<Conductor> darConductores() {
         return conductorEjb.darConductores();
     }
     
@@ -45,7 +45,19 @@ public class ConductorService {
     
     @GET
     @Path("{id}")
-    public Conductor getConductor(@PathParam("id") long id) {
+    public Conductor darConductor(@PathParam("id") long id) {
         return conductorEjb.darConductor(id);
+    }
+    
+    @DELETE
+    @Path("{id}")
+    public void eliminarConductor(@PathParam("id") long id) {
+        conductorEjb.eliminarConductor(id);
+    }
+    
+    @PUT
+    @Path("{id}")
+    public void actualizarConductor(Conductor conductor) {
+        conductorEjb.actualizarConductor(conductor);
     }
 }

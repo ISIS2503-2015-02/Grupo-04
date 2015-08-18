@@ -31,7 +31,7 @@ public class MovibusService {
     private IServicioMovibusMockLocal movibusEjb;
     
     @GET
-    public List<Movibus> getMovibuses() {
+    public List<Movibus> darMovibuses() {
         return movibusEjb.darMovibuses();
     }
     
@@ -43,7 +43,7 @@ public class MovibusService {
     
     @GET
     @Path("{id}")
-    public Movibus getMovibus(@PathParam("id") long id) {
+    public Movibus darMovibus(@PathParam("id") long id) {
         return movibusEjb.darMovibus(id);
     }
 }
