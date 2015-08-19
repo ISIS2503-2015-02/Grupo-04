@@ -47,6 +47,12 @@ public class ServicioUsuarioMock implements IServicioUsuarioMockLocal{
     public void solicitarMovibus(PedidoMovibus pedmovi) {
         persistencia.create(pedmovi);
     }
+    
+    @Override
+    public void eliminarUsuario(long id){
+        Usuario t=(Usuario) persistencia.findById(Usuario.class, id);
+        persistencia.delete(t);
+    }
 
     
 }

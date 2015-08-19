@@ -21,4 +21,6 @@ public interface IServicioUsuarioMockLocal {
     public Usuario darUsuario(long id);
     
     public void solicitarMovibus(PedidoMovibus pedmovi);
+    
+    public void eliminarUsuario(long id);
 }

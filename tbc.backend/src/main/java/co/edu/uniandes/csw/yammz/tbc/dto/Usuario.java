@@ -10,13 +10,17 @@ import javax.persistence.Entity;
  *
  * @author cf.agudelo12
  */
-@Entity
 public class Usuario {
 
     //---------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------
 
+    /**
+     * Id
+     */
+    private long id;
+    
     /**
      * Nombre del usuario.
      */
@@ -68,6 +72,14 @@ public class Usuario {
     // Metodos
     //---------------------------------------------------------------------
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long ident) {
+        this.id=ident;
+    }
+    
     public String getNombre() {
         return nombre;
     }

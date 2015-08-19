@@ -17,6 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -44,8 +45,20 @@ public class UsuarioService {
     }
     
     @POST
-    public Usuario agregarTranvia(Usuario usuario) {
+    public Usuario agregarUsuario(Usuario usuario) {
         usuarioEjb.agregarUsuario(usuario);   
         return usuario;
+    }
+    
+    @GET
+    @Path("{id}")
+    public Usuario darUsuario(@PathParam("id") long id) {
+        return usuarioEjb.darUsuario(id);
+    }
+    
+    @POST
+    public PedidoMovibus solicitarMovibus(PedidoMovibus pedido) {
+        usuarioEjb.solicitarMovibus(pedido);   
+        return pedido;
     }
 }
