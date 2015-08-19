@@ -34,6 +34,8 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
     
     private static ArrayList<Tranvia> tranvias;
     
+    private static ArrayList<Usuario> usuarios;
+    
     /**
      * Constructor de la clase. Inicializa los atributos.
      */
@@ -43,7 +45,8 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
         conductores=new ArrayList();
         pedidosMovibus=new ArrayList();
         reportes=new ArrayList();    
-        tranvias=new ArrayList();        
+        tranvias=new ArrayList();  
+        usuarios=new ArrayList();
     }
   
      //-----------------------------------------------------------
@@ -81,6 +84,11 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
             usuario.setId(usuarios.size()+1);
             conductores.add(conductor);
         }
+        else if(obj instanceof EstacionVcub) {
+            EstacionVcub estacion = (EstacionVcub)obj;
+            estacion.setId(estacionesVcub.size()+1);
+            estacionesVcub.add(estacion);
+        }
     }
 
      /** Retorna la lista de todos los elementos de una clase dada que se encuentran en el sistema.
@@ -100,6 +108,9 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
         }
         else if(c.equals(Conductor.class)) {
             return conductores;
+        }
+        else if(c.equals(EstacionVcub.class)) {
+            return estacionesVcub;
         }
         return null;
     }
@@ -143,6 +154,17 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 }
             }
         }
+        else if(obj instanceof EstacionVcub) {
+            EstacionVcub editar = (EstacionVcub) obj;
+            EstacionVcub estacion;
+            for (int i = 0; i < estacionesVcub.size(); i++) {
+                estacion = estacionesVcub.get(i);
+                if (estacion.getId()==editar.getId()) {
+                    estacionesVcub.set(i, editar);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -179,6 +201,16 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 }
             }
         }
+        if (obj instanceof EstacionVcub) {
+            EstacionVcub estacionABorrar = (EstacionVcub) obj;
+            for (int e = 0; e < estacionesVcub.size(); e++) {
+                EstacionVcub estacion = (EstacionVcub) estacionesVcub.get(e);
+                if (estacion.getId()== estacionABorrar.getId()) {
+                    estacionesVcub.remove(e);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -196,6 +228,14 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
                 Movibus movibus = (Movibus) v;
                 if (movibus.getId()==id) {
                     return movibus;
+                }
+            }
+        }
+        else if (c.equals(EstacionVcub.class)) {
+            for (Object v : findAll(c)){
+                EstacionVcub estacion = (EstacionVcub)v;
+                if(estacion.getId()==id){
+                    return estacion;
                 }
             }
         }

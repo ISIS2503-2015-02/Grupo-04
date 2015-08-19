@@ -47,12 +47,15 @@ public class EstacionVcub {
     /**
      * Constructor con parametros.
      * @param capacidad Capacidad de la estacion.
+     * @param nombre Nombre de la estacion.
+     * @param id Id autogenerado de la estacion.
      */
-    public EstacionVcub(int capacidad,String nombre) {
+    public EstacionVcub(int capacidad,String nombre,long id) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
         this.nombre=nombre;
         this.envioReporte=false;
+        this.id = id;
     }
 
 
@@ -88,5 +91,13 @@ public class EstacionVcub {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public long getId(){
+        return id;
+    }
+    
+    public void setId(long id){
+        this.id=id;
     }
 }
