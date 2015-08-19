@@ -95,7 +95,7 @@ public class Usuario {
         this.correo=correo;
     }
 
-    public int getvCubsWnUso() {
+    public int getvCubsEnUso() {
         return vCubsEnUso;
     }
 

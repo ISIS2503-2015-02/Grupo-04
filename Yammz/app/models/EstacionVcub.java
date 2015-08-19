@@ -38,7 +38,7 @@ public class EstacionVcub extends Model{
     private String nombre;
 
     /**
-     * Envio reporte.
+     * Envio reporte de falta de bicicletas.
      */
     private boolean envioReporte;
 
@@ -95,14 +95,6 @@ public class EstacionVcub extends Model{
      */
     public boolean solicitarVcbus() {
         return vcubs/capacidad<=0.1;
-    }
-
-    /**
-     * Agrega la cantidad de vcubs a la estacion.
-     * @param vcub Capacidad de vcubs que llegan a la estacion.
-     */
-    public void agregarVcub(int vcub) {
-        vcubs+=vcub;
     }
 
     /**

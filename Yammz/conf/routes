@@ -23,6 +23,17 @@ GET         /conductor               controllers.ConductorController.read()
 
 GET         /conductor/:id           controllers.ConductorController.get(id : Long)
 
+POST        /estacionvcub           controllers.EstacionVcubController.create()
+
+GET         /estacionvcub           controllers.EstacionVcubController.read()
+
+PUT         /estacionvcub/:id      controllers.EstacionVcubController.llenarEstacion(id : Long);
+
+PUT         /estacionvcub/:ide/usuario/:idu           controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
+
+PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub          controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
+
+
 # API
 
 #POST        /usuario                controllers.UsuarioController.create()
@@ -33,7 +44,7 @@ GET         /conductor/:id           controllers.ConductorController.get(id : Lo
 
 #GET         /estacionvcub           controllers.EstacionVcubController.read()
 
-#PUT         /estacionvcub/:id      controllers.EstacionVcubController.llenarEstacion(id : Long);
+#PUT         /estacionvcub/:id       controllers.EstacionVcubController.llenarEstacion(id : Long);
 
 #PUT         /estacionvcub/:ide/usuario/:idu           controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
 

@@ -31,7 +31,10 @@ public class EstacionVcub {
      * Nombre estacion.
      */
     private String nombre;
-
+    /**
+     * Envio de reporte de falta de bicicletas.
+     */
+    private boolean envioReporte;
     //------------------------------------------------------
     // Constructores
     //------------------------------------------------------
@@ -48,6 +51,8 @@ public class EstacionVcub {
     public EstacionVcub(int capacidad,String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
+        this.nombre=nombre;
+        this.envioReporte=false;
     }
 
 
@@ -62,12 +67,19 @@ public class EstacionVcub {
         return capacidad;
     }
 
+    public void setCapacidad(int capacidad){
+        this.capacidad=capacidad;
+    }
     /**
      * Devuelve la cantidad de vcubs en la estacion.
      * @return int cantidadVcubs
      */
     public int getVcubs() {
         return vcubs;
+    }
+    
+    public void setVcubs(int vcubs){
+        this.vcubs=vcubs;
     }
 
     public String getNombre() {
@@ -76,35 +88,5 @@ public class EstacionVcub {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    /**
-     * Verifica si la cantidad de vcubs baja del 10% de la capacidad.
-     * @return true si necesita solicitar vcubs, false de lo contrario.
-     */
-    public boolean solicitarVcbus() {
-        return vcubs/capacidad<=0.1;
-    }
-
-    /**
-     * Agrega la cantidad de vcubs a la estacion.
-     * @param vcub Capacidad de vcubs que llegan a la estacion.
-     */
-    public void agregarVcub(int vcub) {
-        vcubs+=vcub;
-    }
-
-    /**
-     * Presta una vcub de la estacion.
-     */
-    public void prestarVcub() {
-        vcubs--;
-    }
-
-    /**
-     * Restituye una vcub de la estacion.
-     */
-    public void restituirVcub() {
-        vcubs++;
     }
 }
