@@ -44,9 +44,8 @@ public class UsuarioController {
     }
 
     public Result solicitarMovibus(Long id) {
-        JsonNode j = request().body().asJson();
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
-        PedidoMovibus pedidoMovibus = Json.fromJson(j, PedidoMovibus.class);
+        PedidoMovibus pedidoMovibus = new PedidoMovibus();
         Movibus movibus = (Movibus) new Model.Finder(String.class, Movibus.class).all().remove(0);
         movibus.reservarMovibus(pedidoMovibus);
         Conductor conductor = (Conductor) new Model.Finder(String.class, Conductor.class).all().remove(0);
