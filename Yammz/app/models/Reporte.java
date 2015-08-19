@@ -21,7 +21,7 @@ public class Reporte extends Model{
     /**
      * Constante que define que si el reporte es para realizar un pedido de biciletas a una estacion
      */
-    public final static String PEDIDO_BICICLETAS="Pedidoo bicicletas";
+    public final static String PEDIDO_BICICLETAS="Pedido bicicletas";
 
     /**
      * Constante que define que si el reporte es para reportar una emergencia de un tranvia

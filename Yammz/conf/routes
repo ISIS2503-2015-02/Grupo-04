@@ -33,6 +33,12 @@ GET         /conductor/:id           controllers.ConductorController.get(id : Lo
 
 #GET         /estacionvcub           controllers.EstacionVcubController.read()
 
+#PUT         /estacionvcub/:id      controllers.EstacionVcubController.llenarEstacion(id : Long);
+
+#PUT         /estacionvcub/:ide/usuario/:idu           controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
+
+#PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub          controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
+
 #POST        /movibus                controllers.MovibusController.create()
 
 #GET         /movibus                controllers.MovibusController.read()

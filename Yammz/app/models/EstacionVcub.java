@@ -37,6 +37,11 @@ public class EstacionVcub extends Model{
      */
     private String nombre;
 
+    /**
+     * Envio reporte.
+     */
+    private boolean envioReporte;
+
     //------------------------------------------------------
     // Constructores
     //------------------------------------------------------
@@ -53,6 +58,7 @@ public class EstacionVcub extends Model{
     public EstacionVcub(int capacidad,String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
+        this.envioReporte=false;
     }
 
 
@@ -106,10 +112,26 @@ public class EstacionVcub extends Model{
         vcubs--;
     }
 
+    public boolean isEnvioReporte() {
+        return envioReporte;
+    }
+
+    public void setEnvioReporte(boolean envioReporte) {
+        this.envioReporte = envioReporte;
+    }
+
     /**
      * Restituye una vcub de la estacion.
      */
     public void restituirVcub() {
         vcubs++;
+    }
+
+    /**
+     * Llena hasta la capacidad maxima de Vcubs, la estacion.
+     */
+    public void llenarEstacion(){
+        vcubs = capacidad;
+        envioReporte = false;
     }
 }
