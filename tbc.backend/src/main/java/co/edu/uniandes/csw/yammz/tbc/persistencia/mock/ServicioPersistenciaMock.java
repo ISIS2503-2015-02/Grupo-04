@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.yammz.tbc.dto.Movibus;
 import co.edu.uniandes.csw.yammz.tbc.dto.PedidoMovibus;
 import co.edu.uniandes.csw.yammz.tbc.dto.Reporte;
 import co.edu.uniandes.csw.yammz.tbc.dto.Tranvia;
+import co.edu.uniandes.csw.yammz.tbc.dto.Usuario;
 import co.edu.uniandes.csw.yammz.tbc.logica.interfaces.IServicioPersistenciaMockLocal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,11 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal 
         else if(obj instanceof Conductor) {
             Conductor conductor = (Conductor) obj;
             conductor.setId(conductores.size()+1);
+            conductores.add(conductor);
+        }
+        else if(obj instanceof Usuario) {
+            Usuario usuario = (Usuario) obj;
+            usuario.setId(usuarios.size()+1);
             conductores.add(conductor);
         }
     }
