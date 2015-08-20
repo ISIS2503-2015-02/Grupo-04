@@ -27,12 +27,24 @@ public class Conductor extends Model{
     private int celular;
     
     private String correo;
+
+    /**
+     * Medida en porcentaje de la eficiencia de un conductor respecto a los tiempos de sus trayectos.
+     */
+    private int desempenio;
+
+    /**
+     * Cantidad de pedidos y viajes realizados para calcular el desempenio.
+     */
+    private int viajesTotales;
     
-    public Conductor(String nombre,int cedula,int celular,String correo) {
+    public Conductor(String nombre,int cedula,int celular,String correo, int desempenio) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
         this.correo=correo;
+        this.desempenio=desempenio;
+        this.viajesTotales=0;
     }
 
     public Long getId() {
@@ -67,12 +79,22 @@ public class Conductor extends Model{
         this.correo=correo;
     }
 
+    public int getDesempenio(){
+        return desempenio;
+    }
+
+    public void setDesempenio(int desempenio){
+        this.desempenio += (desempenio/(viajesTotales+1));
+        viajesTotales ++;
+    }
+
     public static Conductor bind(JsonNode j) {
         String nombre=j.findPath("nombre").asText();
         int cedula=j.findPath("cedula").asInt();
         int celular=j.findPath("celular").asInt();
         String correo=j.findPath("correo").asText();
-        return new Conductor(nombre,cedula,celular,correo);
+        int desempenio=j.findPath("desempenio").asInt();
+        return new Conductor(nombre,cedula,celular,correo,desempenio);
     }
 
     public void update(Conductor conductor) {

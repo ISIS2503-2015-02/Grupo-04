@@ -29,7 +29,7 @@ public class EstacionVcub extends Model{
     private int capacidad;
 
     /**
-     * Cantidad actual de vcbus en la estacion.
+     * Cantidad actual de vcubs en la estacion.
      */
     private int vcubs;
     /**

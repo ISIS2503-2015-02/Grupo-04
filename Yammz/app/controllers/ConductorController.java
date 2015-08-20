@@ -34,10 +34,32 @@ public class ConductorController {
     public Result get(Long id) {
         Conductor conductor = (Conductor) new Model.Finder(Long.class, Conductor.class).byId(id);
         ObjectNode result = Json.newObject();
-        if(conductor == null)
+        if (conductor == null)
             return ok(Json.toJson(result));
         else {
             return ok(Json.toJson(conductor));
         }
+    }
+
+    /**
+     * Obtiene el desempenio del conductor.
+     * @param id, id del conductor.
+     * @return el desempenio del conductor como un porcentaje estimado entre sus tiempos reales y tiempos esperados sobre cantidad de viajes.
+     */
+    public Result getDesempenio(Long id){
+        Conductor conductor = (Conductor) new Model.Finder(Long.class,  Conductor.class).byId(id);
+        return ok(Json.toJson(conductor.getDesempenio()));
+    }
+
+    /**
+     * Obtiene el conductor con el mejor desempenio.
+     */
+    public Result getMejorDesempenio(){
+        List<Conductor> conductores = new Model.Finder(String.class, Conductor.class).all();
+        Conductor conductor = null;
+        for(Conductor c : conductores){
+            conductor=(c.getDesempenio()>conductor.getDesempenio())?c:conductor;
+        }
+        return ok(Json.toJson(conductor));
     }
 }

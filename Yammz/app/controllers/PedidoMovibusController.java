@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Conductor;
 import models.PedidoMovibus;
 import models.Usuario;
 import play.libs.Json;
@@ -24,12 +25,17 @@ public class PedidoMovibusController {
     public Result get(Long id) {
         PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
         ObjectNode result = Json.newObject();
-        if(pedidoMovibus == null)
+        if (pedidoMovibus == null)
             return ok(Json.toJson(result));
         else {
             return ok(Json.toJson(pedidoMovibus));
         }
     }
 
-
+    public Result setDesempenioConductor(Long idPedido){
+        PedidoMovibus pedido = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(idPedido);
+        Conductor c = pedido.getConductor();
+        c.setDesempenio(pedido.getDiferenciaTiempos());
+        return ok(Json.toJson(c));
+    }
 }

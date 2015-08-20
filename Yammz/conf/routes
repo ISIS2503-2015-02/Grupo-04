@@ -23,6 +23,10 @@ GET         /conductor                                       controllers.Conduct
 
 GET         /conductor/:id                                   controllers.ConductorController.get(id : Long)
 
+GET         /conductor/desempenio/:id                        controllers.ConductorController.getDesempenio(id : Long)
+
+GET         /conductor/mejorDesempenio                       controllers.ConductorController.getMejorDesempenio()
+
 POST        /estacionvcub                                    controllers.EstacionVcubController.create()
 
 GET         /estacionvcub                                    controllers.EstacionVcubController.read()

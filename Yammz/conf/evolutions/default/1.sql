@@ -9,6 +9,8 @@ create table conductor (
   cedula                    integer,
   celular                   integer,
   correo                    varchar(255),
+  desempenio                integer,
+  viajes_totales            integer,
   constraint pk_conductor primary key (id))
 ;
 
