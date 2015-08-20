@@ -23,6 +23,7 @@ public class EstacionVcub extends Model{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
+
     /**
      * Capacidad de vcubs.
      */
@@ -88,6 +89,17 @@ public class EstacionVcub extends Model{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
 
     /**
      * Verifica si la cantidad de vcubs baja del 10% de la capacidad.
