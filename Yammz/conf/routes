@@ -3,72 +3,49 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                                                    controllers.Application.index()
 
-GET         /movibus                 controllers.MovibusController.read()
+GET         /movibus                                         controllers.MovibusController.read()
 
-POST        /movibus                 controllers.MovibusController.create()
+POST        /movibus                                         controllers.MovibusController.create()
 
-POST        /usuario                 controllers.UsuarioController.create()
+POST        /usuario                                         controllers.UsuarioController.create()
 
-GET         /usuario                 controllers.UsuarioController.read()
+GET         /usuario                                         controllers.UsuarioController.read()
 
-GET         /usuario/:id             controllers.UsuarioController.get(id : Long)
+GET         /usuario/:id                                     controllers.UsuarioController.get(id : Long)
 
-POST        /usuario/:id/solicitarMovibus      controllers.UsuarioController.solicitarMovibus(id : Long)
+POST        /usuario/:id/solicitarMovibus                    controllers.UsuarioController.solicitarMovibus(id : Long)
 
-POST        /conductor               controllers.ConductorController.create()
+POST        /conductor                                       controllers.ConductorController.create()
 
-GET         /conductor               controllers.ConductorController.read()
+GET         /conductor                                       controllers.ConductorController.read()
 
-GET         /conductor/:id           controllers.ConductorController.get(id : Long)
+GET         /conductor/:id                                   controllers.ConductorController.get(id : Long)
 
-POST        /estacionvcub           controllers.EstacionVcubController.create()
+POST        /estacionvcub                                    controllers.EstacionVcubController.create()
 
-GET         /estacionvcub           controllers.EstacionVcubController.read()
+GET         /estacionvcub                                    controllers.EstacionVcubController.read()
 
-PUT         /estacionvcub/:id      controllers.EstacionVcubController.llenarEstacion(id : Long);
+PUT         /estacionvcub/:id                                controllers.EstacionVcubController.llenarEstacion(id : Long)
 
-PUT         /estacionvcub/:ide/usuario/:idu           controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
+PUT         /estacionvcub/:ide/usuario/:idu                  controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
 
-PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub          controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
+PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub   controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
+         
+POST        /tranvia                                         controllers.TranviaController.create()
 
+GET         /tranvias                                        controllers.TranviaController.read()
 
-# API
+GET         /tranvia/:id                                     controllers.TranviaController.get(id : Long)
 
-#POST        /usuario                controllers.UsuarioController.create()
+PUT         /tranvia/update/:id                              controllers.TranviaController.update(id : Long )
 
-#GET         /usuario                controllers.UsuarioController.read()
+POST        /tranvia/emergencia                              controllers.TranviaController.reportarAccidente()
 
-#POST        /estacionvcub           controllers.EstacionVcubController.create()
+GET         /reportes                                        controllers.ReporteController.read()
 
-#GET         /estacionvcub           controllers.EstacionVcubController.read()
-
-#PUT         /estacionvcub/:id       controllers.EstacionVcubController.llenarEstacion(id : Long);
-
-#PUT         /estacionvcub/:ide/usuario/:idu           controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
-
-#PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub          controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
-
-#POST        /movibus                controllers.MovibusController.create()
-
-#GET         /movibus                controllers.MovibusController.read()
-
-#GET         /movibus/:id            controllers.MovibusController.get(id : Long)
-
-POST        /tranvia                 controllers.TranviaController.create()
-
-GET         /tranvias                controllers.TranviaController.read()
-
-GET         /tranvia/:id             controllers.TranviaController.get(id : Long)
-
-PUT         /tranvia/update/:id      controllers.TranviaController.update(id : Long )
-
-POST        /tranvia/emergencia      controllers.TranviaController.reportarAccidente()
-
-GET         /reportes                controllers.ReporteController.read()
-
-GET         /reporte/:id             controllers.ReporteController.get(id : Long)
+GET         /reporte/:id                                     controllers.ReporteController.get(id : Long)
 
 
 

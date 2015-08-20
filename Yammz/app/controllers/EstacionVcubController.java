@@ -3,13 +3,20 @@ package controllers;
 import models.EstacionVcub;
 import models.Usuario;
 import models.Reporte;
-
+import play.mvc.BodyParser;
+import play.mvc.Controller;
+import play.mvc.Result;
 import java.util.List;
+import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import play.libs.Json;
 
 /**
  * Created by s.baquero10 on 19/08/2015.
  */
-public class EstacionVcubController {
+public class EstacionVcubController extends Controller {
+
     @BodyParser.Of(BodyParser.Json.class)
     public Result create() {
         JsonNode j = request().body().asJson();
@@ -28,9 +35,7 @@ public class EstacionVcubController {
         Usuario usuario = (Usuario)new Model.Finder(Long.class, Usuario.class).byId(idu);
         estacion.prestarVcub();
         if(estacion.solicitarVcbus()&&estacion.isEnvioReporte()){
-            Reporte reporte = (Reporte)new Model.Finder(Long.class, Reporte.class);
-            reporte.setDescripcion("Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre());
-            reporte.setTipoReporte(Reporte.PEDIDO_BICICLETAS);
+            Reporte reporte = (Reporte)new Reporte(Reporte.PEDIDO_BICICLETAS, "Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre(),ide);
             reporte.save();
         }
         usuario.agregarVcubEnUso();
@@ -56,4 +61,3 @@ public class EstacionVcubController {
         return ok(Json.toJson(estacion));
     }
 }
-

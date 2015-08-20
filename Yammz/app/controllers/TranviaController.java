@@ -65,7 +65,7 @@ public class TranviaController extends Controller{
     {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
-        int id= j.findPath("id").asInt();
+        Long id= j.findPath("id").asLong();
         Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,id);
         reporte.save();
         return ok("La emergencia fue registrada");

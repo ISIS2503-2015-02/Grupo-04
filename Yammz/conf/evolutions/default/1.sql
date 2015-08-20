@@ -24,6 +24,7 @@ create table estacion_vcub (
   capacidad                 integer,
   vcubs                     integer,
   nombre                    varchar(255),
+  envio_reporte             boolean,
   constraint pk_estacion_vcub primary key (id))
 ;
 
@@ -44,7 +45,7 @@ create table pedido_movibus (
 ;
 
 create table reporte (
-  id                        integer auto_increment not null,
+  id                        bigint auto_increment not null,
   tipo_reporte              varchar(255),
   descripcion               varchar(255),
   constraint pk_reporte primary key (id))

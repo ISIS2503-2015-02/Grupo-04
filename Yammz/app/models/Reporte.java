@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.lang.Long;
 
 /**
  * Created by g.martinez10 on 15/08/2015.
@@ -47,7 +48,7 @@ public class Reporte extends Model{
      */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
 
     //---------------------------------------------------------------------
@@ -58,7 +59,7 @@ public class Reporte extends Model{
     {
     }
 
-    public Reporte(String tipoRep, String descrip, int identificacion)
+    public Reporte(String tipoRep, String descrip, Long identificacion)
     {
         if(tipoRep.equals(PEDIDO_BICICLETAS))
         {
@@ -92,11 +93,11 @@ public class Reporte extends Model{
         this.descripcion = descripcion;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
