@@ -12,39 +12,29 @@ import javax.persistence.*;
  * @author cf.agudelo12
  */
 @Entity
-public class Direccion extends Model{
+public class Direccion extends Model {
     
-    private int calle;
-    
-    private int carrera;
+    private int principal;
     
     private int numero;
     
     private String detalles;
     
-    public Direccion(int calle, int carrera, int numero, String detalles) {
-        this.calle=calle;
-        this.carrera=carrera;
-        this.numero=numero;
-        this.detalles=detalles;
+    public Direccion(String direccion) {
+        String[] data= direccion.split(",");
+        this.principal=Integer.parseInt(data[0]);
+        this.numero=Integer.parseInt(data[1]);
+        this.detalles=data[2];
     }
     
-    public int getCalle() {
-        return calle;
+    public int getPrincipal() {
+        return principal;
     }
     
-    public void setCalle(int calle) {
-        this.calle=calle;
+    public void setPrincipal(int principal) {
+        this.principal=principal;
     }
-    
-    public int getCarrera() {
-        return carrera;
-    }
-    
-    public void setCarrera(int carrera) {
-        this.carrera=carrera;
-    }
-    
+
     public int getNumero() {
         return numero;
     }
@@ -59,5 +49,9 @@ public class Direccion extends Model{
     
     public void setDetalles(String detalles) {
         this.detalles=detalles;
+    }
+
+    public boolean equals(Object direccion) {
+        return principal==((Direccion)direccion).principal&&numero==((Direccion)direccion).numero;
     }
 }

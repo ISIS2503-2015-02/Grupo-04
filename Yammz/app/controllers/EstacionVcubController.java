@@ -1,16 +1,16 @@
 package controllers;
 
+import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 import models.EstacionVcub;
-import models.Usuario;
 import models.Reporte;
+import models.Usuario;
+import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+
 import java.util.List;
-import com.avaje.ebean.Model;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import play.libs.Json;
 
 /**
  * Created by s.baquero10 on 19/08/2015.
@@ -26,7 +26,7 @@ public class EstacionVcubController extends Controller {
     }
 
     public Result read() {
-        List<EstacionVcub> estaciones = new Model.Finder(String.class, EstacionVcub.class).all();
+        List<EstacionVcub> estaciones = new Model.Finder(Long.class, EstacionVcub.class).all();
         return ok(Json.toJson(estaciones));
     }
 

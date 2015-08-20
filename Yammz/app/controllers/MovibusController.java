@@ -32,7 +32,7 @@ public class MovibusController {
     }
 
     public Result read() {
-        List<Movibus> movibuses = new Model.Finder(String.class, Movibus.class).all();
+        List<Movibus> movibuses = new Model.Finder(Long.class, Movibus.class).all();
         return ok(Json.toJson(movibuses));
     }
 

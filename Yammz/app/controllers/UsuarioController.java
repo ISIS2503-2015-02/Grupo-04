@@ -29,7 +29,7 @@ public class UsuarioController {
     }
 
     public Result read() {
-        List<Usuario> usuarios = new Model.Finder(String.class, Usuario.class).all();
+        List<Usuario> usuarios = new Model.Finder(Long.class, Usuario.class).all();
         return ok(Json.toJson(usuarios));
     }
 
@@ -45,14 +45,24 @@ public class UsuarioController {
 
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
-        PedidoMovibus pedidoMovibus = new PedidoMovibus();
-        Movibus movibus = (Movibus) new Model.Finder(String.class, Movibus.class).all().remove(0);
-        movibus.reservarMovibus(pedidoMovibus);
-        Conductor conductor = (Conductor) new Model.Finder(String.class, Conductor.class).all().remove(0);
-        pedidoMovibus.save();
-        pedidoMovibus.setConductor(conductor);
-        pedidoMovibus.setMovibus(movibus);
-        pedidoMovibus.setUsuario(usuario);
-        return ok(Json.toJson(pedidoMovibus));
+        if(new Model.Finder(Long.class, Movibus.class).all().isEmpty()) {
+            /*PedidoMovibus.PedidoMovibusPendiente pedidoMovibusPendiente= new PedidoMovibus.PedidoMovibusPendiente(usuario,request().body().asJson().findPath("direccionUsuario").asText());*/
+        }
+        else {
+            PedidoMovibus pedidoMovibus = new PedidoMovibus();
+            Movibus movibus = (Movibus) new Model.Finder(Long.class, Movibus.class).all().get(0);
+            movibus.delete();
+            movibus.reservarMovibus(pedidoMovibus);
+            Conductor conductor = (Conductor) new Model.Finder(Long.class, Conductor.class).all().get(0);
+            conductor.delete();
+            pedidoMovibus.save();
+            pedidoMovibus.setConductor(conductor);
+            pedidoMovibus.setMovibus(movibus);
+            pedidoMovibus.setUsuario(usuario);
+            return ok(Json.toJson(pedidoMovibus));
+        }
+
+        PedidoMovibus.PedidoMovibusPendiente pedidoMovibusPendiente= (PedidoMovibus.PedidoMovibusPendiente) new Model.Finder(Long.class, PedidoMovibus.PedidoMovibusPendiente.class).all().remove(0);
+        return ok(Json.toJson(null));
     }
 }

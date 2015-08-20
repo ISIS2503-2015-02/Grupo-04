@@ -45,7 +45,7 @@ GET         /tranvia/:id                                     controllers.Tranvia
 
 PUT         /tranvia/update/:id                              controllers.TranviaController.update(id : Long )
 
-POST        /tranvia/emergencia                              controllers.TranviaController.reportarAccidente()
+POST        /tranvia/:magnitud/:tipoAccidente                controllers.TranviaController.reportarAccidente(magnitud: String, tipoAccidente: int)
 
 GET         /reportes                                        controllers.ReporteController.read()
 

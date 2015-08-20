@@ -135,4 +135,58 @@ public class PedidoMovibus extends Model{
     public static PedidoMovibus bind(JsonNode j) {
         return new PedidoMovibus();
     }
+
+    public boolean movibusEnRuta() {
+        return ruta.contains(movibus.getPosicion());
+    }
+
+    public class PedidoMovibusPendiente extends Model {
+        @Id
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        private Long id;
+
+        private Usuario usuario;
+
+        private Direccion direccionUsuario;
+
+        private Direccion direccionDestino;
+
+        public PedidoMovibusPendiente(Usuario usuario,Direccion direccionUsuario,Direccion direccionDestino) {
+            this.usuario=usuario;
+            this.direccionDestino=direccionDestino;
+            this.direccionUsuario=direccionUsuario;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id=id;
+        }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(Usuario usuario) {
+            this.usuario=usuario;
+        }
+
+        public Direccion getDireccionUsuario() {
+            return direccionUsuario;
+        }
+
+        public void setDireccionUsuario(Direccion direccionUsuario)        {
+            this.direccionUsuario=direccionUsuario;
+        }
+
+        public Direccion getDireccionDestino() {
+            return direccionDestino;
+        }
+
+        public void setDireccionDestino(Direccion direccionDestino) {
+            this.direccionDestino=direccionDestino;
+        }
+    }
 }
