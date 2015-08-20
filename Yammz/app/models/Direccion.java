@@ -20,10 +20,11 @@ public class Direccion extends Model {
     
     private String detalles;
     
-    public Direccion(int principal, int numero, String detalles) {
-        this.principal=principal;
-        this.numero=numero;
-        this.detalles=detalles;
+    public Direccion(String direccion) {
+        String[] data= direccion.split(",");
+        this.principal=Integer.parseInt(data[0]);
+        this.numero=Integer.parseInt(data[1]);
+        this.detalles=data[2];
     }
     
     public int getPrincipal() {

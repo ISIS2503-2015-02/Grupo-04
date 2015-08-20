@@ -144,10 +144,19 @@ public class PedidoMovibus extends Model{
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
         private Long id;
-        private PedidoMovibus pedidoMovibus;
-        public PedidoMovibusPendiente(PedidoMovibus pedidoMovibus) {
-            this.pedidoMovibus=pedidoMovibus;
+
+        private Usuario usuario;
+
+        private Direccion direccionUsuario;
+
+        private Direccion direccionDestino;
+
+        public PedidoMovibusPendiente(Usuario usuario,Direccion direccionUsuario,Direccion direccionDestino) {
+            this.usuario=usuario;
+            this.direccionDestino=direccionDestino;
+            this.direccionUsuario=direccionUsuario;
         }
+
         public Long getId() {
             return id;
         }
@@ -155,11 +164,29 @@ public class PedidoMovibus extends Model{
         public void setId(Long id) {
             this.id=id;
         }
-        public PedidoMovibus getPedidoMovibus() {
-            return pedidoMovibus;
+
+        public Usuario getUsuario() {
+            return usuario;
         }
-        public void setPedidoMovibus(PedidoMovibus pedidoMovibus) {
-            this.pedidoMovibus=pedidoMovibus;
+
+        public void setUsuario(Usuario usuario) {
+            this.usuario=usuario;
+        }
+
+        public Direccion getDireccionUsuario() {
+            return direccionUsuario;
+        }
+
+        public void setDireccionUsuario(Direccion direccionUsuario)        {
+            this.direccionUsuario=direccionUsuario;
+        }
+
+        public Direccion getDireccionDestino() {
+            return direccionDestino;
+        }
+
+        public void setDireccionDestino(Direccion direccionDestino) {
+            this.direccionDestino=direccionDestino;
         }
     }
 }
