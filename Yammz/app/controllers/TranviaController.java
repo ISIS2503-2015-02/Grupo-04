@@ -61,7 +61,7 @@ public class TranviaController extends Controller{
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result reportarAccidente(String magnitud,int tipoAccidente)
+    public Result reportarAccidente(String magnitud,Integer tipoAccidente)
     {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();

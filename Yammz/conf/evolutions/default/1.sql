@@ -15,8 +15,7 @@ create table conductor (
 ;
 
 create table direccion (
-  calle                     integer,
-  carrera                   integer,
+  principal                 integer,
   numero                    integer,
   detalles                  varchar(255))
 ;
@@ -50,6 +49,8 @@ create table reporte (
   id                        bigint auto_increment not null,
   tipo_reporte              varchar(255),
   descripcion               varchar(255),
+  tipo_accidente            integer,
+  magnitud                  varchar(255),
   constraint pk_reporte primary key (id))
 ;
 
