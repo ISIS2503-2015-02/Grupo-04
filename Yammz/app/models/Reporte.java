@@ -29,6 +29,37 @@ public class Reporte extends Model{
      */
     public final static String EMERGENCIA_TRANVIA="Emergencia Tranvia";
 
+    /**
+     * Constante que representa el nivel bajo de emergencia
+     */
+    public final static String MAGNITUD_BAJA="baja";
+
+    /**
+     * Constante que representa el nivel medio de emergencia
+     */
+    public final static String MAGNITUD_MEDIA="media";
+
+    /**
+     * Constante que representa el nivel alto de emergencia
+     */
+    public final static String MAGNITUD_ALTA="alta";
+
+    /**
+     * Constante que representa estrellarse
+     */
+    public final static int ESTRELLARSE= 0;
+
+    /**
+     * Constante que representa vararse
+     */
+    public final static int VARARSE= 1;
+
+    /**
+     * Constante que representa robo
+     */
+    public final static int ROBO= 2;
+
+
     //---------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------
@@ -43,6 +74,15 @@ public class Reporte extends Model{
      */
     private String descripcion;
 
+    /**
+     * Describe el tipo de accidente
+     */
+    private int tipoAccidente;
+
+    /**
+     * Describe la magnitud de la emergencia
+     */
+    private String magnitud;
     /**
      * Identificador de la estacion o tranvia que creo el reporte.
      */
@@ -59,16 +99,18 @@ public class Reporte extends Model{
     {
     }
 
+    public Reporte(String tipoRep, String descrip, Long identificacion, String magnitud, int tipoAccidente)
+    {
+        this.tipoReporte=tipoRep;
+        this.descripcion=descrip;
+        this.id=identificacion;
+        this.magnitud=magnitud;
+        this.tipoAccidente=tipoAccidente;
+    }
+
     public Reporte(String tipoRep, String descrip, Long identificacion)
     {
-        if(tipoRep.equals(PEDIDO_BICICLETAS))
-        {
-            this.tipoReporte=PEDIDO_BICICLETAS;
-        }
-        else
-        {
-            this.tipoReporte=EMERGENCIA_TRANVIA;
-        }
+        this.tipoReporte=tipoRep;
         this.descripcion=descrip;
         this.id=identificacion;
     }
@@ -76,6 +118,22 @@ public class Reporte extends Model{
     //---------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------
+
+    public int getTipoAccidente() {
+        return tipoAccidente;
+    }
+
+    public void setTipoAccidente(int tipoAccidente) {
+        this.tipoAccidente = tipoAccidente;
+    }
+
+    public String getMagnitud() {
+        return magnitud;
+    }
+
+    public void setMagnitud(String magnitud) {
+        this.magnitud = magnitud;
+    }
 
     public String getTipoReporte() {
         return tipoReporte;

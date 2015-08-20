@@ -61,14 +61,43 @@ public class TranviaController extends Controller{
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result reportarAccidente()
+    public Result reportarAccidente(String magnitud,int tipoAccidente)
     {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
         Long id= j.findPath("id").asLong();
-        Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,id);
+        Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,id,magnitud,tipoAccidente);
         reporte.save();
         return ok("La emergencia fue registrada");
     }
 
+    public Result getAccidenteMasComun(){
+        int estrellarse=0;
+        int vararse=0;
+        int robo=0;
+
+        List<Reporte> reportes = new Model.Finder(Long.class, Reporte.class).all();
+
+        for (int i=0;i<reportes.size();i++){
+            Reporte r=(Reporte)reportes.get(i);
+            if(r.getTipoAccidente()==Reporte.ESTRELLARSE){
+                estrellarse++;
+            }
+            else if(r.getTipoAccidente()==Reporte.VARARSE){
+                vararse++;
+            }
+            else if(r.getTipoAccidente()==Reporte.ROBO){
+                robo++;
+            }
+        }
+        if(estrellarse>vararse && estrellarse>robo){
+            return ok("Estrellarse");
+        }
+        else if(vararse>estrellarse && vararse>robo){
+            return ok("Vararse");
+        }
+        else {
+            return ok("Robo");
+        }
+    }
 }
