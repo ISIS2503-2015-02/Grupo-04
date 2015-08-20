@@ -30,7 +30,7 @@ public class TranviaController extends Controller{
     }
 
     public Result read(){
-        List<Tranvia> tranvias = new Model.Finder(String.class, Tranvia.class).all();
+        List<Tranvia> tranvias = new Model.Finder(Long.class, Tranvia.class).all();
         return ok(Json.toJson(tranvias));
     }
 

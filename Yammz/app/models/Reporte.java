@@ -39,7 +39,7 @@ public class Reporte extends Model{
     private String tipoReporte;
 
     /**
-     * Descripci�n del reporte.
+     * Descripcion del reporte.
      */
     private String descripcion;
 

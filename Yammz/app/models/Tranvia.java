@@ -120,9 +120,9 @@ public class Tranvia extends Model {
         return posicion;
     }
 
-    public long getId(){ return id;}
+    public Long getId(){ return id;}
 
-    public void setId(long id){this.id=id;}
+    public void setId(Long id){this.id=id;}
 
     /**
      * Metodo encargado de cambiar la posicion del vehiculo

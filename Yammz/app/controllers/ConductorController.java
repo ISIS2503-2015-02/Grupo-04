@@ -27,7 +27,7 @@ public class ConductorController {
     }
 
     public Result read() {
-        List<Conductor> conductores = new Model.Finder(String.class, Conductor.class).all();
+        List<Conductor> conductores = new Model.Finder(Long.class, Conductor.class).all();
         return ok(Json.toJson(conductores));
     }
 

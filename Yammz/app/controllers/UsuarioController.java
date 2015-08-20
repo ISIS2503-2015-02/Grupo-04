@@ -29,7 +29,7 @@ public class UsuarioController {
     }
 
     public Result read() {
-        List<Usuario> usuarios = new Model.Finder(String.class, Usuario.class).all();
+        List<Usuario> usuarios = new Model.Finder(Long.class, Usuario.class).all();
         return ok(Json.toJson(usuarios));
     }
 
@@ -46,9 +46,11 @@ public class UsuarioController {
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
         PedidoMovibus pedidoMovibus = new PedidoMovibus();
-        Movibus movibus = (Movibus) new Model.Finder(String.class, Movibus.class).all().remove(0);
+        Movibus movibus = (Movibus) new Model.Finder(Long.class, Movibus.class).all().get(0);
+
         movibus.reservarMovibus(pedidoMovibus);
-        Conductor conductor = (Conductor) new Model.Finder(String.class, Conductor.class).all().remove(0);
+        Conductor conductor = (Conductor) new Model.Finder(Long.class, Conductor.class).all().remove(0);
+        PedidoMovibus.PedidoMovibusPendiente pedidoMovibusPendiente= (PedidoMovibus.PedidoMovibusPendiente) new Model.Finder(Long.class, PedidoMovibus.PedidoMovibusPendiente.class).all().remove(0);
         pedidoMovibus.save();
         pedidoMovibus.setConductor(conductor);
         pedidoMovibus.setMovibus(movibus);

@@ -26,7 +26,7 @@ public class EstacionVcubController extends Controller {
     }
 
     public Result read() {
-        List<EstacionVcub> estaciones = new Model.Finder(String.class, EstacionVcub.class).all();
+        List<EstacionVcub> estaciones = new Model.Finder(Long.class, EstacionVcub.class).all();
         return ok(Json.toJson(estaciones));
     }
 

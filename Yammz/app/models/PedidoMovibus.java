@@ -135,4 +135,31 @@ public class PedidoMovibus extends Model{
     public static PedidoMovibus bind(JsonNode j) {
         return new PedidoMovibus();
     }
+
+    public boolean movibusEnRuta() {
+        return ruta.contains(movibus.getPosicion());
+    }
+
+    public class PedidoMovibusPendiente extends Model {
+        @Id
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        private Long id;
+        private PedidoMovibus pedidoMovibus;
+        public PedidoMovibusPendiente(PedidoMovibus pedidoMovibus) {
+            this.pedidoMovibus=pedidoMovibus;
+        }
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id=id;
+        }
+        public PedidoMovibus getPedidoMovibus() {
+            return pedidoMovibus;
+        }
+        public void setPedidoMovibus(PedidoMovibus pedidoMovibus) {
+            this.pedidoMovibus=pedidoMovibus;
+        }
+    }
 }

@@ -31,5 +31,14 @@ public class PedidoMovibusController {
         }
     }
 
+    public Result reportarPedidoTerminado(Long id) {
+        PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
+        ObjectNode result = Json.newObject();
+        if(pedidoMovibus == null)
+            return ok(Json.toJson(result));
+        else {
 
+            return ok(Json.toJson(pedidoMovibus));
+        }
+    }
 }
