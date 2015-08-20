@@ -61,7 +61,6 @@ public class EstacionVcub extends Model{
         this.envioReporte=false;
     }
 
-
     //------------------------------------------------------
     // Metodos
     //------------------------------------------------------
@@ -88,7 +87,6 @@ public class EstacionVcub extends Model{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 
     public Long getId() {
         return id;

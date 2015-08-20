@@ -7,6 +7,7 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.avaje.ebeaninternal.server.lib.util.Str;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
@@ -26,14 +27,14 @@ public class Movibus extends Model {
     //-----------------------------------------------------------
 
     /**
-     * Constante que representa el estado ocupado
-     */
-    public final static int OCUPADO=0;
-
-    /**
      * Constante que representa el estado disponible
      */
-    public final static int DISPONIBLE=1;
+    public final static int DISPONIBLE=0;
+
+    /**
+     * Constante que representa el estado ocupado
+     */
+    public final static int OCUPADO=1;
 
     /**
      * Constante que representa el estado problema
@@ -48,10 +49,13 @@ public class Movibus extends Model {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    public static Finder<Integer, Movibus> find
+            = new Model.Finder<>(Integer.class, Movibus.class);
+
     /**
      * Posicion del vehiculo
      */
-    private Direccion posicion;
+    private String posicion;
 
     /**
      * Estado del vehiculo
@@ -63,7 +67,7 @@ public class Movibus extends Model {
      */
     private int kilometraje;
     
-    public Movibus(Direccion posicion) {
+    public Movibus(String posicion) {
         this.posicion=posicion;
         estado=DISPONIBLE;
         kilometraje=0;
@@ -81,7 +85,7 @@ public class Movibus extends Model {
      * Metodo encargado de obtener la posicion del vehiculo
      * @return posicion
      */
-    public Direccion getPosicion() {
+    public String getPosicion() {
         return posicion;
     }
 
@@ -89,7 +93,7 @@ public class Movibus extends Model {
      * Metodo encargado de cambiar la posicion del vehiculo
      * @param posicion
      */
-    public void setPosicion(Direccion posicion) {
+    public void setPosicion(String posicion) {
         this.posicion=posicion;
     }
 
@@ -131,9 +135,7 @@ public class Movibus extends Model {
     }
 
     public static Movibus bind(JsonNode j) {
-        Direccion posicion = null;
-        int estado = j.findPath("estado").asInt();
-        PedidoMovibus pedidoMovibus = null;
+        String posicion = j.findPath("posicion").asText();
         return new Movibus(posicion);
     }
 

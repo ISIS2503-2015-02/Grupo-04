@@ -31,6 +31,7 @@ create table estacion_vcub (
 
 create table movibus (
   id                        bigint auto_increment not null,
+  posicion                  varchar(255),
   estado                    integer,
   kilometraje               integer,
   constraint pk_movibus primary key (id))
@@ -42,7 +43,24 @@ create table pedido_movibus (
   fecha_ejecucion           timestamp,
   tiempo_estimado           integer,
   tiempo_real               integer,
+  usuario_id                bigint,
+  movibus_id                bigint,
+  conductor_id              bigint,
+  direccion_usuario         varchar(255),
+  direccion_destino         varchar(255),
+  constraint uq_pedido_movibus_usuario_id unique (usuario_id),
+  constraint uq_pedido_movibus_movibus_id unique (movibus_id),
+  constraint uq_pedido_movibus_conductor_id unique (conductor_id),
   constraint pk_pedido_movibus primary key (id))
+;
+
+create table pedido_movibus_pendiente (
+  id                        bigint auto_increment not null,
+  usuario_id                bigint,
+  direccion_usuario         varchar(255),
+  direccion_destino         varchar(255),
+  constraint uq_pedido_movibus_pendiente_usua unique (usuario_id),
+  constraint pk_pedido_movibus_pendiente primary key (id))
 ;
 
 create table reporte (
@@ -78,6 +96,14 @@ create table vehiculo (
   kilometraje               integer)
 ;
 
+alter table pedido_movibus add constraint fk_pedido_movibus_usuario_1 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
+create index ix_pedido_movibus_usuario_1 on pedido_movibus (usuario_id);
+alter table pedido_movibus add constraint fk_pedido_movibus_movibus_2 foreign key (movibus_id) references movibus (id) on delete restrict on update restrict;
+create index ix_pedido_movibus_movibus_2 on pedido_movibus (movibus_id);
+alter table pedido_movibus add constraint fk_pedido_movibus_conductor_3 foreign key (conductor_id) references conductor (id) on delete restrict on update restrict;
+create index ix_pedido_movibus_conductor_3 on pedido_movibus (conductor_id);
+alter table pedido_movibus_pendiente add constraint fk_pedido_movibus_pendiente_us_4 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
+create index ix_pedido_movibus_pendiente_us_4 on pedido_movibus_pendiente (usuario_id);
 
 
 
@@ -94,6 +120,8 @@ drop table if exists estacion_vcub;
 drop table if exists movibus;
 
 drop table if exists pedido_movibus;
+
+drop table if exists pedido_movibus_pendiente;
 
 drop table if exists reporte;
 

@@ -51,6 +51,10 @@ public class Direccion extends Model {
         this.detalles=detalles;
     }
 
+    public int darDistancia(Direccion direccion) {
+        return Math.abs((principal-direccion.principal)*100)+Math.abs((numero-direccion.numero)*100);
+    }
+
     public boolean equals(Object direccion) {
         return principal==((Direccion)direccion).principal&&numero==((Direccion)direccion).numero;
     }

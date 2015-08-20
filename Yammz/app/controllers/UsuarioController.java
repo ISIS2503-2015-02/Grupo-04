@@ -3,17 +3,16 @@ package controllers;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.Conductor;
-import models.Movibus;
-import models.PedidoMovibus;
-import models.Usuario;
+import models.*;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static play.mvc.Controller.request;
+import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
 
 /**
@@ -46,23 +45,33 @@ public class UsuarioController {
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
         if(new Model.Finder(Long.class, Movibus.class).all().isEmpty()) {
-            /*PedidoMovibus.PedidoMovibusPendiente pedidoMovibusPendiente= new PedidoMovibus.PedidoMovibusPendiente(usuario,request().body().asJson().findPath("direccionUsuario").asText());*/
+            PedidoMovibusPendiente pedidoMovibusPendiente=new PedidoMovibusPendiente(usuario,request().body().asJson().findPath("direccionUsuario").asText(),request().body().asJson().findPath("direccionDestino").asText());
+            pedidoMovibusPendiente.save();
+            return badRequest();
         }
         else {
             PedidoMovibus pedidoMovibus = new PedidoMovibus();
-            Movibus movibus = (Movibus) new Model.Finder(Long.class, Movibus.class).all().get(0);
-            movibus.delete();
+            List movibuses = Movibus.find.where().like("estado",""+Movibus.DISPONIBLE).findList();
+            Movibus movibus=null;
+            int menorDistancia=PedidoMovibus.DISTANCIA_MAXIMA;
+            Iterator i = movibuses.iterator();
+            while (i.hasNext()) {
+                Movibus movibusT=(Movibus)i.next();
+                Direccion d1=new Direccion(movibusT.getPosicion());
+                Direccion d2=new Direccion(request().body().asJson().findPath("direccionUsuario").asText());
+                if(d1.darDistancia(d2)<menorDistancia) {
+                    movibus=movibusT;
+                }
+            }
             movibus.reservarMovibus(pedidoMovibus);
             Conductor conductor = (Conductor) new Model.Finder(Long.class, Conductor.class).all().get(0);
-            conductor.delete();
-            pedidoMovibus.save();
             pedidoMovibus.setConductor(conductor);
             pedidoMovibus.setMovibus(movibus);
             pedidoMovibus.setUsuario(usuario);
+            pedidoMovibus.setDireccionDestino(request().body().asJson().findPath("direccionDestino").asText());
+            pedidoMovibus.setDireccionUsuario(request().body().asJson().findPath("direccionUsuario").asText());
+            pedidoMovibus.save();
             return ok(Json.toJson(pedidoMovibus));
         }
-
-        PedidoMovibus.PedidoMovibusPendiente pedidoMovibusPendiente= (PedidoMovibus.PedidoMovibusPendiente) new Model.Finder(Long.class, PedidoMovibus.PedidoMovibusPendiente.class).all().remove(0);
-        return ok(Json.toJson(null));
     }
 }

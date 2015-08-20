@@ -46,7 +46,6 @@ public class PedidoMovibusController {
         if(pedidoMovibus == null)
             return ok(Json.toJson(result));
         else {
-
             return ok(Json.toJson(pedidoMovibus));
         }
     }

@@ -20,6 +20,8 @@ import javax.persistence.*;
 @Entity
 public class PedidoMovibus extends Model{
 
+    public final static int DISTANCIA_MAXIMA=10000;
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -34,15 +36,18 @@ public class PedidoMovibus extends Model{
     
     private int tiempoReal;
 
+    @OneToOne
     private Usuario usuario;
 
+    @OneToOne
     private Movibus movibus;
 
+    @OneToOne
     private Conductor conductor;
 
-    private Direccion direccionUsuario;
+    private String direccionUsuario;
 
-    private Direccion direccionDestino;
+    private String direccionDestino;
 
     public PedidoMovibus() {
         ruta=new LinkedList<>();
@@ -116,19 +121,19 @@ public class PedidoMovibus extends Model{
         this.conductor=conductor;
     }
 
-    public Direccion getDireccionUsuario() {
+    public String getDireccionUsuario() {
         return direccionUsuario;
     }
 
-    public void setDireccionUsuario(Direccion direccionUsuario) {
+    public void setDireccionUsuario(String direccionUsuario) {
         this.direccionUsuario=direccionUsuario;
     }
 
-    public Direccion getDireccionDestino() {
+    public String getDireccionDestino() {
         return direccionDestino;
     }
 
-    public void setDireccionDestino(Direccion direccionDestino) {
+    public void setDireccionDestino(String direccionDestino) {
         this.direccionDestino=direccionDestino;
     }
 
@@ -138,55 +143,5 @@ public class PedidoMovibus extends Model{
 
     public boolean movibusEnRuta() {
         return ruta.contains(movibus.getPosicion());
-    }
-
-    public class PedidoMovibusPendiente extends Model {
-        @Id
-        @GeneratedValue(strategy=GenerationType.IDENTITY)
-        private Long id;
-
-        private Usuario usuario;
-
-        private Direccion direccionUsuario;
-
-        private Direccion direccionDestino;
-
-        public PedidoMovibusPendiente(Usuario usuario,Direccion direccionUsuario,Direccion direccionDestino) {
-            this.usuario=usuario;
-            this.direccionDestino=direccionDestino;
-            this.direccionUsuario=direccionUsuario;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id=id;
-        }
-
-        public Usuario getUsuario() {
-            return usuario;
-        }
-
-        public void setUsuario(Usuario usuario) {
-            this.usuario=usuario;
-        }
-
-        public Direccion getDireccionUsuario() {
-            return direccionUsuario;
-        }
-
-        public void setDireccionUsuario(Direccion direccionUsuario)        {
-            this.direccionUsuario=direccionUsuario;
-        }
-
-        public Direccion getDireccionDestino() {
-            return direccionDestino;
-        }
-
-        public void setDireccionDestino(Direccion direccionDestino) {
-            this.direccionDestino=direccionDestino;
-        }
     }
 }
