@@ -15,6 +15,8 @@ GET         /usuario                                         controllers.Usuario
 
 GET         /usuario/:id                                     controllers.UsuarioController.get(id : Long)
 
+GET         /usuario/:ccu                                    controllers.UsuarioController.getByCC(ccu : Long)
+
 POST        /usuario/:id/solicitarMovibus                    controllers.UsuarioController.solicitarMovibus(id : Long)
 
 POST        /conductor                                       controllers.ConductorController.create()
@@ -33,9 +35,9 @@ GET         /estacionvcub                                    controllers.Estacio
 
 PUT         /estacionvcub/:id                                controllers.EstacionVcubController.llenarEstacion(id : Long)
 
-PUT         /estacionvcub/:ide/usuario/:idu                  controllers.EstacionVcubController.retiroVcub(ide : Long, idu : Long)
+PUT         /estacionvcub/:ide/usuario/:ccu                  controllers.EstacionVcubController.retiroVcub(ide : Long, ccu : Long)
 
-PUT         /estacionvcub/:ide/usuario/:idu/devolucionVcub   controllers.EstacionVcubController.devolucionVcub(ide : Long, idu : Long)
+PUT         /estacionvcub/:ide/usuario/:ccu/devolucionVcub   controllers.EstacionVcubController.devolucionVcub(ide : Long, ccu : Long)
          
 POST        /tranvia                                         controllers.TranviaController.create()
 

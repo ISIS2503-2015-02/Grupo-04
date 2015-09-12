@@ -39,6 +39,21 @@ public class Tranvia extends Model {
      */
     public final static int PROBLEMA=2;
 
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_A=0;
+
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_B=1;
+
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_C=2;
+
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
@@ -62,33 +77,11 @@ public class Tranvia extends Model {
      */
     private int kilometraje;
 
-    //-----------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_A=0;
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_B=1;
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_C=2;
-    
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
-    
     /**
      * Linea asignada al tranvia
      */
     private int linea;
+
     
     public Tranvia(String posicion,int linea) {
         this.linea=linea;

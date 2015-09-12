@@ -30,12 +30,18 @@ public class EstacionVcubController extends Controller {
         return ok(Json.toJson(estaciones));
     }
 
-    public Result retiroVcub(Long ide, Long idu){
-        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(ide);
-        Usuario usuario = (Usuario)new Model.Finder(Long.class, Usuario.class).byId(idu);
+    public Result retiroVcub(Long idEstacion, Long ccUsuario){
+        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(idEstacion);
+        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
+        Usuario usuario = null;
+        for(Usuario u:users){
+            if(u.getCedula()==ccUsuario){
+                usuario = u;
+            }
+        }
         estacion.prestarVcub();
         if(estacion.solicitarVcbus()&&estacion.isEnvioReporte()){
-            Reporte reporte = (Reporte)new Reporte(Reporte.PEDIDO_BICICLETAS, "Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre(),ide);
+            Reporte reporte = (Reporte)new Reporte(Reporte.PEDIDO_BICICLETAS, "Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre(),idEstacion);
             reporte.save();
         }
         usuario.agregarVcubEnUso();
@@ -44,11 +50,21 @@ public class EstacionVcubController extends Controller {
         return ok(Json.toJson(usuario));
     }
 
-    public Result devolucionVcub(Long ide, Long idu){
-        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(ide);
-        Usuario usuario = (Usuario)new Model.Finder(Long.class, Usuario.class).byId(idu);
+    public Result devolucionVcub(Long idEstacion, Long ccUsuario){
+        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(idEstacion);
+        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
+        Usuario usuario = null;
+        for(Usuario u:users){
+            if(u.getCedula()==ccUsuario){
+                usuario = u;
+            }
+        }
         estacion.restituirVcub();
-        usuario.devolverVcubEnUso();
+        try {
+            usuario.devolverVcubEnUso();
+        }catch(Exception e){
+            return ok(Json.toJson("{\"error\":\""+e.getMessage()+"\"}"));
+        }
         usuario.save();
         estacion.save();
         return ok(Json.toJson(usuario));
