@@ -1,0 +1,28 @@
+package Interface;
+
+public interface ITranvia {
+	/**
+	 * Envia al servidor central la posicion actual del tranvia cada x segundos.
+	 */
+	public String sendPos();
+	
+	/**
+	 * Envia el estado acual del tranvia a la central TBC.
+	 */
+	public String enviarEstado();
+	
+	/**
+	 * Reporta el kilometraje desde la utlima revision.
+	 */
+	public int kmUltRevision();
+	
+	/**
+	 * Actualiza la revision del tranvia
+	 */
+	public String revisado();
+	
+	/**
+	 * Reporta todos los atributos del tranvia a la central TBC.
+	 */
+	public String reportarTranvia();
+}

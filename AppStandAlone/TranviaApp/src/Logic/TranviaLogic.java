@@ -6,15 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import DTO.TranviaDTO;
-import Interface.ITranvia;
 
-public class TranviaLogic implements ITranvia{
+public class TranviaLogic{
 
-	@Override
 	public int sendPos(TranviaDTO dto) {
 		int rta=0;
 		try{
-			URL url = new URL("http://localhost:8080/tranvia/update/{"+dto.getId()+"}");
+			URL url = new URL("http://localhost:8080/tranvia/update/"+dto.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
@@ -48,7 +46,6 @@ public class TranviaLogic implements ITranvia{
 		return rta;
 	}
 
-	@Override
 	public int enviarEstado(TranviaDTO dto) {
 		//TODO revisar como se envia la informacion y que se envia.
 		int rta=0;
@@ -83,7 +80,6 @@ public class TranviaLogic implements ITranvia{
 		return rta;
 	}
 
-	@Override
 	public int kmUltRevision(TranviaDTO dto) {
 		int rta=0;
 		try{

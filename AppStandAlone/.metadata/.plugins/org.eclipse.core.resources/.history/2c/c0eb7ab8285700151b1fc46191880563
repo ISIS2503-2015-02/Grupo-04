@@ -1,0 +1,62 @@
+package Logic;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import Interface.ITranvia;
+
+public class TranviaLogic implements ITranvia{
+
+	@Override
+	public int sendPos() {
+		try{
+			URL url = new URL("http://localhost:8080/Tranvia/actualizarTranvia/");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+			
+			if(conn.getResponseCode()!=200){
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String output;
+			System.out.println("Output from server .... \n");
+			while((output = buff.readLine())!=null){
+				System.out.println(output);
+			}
+			int rta = conn.getResponseCode();
+			conn.disconnect();
+			return rta;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String enviarEstado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int kmUltRevision() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String revisado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reportarTranvia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -12,9 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Interface.IEstacionVcub;
-
-public class EstacionVcubLogic implements IEstacionVcub{
+public class EstacionVcubLogic{
 	
 	EstacionVcubSerializable data;
 	
@@ -77,11 +75,10 @@ public class EstacionVcubLogic implements IEstacionVcub{
 		}
 	}
 	
-	@Override
 	public int llenarEstacion() {
 		int rta=0;
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub/{"+data.getId()+"}");
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
@@ -89,13 +86,21 @@ public class EstacionVcubLogic implements IEstacionVcub{
 			if(conn.getResponseCode()!=200){
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
+			
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output;
-			System.out.println("Output from server .... \n");
-			while((output = buff.readLine())!=null){
-				System.out.println(output);
+			String output=buff.readLine();
+			String at1[] = output.split(",");
+			for (String string : at1) {
+				String at2[] = string.split(":");
+				if(at2[0].equals("[{\"id\""))
+					data.setId(Long.parseLong(at2[1]));
+				if(at2[0].equals("\"nombre\""))
+					data.setNombre(at2[1].replaceAll("\"", ""));
+				if(at2[0].equals("\"capacidad\""))
+					data.setCapacidad(Integer.parseInt(at2[1]));
+				if(at2[0].equals("\"vcubs\""))
+					data.setVcubs(Integer.parseInt(at2[1]));
 			}
-			rta = conn.getResponseCode();
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
@@ -104,7 +109,6 @@ public class EstacionVcubLogic implements IEstacionVcub{
 		return rta;
 	}
 
-	@Override
 	public String retiroVcub(Long usuarioCC) {
 		String rta="";
 		try{
@@ -138,7 +142,6 @@ public class EstacionVcubLogic implements IEstacionVcub{
 		return rta;
 	}
 
-	@Override
 	public String devolucionVcub(Long usuarioCC) throws Exception{
 		String rta="";
 		try{

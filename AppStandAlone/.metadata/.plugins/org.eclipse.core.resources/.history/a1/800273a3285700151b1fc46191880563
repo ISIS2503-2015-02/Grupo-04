@@ -1,0 +1,45 @@
+package Logic;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import Interface.ITranvia;
+
+public class TranviaLogic implements ITranvia{
+
+	@Override
+	public String sendPos() {
+		try{
+			URL url = new URL("http://localhost:8080/Tranvia/actualizarTranvia/");
+			HttpURLConnection conn = (HttpURLConnection) url openConnection();
+		}
+	}
+
+	@Override
+	public String enviarEstado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int kmUltRevision() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String revisado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reportarTranvia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

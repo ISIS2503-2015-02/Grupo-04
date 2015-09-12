@@ -1,0 +1,158 @@
+package Logic;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import DTO.EstacionVcubDTO;
+import Interface.IEstacionVcub;
+
+public class EstacionVcubLogic implements IEstacionVcub{
+	
+	EstacionVcubSerializable data;
+	
+	public EstacionVcubLogic(){
+		try{
+			ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
+			data = (EstacionVcubSerializable)ins.readObject();
+			ins.close();
+			System.out.println("DATA: \n "+data.getNombre());
+			System.out.println(data.getVcubs());
+			System.out.println(data.getCapacidad());
+		}catch(FileNotFoundException e){
+			File file = new File("./data/data");
+			getEstacion();
+			persist();
+			System.out.println(e.getMessage());
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void getEstacion(){
+		try{
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+			
+			if(conn.getResponseCode()!=200){
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String output;
+			System.out.println("Output from server .... \n");
+			while((output = buff.readLine())!=null){
+				System.out.println(output);
+			}
+			conn.disconnect();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int llenarEstacion() {
+		int rta=0;
+		try{
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/{"+data.getId()+"}");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("PUT");
+			conn.setRequestProperty("Accept", "application/json");
+			
+			if(conn.getResponseCode()!=200){
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String output;
+			System.out.println("Output from server .... \n");
+			while((output = buff.readLine())!=null){
+				System.out.println(output);
+			}
+			rta = conn.getResponseCode();
+			conn.disconnect();
+			return rta;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return rta;
+	}
+
+	@Override
+	public int retiroVcub(Long usuarioCC) {
+		int rta=0;
+		try{
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/{"+data.getId()+"}/usuario/{"+usuarioCC+"}");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("PUT");
+			conn.setRequestProperty("Accept", "application/json");
+			
+			if(conn.getResponseCode()!=200){
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String output;
+			System.out.println("Output from server .... \n");
+			while((output = buff.readLine())!=null){
+				System.out.println(output);
+			}
+			rta = conn.getResponseCode();
+			conn.disconnect();
+			return rta;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return rta;
+	}
+
+	@Override
+	public int devolucionVcub(Long usuarioCC) {
+		int rta=0;
+		try{
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/{"+data.getId()+"}/usuario/{"+usuarioCC+"}/devolucionVcub");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("PUT");
+			conn.setRequestProperty("Accept", "application/json");
+			
+			if(conn.getResponseCode()!=200){
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String output;
+			System.out.println("Output from server .... \n");
+			while((output = buff.readLine())!=null){
+				System.out.println(output);
+			}
+			rta = conn.getResponseCode();
+			conn.disconnect();
+			return rta;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return rta;
+	}
+
+	public void persist(){
+		try{
+		FileOutputStream out = new FileOutputStream("./data/data");
+		ObjectOutputStream os = new ObjectOutputStream(out);
+		os.writeObject(data);
+		os.flush(); 
+		os.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+}

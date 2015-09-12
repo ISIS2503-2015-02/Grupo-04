@@ -1,0 +1,12 @@
+package Interface;
+
+public interface Itranvia {
+	/**
+	 * Envia al servidor central la posicion actual del movibus cada x segundos.
+	 */
+	public void sendPos();
+	
+	/**
+	 * 
+	 */
+}

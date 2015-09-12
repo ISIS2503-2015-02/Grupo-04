@@ -1,0 +1,43 @@
+package DTO;
+
+public class ReporteDTO {
+	
+	/**
+	 * El tipo de reporte.
+	 */
+	private String tipoReporte;
+	
+	/**
+	 * Una breve descripcion del reporte
+	 */
+	private String descripcion;
+	
+	/**
+	 * la id de la entidad que genero el reporte
+	 */
+	private int id;
+
+	public String getTipoReporte() {
+		return tipoReporte;
+	}
+
+	public void setTipoReporte(String tipoReporte) {
+		this.tipoReporte = tipoReporte;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+}

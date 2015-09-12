@@ -163,7 +163,7 @@ public class Main extends JFrame implements ActionListener{
 				int rta = logic.llenarEstacion();
 				if(rta!=200){
 					vcubs.add(denied, BorderLayout.CENTER);
-					JOptionPane.showMessageDialog(this, "Error del servidor: "+rta+", intente mas tarded","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Error del servidor: "+rta+", intente mas tarde","Error",JOptionPane.ERROR_MESSAGE);
 				}else{
 					vcubs.add(refillSuccess, BorderLayout.NORTH);
 					vcubs.add(success, BorderLayout.CENTER);
