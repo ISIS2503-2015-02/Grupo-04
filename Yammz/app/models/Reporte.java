@@ -32,27 +32,27 @@ public class Reporte extends Model{
     /**
      * Constante que representa el nivel bajo de emergencia
      */
-    public final static String MAGNITUD_BAJA="baja";
+    public final static String MAGNITUD_BAJA="Baja";
 
     /**
      * Constante que representa el nivel medio de emergencia
      */
-    public final static String MAGNITUD_MEDIA="media";
+    public final static String MAGNITUD_MEDIA="Media";
 
     /**
      * Constante que representa el nivel alto de emergencia
      */
-    public final static String MAGNITUD_ALTA="alta";
+    public final static String MAGNITUD_ALTA="Alta";
 
     /**
      * Constante que representa estrellarse
      */
-    public final static int ESTRELLARSE= 0;
+    public final static int CHOQUE= 0;
 
     /**
      * Constante que representa vararse
      */
-    public final static int VARARSE= 1;
+    public final static int DANIO= 1;
 
     /**
      * Constante que representa robo
@@ -95,9 +95,7 @@ public class Reporte extends Model{
     // Constructores
     //---------------------------------------------------------------------
 
-    public Reporte()
-    {
-    }
+    public Reporte() {}
 
     public Reporte(String tipoRep, String descrip, Long identificacion, String magnitud, int tipoAccidente)
     {

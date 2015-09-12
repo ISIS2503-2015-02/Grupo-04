@@ -5,15 +5,10 @@
  */
 package models;
 
-
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;
-
-
-
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,16 +43,14 @@ public class Tranvia extends Model {
     // Atributos
     //-----------------------------------------------------------
 
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-
     /**
      * Posicion del vehiculo
      */
-    private Direccion posicion;
+    private String posicion;
 
     /**
      * Estado del vehiculo
@@ -97,13 +90,17 @@ public class Tranvia extends Model {
      */
     private int linea;
     
-    public Tranvia(Direccion posicion,int linea) {
+    public Tranvia(String posicion,int linea) {
         this.linea=linea;
         this.posicion=posicion;
         estado=DISPONIBLE;
         kilometraje=0;
     }
-    
+
+    public Long getId(){ return id;}
+
+    public void setId(Long id){this.id=id;}
+
     public int getLinea() {
         return linea;
     }
@@ -116,19 +113,17 @@ public class Tranvia extends Model {
      * Metodo encargado de obtener la posicion del vehiculo
      * @return posicion
      */
-    public Direccion getPosicion() {
+    public String getPosicion() {
         return posicion;
     }
 
-    public Long getId(){ return id;}
 
-    public void setId(Long id){this.id=id;}
 
     /**
      * Metodo encargado de cambiar la posicion del vehiculo
      * @param posicion
      */
-    public void setPosicion(Direccion posicion) {
+    public void setPosicion(String posicion) {
         this.posicion=posicion;
     }
 
@@ -175,7 +170,7 @@ public class Tranvia extends Model {
      * @param j Nodo Json con atributos y valores de un objeto Tranvia
      */
     public static Tranvia bind(JsonNode j) {
-        Direccion posicion = null;
+        String posicion = j.findPath("posicion").asText();
         int estado = j.findPath("estado").asInt();
         int kilometraje = j.findPath("kilometraje").asInt();
         int linea = j.findPath("linea").asInt();
@@ -183,13 +178,11 @@ public class Tranvia extends Model {
         return tranvia;
     }
 
-    public void update(Tranvia nuevoTranvia) {
-        this.setPosicion((nuevoTranvia.getPosicion()));
-        this.setEstado(nuevoTranvia.getEstado());
-        System.out.print(getEstado() + "\n");
-        this.setKilometraje(nuevoTranvia.getKilometraje());
-        System.out.print(getKilometraje() + "\n");
-        this.setLinea(nuevoTranvia.getLinea());
+    public void update(Tranvia tranvia) {
+        this.setPosicion((tranvia.getPosicion()));
+        this.setEstado(tranvia.getEstado());
+        this.setKilometraje(tranvia.getKilometraje());
+        this.setLinea(tranvia.getLinea());
     }
 
 }

@@ -15,30 +15,30 @@ import javax.persistence.*;
  * @author cfagu
  */
 @Entity
-public class Conductor extends Model{
+public class Conductor extends Model {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private final String nombre;
-    
+
     private final int cedula;
-    
+
     private int celular;
-    
+
     private String correo;
 
     /**
      * Medida en porcentaje de la eficiencia de un conductor respecto a los tiempos de sus trayectos.
      */
-    private int desempenio;
+    private double desempenio;
 
     /**
      * Cantidad de pedidos y viajes realizados para calcular el desempenio.
      */
     private int viajesTotales;
-    
-    public Conductor(String nombre,int cedula,int celular,String correo, int desempenio) {
+
+    public Conductor(String nombre, int cedula, int celular, String correo) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
@@ -79,13 +79,13 @@ public class Conductor extends Model{
         this.correo=correo;
     }
 
-    public int getDesempenio(){
+    public double getDesempenio(){
         return desempenio;
     }
 
-    public void setDesempenio(int desempenio){
-        this.desempenio += (desempenio/(viajesTotales+1));
-        viajesTotales ++;
+    public void setDesempenio(double desempenio){
+        viajesTotales++;
+        this.desempenio += desempenio/viajesTotales;
     }
 
     public static Conductor bind(JsonNode j) {
@@ -93,12 +93,6 @@ public class Conductor extends Model{
         int cedula=j.findPath("cedula").asInt();
         int celular=j.findPath("celular").asInt();
         String correo=j.findPath("correo").asText();
-        int desempenio=j.findPath("desempenio").asInt();
-        return new Conductor(nombre,cedula,celular,correo,desempenio);
-    }
-
-    public void update(Conductor conductor) {
-        this.setCelular(conductor.getCelular());
-        this.setCorreo(conductor.getCorreo());
+        return new Conductor(nombre,cedula,celular,correo);
     }
 }
