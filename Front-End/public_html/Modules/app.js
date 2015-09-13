@@ -1,6 +1,6 @@
 (function () {
 
-    var mainApp = angular.module('mainApp', []);
+    var mainApp = angular.module('mainApp', ['tranviaModule']);
     mainApp.directive('toolbar', function(){
         return{
             restrict:'E',
