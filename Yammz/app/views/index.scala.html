@@ -20,10 +20,11 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right text-uppercase">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#feature">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#Vcubs">Vcubs</a></li>
+                <li><a href="#Movibus">Movibus</a></li>
+                <li><a href="#download">Tranvia</a></li>
+                <li><a href="#Estadistcas">Estadisticas</a></li>
+                <li><a href="#Contact">Contacto</a></li>
             </ul>
         </div>
     </div>
@@ -43,6 +44,12 @@
                     <div class="panel-body">
                         <form role="form">
                             <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="email" name="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" value="">
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="email" name="email" type="email" autofocus>
                                 </div>
@@ -90,11 +97,11 @@
 <!-- end divider -->
 
 <!-- start feature -->
-<section id="feature">
+<section id="Vcubs">
     <div class="container">
         <div class="row">
             <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s">
-                <h2 class="text-uppercase">Our Software Features</h2>
+                <h2 class="text-uppercase">Estado de las estaciones de vcubs</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <p><span><i class="fa fa-mobile"></i></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <p><i class="fa fa-code"></i>Quis autem velis reprehenderit et quis voluptate velit esse quam.</p>
@@ -108,14 +115,14 @@
 <!-- end feature -->
 
 <!-- start feature1 -->
-<section id="feature1">
+<section id="Movibus">
     <div class="container">
         <div class="row">
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <img src="@routes.Assets.at("images/software-img.png")"/>
+                <img src="@routes.Assets.at("images/transmi.png")"/>
             </div>
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <h2 class="text-uppercase">More of Your Software</h2>
+                <h2 class="text-uppercase">Información movibus</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <p><span><i class="fa fa-mobile"></i></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 <p><i class="fa fa-code"></i>Quis autem velis reprehenderit et quis voluptate velit esse quam.</p>
@@ -126,34 +133,30 @@
 <!-- end feature1 -->
 
 <!-- start pricing -->
-<section id="pricing">
+<section id="Estadisticas">
     <div class="container">
         <div class="row">
             <div class="col-md-12 wow bounceIn">
-                <h2 class="text-uppercase">Our Pricing</h2>
+                <h2 class="text-uppercase">Estadisticas</h2>
             </div>
             <div class="col-md-4 wow fadeIn" data-wow-delay="0.6s">
                 <div class="pricing text-uppercase">
                     <div class="pricing-title">
-                        <h4>Basic Plan</h4>
-                        <p>$10</p>
-                        <small class="text-lowercase">monthly</small>
+                        <h4>Conductores</h4>
+                        <small class="text-lowercase">Información</small>
                     </div>
                     <ul>
-                        <li>2 GB Space</li>
-                        <li>200 GB Bandwidth</li>
-                        <li>20 More Themes</li>
-                        <li>Lifetime Support</li>
+                        <li>Trayectos:</li>
+                        <li>Efectivos:</li>
+                        <li>No efectivos:</li>
                     </ul>
-                    <button class="btn btn-primary text-uppercase">Sign up</button>
                 </div>
             </div>
             <div class="col-md-4 wow fadeIn" data-wow-delay="0.6s">
                 <div class="pricing active text-uppercase">
                     <div class="pricing-title">
-                        <h4>Business Plan</h4>
-                        <p>$20</p>
-                        <small class="text-lowercase">monthly</small>
+                        <h4>Accidentes</h4>
+                        <small class="text-lowercase">información</small>
                     </div>
                     <ul>
                         <li>5 GB space</li>
@@ -161,15 +164,13 @@
                         <li>50 More Themes</li>
                         <li>Lifetime Support</li>
                     </ul>
-                    <button class="btn btn-primary text-uppercase">Sign up</button>
                 </div>
             </div>
             <div class="col-md-4 wow fadeIn" data-wow-delay="0.6s">
                 <div class="pricing text-uppercase">
                     <div class="pricing-title">
-                        <h4>Pro Plan</h4>
-                        <p>$30</p>
-                        <small class="text-lowercase">monthly</small>
+                        <h4>Trayectos</h4>
+                        <small class="text-lowercase">información</small>
                     </div>
                     <ul>
                         <li>10 GB space</li>
@@ -177,7 +178,6 @@
                         <li>100 more themes</li>
                         <li>Lifetime Support</li>
                     </ul>
-                    <button class="btn btn-primary text-uppercase">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -185,22 +185,30 @@
 </section>
 <!-- end pricing -->
 
+
 <!-- start download -->
-<section id="download">
+<section id="Tranvia">
     <div class="container">
         <div class="row">
             <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s">
-                <h2 class="text-uppercase">Download Our Software</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
+                <h2 class="text-uppercase">Información Tranvia</h2>
+                <ul>
+                    <li>Linea: Kilometraje:</li>
+                    <li>Linea: Kilometraje:</li>
+                    <li>Linea: Kilometraje:</li>
+                    <li>Linea: Kilometraje:</li>
+                </ul>
                 <button class="btn btn-primary text-uppercase"><i class="fa fa-download"></i> Download</button>
             </div>
             <div class="col-md-6 wow fadeInRight" data-wow-delay="0.6s">
-                <img src="@routes.Assets.at("images/software-img.png")"/>
+                <img src="@routes.Assets.at("images/tram.png")"/>
             </div>
         </div>
     </div>
 </section>
 <!-- end download -->
+
+
 
 <!-- start contact -->
 <section id="contact">
