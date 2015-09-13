@@ -32,7 +32,83 @@
         </div>
         <!-- end preloader -->
         <!-- start navigation -->
-        <toolbar></toolbar>
+        
+            <toolbar></toolbar>
+            <section id="home">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
+                                <h1 class="text-upper">Sistema central de transporte</h1>
+                                <p class="tm-white">Bienvenido al sistema central de transporte TBC. En este lugar usted podrá agendar sus pedidos de movivus</p>
+                                <div class="panel-body">
+                                    <form role="form">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Nombre" name="email" type="text" autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Dirección" name="password" type="text" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Fecha" name="email" type="date" autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Discapacidad" name="text" type="password" value="">
+                                            </div>
+                                            <!-- Change this to a button or input when using this as a form -->
+                                            <div class="btn-group">
+                                                <a href="index.html" class="btn btn-lg btn-success">Solicitar</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <img src="images/fondo transparente.png" height="72" width="72"/>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end home -->
+            <!-- start divider -->
+            <section id="divider">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
+                            <i class="fa fa-bicycle"></i>
+                            <h3 class="text-uppercase">ALQUILA TU VCUB</h3>
+                            <p>Dirigete a la estación mas cercana y retira tu vcub! Puedes retornarla en cualquier estación de la ciudad. </p>
+                        </div>
+                        <div class="col-md-4 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
+                            <i class="fa fa-train"></i>
+                            <h3 class="text-uppercase">POR TU SEGURIDAD</h3>
+                            <p>Monitoreamos el comportamiento de los tranvias de la ciudad para prestar el mejor servicio y asegurar tu bienestar. </p>
+                        </div>
+                        <div class="col-md-4 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
+                            <i class="fa fa-bus"></i>
+                            <h3 class="text-uppercase">SOLICITA TU MOVIBUS</h3>
+                            <p>Donde sea que estes solicita tu movibus y en poco tiempo estaremos ahi para recogerte. </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- end divider -->
+            <div ng-if="toolbar.isSelected(1)">
+                <competitor-form competitorInfo></competitor-form>
+            </div>
+            <div ng-if="toolbar.isSelected(2)">
+                <competitor-info></competitor-info>
+            </div>
+            <div ng-if="toolbar.isSelected(3)">
+                <competitor-login></competitor-login>
+            </div>
+            <div ng-if="toolbar.isSelected(4)">
+                <competitor></competitor>
+            </div>
+
+        
         <footer>
             <div class="container">
                 <div class="row">
@@ -46,18 +122,11 @@
         <script src="javascripts/wow.min.js" type="text/javascript"></script>
         <script src="javascripts/jquery.singlePageNav.min.js" type="text/javascript"></script>
         <script src="javascripts/custom.js" type="text/javascript"></script>
-        <script src="javascripts/flot-data.js" type="text/javascript"></script>
-        <script src="javascripts/morris-data.js" type="text/javascript"></script>
-
         <!-- Angular -->
-        <script src="angular/angular.js" type="text/javascript"></script>
-        <script src="angular/ui-bootstrap.js" type="text/javascript"></script>
+        <script src="angular/angular.min.js" type="text/javascript"></script>
+        <script src="angular/ui-bootstrap.min.js" type="text/javascript"></script>
         <!-- App Principal -->
-        <script src="Modules/app.js" type="text/javascript"></script>
-        <!-- Modulo de Tranvia -->
-        <script src="Modules/modules/tranvia/tranvia.mod.js" type="text/javascript"></script>
-        <script src="Modules/modules/tranvia/tranvia.svc.js" type="text/javascript"></script>
-        <script src="Modules/modules/tranvia/tranvia.ctrl.js" type="text/javascript"></script>
+        <script type="text/javascript" src="Modules/app.js" ></script>
     </body>
 </html>
 

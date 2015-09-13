@@ -1,5 +1,5 @@
-(function (ng) {
-    var mod = ng.module('tranviaModule');
+(function () {
+    var mod = angular.module('tranviaModule');
 
     mod.service('tranviaService', ['$http', 'tranviaContext', function ($http, context) {
             this.fetchRecords = function () {
@@ -20,4 +20,4 @@
                 return $http.delete(context + "/" + id);
             };
         }]);
-})(window.angular);
+})();

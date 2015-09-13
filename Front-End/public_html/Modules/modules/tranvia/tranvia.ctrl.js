@@ -1,5 +1,5 @@
-(function (ng) {
-    var mod = ng.module('tranviaModule');
+(function () {
+    var mod = angular.module('tranviaModule');
 
     mod.controller('tranviaCtrl', ['$scope', 'tranviaService', function ($scope, svc) {
              
@@ -45,4 +45,4 @@
 
             this.fetchRecords();
         }]);
-})(window.angular);
+})();

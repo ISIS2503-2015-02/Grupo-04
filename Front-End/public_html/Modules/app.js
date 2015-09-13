@@ -1,9 +1,6 @@
 (function () {
 
-    var mainApp = angular.module('mainApp', [
-        'tranviaModule',
-        'ngRoute'
-    ]);
+    var mainApp = angular.module('mainApp', []);
     mainApp.directive('toolbar', function(){
         return{
             restrict:'E',
@@ -20,15 +17,4 @@
             controllerAs:'toolbar'
         };
     });
-
-    mainApp.config(['$routeProvider', function ($routeProvider) {
-            $routeProvider
-                .when('/tranvia', {
-                    restrict:'E',
-                    templateUrl: '/modules/tranvia/tranvia.tpl.html',
-                    controller: 'tranviaCtrl'
-                })
-                .otherwise('/tranvia');
-        }]);
-
-})(window.angular);
+})();
