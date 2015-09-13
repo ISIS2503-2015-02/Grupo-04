@@ -9,7 +9,7 @@ create table conductor (
   cedula                    integer,
   celular                   integer,
   correo                    varchar(255),
-  desempenio                integer,
+  desempenio                double,
   viajes_totales            integer,
   constraint pk_conductor primary key (id))
 ;
@@ -74,6 +74,7 @@ create table reporte (
 
 create table tranvia (
   id                        bigint auto_increment not null,
+  posicion                  varchar(255),
   estado                    integer,
   kilometraje               integer,
   linea                     integer,
@@ -89,11 +90,6 @@ create table usuario (
   vcubs_en_uso              integer,
   tarjeta_bancaria          bigint,
   constraint pk_usuario primary key (id))
-;
-
-create table vehiculo (
-  estado                    integer,
-  kilometraje               integer)
 ;
 
 alter table pedido_movibus add constraint fk_pedido_movibus_usuario_1 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
@@ -128,8 +124,6 @@ drop table if exists reporte;
 drop table if exists tranvia;
 
 drop table if exists usuario;
-
-drop table if exists vehiculo;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 

@@ -51,7 +51,7 @@ public class UsuarioController {
         List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
         Usuario usuario = null;
         for(Usuario u:users){
-            if(u.getCedula()==ccUsuario){
+            if(u.getCedula()==ccu){
                 usuario = u;
             }
         }

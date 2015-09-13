@@ -80,10 +80,10 @@ public class TranviaController extends Controller{
 
         for (int i=0;i<reportes.size();i++){
             Reporte r=(Reporte)reportes.get(i);
-            if(r.getTipoAccidente()==Reporte.ESTRELLARSE){
+            if(r.getTipoAccidente()==Reporte.CHOQUE){
                 estrellarse++;
             }
-            else if(r.getTipoAccidente()==Reporte.VARARSE){
+            else if(r.getTipoAccidente()==Reporte.DANIO){
                 vararse++;
             }
             else if(r.getTipoAccidente()==Reporte.ROBO){
