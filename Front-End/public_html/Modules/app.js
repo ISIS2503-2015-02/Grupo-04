@@ -24,5 +24,16 @@
             controller: 'tranviaController'
         }
     });
+    mainApp.controller("tranviaController", function($http, $scope) {
+        
+            $http.get('http://localhost:9000/tranvias').
+                success(function(data, status, headers, config) {
+                    $scope.tranvias = data;
+                }).
+                error(function(data, status, headers, config) {
+                    // log error
+                });
+  
+    }); 
     
 })();
