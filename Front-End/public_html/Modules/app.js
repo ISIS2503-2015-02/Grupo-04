@@ -17,4 +17,12 @@
             controllerAs:'toolbar'
         };
     });
+    mainApp.directive("tranvia",function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/tranvia.html',
+            controller: 'tranviaController'
+        }
+    });
+    
 })();
