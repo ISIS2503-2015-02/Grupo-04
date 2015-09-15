@@ -17,10 +17,15 @@
                 <li ng-class="{active:toolbar.isSelected(1)}">
                     <a href="#Tranvia" ng-click="toolbar.selectTab(1)">Tranvia</a>
                 </li>
-                <li><a href="#Vcubs">Vcubs</a></li>
-                <li><a href="#Movibus">Movibus</a></li>
-                <li><a href="#Estadisticas">Estadisticas</a></li>
-                <li><a href="#Contact">Contacto</a></li>
+                <li ng-class="{active:toolbar.isSelected(2)}">
+                    <a href="#Vcubs" ng-click="toolbar.selectTab(2)">Vcubs</a>
+                </li>
+                <li ng-class="{active:toolbar.isSelected(3)}">
+                    <a href="#Movibus" ng-click="toolbar.selectTab(3)">Movibus</a>
+                </li>
+                <li ng-class="{active:toolbar.isSelected(4)}">
+                    <a href="#Estadisticas" ng-click="toolbar.selectTab(4)">Estadísticas</a>
+                </li>
             </ul>
         </div>
     </div>

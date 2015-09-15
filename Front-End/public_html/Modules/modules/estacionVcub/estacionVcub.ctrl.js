@@ -1,7 +1,7 @@
 (function (ng) {
-    var mod = ng.module('tranviaModule');
+    var mod = ng.module('estacionVcubModule');
 
-    mod.controller('tranviaCtrl', ['$scope', 'tranviaService', function ($scope, svc) {
+    mod.controller('estacionVcubCtrl', ['$scope', 'estacionVcubService', function ($scope, svc) {
              
             $scope.currentRecord = {};
             $scope.records = [];

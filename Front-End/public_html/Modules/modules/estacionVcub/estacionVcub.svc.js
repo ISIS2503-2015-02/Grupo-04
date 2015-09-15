@@ -1,7 +1,7 @@
 (function (ng) {
-    var mod = ng.module('tranviaModule');
+    var mod = ng.module('estacionVcubModule');
 
-    mod.service('tranviaService', ['$http', 'tranviaContext', function ($http, context) {
+    mod.service('estacionVcubService', ['$http', 'testacionVcubContext', function ($http, context) {
             this.fetchRecords = function () {
                 return $http.get(context);
             };
