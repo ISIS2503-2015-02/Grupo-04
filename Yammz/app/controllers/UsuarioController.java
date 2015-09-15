@@ -56,7 +56,7 @@ public class UsuarioController {
             }
         }
         if(usuario == null){
-            return ok(Json.toJson("\"error\":\"Usuario no registrado.\""));
+            return ok(Json.toJson("error:Usuario no registrado."));
         }else {
             return ok(Json.toJson(usuario));
         }

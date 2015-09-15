@@ -15,7 +15,7 @@ GET         /usuario                                         controllers.Usuario
 
 GET         /usuario/:id                                     controllers.UsuarioController.get(id : Long)
 
-GET         /usuario/:ccu                                    controllers.UsuarioController.getByCC(ccu : Long)
+GET         /usuario/:ccu/login                              controllers.UsuarioController.getByCC(ccu : Long)
 
 POST        /usuario/:id/solicitarMovibus                    controllers.UsuarioController.solicitarMovibus(id : Long)
 

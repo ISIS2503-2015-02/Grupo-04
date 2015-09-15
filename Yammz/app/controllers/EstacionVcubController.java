@@ -63,7 +63,7 @@ public class EstacionVcubController extends Controller {
         try {
             usuario.devolverVcubEnUso();
         }catch(Exception e){
-            return ok(Json.toJson("{\"error\":\""+e.getMessage()+"\"}"));
+            return ok(Json.toJson("error:"+e.getMessage()));
         }
         usuario.save();
         estacion.save();

@@ -75,7 +75,7 @@ public class EstacionVcubLogic{
 		}
 	}
 	
-	public int llenarEstacion() {
+	public int llenarEstacion() throws Exception {
 		int rta=0;
 		try{
 			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId());
@@ -83,33 +83,26 @@ public class EstacionVcubLogic{
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Accept", "application/json");
-			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-			}
 			
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
 			String at1[] = output.split(",");
 			for (String string : at1) {
 				String at2[] = string.split(":");
-				if(at2[0].equals("[{\"id\""))
-					data.setId(Long.parseLong(at2[1]));
-				if(at2[0].equals("\"nombre\""))
-					data.setNombre(at2[1].replaceAll("\"", ""));
 				if(at2[0].equals("\"capacidad\""))
 					data.setCapacidad(Integer.parseInt(at2[1]));
 				if(at2[0].equals("\"vcubs\""))
 					data.setVcubs(Integer.parseInt(at2[1]));
 			}
+			rta = data.getCapacidad();
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}
-		return rta;
 	}
 
-	public String retiroVcub(Long usuarioCC) {
+	public String retiroVcub(Long usuarioCC) throws Exception{
 		String rta="";
 		try{
 			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId()+"/usuario/"+usuarioCC+"");
@@ -133,13 +126,11 @@ public class EstacionVcubLogic{
 				}
 				System.out.println(output);
 			}
-			rta = rta+conn.getResponseCode()+"";
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}
-		return rta;
 	}
 
 	public String devolucionVcub(Long usuarioCC) throws Exception{
@@ -151,9 +142,6 @@ public class EstacionVcubLogic{
 			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Accept", "application/json");
 			
-			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
 			System.out.println("Output from server .... \n");
@@ -161,34 +149,29 @@ public class EstacionVcubLogic{
 				String[] at1 = output.split(",");
 				for (String string : at1) {
 					String[] at2=string.split(":");
-						if(at2[0].equals("\"vcubsEnUso\""))
-							rta = at2[1]+":";
-						if(at2[0].equals("\"error\""))
-							throw new Exception(at2[1]);
+					if(at2[0].equals("\"vcubsEnUso\""))
+						rta = at2[1]+":";
+					if(at2[0].equals("\"error")){
+						throw new Exception(at2[1].replace("\"",""));
+					}
 				}
 				System.out.println(output);
 			}
-			rta = rta+conn.getResponseCode();
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}
-		return rta;
 	}
 
-	public String verificarUsuario(Long usuarioCC){
+	public String verificarUsuario(Long usuarioCC)throws Exception{
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.35:9000/usuario/"+usuarioCC);
+			URL url = new URL("http://172.24.100.35:9000/usuario/"+usuarioCC+"/login");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
-			
-			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
 			System.out.println("Output from server .... \n");
@@ -197,21 +180,19 @@ public class EstacionVcubLogic{
 				for (String string : at1) {
 					String[] at2=string.split(":");
 						if(at2[0].equals("\"vcubsEnUso\""))
-							rta = at2[1]+":";
+							rta = rta + at2[1];
 						if(at2[0].equals("\"error\""))
 							throw new Exception(at2[1]);
 						if(at2[0].equals("\"nombre\""))
-							rta = rta + at2[1];
+							rta = at2[1]+":";
 				}
 				System.out.println(output);
 			}
-			rta = rta+conn.getResponseCode();
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}
-		return rta;
 	}
 	
 	public void persist(){

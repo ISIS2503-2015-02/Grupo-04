@@ -30,11 +30,8 @@ public class Main extends JFrame implements ActionListener{
 	JButton check;
 	JPanel vcubs;
 	JLabel success;
-	JLabel denied;
-	JLabel checkLab;
 	JLabel numVc;
 	JButton refill;
-	JLabel refillSuccess;
 
 	public Main(){
 		logic = new EstacionVcubLogic();
@@ -70,9 +67,7 @@ public class Main extends JFrame implements ActionListener{
 		//VCUBRTA
 		vcubs = new JPanel();
 		vcubs.setLayout(new BorderLayout());
-		success = new JLabel("SUCCESS");
-		denied = new JLabel("Denied");
-		checkLab = new JLabel("Usuario : ");
+		success = new JLabel("Operacion Exitosa");
 		numVc = new JLabel();
 		vcubs.add(numVc, BorderLayout.SOUTH);
 		vcubs.setVisible(false);
@@ -100,13 +95,16 @@ public class Main extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		if(event.getActionCommand().equals("retirar")){
 			if(!input.getText().equals("")){
-				String[] rta = logic.retiroVcub(Long.parseLong(input.getText())).split(":");
-				if(Integer.parseInt(rta[1])!=200){
-					vcubs.add(denied, BorderLayout.CENTER);
-					numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
-				}else{
+				String[] rta = null;
+				try {
+					rta = logic.retiroVcub(Long.parseLong(input.getText())).split(":");
+					success.setText("Operacion Exitosa");
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
+				} catch (Exception e) {
+					success.setText("Operacion Fallida");
+					vcubs.add(success, BorderLayout.CENTER);
+					numVc.setText("Error con el numero de identificacion");
 				}
 				vcubs.setVisible(true);
 			}else{
@@ -115,19 +113,16 @@ public class Main extends JFrame implements ActionListener{
 		}
 		if(event.getActionCommand().equals("devolver")){
 			if(!input.getText().equals("")){
-				String[] rta;
+				String[] rta=null;
 				try{
 					rta = logic.devolucionVcub(Long.parseLong(input.getText())).split(":");
-					if(Integer.parseInt(rta[1])!=200){
-						vcubs.add(denied, BorderLayout.CENTER);
-						numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
-					}else{
-						checkLab.setText(checkLab.getText()+rta[2]);
-						vcubs.add(checkLab, BorderLayout.CENTER);
-						numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
-					}
+					success.setText("Operacion Exitosa");
+					vcubs.add(success, BorderLayout.CENTER);
+					numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia de usuario", JOptionPane.WARNING_MESSAGE);
+					success.setText("Operacion Fallida");
+					vcubs.add(success, BorderLayout.CENTER);
+					numVc.setText("Error con el numero de identificacion.");
 				}
 				vcubs.setVisible(true);
 			}else{
@@ -136,44 +131,41 @@ public class Main extends JFrame implements ActionListener{
 		}
 		if(event.getActionCommand().equals("verificar")){
 			if(!input.getText().equals("") && !input.getText().equals("admin")){
-				String[] rta;
+				String[] rta=null;
 				try{
 					rta = logic.verificarUsuario(Long.parseLong(input.getText())).split(":");
-					if(Integer.parseInt(rta[2])!=200){
-						vcubs.add(denied, BorderLayout.CENTER);
-						numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
-					}else{
-						checkLab.setText(checkLab.getText() + " " + rta[1]);
-						vcubs.add(checkLab, BorderLayout.CENTER);
-						numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
-					}
+					success.setText("Usuario: " + rta[0].replace("\"", ""));
+					vcubs.add(success, BorderLayout.CENTER);
+					numVc.setText("Numero de Vcubs rentadas : "+rta[1]);
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia de usuario", JOptionPane.WARNING_MESSAGE);
+					success.setText("Operacion Fallida");
+					vcubs.add(success, BorderLayout.CENTER);
+					numVc.setText("Error con el numero de identificacion.");
 				}
 				vcubs.setVisible(true);
 			}else if(input.getText().equals("admin")){
+				vcubs.remove(success);
 				vcubs.add(refill, BorderLayout.CENTER);
+				numVc.setText("");
+				vcubs.setVisible(true);
+				refill.setVisible(true);
 			}else{
 				JOptionPane.showMessageDialog( this, "Numero de identificacion invalido.", "Error de identificacion", JOptionPane.ERROR_MESSAGE );
 			}
 		}
 		if(event.getActionCommand().equals("refill")){
-			refillSuccess.setText("Estacion Llena.");
 			try{
 				int rta = logic.llenarEstacion();
-				if(rta!=200){
-					vcubs.add(denied, BorderLayout.CENTER);
-					JOptionPane.showMessageDialog(this, "Error del servidor: "+rta+", intente mas tarde","Error",JOptionPane.ERROR_MESSAGE);
-				}else{
-					vcubs.add(refillSuccess, BorderLayout.NORTH);
-					vcubs.add(success, BorderLayout.CENTER);
-					try{TimeUnit.SECONDS.sleep(5);}catch(Exception e){System.out.println(e.getMessage());}
-				}
+				vcubs.remove(refill);
+				success.setText("Estacion llenada a capacidad maxima de : "+rta);
+				vcubs.add(success, BorderLayout.CENTER);
 			}catch(Exception e){
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia de usuario", JOptionPane.WARNING_MESSAGE);
+				vcubs.remove(refill);
+				success.setText("Error en la operacion.\nPor favor comuniquese con el dueño del servidor.");
+				vcubs.add(success, BorderLayout.CENTER);
 			}
-			vcubs.add(buts, BorderLayout.NORTH);
-			vcubs.add(new JLabel(), BorderLayout.CENTER);
+			vcubs.setVisible(true);
 		}
+		this.repaint();
 	}
 }
