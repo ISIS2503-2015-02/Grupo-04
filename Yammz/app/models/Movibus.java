@@ -5,7 +5,6 @@
  */
 package models;
 
-
 import com.avaje.ebean.Model;
 import com.avaje.ebeaninternal.server.lib.util.Str;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -49,13 +48,11 @@ public class Movibus extends Model {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    public static Finder<Integer, Movibus> find
-            = new Model.Finder<>(Integer.class, Movibus.class);
+    private Long latitud;
 
-    /**
-     * Posicion del vehiculo
-     */
-    private String posicion;
+    private Long longitud;
+
+    public static Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
 
     /**
      * Estado del vehiculo
@@ -67,8 +64,9 @@ public class Movibus extends Model {
      */
     private int kilometraje;
     
-    public Movibus(String posicion) {
-        this.posicion=posicion;
+    public Movibus(Long latitud, Long longitud) {
+        this.latitud=latitud;
+        this.longitud=longitud;
         estado=DISPONIBLE;
         kilometraje=0;
     }
@@ -81,20 +79,18 @@ public class Movibus extends Model {
         this.id=id;
     }
 
-    /**
-     * Metodo encargado de obtener la posicion del vehiculo
-     * @return posicion
-     */
-    public String getPosicion() {
-        return posicion;
+    public Long getLatitud() {
+        return latitud;
     }
 
-    /**
-     * Metodo encargado de cambiar la posicion del vehiculo
-     * @param posicion
-     */
-    public void setPosicion(String posicion) {
-        this.posicion=posicion;
+    public void setLatitud(Long latitud) {
+        this.latitud=latitud;
+    }
+
+    public Long getLongitud() { return longitud; }
+
+    public void setLongitud(Long longitud) {
+        this.longitud=longitud;
     }
 
     /**
@@ -135,13 +131,15 @@ public class Movibus extends Model {
     }
 
     public static Movibus bind(JsonNode j) {
-        String posicion = j.findPath("posicion").asText();
-        return new Movibus(posicion);
+        Long latitud = j.findPath("latitud").asLong();
+        Long longitud = j.findPath("longitud").asLong();
+        return new Movibus(latitud, longitud);
     }
 
     public void update(Movibus movibus) {
+        this.setLatitud(movibus.getLatitud());
+        this.setLongitud(movibus.getLongitud());
         this.setEstado(movibus.getEstado());
-        this.setPosicion(movibus.getPosicion());
         this.setKilometraje(movibus.getKilometraje());
     }
 }

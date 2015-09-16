@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.EstacionVcub;
 import models.Reporte;
 import models.Usuario;
@@ -12,15 +13,13 @@ import play.mvc.Result;
 
 import java.util.List;
 
-/**
- * Created by s.baquero10 on 19/08/2015.
- */
 public class EstacionVcubController extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result create() {
         JsonNode j = request().body().asJson();
         EstacionVcub estacionVcub = Json.fromJson(j, EstacionVcub.class);
+        estacionVcub.setVcubs(estacionVcub.getCapacidad());
         estacionVcub.save();
         return ok(Json.toJson(estacionVcub));
     }
@@ -30,41 +29,43 @@ public class EstacionVcubController extends Controller {
         return ok(Json.toJson(estaciones));
     }
 
-    public Result retiroVcub(Long idEstacion, Long ccUsuario){
-        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(idEstacion);
-        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
-        Usuario usuario = null;
-        for(Usuario u:users){
-            if(u.getCedula()==ccUsuario){
-                usuario = u;
-            }
+    public Result get(Long id) {
+        EstacionVcub estacionVcub = (EstacionVcub) new Model.Finder(Long.class, EstacionVcub.class).byId(id);
+        ObjectNode result = Json.newObject();
+        if (estacionVcub == null)
+            return ok(Json.toJson(result));
+        else {
+            return ok(Json.toJson(estacionVcub));
         }
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result retirarVcub() {
+        JsonNode j = request().body().asJson();
+        Long idEstacion=j.findPath("idEstacion").asLong();
+        Long idUsuario=j.findPath("idUsuario").asLong();
+        EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(idEstacion);
+        Usuario usuario = (Usuario)new Model.Finder(Long.class, Usuario.class).byId(idUsuario);
         estacion.prestarVcub();
-        if(estacion.solicitarVcbus()&&estacion.isEnvioReporte()){
-            Reporte reporte = (Reporte)new Reporte(Reporte.PEDIDO_BICICLETAS, "Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre(),idEstacion);
+        usuario.agregarVcubEnUso();
+        if(estacion.solicitarVcbus()){
+            Reporte reporte = new Reporte(Reporte.PEDIDO_BICICLETAS, "Se necesitan "+(estacion.getCapacidad()-estacion.getVcubs())+" Vcubs en la estacion "+estacion.getNombre(),Reporte.MAGNITUD_BAJA);
             reporte.save();
         }
-        usuario.agregarVcubEnUso();
         usuario.save();
         estacion.save();
         return ok(Json.toJson(usuario));
     }
 
-    public Result devolucionVcub(Long idEstacion, Long ccUsuario){
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result devolverVcub() {
+        JsonNode j = request().body().asJson();
+        Long idEstacion=j.findPath("idEstacion").asLong();
+        Long idUsuario=j.findPath("idUsuario").asLong();
         EstacionVcub estacion = (EstacionVcub)new Model.Finder(Long.class, EstacionVcub.class).byId(idEstacion);
-        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
-        Usuario usuario = null;
-        for(Usuario u:users){
-            if(u.getCedula()==ccUsuario){
-                usuario = u;
-            }
-        }
+        Usuario usuario = (Usuario)new Model.Finder(Long.class, Usuario.class).byId(idUsuario);
         estacion.restituirVcub();
-        try {
-            usuario.devolverVcubEnUso();
-        }catch(Exception e){
-            return ok(Json.toJson("error:"+e.getMessage()));
-        }
+        usuario.devolverVcubEnUso();
         usuario.save();
         estacion.save();
         return ok(Json.toJson(usuario));

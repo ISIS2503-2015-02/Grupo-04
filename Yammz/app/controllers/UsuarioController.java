@@ -8,6 +8,9 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,9 +18,6 @@ import static play.mvc.Controller.request;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
 
-/**
- * Created by cfagu on 16-Aug-15.
- */
 public class UsuarioController {
     @BodyParser.Of(BodyParser.Json.class)
     public Result create() {
@@ -42,55 +42,53 @@ public class UsuarioController {
         }
     }
 
-    /**
-     * Devuelve un usuario dada la cedula del mismo.
-     * @param ccu cedula del usuario.
-     * @return JSon con loa informacion del usuario.
-     */
-    public Result getByCC(Long ccu){
-        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
-        Usuario usuario = null;
-        for(Usuario u:users){
-            if(u.getCedula()==ccu){
-                usuario = u;
-            }
-        }
-        if(usuario == null){
-            return ok(Json.toJson("error:Usuario no registrado."));
-        }else {
-            return ok(Json.toJson(usuario));
-        }
-    }
-
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
-        if(new Model.Finder(Long.class, Movibus.class).all().isEmpty()) {
-            PedidoMovibusPendiente pedidoMovibusPendiente=new PedidoMovibusPendiente(usuario,request().body().asJson().findPath("direccionUsuario").asText(),request().body().asJson().findPath("direccionDestino").asText());
-            pedidoMovibusPendiente.save();
-            return badRequest();
+        List<Movibus> movibuses = Movibus.find.where().like("estado",""+Movibus.DISPONIBLE).findList();
+        List<Conductor> conductores = Conductor.find.where().like("estado",""+Conductor.DISPONIBLE).findList();
+        JsonNode j = request().body().asJson();
+        if(movibuses.isEmpty()||conductores.isEmpty()) {
+            PedidoMovibusPendiente pedidoMovibusPendiente = null;
+            try {
+                pedidoMovibusPendiente = new PedidoMovibusPendiente(usuario,new Date(),new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()),j.findPath("latitudUsuario").asLong(),j.findPath("longitudUsuario").asLong(),j.findPath("latitudDestino").asLong(),j.findPath("longitudDestino").asLong(),j.findPath("tiempoEstimado").asInt());
+                pedidoMovibusPendiente.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return ok(Json.toJson(pedidoMovibusPendiente));
         }
         else {
             PedidoMovibus pedidoMovibus = new PedidoMovibus();
-            List movibuses = Movibus.find.where().like("estado",""+Movibus.DISPONIBLE).findList();
             Movibus movibus=null;
             int menorDistancia=PedidoMovibus.DISTANCIA_MAXIMA;
-            Iterator i = movibuses.iterator();
-            while (i.hasNext()) {
-                Movibus movibusT=(Movibus)i.next();
-                Direccion d1=new Direccion(movibusT.getPosicion());
-                Direccion d2=new Direccion(request().body().asJson().findPath("direccionUsuario").asText());
-                if(d1.darDistancia(d2)<menorDistancia) {
-                    movibus=movibusT;
+            Iterator<Movibus> i = movibuses.iterator();
+            while(i.hasNext()) {
+                Movibus actual = i.next();
+                if(actual.getLatitud().intValue()*100+actual.getLongitud().intValue()*100<menorDistancia) {
+                    menorDistancia=actual.getLatitud().intValue()*100+actual.getLongitud().intValue()*100;
+                    movibus=actual;
                 }
             }
             movibus.reservarMovibus(pedidoMovibus);
-            Conductor conductor = (Conductor) new Model.Finder(Long.class, Conductor.class).all().get(0);
+            Conductor conductor = conductores.get(0);
+            conductor.setEstado(Conductor.OCUPADO);
             pedidoMovibus.setConductor(conductor);
             pedidoMovibus.setMovibus(movibus);
             pedidoMovibus.setUsuario(usuario);
-            pedidoMovibus.setDireccionDestino(request().body().asJson().findPath("direccionDestino").asText());
-            pedidoMovibus.setDireccionUsuario(request().body().asJson().findPath("direccionUsuario").asText());
+            pedidoMovibus.setFechaPedido(new Date());
+            try {
+                pedidoMovibus.setFechaEjecucion(new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            pedidoMovibus.setLatitudUsuario(j.findPath("latitudUsuario").asLong());
+            pedidoMovibus.setLongitudUsuario(j.findPath("longitudUsuario").asLong());
+            pedidoMovibus.setLatitudDestino(j.findPath("latitudDestino").asLong());
+            pedidoMovibus.setLongitudDestino(j.findPath("longitudDestino").asLong());
+            pedidoMovibus.setTiempoReal(j.findPath("tiempoEstimado").asInt());
             pedidoMovibus.save();
+            movibus.save();
+            conductor.save();
             return ok(Json.toJson(pedidoMovibus));
         }
     }

@@ -39,21 +39,6 @@ public class Tranvia extends Model {
      */
     public final static int PROBLEMA=2;
 
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_A=0;
-
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_B=1;
-
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_C=2;
-
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
@@ -62,10 +47,9 @@ public class Tranvia extends Model {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Posicion del vehiculo
-     */
-    private String posicion;
+    private Long latitud;
+
+    private Long longitud;
 
     /**
      * Estado del vehiculo
@@ -77,15 +61,38 @@ public class Tranvia extends Model {
      */
     private int kilometraje;
 
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_A=0;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_B=1;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_C=2;
+    
+    //-----------------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------------
+    
     /**
      * Linea asignada al tranvia
      */
     private int linea;
-
     
-    public Tranvia(String posicion,int linea) {
+    public Tranvia(Long latitud, Long longitud, int linea) {
         this.linea=linea;
-        this.posicion=posicion;
+        this.latitud=latitud;
+        this.longitud=longitud;
         estado=DISPONIBLE;
         kilometraje=0;
     }
@@ -102,22 +109,18 @@ public class Tranvia extends Model {
         this.linea=linea;
     }
 
-    /**
-     * Metodo encargado de obtener la posicion del vehiculo
-     * @return posicion
-     */
-    public String getPosicion() {
-        return posicion;
+    public Long getLatitud() {
+        return latitud;
     }
 
+    public void setLatitud(Long latitud) {
+        this.latitud=latitud;
+    }
 
+    public Long getLongitud() { return longitud; }
 
-    /**
-     * Metodo encargado de cambiar la posicion del vehiculo
-     * @param posicion
-     */
-    public void setPosicion(String posicion) {
-        this.posicion=posicion;
+    public void setLongitud(Long longitud) {
+        this.longitud=longitud;
     }
 
     /**
@@ -129,6 +132,14 @@ public class Tranvia extends Model {
     }
 
     /**
+     * Metodo encargado de cambiar el estado del vehiculo
+     * @param estado
+     */
+    public void setEstado(int estado) {
+        this.estado=estado;
+    }
+
+    /**
      * Metodo encargado de cambiar el kilometraje del vehiculo
      * @param kilometraje
      */
@@ -136,13 +147,6 @@ public class Tranvia extends Model {
         this.kilometraje=kilometraje;
     }
 
-    /**
-     * Metodo encargado de cambiar el estado del vehiculo
-     * @param estado
-     */
-    public void setEstado(int estado) {
-        this.estado=estado;
-    }
     /**
      * Metodo encargado de obtener el kilometraje del vehiculo
      * @return kilometraje
@@ -163,19 +167,18 @@ public class Tranvia extends Model {
      * @param j Nodo Json con atributos y valores de un objeto Tranvia
      */
     public static Tranvia bind(JsonNode j) {
-        String posicion = j.findPath("posicion").asText();
-        int estado = j.findPath("estado").asInt();
-        int kilometraje = j.findPath("kilometraje").asInt();
+        Long latitud = j.findPath("latitud").asLong();
+        Long longitud = j.findPath("longitud").asLong();
         int linea = j.findPath("linea").asInt();
-        Tranvia tranvia = new Tranvia(posicion, linea);
+        Tranvia tranvia = new Tranvia(latitud, longitud, linea);
         return tranvia;
     }
 
     public void update(Tranvia tranvia) {
-        this.setPosicion((tranvia.getPosicion()));
+        this.setLatitud(tranvia.getLatitud());
+        this.setLongitud(tranvia.getLongitud());
         this.setEstado(tranvia.getEstado());
         this.setKilometraje(tranvia.getKilometraje());
         this.setLinea(tranvia.getLinea());
     }
-
 }

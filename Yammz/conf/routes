@@ -3,67 +3,86 @@
 # ~~~~
 
 # Home page
-GET         /                                                controllers.Application.index()
+GET       /                                                 controllers.Application.index()
 
-GET         /movibus                                         controllers.MovibusController.read()
+GET       /movibus                                          controllers.MovibusController.read()
 
-POST        /movibus                                         controllers.MovibusController.create()
+POST      /movibus                                          controllers.MovibusController.create()
 
-PUT         /movibus/:id/:posicion                           controllers.MovibusController.reportarPosicion(id : Long, String : posicion)
+GET       /movibus/:id                                      controllers.MovibusController.get(id : Long)
 
-GET         /pedidomovibus                                   controllers.MovibusController.read()
+POST      /movibus/:id                                      controllers.MovibusController.update(id : Long)
 
-POST        /pedidomovibus                                   controllers.MovibusController.create()
+POST      /movibus/:id/reportarAccidente                    controllers.MovibusController.reportarAccidente(id : Long)
 
-PUT         /pedidomovibus/:id/:tempr                       controllers.MovibusController.reportarPosicion(id : Long, int : tempr)
+GET       /movibus/get/accidenteMasComun                    controllers.MovibusController.getAccidenteMasComun()
 
-POST        /usuario                                         controllers.UsuarioController.create()
+PUT       /movibus/:id/:posicion                            controllers.MovibusController.reportarPosicion(id : Long, String : posicion)
 
-GET         /usuario                                         controllers.UsuarioController.read()
+GET       /pedidomovibus                                    controllers.MovibusController.read()
 
-GET         /usuario/:id                                     controllers.UsuarioController.get(id : Long)
+POST      /pedidomovibus                                    controllers.MovibusController.create()
 
-GET         /usuario/:ccu/login                              controllers.UsuarioController.getByCC(ccu : Long)
+PUT       /pedidomovibus/:id/:tempr                         controllers.MovibusController.reportarPosicion(id : Long, int : tempr)
 
-POST        /usuario/:id/solicitarMovibus                    controllers.UsuarioController.solicitarMovibus(id : Long)
+POST      /usuario                                          controllers.UsuarioController.create()
 
-POST        /conductor                                       controllers.ConductorController.create()
+GET       /usuario                                          controllers.UsuarioController.read()
 
-GET         /conductor                                       controllers.ConductorController.read()
+GET       /usuario/:id                                      controllers.UsuarioController.get(id : Long)
 
-GET         /conductor/:id                                   controllers.ConductorController.get(id : Long)
+POST      /usuario/:id/solicitarMovibus                     controllers.UsuarioController.solicitarMovibus(id : Long)
 
-GET         /conductor/desempenio/:id                        controllers.ConductorController.getDesempenio(id : Long)
+POST      /conductor                                        controllers.ConductorController.create()
 
-GET         /conductor/mejorDesempenio                       controllers.ConductorController.getMejorDesempenio()
+GET       /conductor                                        controllers.ConductorController.read()
 
-POST        /estacionvcub                                    controllers.EstacionVcubController.create()
+GET       /conductor/:id                                    controllers.ConductorController.get(id : Long)
 
-GET         /estacionvcub                                    controllers.EstacionVcubController.read()
+POST      /conductor/:id                                    controllers.ConductorController.update(id : Long)
 
-PUT         /estacionvcub/:id                                controllers.EstacionVcubController.llenarEstacion(id : Long)
+GET       /conductor/:id/desempenio                         controllers.ConductorController.getDesempenio(id : Long)
 
-PUT         /estacionvcub/:ide/usuario/:ccu                  controllers.EstacionVcubController.retiroVcub(ide : Long, ccu : Long)
+GET       /conductor/get/mejorDesempenio                    controllers.ConductorController.getMejorDesempenio()
 
-PUT         /estacionvcub/:ide/usuario/:ccu/devolucionVcub   controllers.EstacionVcubController.devolucionVcub(ide : Long, ccu : Long)
+POST      /estacionvcub                                     controllers.EstacionVcubController.create()
+
+GET       /estacionvcub                                     controllers.EstacionVcubController.read()
+
+GET       /estacionvcub/:id                                 controllers.EstacionVcubController.get(id : Long)
+
+GET       /estacionvcub/:id/llenarEstacion                 controllers.EstacionVcubController.llenarEstacion(id : Long)
+
+POST      /estacionvcub/retirarVcub                         controllers.EstacionVcubController.retirarVcub()
+
+POST      /estacionvcub/devolverVcub                        controllers.EstacionVcubController.devolverVcub()
          
-POST        /tranvia                                         controllers.TranviaController.create()
+POST      /tranvia                                          controllers.TranviaController.create()
 
-GET         /tranvias                                        controllers.TranviaController.read()
+GET       /tranvia                                          controllers.TranviaController.read()
 
-GET         /tranvia/:id                                     controllers.TranviaController.get(id : Long)
+GET       /tranvia/:id                                      controllers.TranviaController.get(id : Long)
 
-PUT         /tranvia/update/:id                              controllers.TranviaController.update(id : Long )
+POST      /tranvia/:id                                      controllers.TranviaController.update(id : Long)
 
-POST        /tranvia/:magnitud/:tipoAccidente                controllers.TranviaController.reportarAccidente(magnitud: String, tipoAccidente: Integer)
+POST      /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
 
-GET         /tranvia/accidenteMasComun                       controllers.TranviaController.getAccidenteMasComun()
+GET       /tranvia/get/accidenteMasComun                    controllers.TranviaController.getAccidenteMasComun()
 
-GET         /reportes                                        controllers.ReporteController.read()
+GET       /reporte                                          controllers.ReporteController.read()
 
-GET         /reporte/:id                                     controllers.ReporteController.get(id : Long)
+GET       /reporte/:id                                      controllers.ReporteController.get(id : Long)
 
+GET       /pedidoMovibus                                    controllers.PedidoMovibusController.read()
 
+GET       /pedidoMovibus/:id                                controllers.PedidoMovibusController.get(id : Long)
+
+GET       /pedidoMovibusPendiente                           controllers.PedidoMovibusController.readPendientes()
+
+GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
+
+POST      /pedidoMovibus/:id/reportarPedidoTerminado        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+>>>>>>> origin/master
