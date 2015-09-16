@@ -26,7 +26,7 @@
     });
     mainApp.controller("tranviaController", function($http, $scope) {
         
-            $http.get('http://localhost:9000/tranvias').
+            $http.get('http://localhost:9000/tranvia').
                 success(function(data, status, headers, config) {
                     $scope.tranvias = data;
                 }).
@@ -91,4 +91,24 @@
                 });
   
     }); 
+    
+    mainApp.controller("pedidoMovibusController", function($http, $scope) {
+    var usuario;
+        this.crearUsuario = function (id) {
+            $http.defaults.headers.post = { 'Content-Type':'application/json' };
+            $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+                usuario=data;
+            });
+        }
+        this.hacerPedido = function (id) {
+            $http.post('http://localhost:9000/usuario/'+data.id+'/solicitarMovibus', JSON.stringify($scope.competitor),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+                usuario=data;
+            });
+        };
+        
+            
+  
+    });
+    
+    
 })();

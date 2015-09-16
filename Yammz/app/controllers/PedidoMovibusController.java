@@ -10,6 +10,7 @@ import models.PedidoMovibusPendiente;
 import play.libs.Json;
 import play.mvc.Result;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static play.mvc.Controller.request;
@@ -92,5 +93,17 @@ public class PedidoMovibusController {
                 return ok(Json.toJson(pedidoMovibus));
             }
         }
+    }
+
+    public Result getPedidoByMovibus(Long id) {
+        List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
+        Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
+        while(pedidoMovibusIterator.hasNext()) {
+            PedidoMovibus pedidoMovibus=pedidoMovibusIterator.next();
+            if(pedidoMovibus.getMovibus().getId().equals(id)) {
+                return ok(Json.toJson(pedidoMovibus));
+            }
+        }
+        return ok(Json.toJson(Json.newObject()));
     }
 }

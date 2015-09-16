@@ -11,13 +11,8 @@ create table conductor (
   correo                    varchar(255),
   desempenio                double,
   viajes_totales            integer,
+  estado                    integer,
   constraint pk_conductor primary key (id))
-;
-
-create table direccion (
-  principal                 integer,
-  numero                    integer,
-  detalles                  varchar(255))
 ;
 
 create table estacion_vcub (
@@ -25,13 +20,13 @@ create table estacion_vcub (
   capacidad                 integer,
   vcubs                     integer,
   nombre                    varchar(255),
-  envio_reporte             boolean,
   constraint pk_estacion_vcub primary key (id))
 ;
 
 create table movibus (
   id                        bigint auto_increment not null,
-  posicion                  varchar(255),
+  latitud                   bigint,
+  longitud                  bigint,
   estado                    integer,
   kilometraje               integer,
   constraint pk_movibus primary key (id))
@@ -46,20 +41,23 @@ create table pedido_movibus (
   usuario_id                bigint,
   movibus_id                bigint,
   conductor_id              bigint,
-  direccion_usuario         varchar(255),
-  direccion_destino         varchar(255),
-  constraint uq_pedido_movibus_usuario_id unique (usuario_id),
-  constraint uq_pedido_movibus_movibus_id unique (movibus_id),
-  constraint uq_pedido_movibus_conductor_id unique (conductor_id),
+  latitud_usuario           bigint,
+  longitud_usuario          bigint,
+  latitud_destino           bigint,
+  longitud_destino          bigint,
   constraint pk_pedido_movibus primary key (id))
 ;
 
 create table pedido_movibus_pendiente (
   id                        bigint auto_increment not null,
   usuario_id                bigint,
-  direccion_usuario         varchar(255),
-  direccion_destino         varchar(255),
-  constraint uq_pedido_movibus_pendiente_usua unique (usuario_id),
+  fecha_pedido              timestamp,
+  fecha_ejecucion           timestamp,
+  latitud_usuario           bigint,
+  longitud_usuario          bigint,
+  latitud_destino           bigint,
+  longitud_destino          bigint,
+  tiempo_estimado           integer,
   constraint pk_pedido_movibus_pendiente primary key (id))
 ;
 
@@ -74,7 +72,8 @@ create table reporte (
 
 create table tranvia (
   id                        bigint auto_increment not null,
-  posicion                  varchar(255),
+  latitud                   bigint,
+  longitud                  bigint,
   estado                    integer,
   kilometraje               integer,
   linea                     integer,
@@ -108,8 +107,6 @@ create index ix_pedido_movibus_pendiente_us_4 on pedido_movibus_pendiente (usuar
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists conductor;
-
-drop table if exists direccion;
 
 drop table if exists estacion_vcub;
 

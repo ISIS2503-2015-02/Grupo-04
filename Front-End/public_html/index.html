@@ -39,35 +39,71 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
-                                <h1 class="text-upper">Sistema central de transporte</h1>
-                                <p class="tm-white">Bienvenido al sistema central de transporte TBC. En este lugar usted podrá agendar sus pedidos de movivus</p>
-                                <div class="panel-body">
-                                    <form role="form">
+                             <h1 class="text-upper">Sistema central de transporte</h1>
+                             <p class="tm-white">Bienvenido al sistema central de transporte TBC. En este lugar usted podrá agendar sus pedidos de movivus</p>
+                            <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                                <h3>Crear Usuario</h3>
+                               <div class="panel-body" class="container" ng-controller="pedidoMovibusController as pedidoMovibusController">
+                                    <form role="form" ng-submit="form.$valid && pedidoMovibusController.crearUsuario()">
                                         <fieldset>
-                                            <div class="form-group">
-                                                <input class="form-control" placeholder="Nombre" name="email" type="text" autofocus>
+                                            <div class="form-group" ng-class="{'has-success': form.nombre.$valid && form.nombre.$dirty, 'has-error': form.nombre.$invalid && (form.nombre.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Nombre" name="nombre" type="text" ng-model="currentRecord.nombre" >
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control" placeholder="Dirección" name="password" type="text" value="">
+                                            <div class="form-group" ng-class="{'has-success': form.email.$valid && form.email.$dirty, 'has-error': form.email.$invalid && (form.email.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Email" name="correo" type="email" ng-model="currentRecord.correo" >
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control" placeholder="Fecha" name="email" type="date" autofocus>
+                                            <div class="form-group" ng-class="{'has-success': form.cedula.$valid && form.cedula.$dirty, 'has-error': form.cedula.$invalid && (form.cedula.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Cedula" name="cedula" type="number" ng-model="currentRecord.cedula" >
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control" placeholder="Discapacidad" name="text" type="password" value="">
+                                            <div class="form-group" ng-class="{'has-success': form.celular.$valid && form.celular.$dirty, 'has-error': form.celular.$invalid && (form.celular.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Celular" name="celular" type="number"  ng-model="currentRecord.celular">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.tarjetaBancaria.$valid && form.tarjetaBancaria.$dirty, 'has-error': form.tarjetaBancaria.$invalid && (form.tarjetaBancaria.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Tarjeta Bancaria" name="tarjetaBancaria" type="number" ng-model="currentRecord.tarjetaBancaria">
                                             </div>
                                             <!-- Change this to a button or input when using this as a form -->
                                             <div class="btn-group">
-                                                <a href="index.html" class="btn btn-lg btn-success">Solicitar</a>
+                                                <button href="index.html" class="btn btn-lg btn-success" ng-click="pedidoMovibusController.crearUsuario()">Crear</button>
                                             </div>
                                         </fieldset>
                                     </form>
                                 </div>
-                                <img src="images/fondo transparente.png" height="72" width="72"/>
                             </div>
-                            <div class="col-md-1"></div>
+                            <br/>
+                            <h3>Realizar pedido</h3>
+                            <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                                <div class="panel-body" class="container" ng-controller="pedidoMovibusController as pedidoMovibusController">
+                                    <form role="form" ng-submit="form.$valid && pedidoMovibusController.hacerPedido()">
+                                        <fieldset>
+                                       
+                                            <div class="form-group" ng-class="{'has-success': form.longitudUsuario.$valid && form.longitudUsuario.$dirty, 'has-error': form.longitudUsuario.$invalid && (form.longitudUsuario.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Longitud actual" name="longitudUsuario" type="number" value="">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.latitudUsuario.$valid && form.latitudUsuario.$dirty, 'has-error': form.latitudUsuario.$invalid && (form.latitudUsuario.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Latitud actual" name="latitudUsuario" type="number" value="">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.longitudDestino.$valid && form.longitudDestino.$dirty, 'has-error': form.longitudDestino.$invalid && (form.longitudDestino.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Longitud destino" name="longitudDestino" type="number" value="">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.latitudDestino.$valid && form.latitudDestino.$dirty, 'has-error': form.latitudDestino.$invalid && (form.latitudDestino.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Latitud destino" name="latitudDestino" type="number" value="">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.tiempoEstimado.$valid && form.tiempoEstimado.$dirty, 'has-error': form.tiempoEstimado.$invalid && (form.tiempoEstimado.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Tiempo estimado" name="tiempoEstimado" type="number" value="">
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-success': form.fechaEjecucion.$valid && form.fechaEjecucion.$dirty, 'has-error': form.fechaEjecucion.$invalid && (form.fechaEjecucion.$dirty || form.$submitted)}">
+                                                <input class="form-control" placeholder="Fecha" name="fechaEjecucion" type="text" autofocus>
+                                            </div>
+                                            <!-- Change this to a button or input when using this as a form -->
+                                            <div class="btn-group">
+                                                <button href="index.html" class="btn btn-lg btn-success" ng-click="pedidoMovibusController.hacerPedido()">Solicitar</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                        <img src="images/fondo transparente.png" height="72" width="72"/>
                     </div>
                 </div>
             </section>
