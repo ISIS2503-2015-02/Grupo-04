@@ -4,7 +4,6 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Movibus;
-import models.PedidoMovibus;
 import models.Reporte;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -95,4 +94,3 @@ public class MovibusController {
         }
     }
 }
->>>>>>> origin/master

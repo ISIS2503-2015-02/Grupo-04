@@ -48,7 +48,7 @@ public class PedidoMovibusController {
         }
     }
 
-    public Result reportarPedidoTerminado(Long id) {
+    public Result reportarPedidoTerminado(Long id, int tmpr) {
         JsonNode j = request().body().asJson();
         int tiempoReal=j.findPath("tiempoReal").asInt();
         PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
