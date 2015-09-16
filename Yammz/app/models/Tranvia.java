@@ -47,9 +47,9 @@ public class Tranvia extends Model {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private Long latitud;
+    private Double latitud;
 
-    private Long longitud;
+    private Double longitud;
 
     /**
      * Estado del vehiculo
@@ -89,7 +89,7 @@ public class Tranvia extends Model {
      */
     private int linea;
     
-    public Tranvia(Long latitud, Long longitud, int linea) {
+    public Tranvia(Double latitud, Double longitud, int linea) {
         this.linea=linea;
         this.latitud=latitud;
         this.longitud=longitud;
@@ -109,17 +109,17 @@ public class Tranvia extends Model {
         this.linea=linea;
     }
 
-    public Long getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(Long latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud=latitud;
     }
 
-    public Long getLongitud() { return longitud; }
+    public Double getLongitud() { return longitud; }
 
-    public void setLongitud(Long longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud=longitud;
     }
 
@@ -167,8 +167,8 @@ public class Tranvia extends Model {
      * @param j Nodo Json con atributos y valores de un objeto Tranvia
      */
     public static Tranvia bind(JsonNode j) {
-        Long latitud = j.findPath("latitud").asLong();
-        Long longitud = j.findPath("longitud").asLong();
+        Double latitud = j.findPath("latitud").asDouble();
+        Double longitud = j.findPath("longitud").asDouble();
         int linea = j.findPath("linea").asInt();
         Tranvia tranvia = new Tranvia(latitud, longitud, linea);
         return tranvia;

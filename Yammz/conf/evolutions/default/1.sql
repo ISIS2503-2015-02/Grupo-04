@@ -20,13 +20,14 @@ create table estacion_vcub (
   capacidad                 integer,
   vcubs                     integer,
   nombre                    varchar(255),
+  reporte                   boolean,
   constraint pk_estacion_vcub primary key (id))
 ;
 
 create table movibus (
   id                        bigint auto_increment not null,
-  latitud                   bigint,
-  longitud                  bigint,
+  latitud                   double,
+  longitud                  double,
   estado                    integer,
   kilometraje               integer,
   constraint pk_movibus primary key (id))
@@ -72,8 +73,8 @@ create table reporte (
 
 create table tranvia (
   id                        bigint auto_increment not null,
-  latitud                   bigint,
-  longitud                  bigint,
+  latitud                   double,
+  longitud                  double,
   estado                    integer,
   kilometraje               integer,
   linea                     integer,

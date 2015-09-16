@@ -17,8 +17,6 @@ import Logic.EstacionVcubLogic;
 
 public class Main extends JFrame implements ActionListener{
 
-	private static final long serialVersionUID = 1L;
-
 	EstacionVcubLogic logic;
 	JPanel everything;
 	JPanel buts;
@@ -33,8 +31,8 @@ public class Main extends JFrame implements ActionListener{
 	JLabel numVc;
 	JButton refill;
 
-	public Main(int i){
-		logic = new EstacionVcubLogic(i);
+	public Main(){
+		logic = new EstacionVcubLogic();
 		this.setSize(400, 400);
 		everything = new JPanel();
 		everything.setLayout(new BorderLayout());
@@ -82,7 +80,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		Main main = new Main(1);
+		Main main = new Main();
 	}
 
 	@Override
@@ -122,7 +120,7 @@ public class Main extends JFrame implements ActionListener{
 				}catch(Exception e){
 					success.setText("Operacion Fallida");
 					vcubs.add(success, BorderLayout.CENTER);
-					numVc.setText("Error con el numero de identificacion.");
+					numVc.setText(e.getMessage());
 				}
 				vcubs.setVisible(true);
 			}else{

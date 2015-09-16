@@ -132,8 +132,12 @@ public class Usuario extends Model{
     /**
      * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
      */
-    public void devolverVcubEnUso() {
-        this.vcubsEnUso--;
+    public void devolverVcubEnUso() throws Exception{
+        if(vcubsEnUso<=0) {
+            throw new Exception("No debe devolver mas vcubs.");
+        }else{
+            this.vcubsEnUso--;
+        }
     }
 
     public static Usuario bind(JsonNode j) {

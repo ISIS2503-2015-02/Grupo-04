@@ -38,16 +38,23 @@ public class EstacionVcub extends Model{
      */
     private String nombre;
 
+    /**
+     * Variable para saber si ya ha enviado un reporte solicitando restitucion de vcubs
+     */
+    private boolean reporte;
+
     //------------------------------------------------------
     // Constructores
     //------------------------------------------------------
 
     public EstacionVcub() {}
 
+
     public EstacionVcub(int capacidad, String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
         this.nombre=nombre;
+        this.reporte=false;
     }
 
     //------------------------------------------------------
@@ -101,4 +108,13 @@ public class EstacionVcub extends Model{
     public void llenarEstacion(){
         vcubs = capacidad;
     }
+
+    public boolean haReportado() {
+        return reporte;
+    }
+
+    public void cambioReporte(boolean nReporte) {
+        this.reporte = nReporte;
+    }
+
 }

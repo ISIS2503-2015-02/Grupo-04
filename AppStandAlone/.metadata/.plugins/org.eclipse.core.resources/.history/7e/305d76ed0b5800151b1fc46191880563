@@ -1,9 +1,0 @@
-package Interface;
-
-import DTO.EstacionVcubDTO;
-
-public interface IEstacionVcub {
-	public int llenarEstacion(EstacionVcubDTO dto);
-	public int retiroVcub(EstacionVcubDTO dto, Long usuarioCC);
-	public int devolucionVcub(EstacionVcubDTO dto, Long usuarioCC);
-}

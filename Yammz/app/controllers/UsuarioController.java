@@ -42,6 +42,26 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Devuelve un usuario dada la cedula del mismo.
+     * @param ccu cedula del usuario.
+     * @return JSon con loa informacion del usuario.
+     */
+    public Result getByCC(Long ccu){
+        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
+        Usuario usuario = null;
+        for(Usuario u:users){
+            if(u.getCedula()==ccu){
+                usuario = u;
+            }
+        }
+        if(usuario == null){
+            return ok(Json.toJson("error:Usuario no registrado."));
+        }else {
+            return ok(Json.toJson(usuario));
+        }
+    }
+
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
         List<Movibus> movibuses = Movibus.find.where().like("estado",""+Movibus.DISPONIBLE).findList();

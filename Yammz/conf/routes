@@ -23,6 +23,8 @@ GET       /usuario                                          controllers.UsuarioC
 
 GET       /usuario/:id                                      controllers.UsuarioController.get(id : Long)
 
+GET       /usuario/:cc/login                                controllers.UsuarioController.getByCC(cc: Long)
+
 POST      /usuario/:id/solicitarMovibus                     controllers.UsuarioController.solicitarMovibus(id : Long)
 
 POST      /conductor                                        controllers.ConductorController.create()
@@ -43,11 +45,11 @@ GET       /estacionvcub                                     controllers.Estacion
 
 GET       /estacionvcub/:id                                 controllers.EstacionVcubController.get(id : Long)
 
-GET       /estacionvcub/:id/llenarEstacion                 controllers.EstacionVcubController.llenarEstacion(id : Long)
+GET       /estacionvcub/:id/llenarEstacion                  controllers.EstacionVcubController.llenarEstacion(id : Long)
 
-POST      /estacionvcub/retirarVcub                         controllers.EstacionVcubController.retirarVcub()
+PUT       /estacionvcub/:ide/usuario/:ccu                   controllers.EstacionVcubController.retiroVcub(ide : Long, ccu : Long)
 
-POST      /estacionvcub/devolverVcub                        controllers.EstacionVcubController.devolverVcub()
+PUT       /estacionvcub/:ide/usuario/:ccu/devolver          controllers.EstacionVcubController.devolverVcub(ide : Long, ccu : Long)
          
 POST      /tranvia                                          controllers.TranviaController.create()
 
@@ -55,9 +57,9 @@ GET       /tranvia                                          controllers.TranviaC
 
 GET       /tranvia/:id                                      controllers.TranviaController.get(id : Long)
 
-PUT      /tranvia/:id                                       controllers.TranviaController.update(id : Long)
+PUT       /tranvia/:id                                       controllers.TranviaController.update(id : Long)
 
-PUT      /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
+PUT       /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
 
 GET       /tranvia/get/accidenteMasComun                    controllers.TranviaController.getAccidenteMasComun()
 

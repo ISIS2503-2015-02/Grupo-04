@@ -48,9 +48,9 @@ public class Movibus extends Model {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private Long latitud;
+    private Double latitud;
 
-    private Long longitud;
+    private Double longitud;
 
     public static Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
 
@@ -64,7 +64,7 @@ public class Movibus extends Model {
      */
     private int kilometraje;
     
-    public Movibus(Long latitud, Long longitud) {
+    public Movibus(Double latitud, Double longitud) {
         this.latitud=latitud;
         this.longitud=longitud;
         estado=DISPONIBLE;
@@ -79,17 +79,17 @@ public class Movibus extends Model {
         this.id=id;
     }
 
-    public Long getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(Long latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud=latitud;
     }
 
-    public Long getLongitud() { return longitud; }
+    public Double getLongitud() { return longitud; }
 
-    public void setLongitud(Long longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud=longitud;
     }
 
@@ -131,8 +131,8 @@ public class Movibus extends Model {
     }
 
     public static Movibus bind(JsonNode j) {
-        Long latitud = j.findPath("latitud").asLong();
-        Long longitud = j.findPath("longitud").asLong();
+        Double latitud = j.findPath("latitud").asDouble();
+        Double longitud = j.findPath("longitud").asDouble();
         return new Movibus(latitud, longitud);
     }
 

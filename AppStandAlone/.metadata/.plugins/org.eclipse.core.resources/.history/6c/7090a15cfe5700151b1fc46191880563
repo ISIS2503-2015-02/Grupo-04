@@ -1,7 +1,0 @@
-package Logic;
-
-import java.io.Serializable;
-
-public class EstacionVcubSerializable implements Serializable{
-	
-}

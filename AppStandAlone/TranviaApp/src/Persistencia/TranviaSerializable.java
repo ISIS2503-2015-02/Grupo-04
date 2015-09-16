@@ -7,40 +7,6 @@ public class TranviaSerializable implements Serializable{
 	private static final long serialVersionUID = 1L;
 
     //-----------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------
-
-    /**
-     * Constante que representa el estado ocupado
-     */
-    public final static int OCUPADO=0;
-
-    /**
-     * Constante que representa el estado disponible
-     */
-    public final static int DISPONIBLE=1;
-
-    /**
-     * Constante que representa el estado problema
-     */
-    public final static int PROBLEMA=2;
-
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_A=0;
-
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_B=1;
-
-    /**
-     * Constante que representa la linea
-     */
-    public final static int LINEA_C=2;
-
-    //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
     
@@ -53,9 +19,9 @@ public class TranviaSerializable implements Serializable{
      * Posicion del vehiculo
      */
     //Latitud
-    private Long latitud;
+    private Double latitud;
     //Longitud
-    private Long longitud;
+    private Double longitud;
     
     /**
      * Estado del vehiculo
@@ -80,19 +46,19 @@ public class TranviaSerializable implements Serializable{
 		this.id = id;
 	}
 
-    public Long getLatitud() {
+    public Double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(Long latitud) {
+	public void setLatitud(Double latitud) {
 		this.latitud = latitud;
 	}
 
-	public Long getLongitud() {
+	public Double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(Long longitud) {
+	public void setLongitud(Double longitud) {
 		this.longitud = longitud;
 	}
 
