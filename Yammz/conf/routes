@@ -17,8 +17,6 @@ POST      /movibus/:id/reportarAccidente                    controllers.MovibusC
 
 GET       /movibus/get/accidenteMasComun                    controllers.MovibusController.getAccidenteMasComun()
 
-PUT       /movibus/:id/:posicion                            controllers.MovibusController.reportarPosicion(id : Long, String : posicion)
-
 POST      /usuario                                          controllers.UsuarioController.create()
 
 GET       /usuario                                          controllers.UsuarioController.read()
@@ -74,7 +72,6 @@ GET       /pedidoMovibus/:id                                controllers.PedidoMo
 GET       /pedidoMovibusPendiente                           controllers.PedidoMovibusController.readPendientes()
 
 GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
-
 
 POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
 
