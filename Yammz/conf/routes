@@ -43,7 +43,7 @@ GET       /estacionvcub                                     controllers.Estacion
 
 GET       /estacionvcub/:id                                 controllers.EstacionVcubController.get(id : Long)
 
-GET       /estacionvcub/:id/llenarEstacion                 controllers.EstacionVcubController.llenarEstacion(id : Long)
+GET       /estacionvcub/:id/llenarEstacion                  controllers.EstacionVcubController.llenarEstacion(id : Long)
 
 POST      /estacionvcub/retirarVcub                         controllers.EstacionVcubController.retirarVcub()
 
@@ -55,9 +55,9 @@ GET       /tranvia                                          controllers.TranviaC
 
 GET       /tranvia/:id                                      controllers.TranviaController.get(id : Long)
 
-PUT      /tranvia/:id                                       controllers.TranviaController.update(id : Long)
+PUT       /tranvia/:id                                      controllers.TranviaController.update(id : Long)
 
-PUT      /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
+PUT       /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
 
 GET       /tranvia/get/accidenteMasComun                    controllers.TranviaController.getAccidenteMasComun()
 
@@ -73,7 +73,7 @@ GET       /pedidoMovibusPendiente                           controllers.PedidoMo
 
 GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
 
-POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
+#POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
 
 
 # Map static resources from the /public folder to the /assets URL path
