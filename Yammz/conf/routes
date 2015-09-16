@@ -19,12 +19,6 @@ GET       /movibus/get/accidenteMasComun                    controllers.MovibusC
 
 PUT       /movibus/:id/:posicion                            controllers.MovibusController.reportarPosicion(id : Long, String : posicion)
 
-GET       /pedidomovibus                                    controllers.MovibusController.read()
-
-POST      /pedidomovibus                                    controllers.MovibusController.create()
-
-PUT       /pedidomovibus/:id/:tempr                         controllers.MovibusController.reportarPosicion(id : Long, int : tempr)
-
 POST      /usuario                                          controllers.UsuarioController.create()
 
 GET       /usuario                                          controllers.UsuarioController.read()
@@ -81,7 +75,7 @@ GET       /pedidoMovibusPendiente                           controllers.PedidoMo
 
 GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
 
-POST      /pedidoMovibus/:id/reportarPedidoTerminado        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long)
+POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
