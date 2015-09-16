@@ -12,6 +12,8 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import Persistencia.EstacionVcubSerializable;
+
 public class EstacionVcubLogic{
 	
 	EstacionVcubSerializable data;
