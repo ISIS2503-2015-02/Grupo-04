@@ -5,22 +5,22 @@
  */
 package models;
 
-import java.util.LinkedList;
-
 import com.avaje.ebean.Model;
-import javax.persistence.*;
-/**
- *
- * @author cfagu
- */
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
 public class EstacionVcub extends Model{
+
     //------------------------------------------------------
     // Atributos
     //------------------------------------------------------
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -32,52 +32,42 @@ public class EstacionVcub extends Model{
      * Cantidad actual de vcubs en la estacion.
      */
     private int vcubs;
+
     /**
      * Nombre estacion.
      */
     private String nombre;
 
-    /**
-     * Envio reporte de falta de bicicletas.
-     */
-    private boolean envioReporte;
-
     //------------------------------------------------------
     // Constructores
     //------------------------------------------------------
-    /**
-     * Constructor sin parametros.
-     */
-    public EstacionVcub() {
-    }
 
-    /**
-     * Constructor con parametros.
-     * @param capacidad Capacidad de la estacion.
-     */
-    public EstacionVcub(int capacidad,String nombre) {
+    public EstacionVcub() {}
+
+    public EstacionVcub(int capacidad, String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
-        this.envioReporte=false;
+        this.nombre=nombre;
     }
 
     //------------------------------------------------------
     // Metodos
     //------------------------------------------------------
-    /**
-     * Devuelve la capacidad de la estacion.
-     * @return int capacidad
-     */
+
     public int getCapacidad() {
         return capacidad;
     }
 
-    /**
-     * Devuelve la cantidad de vcubs en la estacion.
-     * @return int cantidadVcubs
-     */
+    public void setCapacidad(int capacidad) {
+        this.capacidad=capacidad;
+    }
+
     public int getVcubs() {
         return vcubs;
+    }
+
+    public void setVcubs(int vcubs) {
+        this.vcubs=vcubs;
     }
 
     public String getNombre() {
@@ -96,43 +86,19 @@ public class EstacionVcub extends Model{
         this.id = id;
     }
 
-
-
-    /**
-     * Verifica si la cantidad de vcubs baja del 10% de la capacidad.
-     * @return true si necesita solicitar vcubs, false de lo contrario.
-     */
     public boolean solicitarVcbus() {
         return vcubs/capacidad<=0.1;
     }
 
-    /**
-     * Presta una vcub de la estacion.
-     */
     public void prestarVcub() {
         vcubs--;
     }
 
-    public boolean isEnvioReporte() {
-        return envioReporte;
-    }
-
-    public void setEnvioReporte(boolean envioReporte) {
-        this.envioReporte = envioReporte;
-    }
-
-    /**
-     * Restituye una vcub de la estacion.
-     */
     public void restituirVcub() {
         vcubs++;
     }
 
-    /**
-     * Llena hasta la capacidad maxima de Vcubs, la estacion.
-     */
     public void llenarEstacion(){
         vcubs = capacidad;
-        envioReporte = false;
     }
 }

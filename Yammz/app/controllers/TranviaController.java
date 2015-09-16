@@ -10,17 +10,12 @@ import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-/**
- * Created by sergio on 8/16/15.
- */
-public class TranviaController extends Controller{
+public class TranviaController extends Controller {
 
-    /**
-     * Metodo encargado de crear un tranvia
-     * @return si se logra crear el tranvia
-     */
     @BodyParser.Of(BodyParser.Json.class)
     public Result create() {
         JsonNode j = request().body().asJson();
@@ -61,40 +56,38 @@ public class TranviaController extends Controller{
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result reportarAccidente(String magnitud,Integer tipoAccidente)
-    {
+    public Result reportarAccidente(Long id) {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
-        Long id= j.findPath("id").asLong();
-        Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,id,magnitud,tipoAccidente);
+        String magnitud=j.findPath("magnitud").asText();
+        int tipoAccidente=j.findParent("tipoAccidente").asInt();
+        Reporte reporte= new Reporte(Reporte.EMERGENCIA_TRANVIA, descripcion,magnitud,tipoAccidente);
         reporte.save();
-        return ok("La emergencia fue registrada");
+        return ok(Json.toJson(reporte));
     }
 
-    public Result getAccidenteMasComun(){
-        int estrellarse=0;
-        int vararse=0;
+    public Result getAccidenteMasComun() {
+        int choque=0;
+        int danio=0;
         int robo=0;
-
         List<Reporte> reportes = new Model.Finder(Long.class, Reporte.class).all();
-
         for (int i=0;i<reportes.size();i++){
-            Reporte r=(Reporte)reportes.get(i);
-            if(r.getTipoAccidente()==Reporte.CHOQUE){
-                estrellarse++;
+            Reporte r=reportes.get(i);
+            if(r.getTipoReporte().equals(Reporte.EMERGENCIA_TRANVIA)&&r.getTipoAccidente()==Reporte.CHOQUE){
+                choque++;
             }
-            else if(r.getTipoAccidente()==Reporte.DANIO){
-                vararse++;
+            else if(r.getTipoReporte().equals(Reporte.EMERGENCIA_TRANVIA)&&r.getTipoAccidente()==Reporte.DANIO){
+                danio++;
             }
-            else if(r.getTipoAccidente()==Reporte.ROBO){
+            else if(r.getTipoReporte().equals(Reporte.EMERGENCIA_TRANVIA)&&r.getTipoAccidente()==Reporte.ROBO){
                 robo++;
             }
         }
-        if(estrellarse>vararse && estrellarse>robo){
-            return ok("Estrellarse");
+        if(choque>danio && choque>robo){
+            return ok("Choque");
         }
-        else if(vararse>estrellarse && vararse>robo){
-            return ok("Vararse");
+        else if(danio>choque && danio>robo){
+            return ok("Dano tecnico");
         }
         else {
             return ok("Robo");

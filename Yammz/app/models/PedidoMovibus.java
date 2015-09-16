@@ -13,10 +13,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
 
-/**
- * 
- * @author cfagu
- */
 @Entity
 public class PedidoMovibus extends Model{
 
@@ -26,39 +22,48 @@ public class PedidoMovibus extends Model{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    private final Date fechaPedido;
+    private Date fechaPedido;
     
-    private final Date fechaEjecucion;
+    private Date fechaEjecucion;
     
-    private LinkedList<Direccion> ruta;
+    private LinkedList<Long> rutaLatitudes;
+
+    private LinkedList<Long> rutaLongitudes;
     
-    private final int tiempoEstimado;
+    private int tiempoEstimado;
     
     private int tiempoReal;
 
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
 
-    @OneToOne
+    @ManyToOne
     private Movibus movibus;
 
-    @OneToOne
+    @ManyToOne
     private Conductor conductor;
 
-    private String direccionUsuario;
+    private Long latitudUsuario;
 
-    private String direccionDestino;
+    private Long longitudUsuario;
+
+    private Long latitudDestino;
+
+    private Long longitudDestino;
 
     public PedidoMovibus() {
-        ruta=new LinkedList<>();
+        rutaLatitudes=new LinkedList<>();
+        rutaLongitudes=new LinkedList<>();
         fechaPedido=new Date();
         fechaEjecucion=null;
         tiempoEstimado=0;
         usuario=null;
         movibus=null;
         conductor=null;
-        direccionUsuario=null;
-        direccionDestino=null;
+        latitudUsuario=null;
+        longitudUsuario=null;
+        latitudDestino=null;
+        longitudDestino=null;
     }
 
     public Long getId() {
@@ -72,13 +77,25 @@ public class PedidoMovibus extends Model{
     public Date getFechaPedido() {
         return fechaPedido;
     }
+
+    public void setFechaPedido(Date fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
     
     public Date getFechaEjecucion() {
         return fechaEjecucion;
     }
+
+    public void setFechaEjecucion(Date fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
+    }
     
-    public LinkedList<Direccion> getRuta() {
-        return ruta;
+    public LinkedList<Long> getRutaLatitudes() {
+        return rutaLatitudes;
+    }
+
+    public LinkedList<Long> getRutaLongitudes() {
+        return rutaLongitudes;
     }
     
     public int getTiempoEstimado() {
@@ -121,20 +138,36 @@ public class PedidoMovibus extends Model{
         this.conductor=conductor;
     }
 
-    public String getDireccionUsuario() {
-        return direccionUsuario;
+    public Long getLatitudUsuario() {
+        return latitudUsuario;
     }
 
-    public void setDireccionUsuario(String direccionUsuario) {
-        this.direccionUsuario=direccionUsuario;
+    public void setLatitudUsuario(Long latitudUsuario) {
+        this.latitudUsuario=latitudUsuario;
     }
 
-    public String getDireccionDestino() {
-        return direccionDestino;
+    public Long getLongitudUsuario() {
+        return longitudUsuario;
     }
 
-    public void setDireccionDestino(String direccionDestino) {
-        this.direccionDestino=direccionDestino;
+    public void setLongitudUsuario(Long longitudUsuario) {
+        this.longitudUsuario=longitudUsuario;
+    }
+
+    public Long getLatitudDestino() {
+        return latitudDestino;
+    }
+
+    public void setLatitudDestino(Long latitudDestino) {
+        this.latitudDestino=latitudDestino;
+    }
+
+    public Long getLongitudDestino() {
+        return longitudDestino;
+    }
+
+    public void setLongitudDestino(Long longitudDestino) {
+        this.longitudDestino=longitudDestino;
     }
 
     public static PedidoMovibus bind(JsonNode j) {
@@ -142,6 +175,6 @@ public class PedidoMovibus extends Model{
     }
 
     public boolean movibusEnRuta() {
-        return ruta.contains(movibus.getPosicion());
+        return rutaLatitudes.contains(movibus.getLatitud())&&rutaLongitudes.contains(movibus.getLongitud());
     }
 }

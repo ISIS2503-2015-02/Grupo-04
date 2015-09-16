@@ -5,7 +5,6 @@
  */
 package models;
 
-
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -14,10 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author cf.agudelo12
- */
 @Entity
 public class Usuario extends Model{
 
@@ -137,12 +132,8 @@ public class Usuario extends Model{
     /**
      * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
      */
-    public void devolverVcubEnUso() throws Exception{
-        if(vcubsEnUso<=0) {
-            throw new Exception ("No debe devolver mas vcubs.");
-        }else{
-            this.vcubsEnUso--;
-        }
+    public void devolverVcubEnUso() {
+        this.vcubsEnUso--;
     }
 
     public static Usuario bind(JsonNode j) {
@@ -155,7 +146,6 @@ public class Usuario extends Model{
     }
 
     public void update(Usuario usuario) {
-        this.setCedula(usuario.getCedula());
         this.setCelular(usuario.getCelular());
         this.setCorreo(usuario.getCorreo());
         this.setTarjetaBancaria(usuario.getTarjetaBancaria());

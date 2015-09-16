@@ -8,12 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.lang.Long;
 
-/**
- * Created by g.martinez10 on 15/08/2015.
- */
 @Entity
 public class Reporte extends Model{
-
 
     //---------------------------------------------------------------------
     // Constantes
@@ -28,6 +24,8 @@ public class Reporte extends Model{
      * Constante que define que si el reporte es para reportar una emergencia de un tranvia
      */
     public final static String EMERGENCIA_TRANVIA="Emergencia Tranvia";
+
+    public final static String EMERGENCIA_MOVIBUS="Emergencia Movibus";
 
     /**
      * Constante que representa el nivel bajo de emergencia
@@ -83,6 +81,7 @@ public class Reporte extends Model{
      * Describe la magnitud de la emergencia
      */
     private String magnitud;
+
     /**
      * Identificador de la estacion o tranvia que creo el reporte.
      */
@@ -90,27 +89,23 @@ public class Reporte extends Model{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-
     //---------------------------------------------------------------------
     // Constructores
     //---------------------------------------------------------------------
 
     public Reporte() {}
 
-    public Reporte(String tipoRep, String descrip, Long identificacion, String magnitud, int tipoAccidente)
-    {
-        this.tipoReporte=tipoRep;
-        this.descripcion=descrip;
-        this.id=identificacion;
+    public Reporte(String tipoReporte, String descripcion, String magnitud, int tipoAccidente) {
+        this.tipoReporte=tipoReporte;
+        this.descripcion=descripcion;
         this.magnitud=magnitud;
         this.tipoAccidente=tipoAccidente;
     }
 
-    public Reporte(String tipoRep, String descrip, Long identificacion)
-    {
-        this.tipoReporte=tipoRep;
-        this.descripcion=descrip;
-        this.id=identificacion;
+    public Reporte(String tipoReporte, String descripcion, String magnitud) {
+        this.tipoReporte=tipoReporte;
+        this.descripcion=descripcion;
+        this.magnitud=magnitud;
     }
 
     //---------------------------------------------------------------------
@@ -156,7 +151,4 @@ public class Reporte extends Model{
     public void setId(Long id) {
         this.id = id;
     }
-
-
-
 }

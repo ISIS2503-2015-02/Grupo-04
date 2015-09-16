@@ -1,24 +1,24 @@
 package controllers;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Conductor;
+import models.Movibus;
 import models.PedidoMovibus;
-import models.Usuario;
+import models.PedidoMovibusPendiente;
 import play.libs.Json;
 import play.mvc.Result;
 
 import java.util.List;
 
+import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
 
-/**
- * Created by cfagu on 16-Aug-15.
- */
 public class PedidoMovibusController {
 
     public Result read() {
-        List<PedidoMovibus> pedidosMovibus = new Model.Finder(String.class, PedidoMovibus.class).all();
+        List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         return ok(Json.toJson(pedidosMovibus));
     }
 
@@ -32,21 +32,65 @@ public class PedidoMovibusController {
         }
     }
 
-    public Result setDesempenioConductor(Long idPedido){
-        PedidoMovibus pedido = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(idPedido);
-        Conductor c = pedido.getConductor();
-        c.setDesempenio(pedido.getDiferenciaTiempos());
-        return ok(Json.toJson(c));
+    public Result readPendientes() {
+        List<PedidoMovibusPendiente> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibusPendiente.class).all();
+        return ok(Json.toJson(pedidosMovibus));
     }
 
-
-    public Result reportarPedidoTerminado(Long id) {
-        PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
+    public Result getPendiente(Long id) {
+        PedidoMovibusPendiente pedidoMovibus = (PedidoMovibusPendiente) new Model.Finder(Long.class, PedidoMovibusPendiente.class).byId(id);
         ObjectNode result = Json.newObject();
-        if(pedidoMovibus == null)
+        if (pedidoMovibus == null)
             return ok(Json.toJson(result));
         else {
             return ok(Json.toJson(pedidoMovibus));
+        }
+    }
+
+    public Result reportarPedidoTerminado(Long id) {
+        JsonNode j = request().body().asJson();
+        int tiempoReal=j.findPath("tiempoReal").asInt();
+        PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
+        pedidoMovibus.setTiempoReal(tiempoReal);
+        List<PedidoMovibusPendiente> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibusPendiente.class).all();
+        if(pedidosMovibus.isEmpty()) {
+            Conductor conductor=pedidoMovibus.getConductor();
+            conductor.setEstado(Conductor.DISPONIBLE);
+            conductor.setDesempenio(tiempoReal / pedidoMovibus.getTiempoEstimado());
+            conductor.save();
+            Movibus movibus=pedidoMovibus.getMovibus();
+            movibus.setEstado(Movibus.DISPONIBLE);
+            movibus.setKilometraje((int) (Math.abs(pedidoMovibus.getLatitudUsuario() - pedidoMovibus.getLatitudDestino()) + Math.abs(pedidoMovibus.getLongitudDestino() - pedidoMovibus.getLongitudUsuario())));
+            movibus.save();
+            if(pedidoMovibus == null)
+                return ok(Json.toJson(Json.newObject()));
+            else {
+                return ok(Json.toJson(pedidoMovibus));
+            }
+        }
+        else {
+            PedidoMovibusPendiente pendiente=pedidosMovibus.get(0);
+            pedidoMovibus=new PedidoMovibus();
+            Conductor conductor=pedidoMovibus.getConductor();
+            conductor.setDesempenio(tiempoReal / pedidoMovibus.getTiempoEstimado());
+            conductor.save();
+            Movibus movibus=pedidoMovibus.getMovibus();
+            movibus.setKilometraje((int) (Math.abs(pedidoMovibus.getLatitudUsuario() - pedidoMovibus.getLatitudDestino()) + Math.abs(pedidoMovibus.getLongitudDestino() - pedidoMovibus.getLongitudUsuario())));
+            movibus.save();
+            pedidoMovibus.setFechaEjecucion(pendiente.getFechaEjecucion());
+            pedidoMovibus.setFechaPedido(pendiente.getFechaPedido());
+            pedidoMovibus.setConductor(conductor);
+            pedidoMovibus.setLatitudDestino(pendiente.getLatitudDestino());
+            pedidoMovibus.setLatitudUsuario(pendiente.getLatitudUsuario());
+            pedidoMovibus.setLongitudDestino(pendiente.getLongitudDestino());
+            pedidoMovibus.setLongitudUsuario(pendiente.getLongitudUsuario());
+            pedidoMovibus.setMovibus(movibus);
+            pedidoMovibus.setUsuario(pendiente.getUsuario());
+            if(pedidoMovibus == null)
+                return ok(Json.toJson(Json.newObject()));
+            else {
+                return ok(Json.toJson(pedidoMovibus));
+            }
         }
     }
 }
