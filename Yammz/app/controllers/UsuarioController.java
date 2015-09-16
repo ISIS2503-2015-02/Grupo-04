@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import static play.mvc.Controller.request;
-import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
 
 public class UsuarioController {
@@ -24,7 +23,7 @@ public class UsuarioController {
         JsonNode j = request().body().asJson();
         Usuario usuario = Json.fromJson(j, Usuario.class);
         usuario.save();
-        return ok(Json.toJson(usuario));
+        return ok(Json.toJson(usuario),"sas");
     }
 
     public Result read() {
@@ -50,7 +49,7 @@ public class UsuarioController {
         if(movibuses.isEmpty()||conductores.isEmpty()) {
             PedidoMovibusPendiente pedidoMovibusPendiente = null;
             try {
-                pedidoMovibusPendiente = new PedidoMovibusPendiente(usuario,new Date(),new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()),j.findPath("latitudUsuario").asLong(),j.findPath("longitudUsuario").asLong(),j.findPath("latitudDestino").asLong(),j.findPath("longitudDestino").asLong(),j.findPath("tiempoEstimado").asInt());
+                pedidoMovibusPendiente = new PedidoMovibusPendiente(usuario,new Date(),new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()),j.findPath("latitudUsuario").asDouble(),j.findPath("longitudUsuario").asDouble(),j.findPath("latitudDestino").asDouble(),j.findPath("longitudDestino").asDouble(),j.findPath("tiempoEstimado").asInt());
                 pedidoMovibusPendiente.save();
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -81,10 +80,10 @@ public class UsuarioController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            pedidoMovibus.setLatitudUsuario(j.findPath("latitudUsuario").asLong());
-            pedidoMovibus.setLongitudUsuario(j.findPath("longitudUsuario").asLong());
-            pedidoMovibus.setLatitudDestino(j.findPath("latitudDestino").asLong());
-            pedidoMovibus.setLongitudDestino(j.findPath("longitudDestino").asLong());
+            pedidoMovibus.setLatitudUsuario(j.findPath("latitudUsuario").asDouble());
+            pedidoMovibus.setLongitudUsuario(j.findPath("longitudUsuario").asDouble());
+            pedidoMovibus.setLatitudDestino(j.findPath("latitudDestino").asDouble());
+            pedidoMovibus.setLongitudDestino(j.findPath("longitudDestino").asDouble());
             pedidoMovibus.setTiempoReal(j.findPath("tiempoEstimado").asInt());
             pedidoMovibus.save();
             movibus.save();

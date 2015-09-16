@@ -5,13 +5,12 @@
  */
 package models;
 
-import java.util.Date;
-import java.util.LinkedList;
-
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.LinkedList;
 
 @Entity
 public class PedidoMovibus extends Model{
@@ -43,13 +42,13 @@ public class PedidoMovibus extends Model{
     @ManyToOne
     private Conductor conductor;
 
-    private Long latitudUsuario;
+    private Double latitudUsuario;
 
-    private Long longitudUsuario;
+    private Double longitudUsuario;
 
-    private Long latitudDestino;
+    private Double latitudDestino;
 
-    private Long longitudDestino;
+    private Double longitudDestino;
 
     public PedidoMovibus() {
         rutaLatitudes=new LinkedList<>();
@@ -138,35 +137,35 @@ public class PedidoMovibus extends Model{
         this.conductor=conductor;
     }
 
-    public Long getLatitudUsuario() {
+    public Double getLatitudUsuario() {
         return latitudUsuario;
     }
 
-    public void setLatitudUsuario(Long latitudUsuario) {
+    public void setLatitudUsuario(Double latitudUsuario) {
         this.latitudUsuario=latitudUsuario;
     }
 
-    public Long getLongitudUsuario() {
+    public Double getLongitudUsuario() {
         return longitudUsuario;
     }
 
-    public void setLongitudUsuario(Long longitudUsuario) {
+    public void setLongitudUsuario(Double longitudUsuario) {
         this.longitudUsuario=longitudUsuario;
     }
 
-    public Long getLatitudDestino() {
+    public Double getLatitudDestino() {
         return latitudDestino;
     }
 
-    public void setLatitudDestino(Long latitudDestino) {
+    public void setLatitudDestino(Double latitudDestino) {
         this.latitudDestino=latitudDestino;
     }
 
-    public Long getLongitudDestino() {
+    public Double getLongitudDestino() {
         return longitudDestino;
     }
 
-    public void setLongitudDestino(Long longitudDestino) {
+    public void setLongitudDestino(Double longitudDestino) {
         this.longitudDestino=longitudDestino;
     }
 
