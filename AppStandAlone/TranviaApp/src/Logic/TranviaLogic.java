@@ -17,6 +17,43 @@ import Persistencia.TranviaSerializable;
 
 public class TranviaLogic{
 
+	/**
+	 * Constantes
+	 */
+	//EMERGENCIA
+    /**
+     * Constante que representa el estado ocupado
+     */
+    public final static int OCUPADO=0;
+
+    /**
+     * Constante que representa el estado disponible
+     */
+    public final static int DISPONIBLE=1;
+
+    /**
+     * Constante que representa el estado problema
+     */
+    public final static int PROBLEMA=2;
+
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_A=0;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_B=1;
+    
+    /**
+     * Constante que representa la linea 
+     */
+    public final static int LINEA_C=2;
+
+    /**
+	 * Atributos de datos.
+	 */
 	TranviaSerializable data;
 	
 	//CONSTRUCTOR DE LA LOGICA
@@ -87,13 +124,18 @@ public class TranviaLogic{
 		data.setLatitud(lat);
 	}
 	
-	public void enviarPosicion()throws Exception{
+	public void enviarPosicion(Long lon, Long lat)throws Exception{
 		try{
 			URL url = new URL("http://172.24.100.35:9000/tranvia/update/"+data.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Accept", "application/json");
+			String input = "{\"longitud\":"+lon+",\"latitud\":"+lat+"}";
+
+			OutputStream os = conn.getOutputStream();
+			os.write(input.getBytes());
+			os.flush();
 			if(conn.getResponseCode()!=200)
 				System.out.println("Error enviando posicion: "+conn.getResponseCode());
 			conn.disconnect();
@@ -103,22 +145,23 @@ public class TranviaLogic{
 	}
 	
 	//EMERGENCIA
-	public String reportarEmergencia()throws Exception{
-		String rta = null;
+	public String reportarEmergencia(String des, int tipoAcc, String mag)throws Exception{
 		try{
 			URL url = new URL("http://172.24.100.35:9000/tranvia/"+data.getId()+"/reportarAccidente");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Accept", "application/json");
-			//Descripcion String
-			//tipoAccidente int 0-2
-			//Magnittud String Baja, Media, Alta
+
+			String input = "{\"descripcion\":\""+des+"\",\"tipoAccidente\":\""+tipoAcc+"\",\"magnitud\":\""+mag+"\"}";
+
+			OutputStream os = conn.getOutputStream();
+			os.write(input.getBytes());
+			os.flush();
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
-			String at1[] = output.split(",");
 			conn.disconnect();
-			return rta;
+			return output;
 		}catch(Exception e){
 			throw e;
 		}
