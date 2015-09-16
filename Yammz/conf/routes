@@ -9,6 +9,14 @@ GET         /movibus                                         controllers.Movibus
 
 POST        /movibus                                         controllers.MovibusController.create()
 
+PUT         /movibus/:id/:posicion                           controllers.MovibusController.reportarPosicion(id : Long, String : posicion)
+
+GET         /pedidomovibus                                   controllers.MovibusController.read()
+
+POST        /pedidomovibus                                   controllers.MovibusController.create()
+
+PUT         /pedidomovibus/:id/:tempr                       controllers.MovibusController.reportarPosicion(id : Long, int : tempr)
+
 POST        /usuario                                         controllers.UsuarioController.create()
 
 GET         /usuario                                         controllers.UsuarioController.read()

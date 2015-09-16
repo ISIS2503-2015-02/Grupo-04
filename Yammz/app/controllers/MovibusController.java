@@ -45,4 +45,11 @@ public class MovibusController {
             return ok(Json.toJson(movibus));
         }
     }
+
+    public Result reportarPosicion(Long idMovibus, String posicion){
+        Movibus movibus = (Movibus)new Model.Finder(Long.class, Movibus.class).byId(idMovibus);
+        movibus.setPosicion(posicion);
+        movibus.save();
+        return ok(Json.toJson(movibus));
+    }
 }
