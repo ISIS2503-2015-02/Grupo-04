@@ -133,20 +133,21 @@
         });
     });
     mainApp.controller("pedidoMovibusController", function($http, $scope) {
+    var usuario;
         this.crearUsuario = function () {
             $http.defaults.headers.post = { 'Content-Type':'application/json' };
             $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
-                usuario=data.id;
-                alert("El usuario a sido creado");
+                usuario=data;
+            }).error(function(data, status, headers, config) {
+                   
             });
         };
         this.hacerPedido = function () {
-            $http.post('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+            $http.post('http://localhost:9000/usuario/'+data.id+'/solicitarMovibus', JSON.stringify($scope.competitor),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
                 usuario=data;
                 alert("La solicitud del movibus se ha enviado");
             });
         };
     });
-        
     
 })();

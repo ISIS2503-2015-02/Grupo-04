@@ -6,7 +6,6 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.avaje.ebeaninternal.server.lib.util.Str;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.Entity;

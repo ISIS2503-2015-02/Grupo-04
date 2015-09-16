@@ -19,17 +19,17 @@ public class PedidoMovibusPendiente extends Model {
 
     private Date fechaEjecucion;
 
-    private Long latitudUsuario;
+    private Double latitudUsuario;
 
-    private Long longitudUsuario;
+    private Double longitudUsuario;
 
-    private Long latitudDestino;
+    private Double latitudDestino;
 
-    private Long longitudDestino;
+    private Double longitudDestino;
 
     private int tiempoEstimado;
 
-    public PedidoMovibusPendiente(Usuario usuario,Date fechaPedido,Date fechaEjecucion,Long latitudUsuario,Long longitudUsuario,Long latitudDestino,Long longitudDestino,int tiempoEstimado) {
+    public PedidoMovibusPendiente(Usuario usuario,Date fechaPedido,Date fechaEjecucion,Double latitudUsuario,Double longitudUsuario,Double latitudDestino,Double longitudDestino,int tiempoEstimado) {
         this.usuario=usuario;
         this.fechaPedido=fechaPedido;
         this.fechaEjecucion=fechaEjecucion;
@@ -72,35 +72,35 @@ public class PedidoMovibusPendiente extends Model {
         this.fechaEjecucion = fechaEjecucion;
     }
 
-    public Long getLatitudUsuario() {
+    public Double getLatitudUsuario() {
         return latitudUsuario;
     }
 
-    public void setLatitudUsuario(Long latitudUsuario) {
+    public void setLatitudUsuario(Double latitudUsuario) {
         this.latitudUsuario=latitudUsuario;
     }
 
-    public Long getLongitudUsuario() {
+    public Double getLongitudUsuario() {
         return longitudUsuario;
     }
 
-    public void setLongitudUsuario(Long longitudUsuario) {
+    public void setLongitudUsuario(Double longitudUsuario) {
         this.longitudUsuario=longitudUsuario;
     }
 
-    public Long getLatitudDestino() {
+    public Double getLatitudDestino() {
         return latitudDestino;
     }
 
-    public void setLatitudDestino(Long latitudDestino) {
+    public void setLatitudDestino(Double latitudDestino) {
         this.latitudDestino=latitudDestino;
     }
 
-    public Long getLongitudDestino() {
+    public Double getLongitudDestino() {
         return longitudDestino;
     }
 
-    public void setLongitudDestino(Long longitudDestino) {
+    public void setLongitudDestino(Double longitudDestino) {
         this.longitudDestino=longitudDestino;
     }
 
