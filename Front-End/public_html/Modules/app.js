@@ -1,6 +1,8 @@
 (function () {
 
+
     var mainApp = angular.module('mainApp', []);
+    
     mainApp.directive('toolbar', function(){
         return{
             restrict:'E',
@@ -81,34 +83,32 @@
         }
     });
     mainApp.controller("estadisticasController", function($http, $scope) {
-        
-            $http.get('http://localhost:9000/estadisticas').
-                success(function(data, status, headers, config) {
-                    $scope.estadisticas = data;
-                }).
-                error(function(data, status, headers, config) {
-                    // log error
-                });
-  
+        $http.get('http://localhost:9000/tranvia/get/accidenteMasComun').
+        success(function(data, status, headers, config) {
+            $scope.tranvias = data;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
     }); 
-    
-    mainApp.controller("pedidoMovibusController", function($http, $scope) {
     var usuario;
-        this.crearUsuario = function (id) {
+    mainApp.controller("pedidoMovibusController", function($http, $scope) {
+        
+        this.crearUsuario = function () {
             $http.defaults.headers.post = { 'Content-Type':'application/json' };
             $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
-                usuario=data;
+                
+                usuario=data.id;
             });
         }
-        this.hacerPedido = function (id) {
-            $http.post('http://localhost:9000/usuario/'+data.id+'/solicitarMovibus', JSON.stringify($scope.competitor),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+        this.hacerPedido = function () {
+            alert('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus');
+            
+            $http.post('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
                 usuario=data;
             });
         };
-        
-            
-  
     });
-    
+        
     
 })();

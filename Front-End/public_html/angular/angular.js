@@ -10067,7 +10067,6 @@ function $HttpProvider() {
   <div ng-controller="FetchController">
     <select ng-model="method" aria-label="Request method">
       <option>GET</option>
-      <option>JSONP</option>
     </select>
     <input type="text" ng-model="url" size="80" aria-label="URL" />
     <button id="fetchbtn" ng-click="fetch()">fetch</button><br>
