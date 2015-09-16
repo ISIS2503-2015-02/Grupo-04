@@ -1,4 +1,4 @@
-package Logic;
+package Persistencia;
 
 import java.io.Serializable;
 

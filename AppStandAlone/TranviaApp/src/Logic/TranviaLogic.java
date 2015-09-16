@@ -1,119 +1,140 @@
 package Logic;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import DTO.TranviaDTO;
+import Persistencia.TranviaSerializable;
+
 
 public class TranviaLogic{
 
-	public int sendPos(TranviaDTO dto) {
-		int rta=0;
+	TranviaSerializable data;
+	
+	//CONSTRUCTOR DE LA LOGICA
+	public TranviaLogic(){
+		try{ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
+			data = (TranviaSerializable)ins.readObject();
+			ins.close();
+		}catch(FileNotFoundException e){
+			data = new TranviaSerializable();
+			File file = new File("./data/data");
+			try {
+				file.createNewFile();
+			} catch (IOException e1) {
+				System.out.println(e1.getMessage());
+			}
+			getTranvia();
+			System.out.println(e.getMessage());
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	//PIDE LA INFORMACION DE UN TRANVIA A LA CENTRAL PARA SIMULARLO
+	public void getTranvia(){
 		try{
-			URL url = new URL("http://localhost:8080/tranvia/update/"+dto.getId());
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
-			conn.setRequestMethod("PUT");
+			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
-			
-			String input="{\"estado\":"+dto.getEstado()+""
-					+ ",\"kilometraje\":\""+dto.getKmAct()+""
-					+ ",\"lat\":\""+dto.getLat()+""
-					+ ",\"lon\":\""+dto.getLon()+""
-					+ ",\"linea\":\""+dto.getLinea()+"\"}";
-			
-			OutputStream os = conn.getOutputStream();
-			os.write(input.getBytes());
-			os.flush();
 			
 			if(conn.getResponseCode()!=200){
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output;
-			System.out.println("Output from server .... \n");
-			while((output = buff.readLine())!=null){
-				System.out.println(output);
+			String output=buff.readLine();
+			String at1[] = output.split(",");
+			for (String string : at1) {
+				String at2[] = string.split(":");
+				if(at2[0].equals("[{\"id\""))
+					data.setId(Long.parseLong(at2[1]));
+				if(at2[0].equals("\"longitud\""))
+					data.setLongitud(Long.parseLong(at2[1]));
+				if(at2[0].equals("\"latitud\""))
+					data.setLatitud(Long.parseLong(at2[1]));
+				if(at2[0].equals("\"estado\""))
+					data.setEstado(Integer.parseInt(at2[1]));
+				if(at2[0].equals("\"Kilometraje\""))
+					data.setKilometraje(Integer.parseInt(at2[1]));
+				if(at2[0].equals("\"linea\""))
+					data.setKilometraje(Integer.parseInt(at2[1].replace("}","")));
 			}
-			rta = conn.getResponseCode();
+			System.out.println(data.getId());
+			System.out.println(data.getLongitud());
+			System.out.println(data.getLatitud());
+			System.out.println(data.getEstado());
+			System.out.println(data.getKilometraje());
+			System.out.println(data.getLinea());
 			conn.disconnect();
-			return rta;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return rta;
 	}
 
-	public int enviarEstado(TranviaDTO dto) {
-		//TODO revisar como se envia la informacion y que se envia.
-		int rta=0;
+	//POSICION
+	public void cambiarPosicion(Long lon, Long lat){
+		data.setLongitud(lon);
+		data.setLatitud(lat);
+	}
+	
+	public void enviarPosicion()throws Exception{
 		try{
-			URL url = new URL("http://localhost:8080/tranvia/reportarAccidente/");
+			URL url = new URL("http://172.24.100.35:9000/tranvia/update/"+data.getId());
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("PUT");
+			conn.setRequestProperty("Accept", "application/json");
+			if(conn.getResponseCode()!=200)
+				System.out.println("Error enviando posicion: "+conn.getResponseCode());
+			conn.disconnect();
+		}catch(Exception e){
+			throw e;
+		}
+	}
+	
+	//EMERGENCIA
+	public String reportarEmergencia()throws Exception{
+		String rta = null;
+		try{
+			URL url = new URL("http://172.24.100.35:9000/tranvia/"+data.getId()+"/reportarAccidente");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Accept", "application/json");
-			
-			String input="{\"descripcion\":"+dto.getReporte().getDescripcion()+",\"tipoReporte\":"+dto.getReporte().getTipoReporte()+",\"id\":\""+dto.getId()+"\"}";
-			
-			OutputStream os = conn.getOutputStream();
-			os.write(input.getBytes());
-			os.flush();
-			
-			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-			}
+			//Descripcion String
+			//tipoAccidente int 0-2
+			//Magnittud String Baja, Media, Alta
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output;
-			System.out.println("Output from server .... \n");
-			while((output = buff.readLine())!=null){
-				System.out.println(output);
-			}
-			rta = conn.getResponseCode();
+			String output=buff.readLine();
+			String at1[] = output.split(",");
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw e;
 		}
-		return rta;
 	}
-
-	public int kmUltRevision(TranviaDTO dto) {
-		int rta=0;
+	
+	//PERSISTENCIA
+	public void persist(){
 		try{
-			URL url = new URL("http://localhost:8080/tranvia/update/{"+dto.getId()+"}");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setDoOutput(true);
-			conn.setRequestMethod("PUT");
-			conn.setRequestProperty("Accept", "application/json");
-			
-			String input="{\"estado\":"+dto.getEstado()+""
-					+ ",\"kilometraje\":\""+dto.getKmAct()+""
-					+ ",\"lat\":\""+dto.getLat()+""
-					+ ",\"lon\":\""+dto.getLon()+""
-					+ ",\"linea\":\""+dto.getLinea()+"\"}";
-			
-			OutputStream os = conn.getOutputStream();
-			os.write(input.getBytes());
-			os.flush();
-			
-			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-			}
-			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output;
-			System.out.println("Output from server .... \n");
-			while((output = buff.readLine())!=null){
-				System.out.println(output);
-			}
-			rta = conn.getResponseCode();
-			conn.disconnect();
-			return rta;
+		FileOutputStream out = new FileOutputStream("./data/data");
+		ObjectOutputStream os = new ObjectOutputStream(out);
+		os.writeObject(data);
+		os.flush(); 
+		os.close();
 		}catch(Exception e){
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return rta;
 	}
 }
