@@ -150,7 +150,7 @@ public class TranviaLogic{
 			URL url = new URL("http://172.24.100.35:9000/tranvia/"+data.getId()+"/reportarAccidente");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
+			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Accept", "application/json");
 
 			String input = "{\"descripcion\":\""+des+"\",\"tipoAccidente\":\""+tipoAcc+"\",\"magnitud\":\""+mag+"\"}";

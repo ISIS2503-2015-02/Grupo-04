@@ -18,7 +18,7 @@ public class EstacionVcubLogic{
 	
 	EstacionVcubSerializable data;
 	
-	public EstacionVcubLogic(){
+	public EstacionVcubLogic(int i){
 		try{
 			ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
 			data = (EstacionVcubSerializable)ins.readObject();
@@ -31,7 +31,7 @@ public class EstacionVcubLogic{
 			} catch (IOException e1) {
 				System.out.println(e1.getMessage());
 			}
-			getEstacion();
+			getEstacion(i);
 			System.out.println(e.getMessage());
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -42,9 +42,9 @@ public class EstacionVcubLogic{
 		return data.getNombre();
 	}
 	
-	public void getEstacion(){
+	public void getEstacion(int i){
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub");
+			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+i);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
