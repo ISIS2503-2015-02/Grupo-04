@@ -1,6 +1,6 @@
 (function () {
-
-
+    this.usuario=0;
+   
     var mainApp = angular.module('mainApp', []);
     
     mainApp.directive('toolbar', function(){
@@ -22,7 +22,7 @@
     mainApp.directive("tranvia",function(){
         return{
             restrict:'E',
-            templateUrl:'Modules/modules/tranvia/tranvia.html',
+            templateUrl:'modules/modules/tranvia/tranvia.html',
             controller: 'tranviaController'
         }
     });
@@ -40,7 +40,7 @@
     mainApp.directive("vcubs",function(){
         return{
             restrict:'E',
-            templateUrl:'Modules/modules/estacionVcub/estacionVcub.html',
+            templateUrl:'modules/modules/estacionVcub/estacionVcub.html',
             controller: 'estacionVcubController'
         }
     });
@@ -53,13 +53,34 @@
                 error(function(data, status, headers, config) {
                     // log error
                 });
-  
+            this.llenarEstacion= function(currentRecord){
+                $http.get('http://localhost:9000/estacionvcub/'+currentRecord.id+'/llenarEstacion').
+                    success(function(data,headers){
+                     $http.get('http://localhost:9000/estacionvcub').
+                     success(function(data, status, headers, config) {
+                            $scope.estacionVcubs = data;
+                     });  
+                }).error(function(data, status, headers, config) {
+                    // log error
+                });
+                                  
+            };
+            this.calcularPorcentaje= function(currentRecord){
+                
+                if(currentRecord.vcubs===currentRecord.capacidad*0.1)
+                {
+                    return true;
+                }
+               return false;                  
+            };
+                
+                
     });
     
     mainApp.directive("movibus",function(){
         return{
             restrict:'E',
-            templateUrl:'Modules/modules/movibus/movibus.html',
+            templateUrl:'modules/modules/movibus/movibus.html',
             controller: 'movibusController'
         }
     });
@@ -72,17 +93,30 @@
                 error(function(data, status, headers, config) {
                     // log error
                 });
-  
+                this.crearUsuario = function () {
+                    $http.defaults.headers.post = { 'Content-Type':'application/json' };
+                    $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+                        usuario=data.id;
+                        alert("El usuario a sido creado");
+                    });
+                };
     });
     
     mainApp.directive("estadisticas",function(){
         return{
             restrict:'E',
-            templateUrl:'Modules/modules/estadisticas/estadisticas.html',
+            templateUrl:'modules/modules/estadisticas/estadisticas.html',
             controller: 'estadisticasController'
         }
     });
     mainApp.controller("estadisticasController", function($http, $scope) {
+        $http.get('http://localhost:9000/conductor/get/mejorDesempenio').
+        success(function(data, status, headers, config) {
+            $scope.conductores = data;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
         $http.get('http://localhost:9000/tranvia/get/accidenteMasComun').
         success(function(data, status, headers, config) {
             $scope.tranvias = data;
@@ -90,22 +124,26 @@
         error(function(data, status, headers, config) {
             // log error
         });
-    }); 
-    var usuario;
+        $http.get('http://localhost:9000/tranvia/get/accidenteMasComun').
+        success(function(data, status, headers, config) {
+            $scope.movibus = data;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
+    });
     mainApp.controller("pedidoMovibusController", function($http, $scope) {
-        
         this.crearUsuario = function () {
             $http.defaults.headers.post = { 'Content-Type':'application/json' };
             $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
-                
                 usuario=data.id;
+                alert("El usuario a sido creado");
             });
-        }
+        };
         this.hacerPedido = function () {
-            alert('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus');
-            
             $http.post('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
                 usuario=data;
+                alert("La solicitud del movibus se ha enviado");
             });
         };
     });

@@ -20,7 +20,11 @@ body
     {
         font-size: 22px;
     }
-        .camposTitulo
+    .camposTexto2
+    {
+        font-size: 14px;
+    }
+    .camposTitulo
     {
         font-size: 32px;
     }
@@ -306,7 +310,7 @@ img
         background: #28a7e9;
         color: #fff;
         font-weight: bold;
-        padding: 30px;
+        padding: 40px;
     }
 #pricing .pricing .pricing-title p
     {
