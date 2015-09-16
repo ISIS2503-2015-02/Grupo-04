@@ -33,8 +33,8 @@ public class Main extends JFrame implements ActionListener{
 	JLabel numVc;
 	JButton refill;
 
-	public Main(){
-		logic = new EstacionVcubLogic();
+	public Main(int i){
+		logic = new EstacionVcubLogic(i);
 		this.setSize(400, 400);
 		everything = new JPanel();
 		everything.setLayout(new BorderLayout());
@@ -82,7 +82,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		Main main = new Main();
+		Main main = new Main(1);
 	}
 
 	@Override
