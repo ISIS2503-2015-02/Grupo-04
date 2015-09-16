@@ -19,7 +19,7 @@ public class EstacionVcubController extends Controller {
     public Result create() {
         JsonNode j = request().body().asJson();
         EstacionVcub estacionVcub = Json.fromJson(j, EstacionVcub.class);
-        estacionVcub.setVcubs(estacionVcub.getCapacidad());
+        estacionVcub.setVcubs(estacionVcub.getVcubs());
         estacionVcub.save();
         return ok(Json.toJson(estacionVcub));
     }
