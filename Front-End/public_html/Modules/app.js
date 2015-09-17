@@ -83,22 +83,19 @@
             templateUrl:'modules/modules/movibus/movibus.html',
             controller: 'movibusController'
         }
-    mainApp.controller("PedidoController", function($http, $scope) {
-        
-            $http.get('http://localhost:9000/pedidoMovibus').
-                success(function(data, status, headers, config) {
-                    $scope.pedido = data;
-                }).
-                error(function(data, status, headers, config) {
-                    // log error
-                });
-            });
-        });
+    });
     mainApp.controller("movibusController", function($http, $scope) {
         
             $http.get('http://localhost:9000/movibus').
                 success(function(data, status, headers, config) {
                     $scope.movibus = data;
+                }).
+                error(function(data, status, headers, config) {
+                    // log error
+                });
+            $http.get('http://localhost:9000/pedidoMovibus').
+                success(function(data, status, headers, config) {
+                    $scope.pedidos = data;
                 }).
                 error(function(data, status, headers, config) {
                     // log error
