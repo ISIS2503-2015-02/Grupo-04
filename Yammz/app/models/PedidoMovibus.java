@@ -25,10 +25,6 @@ public class PedidoMovibus extends Model{
     
     private Date fechaEjecucion;
     
-    private LinkedList<Long> rutaLatitudes;
-
-    private LinkedList<Long> rutaLongitudes;
-    
     private int tiempoEstimado;
     
     private int tiempoReal;
@@ -51,8 +47,6 @@ public class PedidoMovibus extends Model{
     private Double longitudDestino;
 
     public PedidoMovibus() {
-        rutaLatitudes=new LinkedList<>();
-        rutaLongitudes=new LinkedList<>();
         fechaPedido=new Date();
         fechaEjecucion=null;
         tiempoEstimado=0;
@@ -89,18 +83,14 @@ public class PedidoMovibus extends Model{
         this.fechaEjecucion = fechaEjecucion;
     }
     
-    public LinkedList<Long> getRutaLatitudes() {
-        return rutaLatitudes;
-    }
-
-    public LinkedList<Long> getRutaLongitudes() {
-        return rutaLongitudes;
-    }
-    
     public int getTiempoEstimado() {
         return tiempoEstimado;
     }
-    
+
+    public void setTiempoEstimado(int tiempoEstimado) {
+        this.tiempoEstimado = tiempoEstimado;
+    }
+
     public int getTiempoReal() {
         return tiempoReal;
     }
@@ -171,9 +161,5 @@ public class PedidoMovibus extends Model{
 
     public static PedidoMovibus bind(JsonNode j) {
         return new PedidoMovibus();
-    }
-
-    public boolean movibusEnRuta() {
-        return rutaLatitudes.contains(movibus.getLatitud())&&rutaLongitudes.contains(movibus.getLongitud());
     }
 }

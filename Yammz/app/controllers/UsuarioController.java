@@ -104,7 +104,7 @@ public class UsuarioController {
             pedidoMovibus.setLongitudUsuario(j.findPath("longitudUsuario").asDouble());
             pedidoMovibus.setLatitudDestino(j.findPath("latitudDestino").asDouble());
             pedidoMovibus.setLongitudDestino(j.findPath("longitudDestino").asDouble());
-            pedidoMovibus.setTiempoReal(j.findPath("tiempoEstimado").asInt());
+            pedidoMovibus.setTiempoEstimado(j.findPath("tiempoEstimado").asInt());
             pedidoMovibus.save();
             movibus.save();
             conductor.save();

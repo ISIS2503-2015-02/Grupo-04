@@ -10,6 +10,7 @@ import models.PedidoMovibusPendiente;
 import play.libs.Json;
 import play.mvc.Result;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,23 +72,32 @@ public class PedidoMovibusController {
         }
         else {
             PedidoMovibusPendiente pendiente=pedidosMovibus.get(0);
-            pedidoMovibus=new PedidoMovibus();
-            Conductor conductor=pedidoMovibus.getConductor();
-            conductor.setDesempenio(tiempoReal / pedidoMovibus.getTiempoEstimado());
-            conductor.save();
-            Movibus movibus=pedidoMovibus.getMovibus();
-            movibus.setKilometraje((int) (Math.abs(pedidoMovibus.getLatitudUsuario() - pedidoMovibus.getLatitudDestino()) + Math.abs(pedidoMovibus.getLongitudDestino() - pedidoMovibus.getLongitudUsuario())));
-            movibus.save();
-            pedidoMovibus.setFechaEjecucion(pendiente.getFechaEjecucion());
-            pedidoMovibus.setFechaPedido(pendiente.getFechaPedido());
-            pedidoMovibus.setConductor(conductor);
-            pedidoMovibus.setLatitudDestino(pendiente.getLatitudDestino());
-            pedidoMovibus.setLatitudUsuario(pendiente.getLatitudUsuario());
-            pedidoMovibus.setLongitudDestino(pendiente.getLongitudDestino());
-            pedidoMovibus.setLongitudUsuario(pendiente.getLongitudUsuario());
-            pedidoMovibus.setMovibus(movibus);
-            pedidoMovibus.setUsuario(pendiente.getUsuario());
-            if(pedidoMovibus == null)
+            pedidoMovibus = null;
+            boolean encontro=false;
+            while(!encontro&&pendiente!=null) {
+                if(pendiente.getFechaEjecucion().after(new Date())) {
+                    pedidoMovibus = new PedidoMovibus();
+                    Conductor conductor = pedidoMovibus.getConductor();
+                    conductor.setDesempenio(tiempoReal / pedidoMovibus.getTiempoEstimado());
+                    conductor.save();
+                    Movibus movibus = pedidoMovibus.getMovibus();
+                    movibus.setKilometraje((int) (Math.abs(pedidoMovibus.getLatitudUsuario() - pedidoMovibus.getLatitudDestino()) + Math.abs(pedidoMovibus.getLongitudDestino() - pedidoMovibus.getLongitudUsuario())));
+                    movibus.save();
+                    pedidoMovibus.setFechaEjecucion(pendiente.getFechaEjecucion());
+                    pedidoMovibus.setFechaPedido(pendiente.getFechaPedido());
+                    pedidoMovibus.setConductor(conductor);
+                    pedidoMovibus.setLatitudDestino(pendiente.getLatitudDestino());
+                    pedidoMovibus.setLatitudUsuario(pendiente.getLatitudUsuario());
+                    pedidoMovibus.setLongitudDestino(pendiente.getLongitudDestino());
+                    pedidoMovibus.setLongitudUsuario(pendiente.getLongitudUsuario());
+                    pedidoMovibus.setMovibus(movibus);
+                    pedidoMovibus.setUsuario(pendiente.getUsuario());
+                    encontro=true;
+                }
+                pendiente.delete();
+                pendiente=(PedidoMovibusPendiente)new Model.Finder(Long.class, PedidoMovibusPendiente.class).all().get(0);
+            }
+            if (pedidoMovibus == null)
                 return ok(Json.toJson(Json.newObject()));
             else {
                 return ok(Json.toJson(pedidoMovibus));
