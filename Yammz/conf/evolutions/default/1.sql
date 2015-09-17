@@ -42,10 +42,10 @@ create table pedido_movibus (
   usuario_id                bigint,
   movibus_id                bigint,
   conductor_id              bigint,
-  latitud_usuario           bigint,
-  longitud_usuario          bigint,
-  latitud_destino           bigint,
-  longitud_destino          bigint,
+  latitud_usuario           double,
+  longitud_usuario          double,
+  latitud_destino           double,
+  longitud_destino          double,
   constraint pk_pedido_movibus primary key (id))
 ;
 
@@ -54,10 +54,10 @@ create table pedido_movibus_pendiente (
   usuario_id                bigint,
   fecha_pedido              timestamp,
   fecha_ejecucion           timestamp,
-  latitud_usuario           bigint,
-  longitud_usuario          bigint,
-  latitud_destino           bigint,
-  longitud_destino          bigint,
+  latitud_usuario           double,
+  longitud_usuario          double,
+  latitud_destino           double,
+  longitud_destino          double,
   tiempo_estimado           integer,
   constraint pk_pedido_movibus_pendiente primary key (id))
 ;
