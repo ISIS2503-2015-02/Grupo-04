@@ -23,7 +23,7 @@ public class UsuarioController {
         JsonNode j = request().body().asJson();
         Usuario usuario = Json.fromJson(j, Usuario.class);
         usuario.save();
-        return ok(Json.toJson(usuario),"sas");
+        return ok(Json.toJson(usuario));
     }
 
     public Result read() {
