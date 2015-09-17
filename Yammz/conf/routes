@@ -77,6 +77,7 @@ GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMo
 
 #POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
 
+GET       /pedidoMovibus/:id/byMovibus                      controllers.PedidoMovibusController.getPedidoByMovibus(Long id)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
