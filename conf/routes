@@ -1,0 +1,84 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET       /                                                 controllers.Application.index()
+
+GET       /movibus                                          controllers.MovibusController.read()
+
+POST      /movibus                                          controllers.MovibusController.create()
+
+GET       /movibus/:id                                      controllers.MovibusController.get(id : Long)
+
+POST      /movibus/:id                                      controllers.MovibusController.update(id : Long)
+
+POST      /movibus/:id/reportarAccidente                    controllers.MovibusController.reportarAccidente(id : Long)
+
+GET       /movibus/get/accidenteMasComun                    controllers.MovibusController.getAccidenteMasComun()
+
+POST      /usuario                                          controllers.UsuarioController.create()
+
+GET       /usuario                                          controllers.UsuarioController.read()
+
+GET       /usuario/:id                                      controllers.UsuarioController.get(id : Long)
+
+GET       /usuario/:cc/login                                controllers.UsuarioController.getByCC(cc: Long)
+
+POST      /usuario/:id/solicitarMovibus                     controllers.UsuarioController.solicitarMovibus(id : Long)
+
+POST      /conductor                                        controllers.ConductorController.create()
+
+GET       /conductor                                        controllers.ConductorController.read()
+
+GET       /conductor/:id                                    controllers.ConductorController.get(id : Long)
+
+POST      /conductor/:id                                    controllers.ConductorController.update(id : Long)
+
+GET       /conductor/:id/desempenio                         controllers.ConductorController.getDesempenio(id : Long)
+
+GET       /conductor/get/mejorDesempenio                    controllers.ConductorController.getMejorDesempenio()
+
+POST      /estacionvcub                                     controllers.EstacionVcubController.create()
+
+GET       /estacionvcub                                     controllers.EstacionVcubController.read()
+
+GET       /estacionvcub/:id                                 controllers.EstacionVcubController.get(id : Long)
+
+GET       /estacionvcub/:id/llenarEstacion                  controllers.EstacionVcubController.llenarEstacion(id : Long)
+
+PUT       /estacionvcub/:ide/usuario/:ccu                   controllers.EstacionVcubController.retiroVcub(ide : Long, ccu : Long)
+
+PUT       /estacionvcub/:ide/usuario/:ccu/devolver          controllers.EstacionVcubController.devolverVcub(ide : Long, ccu : Long)
+         
+POST      /tranvia                                          controllers.TranviaController.create()
+
+GET       /tranvia                                          controllers.TranviaController.read()
+
+GET       /tranvia/:id                                      controllers.TranviaController.get(id : Long)
+
+PUT       /tranvia/:id                                      controllers.TranviaController.update(id : Long)
+
+PUT       /tranvia/:id/reportarAccidente                    controllers.TranviaController.reportarAccidente(id : Long)
+
+GET       /tranvia/get/accidenteMasComun                    controllers.TranviaController.getAccidenteMasComun()
+
+GET       /reporte                                          controllers.ReporteController.read()
+
+GET       /reporte/:id                                      controllers.ReporteController.get(id : Long)
+
+GET       /pedidoMovibus                                    controllers.PedidoMovibusController.read()
+
+GET       /pedidoMovibus/:id                                controllers.PedidoMovibusController.get(id : Long)
+
+GET       /pedidoMovibusPendiente                           controllers.PedidoMovibusController.readPendientes()
+
+GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
+
+#POST      /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : int)
+
+GET       /pedidoMovibus/:id/byMovibus                      controllers.PedidoMovibusController.getPedidoByMovibus(id : Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

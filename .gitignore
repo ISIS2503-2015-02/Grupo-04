@@ -1,3 +1,8 @@
-/tbc.backend/target/
-/tbc.servicios/target/
-/Front-End/nbproject/private/
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
