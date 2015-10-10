@@ -1,0 +1,19 @@
+<!-- start download -->
+<section id="Tranvia">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-uppercase camposTitulo">Información Tranvias</h2>
+            <br>
+            <div  class="col-md-8 wow fadeInLeft" data-wow-delay="0.6s">
+                <ul ng-repeat="tranvia in tranvias | orderBy: 'linea'">
+                    <li class = "camposTexto"><b>Linea:</b> {{tranvia.linea}} <b>Kilometraje:</b> {{tranvia.kilometraje}}&nbsp;&nbsp;&nbsp;&nbsp;<small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q={{longitud}},{{latitud}}&amp;aq=4&amp;oq=light&amp;ie=UTF8&amp;hq=&amp;hnear=&amp;t=m&amp;z=14" style="color:#777777;text-align:right;font-size:16px;font-family: 'Source Sans Pro', sans-serif;">Ver en Map</a></small>
+                </ul>
+            </div>
+            <div class="col-md-4 wow fadeInRight" data-wow-delay="0.6s">
+                <img src="images/tram.png"/>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end download -->
+
