@@ -13,14 +13,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Clase que representa a un conductor de movibus
+ * @author: g.martinez10
+ */
 @Entity
 public class Conductor extends Model {
 
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
     public final static int DISPONIBLE=0;
 
     public final static int OCUPADO=1;
 
+    //-----------------------------------------------------------
+    // Cosa wtf
+    //-----------------------------------------------------------
+
     public static Finder<Long, Conductor> find = new Model.Finder<>(Long.class, Conductor.class);
+
+    //-----------------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------------
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +53,14 @@ public class Conductor extends Model {
 
     private int viajesTotales;
 
+    /**
+     * Dependiendo del valor nos dice el estado en el que se encuentra el conductor, esto es basandonos en las constantes de la clase
+     */
     private int estado;
+
+    //-----------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------
 
     public Conductor(String nombre, int cedula, int celular, String correo) {
         this.nombre=nombre;
@@ -48,6 +70,10 @@ public class Conductor extends Model {
         this.viajesTotales=0;
         this.estado=DISPONIBLE;
     }
+
+    //-----------------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------------
 
     public Long getId() {
         return id;

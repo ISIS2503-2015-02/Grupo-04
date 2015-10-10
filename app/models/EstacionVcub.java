@@ -49,7 +49,6 @@ public class EstacionVcub extends Model{
 
     public EstacionVcub() {}
 
-
     public EstacionVcub(int capacidad, String nombre) {
         this.capacidad=capacidad;
         this.vcubs=capacidad;
@@ -93,26 +92,47 @@ public class EstacionVcub extends Model{
         this.id = id;
     }
 
+    /**
+     * Metodo que nos dice si es el numero de vcubs en la estacion esta por debajo del 10%
+     * @return true en caso de ser menor de 10% y false de lo contrario
+     */
     public boolean solicitarVcbus() {
         return vcubs/capacidad<=0.1;
     }
 
+    /**
+     * Metodo que reduce en 1 el numero de vcubs en la estacion
+     */
     public void prestarVcub() {
         vcubs--;
     }
 
+    /**
+     * Metodo que aumenta en 1 el numero de vcubs en la estacion
+     */
     public void restituirVcub() {
         vcubs++;
     }
 
+    /**
+     * Metodo que aumenta el numero de vcubs de la estacion al maximo de su capacidad
+     */
     public void llenarEstacion(){
         vcubs = capacidad;
     }
 
+    /**
+     * Metodo que nos dice si ha reportado su falta de vcubs
+     * @return false en caso de no haberlo hecho y true en caso de que si
+     */
     public boolean haReportado() {
         return reporte;
     }
 
+    /**
+     * Metodo que cambia el valor boolean de reporte que representa si ya se realizo antes un reporte
+     * @param nReporte
+     */
     public void cambioReporte(boolean nReporte) {
         this.reporte = nReporte;
     }
