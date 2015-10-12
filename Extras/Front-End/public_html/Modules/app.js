@@ -67,7 +67,7 @@
             };
             this.calcularPorcentaje= function(currentRecord){
                 
-                if(currentRecord.vcubs===currentRecord.capacidad*0.1)
+                if(currentRecord.vcubs<=currentRecord.capacidad*0.1)
                 {
                     return true;
                 }
@@ -144,10 +144,10 @@
         };
         this.hacerPedido = function () {
             $http.defaults.headers.post = { 'Content-Type':'application/json' };
-            $http.post('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+            $http.post('http://localhost:9000/usuario/'+usuario+'/solicitarMovibus', JSON.stringify($scope.pedidoRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
                 alert("La solicitud del movibus se ha enviado");
             }).error(function(data, status, headers, config) {
-                 alert(status);
+                 document.write(usuario+"  "+data);
             });
         };
     });

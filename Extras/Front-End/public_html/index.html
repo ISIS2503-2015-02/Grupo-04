@@ -77,20 +77,20 @@
                                     <form role="form" ng-submit="form.$valid && pedidoMovibusController.hacerPedido()">
                                         <fieldset>
                                             <div class="form-group" ng-class="{'has-success': form.latitudUsuario.$valid && form.latitudUsuario.$dirty, 'has-error': form.latitudUsuario.$invalid && (form.latitudUsuario.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Latitud actual" name="latitudUsuario" type="number" step="any" value="" ng-model="currentRecord.latitudUsuario">
+                                                <input class="form-control" placeholder="Latitud actual" name="latitudUsuario" type="number" step="any" value="" step="any" ng-model="pedidoRecord.latitudUsuario">
                                             </div>   
                                             <div class="form-group" ng-class="{'has-success': form.longitudUsuario.$valid && form.longitudUsuario.$dirty, 'has-error': form.longitudUsuario.$invalid && (form.longitudUsuario.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Longitud actual" name="longitudUsuario" type="number" step="any" value="" ng-model="currentRecord.longitudUsuario">
+                                                <input class="form-control" placeholder="Longitud actual" name="longitudUsuario" type="number" step="any" value="" step="any" ng-model="pedidoRecord.longitudUsuario">
                                             </div>                                         
                                             <div class="form-group" ng-class="{'has-success': form.latitudDestino.$valid && form.latitudDestino.$dirty, 'has-error': form.latitudDestino.$invalid && (form.latitudDestino.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Latitud destino" name="latitudDestino" type="number" step="any" value="" ng-model="currentRecord.latitudDestino">
+                                                <input class="form-control" placeholder="Latitud destino" name="latitudDestino" type="number" step="any" value="" step="any" ng-model="pedidoRecord.latitudDestino">
                                             </div>
                                             <div class="form-group" ng-class="{'has-success': form.longitudDestino.$valid && form.longitudDestino.$dirty, 'has-error': form.longitudDestino.$invalid && (form.longitudDestino.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Longitud destino" name="longitudDestino" type="number" step="any" value="" ng-model="currentRecord.longitudDestino">
+                                                <input class="form-control" placeholder="Longitud destino" name="longitudDestino" type="number" step="any" value="" step="any" ng-model="pedidoRecord.longitudDestino">
                                             </div>
                                             
                                             <div class="form-group" ng-class="{'has-success': form.tiempoEstimado.$valid && form.tiempoEstimado.$dirty, 'has-error': form.tiempoEstimado.$invalid && (form.tiempoEstimado.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Tiempo estimado" name="tiempoEstimado" type="number" value="" ng-model="currentRecord.tiempoEstimado">
+                                                <input class="form-control" placeholder="Tiempo estimado" name="tiempoEstimado" type="number" value="" ng-model="pedidoRecord.tiempoEstimado">
                                             </div>
                                             <div class="form-group" ng-class="{'has-success': form.fechaEjecucion.$valid && form.fechaEjecucion.$dirty, 'has-error': form.fechaEjecucion.$invalid && (form.fechaEjecucion.$dirty || form.$submitted)}">
                                                 <input class="form-control" placeholder="Fecha" name="fechaEjecucion" type="text" ng-model="currentRecord.fechaEjecucion" autofocus>

@@ -4,7 +4,7 @@
         <div class="row">
             <h2 class="text-uppercase camposTitulo">Estado de las estaciones de vcubs</h2>
             <div class="col-md-8 wow fadeInLeft" data-wow-delay="0.6s" ng-controller="estacionVcubController as estacionVcubController">
-                <ul ng-repeat="estacionVcub in estacionVcubs | orderBy: 'capacidad'">
+                <ul ng-repeat="estacionVcub in estacionVcubs | orderBy: 'id'">
                     <li class="camposTexto" >
                         <b>Nombre:</b> {{estacionVcub.nombre}} <b>Cantidad:</b> {{estacionVcub.vcubs}} <b>Capacidad:</b> {{estacionVcub.capacidad}}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<button ng-if="estacionVcubController.calcularPorcentaje(estacionVcub)" class="btn btn-lg btn-success" ng-click="estacionVcubController.llenarEstacion(estacionVcub)"><i class="fa fa-bicycle"></i> Llenar estación</button>
                     </li>
