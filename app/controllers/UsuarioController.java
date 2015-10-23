@@ -10,6 +10,7 @@ import play.mvc.Result;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -63,8 +64,22 @@ public class UsuarioController {
 
     public Result solicitarMovibus(Long id) {
         Usuario usuario = (Usuario) new Model.Finder(Long.class, Usuario.class).byId(id);
-        List<Movibus> movibuses = Movibus.find.where().like("estado",""+Movibus.DISPONIBLE).findList();
-        List<Conductor> conductores = Conductor.find.where().like("estado",""+Conductor.DISPONIBLE).findList();
+        List<Movibus> movibu=new Model.Finder(Long.class, Movibus.class).all();
+        List<Movibus> movibuses=new ArrayList<Movibus>();
+        for(Movibus m:movibu){
+            if(m.getEstado()== Movibus.DISPONIBLE){
+                movibuses.add(m);
+            }
+        }
+
+        List<Conductor> conductors=new Model.Finder(Long.class, Conductor.class).all();
+        List<Conductor> conductores = new ArrayList<Conductor>();
+        for(Conductor c:conductors){
+            if(c.getEstado()== Conductor.DISPONIBLE){
+                conductores.add(c);
+            }
+        }
+
         JsonNode j = request().body().asJson();
         if(movibuses.isEmpty()||conductores.isEmpty()) {
             PedidoMovibusPendiente pedidoMovibusPendiente = null;
@@ -74,7 +89,12 @@ public class UsuarioController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return ok(Json.toJson(pedidoMovibusPendiente));
+            if(pedidoMovibusPendiente==null){
+                return ok(Json.toJson(usuario));
+            }
+            else {
+                return ok(Json.toJson(pedidoMovibusPendiente));
+            }
         }
         else {
             PedidoMovibus pedidoMovibus = new PedidoMovibus();
