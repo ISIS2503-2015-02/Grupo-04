@@ -39,16 +39,40 @@ public class Tranvia extends Model {
      */
     public final static int PROBLEMA=2;
 
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_A=0;
+
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_B=1;
+
+    /**
+     * Constante que representa la linea
+     */
+    public final static int LINEA_C=2;
+
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
 
+    /**
+     * id universal del tranvia
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Latitud en la que se encuentra el tranvia
+     */
     private Double latitud;
 
+    /**
+     * Longitud en la que se encuentra el tranvia
+     */
     private Double longitud;
 
     /**
@@ -61,34 +85,15 @@ public class Tranvia extends Model {
      */
     private int kilometraje;
 
-    //-----------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_A=0;
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_B=1;
-    
-    /**
-     * Constante que representa la linea 
-     */
-    public final static int LINEA_C=2;
-    
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
-    
     /**
      * Linea asignada al tranvia
      */
     private int linea;
-    
+
+    //-----------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------
+
     public Tranvia(Double latitud, Double longitud, int linea) {
         this.linea=linea;
         this.latitud=latitud;
@@ -97,34 +102,70 @@ public class Tranvia extends Model {
         kilometraje=0;
     }
 
+    //-----------------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------------
+
+    /**
+     * Metodo encargado de obtener el id del vehiculo
+     * @return id
+     */
     public Long getId(){ return id;}
 
+    /**
+     * Metodo encargado de cambiar el id del tranvia
+     * @param id
+     */
     public void setId(Long id){this.id=id;}
 
+    /**
+     * Metodo encargado de obtener el identificador de la linea del tranvia
+     * @return linea
+     */
     public int getLinea() {
         return linea;
     }
-    
+
+    /**
+     * Metodo encargado de cambiar el identificador de linea del tranvia
+     * @param linea
+     */
     public void setLinea(int linea) {
         this.linea=linea;
     }
 
+    /**
+     * Metodo encargado de obtener la latitud actual del tranvia
+     * @return latitud
+     */
     public Double getLatitud() {
         return latitud;
     }
 
+    /**
+     * Metodo encargado de cambiar la latitud del tranvia
+     * @param latitud
+     */
     public void setLatitud(Double latitud) {
         this.latitud=latitud;
     }
 
+    /**
+     * Metodo encargado de obtener la longitud actual del tranvia
+     * @return longitud
+     */
     public Double getLongitud() { return longitud; }
 
+    /**
+     * Metodo encargado de cambiar el longitud del tranvia
+     * @param longitud
+     */
     public void setLongitud(Double longitud) {
         this.longitud=longitud;
     }
 
     /**
-     * Metodo encargado de obtener el estado del vehiculo
+     * Metodo encargado de obtener el estado del tranvia
      * @return estado
      */
     public int getEstado() {
@@ -132,7 +173,7 @@ public class Tranvia extends Model {
     }
 
     /**
-     * Metodo encargado de cambiar el estado del vehiculo
+     * Metodo encargado de cambiar el estado del tranvia
      * @param estado
      */
     public void setEstado(int estado) {
@@ -140,7 +181,7 @@ public class Tranvia extends Model {
     }
 
     /**
-     * Metodo encargado de cambiar el kilometraje del vehiculo
+     * Metodo encargado de cambiar el kilometraje del tranvia
      * @param kilometraje
      */
     public void setKilometraje(int kilometraje) {
@@ -148,7 +189,7 @@ public class Tranvia extends Model {
     }
 
     /**
-     * Metodo encargado de obtener el kilometraje del vehiculo
+     * Metodo encargado de obtener el kilometraje del tranvia
      * @return kilometraje
      */
     public int getKilometraje() {
@@ -156,7 +197,7 @@ public class Tranvia extends Model {
     }
 
     /**
-     * Metodo encargado de registrar la revision de un vehiculo
+     * Metodo encargado de registrar la revision de un tranvia
      */
     public void revisarVehiculo() {
         kilometraje=0;

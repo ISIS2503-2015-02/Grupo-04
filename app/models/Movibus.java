@@ -43,15 +43,22 @@ public class Movibus extends Model {
     // Atributos
     //-----------------------------------------------------------
 
+    /**
+     * Id unico del movibus
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Latitud en la que se encuentra el movibus
+     */
     private Double latitud;
 
+    /**
+     * Longitud en la que se encuentra el movibus
+     */
     private Double longitud;
-
-    public static Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
 
     /**
      * Estado del vehiculo
@@ -62,7 +69,17 @@ public class Movibus extends Model {
      * Kilometraje del vehiculo transcurrido desde revision
      */
     private int kilometraje;
-    
+
+    //-------------------------------------------------------
+    // WTF
+    //-------------------------------------------------------
+
+    public static Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
+
+    //-------------------------------------------------------
+    // Constructor
+    //-------------------------------------------------------
+
     public Movibus(Double latitud, Double longitud) {
         this.latitud=latitud;
         this.longitud=longitud;
@@ -70,24 +87,52 @@ public class Movibus extends Model {
         kilometraje=0;
     }
 
+    //-------------------------------------------------------
+    // Metodos
+    //-------------------------------------------------------
+
+    /**
+     * Metodo encargado de obtener el id unico del vehiculo
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Metodo encargado de cambiar el id del vehiculo
+     * @param id
+     */
     public void setId(Long id) {
         this.id=id;
     }
 
+    /**
+     * Metodo encargado de obtener la latitud del vehiculo
+     * @return latitud
+     */
     public Double getLatitud() {
         return latitud;
     }
 
+    /**
+     * Metodo encargado de cambiar la latitud del vehiculo
+     * @param latitud
+     */
     public void setLatitud(Double latitud) {
         this.latitud=latitud;
     }
 
+    /**
+     * Metodo encargado de obtener la longitud del vehiculo
+     * @return longitud
+     */
     public Double getLongitud() { return longitud; }
 
+    /**
+     * Metodo encargado de cambiar la longitud del vehiculo
+     * @param longitud
+     */
     public void setLongitud(Double longitud) {
         this.longitud=longitud;
     }
@@ -116,6 +161,10 @@ public class Movibus extends Model {
         return kilometraje;
     }
 
+    /**
+     * Metodo encargado de cambiar el valor de kilometraje del vehiculo
+     * @param kilometraje
+     */
     public void setKilometraje(int kilometraje) {this.kilometraje=kilometraje;}
 
     /**
@@ -125,6 +174,9 @@ public class Movibus extends Model {
         kilometraje=0;
     }
 
+    /**
+     * Metodo encargado de cambiar el estado del movibus despues de crearse una reserva del vehiculo
+     */
     public void reservarMovibus(PedidoMovibus pedidoMovibus) {
         this.estado=OCUPADO;
     }

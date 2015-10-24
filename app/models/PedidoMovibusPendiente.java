@@ -8,6 +8,10 @@ import java.util.Date;
 
 @Entity
 public class PedidoMovibusPendiente extends Model {
+
+    //-----------------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,19 +19,44 @@ public class PedidoMovibusPendiente extends Model {
     @ManyToOne
     private Usuario usuario;
 
+    /**
+     * Fecha en la que se genero el pedido
+     */
     private Date fechaPedido;
 
+    /**
+     * Fecha en la que se quiere que se recoja al usuario del pedido
+     */
     private Date fechaEjecucion;
 
+    /**
+     * Latitud en la que se quiere recoger al usuario
+     */
     private Double latitudUsuario;
 
+    /**
+     * Longitud en la que se quiere recoger al usuario
+     */
     private Double longitudUsuario;
 
+    /**
+     * Latitud a la que se quiere llevar al usuario
+     */
     private Double latitudDestino;
 
+    /**
+     * Longitud a la que se quiere  llevar al usuario
+     */
     private Double longitudDestino;
 
+    /**
+     * Tiempo estimado que va a tomar en realizarse el viaje del pedido
+     */
     private int tiempoEstimado;
+
+    //-----------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------
 
     public PedidoMovibusPendiente(Usuario usuario,Date fechaPedido,Date fechaEjecucion,Double latitudUsuario,Double longitudUsuario,Double latitudDestino,Double longitudDestino,int tiempoEstimado) {
         this.usuario=usuario;
@@ -39,6 +68,10 @@ public class PedidoMovibusPendiente extends Model {
         this.longitudDestino=longitudDestino;
         this.tiempoEstimado=tiempoEstimado;
     }
+
+    //-----------------------------------------------------------
+    // Metodos (todos son getters and setters)
+    //-----------------------------------------------------------
 
     public Long getId() {
         return id;
