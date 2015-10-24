@@ -5,11 +5,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Movibus;
 import models.Reporte;
+import org.owasp.StringEnvelope;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import static play.mvc.Controller.request;
@@ -56,6 +64,32 @@ public class MovibusController {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
+    public Result posicion() {
+
+        JsonNode j = Controller.request().body().asJson();
+        String coded=j.findPath("envelop").asString();
+        j = desEnvolver(coded);
+
+        Long id = j.getLong("id");
+        Long lat = j.getLong("latitud");
+        Long log = j.getLong("longitud");
+        Double lat2 = new Double(lat);
+        Double log2 = new Double(lat);
+        Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
+        ObjectNode result = Json.newObject();
+        if(movibusViejo == null)
+            return ok(Json.toJson(result));
+        else {
+            Movibus movibusNuevo = movibusViejo;
+            movibusNuevo.setLatitud(lat2);
+            movibusNuevo.setLongitud(log2);
+            movibusViejo.update(movibusNuevo);
+            movibusViejo.save();
+            return ok(Json.toJson(movibusViejo));
+        }
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
     public Result reportarAccidente(Long id) {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
@@ -92,5 +126,40 @@ public class MovibusController {
         else {
             return ok("Robo");
         }
+    }
+
+    public JsonNode desEnvolver(String crypted)
+    {
+        JsonNode plaintext="";
+        StringEnvelope env = new StringEnvelope();
+        try {
+            plaintext = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c").asJson();
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        }
+        return plaintext;
     }
 }

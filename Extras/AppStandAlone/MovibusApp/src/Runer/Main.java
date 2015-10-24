@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +24,7 @@ public class Main  extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
-	MovibusLogic logic;
+	static MovibusLogic logic;
 	PedidoMovibusLogic logic2;
 	JPanel everything;
 	JPanel buts;
@@ -131,7 +132,8 @@ public class Main  extends JFrame implements ActionListener{
 
 	public static void main(String[] args){
 		Main main = new Main();
-		
+		EnviPos envi = new EnviPos(logic);
+		envi.start();		
 	}
 
 	@Override
@@ -271,5 +273,27 @@ public class Main  extends JFrame implements ActionListener{
 
 	}
 
+
+final static class EnviPos extends Thread{
+	private static MovibusLogic logic3;
+	public EnviPos(MovibusLogic logics){
+		this.logic3  = logics;
+	}
+	
+	public void run(){
+		Date d = new Date();
+		while(true){
+			Date c = new Date();
+			if((c.getTime()-d.getTime())>5000){
+				d=c;
+				try {
+					logic3.reportePosicion();
+					System.out.println("Envio Posicion");
+				} catch (Exception e) {
+				}
+			}
+		}
+	}
+}
 }
 
