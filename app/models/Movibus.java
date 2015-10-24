@@ -7,11 +7,19 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.owasp.StringEnvelope;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Clase que representa un movibus en el sistema
@@ -172,6 +180,32 @@ public class Movibus extends Model {
      */
     public void revisarVehiculo() {
         kilometraje=0;
+    }
+
+    public String deseEnvolver(String crypted)
+    {
+        String plaintext="";
+        StringEnvelope env = new StringEnvelope();
+        try {
+            plaintext = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c");
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Decryption failed: " + e);} catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        return plaintext;
     }
 
     /**
