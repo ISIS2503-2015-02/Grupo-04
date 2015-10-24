@@ -24,7 +24,10 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.crypto.KeyGenerator;
+
 import org.json.JSONObject;
+import org.owasp.StringEnvelope;
 
 import Persistence.MovibusSerializable;
 import Security.Security;
@@ -115,9 +118,11 @@ public class MovibusLogic {
 			movRepPos.put("longitud",posLon);
 			movRepPos.put("latitud", posLat);
 			
+			StringEnvelope env = new StringEnvelope();
+			String cipherText = env.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
 			JSONObject movRepPos2   = new JSONObject();
 			
-			movRepPos2.put("thisIsit", movRepPos);
+			movRepPos2.put("envelop", movRepPos);
 
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 			wr.write(movRepPos.toString());

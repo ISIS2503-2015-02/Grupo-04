@@ -59,7 +59,6 @@ public class Main  extends JFrame implements ActionListener{
 
 	public Main(){
 		logic = new MovibusLogic();
-		logic.getPLlave();
 		JOptionPane.showMessageDialog( this, logic.serverPublicKey , "Llave Publica del server", JOptionPane.INFORMATION_MESSAGE );
 		logic2 = new PedidoMovibusLogic();
 		this.setSize(500, 700);
