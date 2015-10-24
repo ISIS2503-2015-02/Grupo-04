@@ -6,7 +6,7 @@
     mainApp.directive('toolbar', function(){
         return{
             restrict:'E',
-            templateUrl: 'partials/userToolbar.html',
+            templateUrl: 'partials/toolbar.html',
             controller:function(){
                 this.tab=0;
                 this.selectTab=function(setTab){
@@ -17,6 +17,22 @@
                 };
             },
             controllerAs:'toolbar'
+        };
+    });
+    mainApp.directive('adminToolbar', function(){
+        return{
+            restrict:'E',
+            templateUrl: 'partials/adminToolbar.html',
+            controller:function(){
+                this.tab=0;
+                this.selectTab=function(setTab){
+                    this.tab=setTab;
+                };
+                this.isSelected=function(tabParam){
+                    return this.tab===tabParam;
+                };
+            },
+            controllerAs:'adminToolbar'
         };
     });
     mainApp.directive("tranvia",function(){
@@ -139,7 +155,7 @@
                  usuario=data.id;
                  alert("El usuario a sido creado");
              }).error(function(data, status, headers, config) {
-                 alert(data);
+                 document.write(usuario+"  "+data);
             });
         };
         this.hacerPedido = function () {
