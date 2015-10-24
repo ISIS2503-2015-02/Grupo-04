@@ -75,7 +75,7 @@ GET       /pedidoMovibusPendiente                           controllers.PedidoMo
 
 GET       /pedidoMovibusPendiente/:id                       controllers.PedidoMovibusController.getPendiente(id : Long)
 
-POST      /pedidoMovibus/reportarPedidoTerminado            controller.PedidoMovibusController.reportarPedidoTerminado()
+POST      /pedidoMovibus/reportarPedidoTerminado            controllers.PedidoMovibusController.reportarPedidoTerminado()
 
 #POST     /pedidoMovibus/:id/reportarPedidoTerminado/:tempr        controllers.PedidoMovibusController.reportarPedidoTerminado(id : Long, tempr : Long)
 

@@ -67,22 +67,20 @@ public class MovibusController {
     public Result posicion() {
 
         JsonNode j = Controller.request().body().asJson();
-        String coded=j.findPath("envelop").asString();
+        String coded=j.findPath("envelop").asText();
         j = desEnvolver(coded);
 
-        Long id = j.getLong("id");
-        Long lat = j.getLong("latitud");
-        Long log = j.getLong("longitud");
-        Double lat2 = new Double(lat);
-        Double log2 = new Double(lat);
+        Double id = j.findPath("id").asDouble();
+        Double lat = j.findPath("latitud").asDouble();
+        Double log = j.findPath("longitud").asDouble();
         Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
         ObjectNode result = Json.newObject();
         if(movibusViejo == null)
             return ok(Json.toJson(result));
         else {
             Movibus movibusNuevo = movibusViejo;
-            movibusNuevo.setLatitud(lat2);
-            movibusNuevo.setLongitud(log2);
+            movibusNuevo.setLatitud(lat);
+            movibusNuevo.setLongitud(log);
             movibusViejo.update(movibusNuevo);
             movibusViejo.save();
             return ok(Json.toJson(movibusViejo));
@@ -130,10 +128,11 @@ public class MovibusController {
 
     public JsonNode desEnvolver(String crypted)
     {
-        JsonNode plaintext="";
+        JsonNode plaintext;
+        String text="";
         StringEnvelope env = new StringEnvelope();
         try {
-            plaintext = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c").asJson();
+            text = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c");
         }
         catch(IllegalArgumentException e){
             System.out.println("Decryption failed: " + e);
@@ -160,6 +159,10 @@ public class MovibusController {
             System.out.println("Decryption failed: " + e);
             e.printStackTrace();
         }
+        ObjectMapper mapper = new ObjectMapper();
+        JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
+        JsonParser jp = factory.createJsonParser(text);
+        plaintext = mapper.readTree(jp);
         return plaintext;
     }
 }
