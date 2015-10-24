@@ -22,7 +22,7 @@
     mainApp.directive("tranvia",function(){
         return{
             restrict:'E',
-            templateUrl:'modules/modules/tranvia/tranvia.html',
+            templateUrl:'partials/tranvia.html',
             controller: 'tranviaController'
         }
     });
@@ -40,7 +40,7 @@
     mainApp.directive("vcubs",function(){
         return{
             restrict:'E',
-            templateUrl:'modules/modules/estacionVcub/estacionVcub.html',
+            templateUrl:'partials/estacionVcub.html',
             controller: 'estacionVcubController'
         }
     });
@@ -80,7 +80,7 @@
     mainApp.directive("movibus",function(){
         return{
             restrict:'E',
-            templateUrl:'modules/modules/movibus/movibus.html',
+            templateUrl:'partials/movibus.html',
             controller: 'movibusController'
         }
     });
@@ -105,7 +105,7 @@
     mainApp.directive("estadisticas",function(){
         return{
             restrict:'E',
-            templateUrl:'modules/modules/estadisticas/estadisticas.html',
+            templateUrl:'partials/estadisticas.html',
             controller: 'estadisticasController'
         }
     });
