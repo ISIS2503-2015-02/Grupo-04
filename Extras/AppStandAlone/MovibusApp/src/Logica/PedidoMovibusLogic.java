@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.json.*;
+import org.owasp.StringEnvelope;
 
 import Persistence.ConductorSerializable;
 import Persistence.MovibusSerializable;
@@ -39,7 +41,6 @@ public class PedidoMovibusLogic {
 			} catch (IOException e1) {
 				System.out.println(e1.getMessage());
 			}
-			getPedidoMovibus();
 			System.out.println(e.getMessage());
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -50,9 +51,14 @@ public class PedidoMovibusLogic {
 		return data.getId();
 	}
 	
-	public void getPedidoMovibus(){
+	public PedidoMovibusSerializable getPedido()
+	{
+		return data;
+	}
+	
+	public void getPedidoMovibus(Long long1){
 		try{
-			URL url = new URL("http://172.24.100.49:9000/movibus");
+			URL url = new URL("http://172.24.100.49:9000/pedidoMovibus/"+long1+"/byMovibus");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
@@ -158,13 +164,29 @@ public class PedidoMovibusLogic {
 	}
 	
 	public String reportarTerminacion(int tempR) throws Exception{
+		Long tem = new Long(tempR);
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.49:9000//pedidoMovibus/"+data.getId()+"/reportarPedidoTerminado/"+tempR);
+			URL url = new URL("http://172.24.100.49:9000/pedidoMovibus/reportarPedidoTerminado");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
-			conn.setRequestMethod("PUT");
+			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Accept", "application/json");
+			
+			JSONObject movRepPos   = new JSONObject();
+
+			movRepPos.put("id", data.getId());
+			movRepPos.put("tiempo",tem);
+			
+			StringEnvelope env = new StringEnvelope();
+			String cipherText = env.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
+			JSONObject movRepPos2   = new JSONObject();
+			
+			movRepPos2.put("envelop", movRepPos);
+
+			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			wr.write(movRepPos2.toString());
+			wr.flush();
 			
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;

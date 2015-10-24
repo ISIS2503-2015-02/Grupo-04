@@ -15,8 +15,14 @@ import java.util.LinkedList;
 @Entity
 public class PedidoMovibus extends Model{
 
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
     public final static int DISTANCIA_MAXIMA=10000;
 
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -46,6 +52,10 @@ public class PedidoMovibus extends Model{
 
     private Double longitudDestino;
 
+    //-----------------------------------------------------------
+    // Constantes
+    //-----------------------------------------------------------
+
     public PedidoMovibus() {
         fechaPedido=new Date();
         fechaEjecucion=null;
@@ -58,6 +68,10 @@ public class PedidoMovibus extends Model{
         latitudDestino=null;
         longitudDestino=null;
     }
+
+    //-----------------------------------------------------------
+    // Metodos (todos son getters and setters excepto el ultimo que es una especie de constructor de nuevos pedidos)
+    //-----------------------------------------------------------
 
     public Long getId() {
         return id;
