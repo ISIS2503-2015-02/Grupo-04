@@ -39,7 +39,6 @@ public class PedidoMovibusLogic {
 			} catch (IOException e1) {
 				System.out.println(e1.getMessage());
 			}
-			getPedidoMovibus();
 			System.out.println(e.getMessage());
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -50,9 +49,14 @@ public class PedidoMovibusLogic {
 		return data.getId();
 	}
 	
-	public void getPedidoMovibus(){
+	public PedidoMovibusSerializable getPedido()
+	{
+		return data;
+	}
+	
+	public void getPedidoMovibus(Long long1){
 		try{
-			URL url = new URL("http://172.24.100.49:9000/movibus");
+			URL url = new URL("http://172.24.100.49:9000/pedidoMovibus/"+long1+"/byMovibus");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
@@ -158,9 +162,10 @@ public class PedidoMovibusLogic {
 	}
 	
 	public String reportarTerminacion(int tempR) throws Exception{
+		Long tem = new Long(tempR);
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.49:9000//pedidoMovibus/"+data.getId()+"/reportarPedidoTerminado/"+tempR);
+			URL url = new URL("http://172.24.100.49:9000//pedidoMovibus/"+data.getId()+"/reportarPedidoTerminado/"+tem);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
