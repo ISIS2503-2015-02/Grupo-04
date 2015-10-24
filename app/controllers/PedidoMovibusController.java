@@ -1,5 +1,6 @@
 package controllers;
 
+import org.owasp.StringEnvelope;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -49,9 +50,13 @@ public class PedidoMovibusController {
         }
     }
 
-    public Result reportarPedidoTerminado(Long id, int tmpr) {
+    public Result reportarPedidoTerminado() {
         JsonNode j = request().body().asJson();
-        int tiempoReal=j.findPath("tiempoReal").asInt();
+        String coded=j.findPath("envelop").asString();
+        StringEnvelope env = new StringEnvelope();
+        JsonNode fin = env.unwrap(coded, "aa09cee77e1d606d5ab06500ac95729c").asJson();
+        Long id = new Long(fin.findPath("id").asInt());
+        int tiempoReal = fin.findPath("tiempo").asInt();
         PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
         pedidoMovibus.setTiempoReal(tiempoReal);
         List<PedidoMovibusPendiente> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibusPendiente.class).all();

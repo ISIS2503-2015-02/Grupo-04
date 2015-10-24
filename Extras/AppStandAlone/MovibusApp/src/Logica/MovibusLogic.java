@@ -100,7 +100,7 @@ public class MovibusLogic {
 		}
 	}
 	
-	public String reportePosicion(Double posLat, Double posLon) throws Exception{
+	public String reportePosicion() throws Exception{
 		String rta="";
 		try{
 			
@@ -115,8 +115,8 @@ public class MovibusLogic {
 			JSONObject movRepPos   = new JSONObject();
 
 			movRepPos.put("id", data.getId());
-			movRepPos.put("longitud",posLon);
-			movRepPos.put("latitud", posLat);
+			movRepPos.put("longitud",data.getPosicionLong());
+			movRepPos.put("latitud", data.getPosicionLat());
 			
 			StringEnvelope env = new StringEnvelope();
 			String cipherText = env.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
