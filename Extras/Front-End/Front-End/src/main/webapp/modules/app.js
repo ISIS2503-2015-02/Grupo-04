@@ -6,7 +6,7 @@
     mainApp.directive('toolbar', function(){
         return{
             restrict:'E',
-            templateUrl: 'partials/toolbar.html',
+            templateUrl: 'partials/userToolbar.html',
             controller:function(){
                 this.tab=0;
                 this.selectTab=function(setTab){
@@ -24,7 +24,7 @@
             restrict:'E',
             templateUrl:'partials/tranvia.html',
             controller: 'tranviaController'
-        }
+        };
     });
     mainApp.controller("tranviaController", function($http, $scope) {
         
@@ -42,7 +42,7 @@
             restrict:'E',
             templateUrl:'partials/estacionVcub.html',
             controller: 'estacionVcubController'
-        }
+        };
     });
     mainApp.controller("estacionVcubController", function($http, $scope) {
         
@@ -82,7 +82,7 @@
             restrict:'E',
             templateUrl:'partials/movibus.html',
             controller: 'movibusController'
-        }
+        };
     });
     mainApp.controller("movibusController", function($http, $scope) {
         
@@ -107,7 +107,7 @@
             restrict:'E',
             templateUrl:'partials/estadisticas.html',
             controller: 'estadisticasController'
-        }
+        };
     });
     mainApp.controller("estadisticasController", function($http, $scope) {
         $http.get('http://localhost:9000/conductor/get/mejorDesempenio').
