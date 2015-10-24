@@ -22,6 +22,7 @@ import java.util.List;
 
 import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
+import org.json.*;
 
 public class MovibusController {
 
@@ -67,14 +68,13 @@ public class MovibusController {
     public Result posicion() {
 
         JsonNode j = Controller.request().body().asJson();
-        String coded=j.findPath("envelop").asString();
-        j = desEnvolver(coded);
-
-        Long id = j.getLong("id");
-        Long lat = j.getLong("latitud");
-        Long log = j.getLong("longitud");
+        String coded=j.findPath("envelop").asText();
+        JSONObject decoded = desEnvolver(coded);
+        Long id = decoded.getLong("id");
+        Long lat = decoded.getLong("latitud");
+        Long log = decoded.getLong("longitud");
         Double lat2 = new Double(lat);
-        Double log2 = new Double(lat);
+        Double log2 = new Double(log);
         Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
         ObjectNode result = Json.newObject();
         if(movibusViejo == null)
@@ -128,12 +128,12 @@ public class MovibusController {
         }
     }
 
-    public JsonNode desEnvolver(String crypted)
+    public JSONObject desEnvolver(String crypted)
     {
-        JsonNode plaintext="";
+        JSONObject plaintext = null;
         StringEnvelope env = new StringEnvelope();
         try {
-            plaintext = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c").asJson();
+            plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
             System.out.println("Decryption failed: " + e);

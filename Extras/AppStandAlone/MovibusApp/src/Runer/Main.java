@@ -59,8 +59,7 @@ public class Main  extends JFrame implements ActionListener{
 	JButton refill;
 
 	public Main(){
-		logic = new MovibusLogic();
-		JOptionPane.showMessageDialog( this, logic.serverPublicKey , "Llave Publica del server", JOptionPane.INFORMATION_MESSAGE );
+//		logic = new MovibusLogic();
 		logic2 = new PedidoMovibusLogic();
 		this.setSize(500, 700);
 		this.setResizable(false);
@@ -131,9 +130,10 @@ public class Main  extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		Main main = new Main();
+		logic = new MovibusLogic();
 		EnviPos envi = new EnviPos(logic);
-		envi.start();		
+		envi.start();
+		Main main = new Main();		
 	}
 
 	@Override
@@ -290,6 +290,8 @@ final static class EnviPos extends Thread{
 					logic3.reportePosicion();
 					System.out.println("Envio Posicion");
 				} catch (Exception e) {
+					System.out.println(e);
+					e.printStackTrace();
 				}
 			}
 		}
