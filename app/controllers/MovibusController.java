@@ -69,12 +69,7 @@ public class MovibusController {
 
         JsonNode j = Controller.request().body().asJson();
         String coded=j.findPath("envelop").asText();
-<<<<<<< HEAD
-        j = desEnvolver(coded);
-
-=======
         JSONObject decoded = desEnvolver(coded);
->>>>>>> origin/master
         Long id = decoded.getLong("id");
         Long lat = decoded.getLong("latitud");
         Long log = decoded.getLong("longitud");
