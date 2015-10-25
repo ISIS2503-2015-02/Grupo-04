@@ -17,6 +17,8 @@ POST      /movibus/:id/reportarAccidente                    controllers.MovibusC
 
 GET       /movibus/get/accidenteMasComun                    controllers.MovibusController.getAccidenteMasComun()
 
+POST      /movibus/posicion                                 controllers.MovibusController.posicion()
+
 POST      /usuario                                          controllers.UsuarioController.create()
 
 GET       /usuario                                          controllers.UsuarioController.read()

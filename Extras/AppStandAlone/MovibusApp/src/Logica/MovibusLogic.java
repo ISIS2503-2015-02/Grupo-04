@@ -103,8 +103,12 @@ public class MovibusLogic {
 	public String reportePosicion() throws Exception{
 		String rta="";
 		try{
-			
-			URL url = new URL("http://172.24.100.49:9000/movibus/posicion");
+			data = new MovibusSerializable();
+			data.setId(new Long(01));
+			data.setKilometraje(123);
+			data.setPosicionLat(12123.0);
+			data.setPosicionLong(123543.0);
+			URL url = new URL("http://172.24.100.35:9000/movibus/posicion");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -130,6 +134,7 @@ public class MovibusLogic {
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
+			e.printStackTrace();
 			throw e;
 		}
 	}

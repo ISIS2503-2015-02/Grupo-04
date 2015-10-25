@@ -2,9 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a378a6d-c0d9-4e74-9b0b-5c2159e48fee" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/SAD.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/data/data" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/partials/adminToolbar.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/administrador.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/customs.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/salir.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/usuario.html" />
+      <change type="DELETED" beforePath="C:\Users\template\Documents\GitHub\Grupo-04\Extras\Documentación de Arquitectura.pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\template\Documents\GitHub\Grupo-04\Extras\Front-End\Front-End\src\main\webapp\estadisticas.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/Runer/Main.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/Runer/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/Logica/MovibusLogic.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/Logica/MovibusLogic.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/evolutions/default/1.sql" afterPath="$PROJECT_DIR$/conf/evolutions/default/1.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/Runer/Main.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/Runer/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MovibusController.java" afterPath="$PROJECT_DIR$/app/controllers/MovibusController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/Logica/MovibusLogic.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/Logica/MovibusLogic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" afterPath="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/modules/app.js" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/modules/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/application.conf" afterPath="$PROJECT_DIR$/conf/application.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/index.html" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End/Front-End/pom.xml" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/routes" afterPath="$PROJECT_DIR$/conf/routes" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/WEB-INF/shiro.ini" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/WEB-INF/shiro.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/partials/toolbar.html" afterPath="$PROJECT_DIR$/Extras/Front-End/Front-End/src/main/webapp/partials/toolbar.html" />
     </list>
     <ignored path="Yammz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovibusController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MovibusController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/MovibusController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="70" selection-end-column="31" />
+            <state vertical-scroll-proportion="1.1108695">
+              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PedidoMovibusController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PedidoMovibusController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/PedidoMovibusController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2423913">
-              <caret line="120" column="54" selection-start-line="120" selection-start-column="54" selection-end-line="120" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="116" column="58" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -134,8 +155,8 @@
         <option value="$PROJECT_DIR$/app/models/EstacionVcub.java" />
         <option value="$PROJECT_DIR$/conf/application.conf" />
         <option value="$PROJECT_DIR$/conf/routes" />
-        <option value="$PROJECT_DIR$/app/controllers/MovibusController.java" />
         <option value="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" />
+        <option value="$PROJECT_DIR$/app/controllers/MovibusController.java" />
       </list>
     </option>
   </component>
@@ -171,7 +192,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -270,7 +291,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -668,7 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -718,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -768,7 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="41" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,7 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -892,20 +909,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/MovibusController.java">
+    <entry file="file://$PROJECT_DIR$/app/controllers/PedidoMovibusController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="70" selection-end-column="31" />
+          <caret line="116" column="58" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/PedidoMovibusController.java">
+    <entry file="file://$PROJECT_DIR$/app/controllers/MovibusController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2423913">
-          <caret line="120" column="54" selection-start-line="120" selection-start-column="54" selection-end-line="120" selection-end-column="54" />
+        <state vertical-scroll-proportion="1.1108695">
+          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

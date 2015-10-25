@@ -19,12 +19,28 @@
             controllerAs:'toolbar'
         };
     });
+    mainApp.directive('adminToolbar', function(){
+        return{
+            restrict:'E',
+            templateUrl: 'partials/adminToolbar.html',
+            controller:function(){
+                this.tab=0;
+                this.selectTab=function(setTab){
+                    this.tab=setTab;
+                };
+                this.isSelected=function(tabParam){
+                    return this.tab===tabParam;
+                };
+            },
+            controllerAs:'adminToolbar'
+        };
+    });
     mainApp.directive("tranvia",function(){
         return{
             restrict:'E',
             templateUrl:'partials/tranvia.html',
             controller: 'tranviaController'
-        }
+        };
     });
     mainApp.controller("tranviaController", function($http, $scope) {
         
@@ -42,7 +58,7 @@
             restrict:'E',
             templateUrl:'partials/estacionVcub.html',
             controller: 'estacionVcubController'
-        }
+        };
     });
     mainApp.controller("estacionVcubController", function($http, $scope) {
         
@@ -82,7 +98,7 @@
             restrict:'E',
             templateUrl:'partials/movibus.html',
             controller: 'movibusController'
-        }
+        };
     });
     mainApp.controller("movibusController", function($http, $scope) {
         
@@ -107,7 +123,7 @@
             restrict:'E',
             templateUrl:'partials/estadisticas.html',
             controller: 'estadisticasController'
-        }
+        };
     });
     mainApp.controller("estadisticasController", function($http, $scope) {
         $http.get('http://localhost:9000/conductor/get/mejorDesempenio').
@@ -139,7 +155,7 @@
                  usuario=data.id;
                  alert("El usuario a sido creado");
              }).error(function(data, status, headers, config) {
-                 alert(data);
+                 document.write(usuario+"  "+data);
             });
         };
         this.hacerPedido = function () {

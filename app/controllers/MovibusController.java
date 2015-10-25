@@ -22,6 +22,7 @@ import java.util.List;
 
 import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
+import org.json.*;
 
 public class MovibusController {
 
@@ -68,8 +69,12 @@ public class MovibusController {
 
         JsonNode j = Controller.request().body().asJson();
         String coded=j.findPath("envelop").asText();
+<<<<<<< HEAD
         j = desEnvolver(coded);
 
+=======
+        JSONObject decoded = desEnvolver(coded);
+>>>>>>> origin/master
         Long id = decoded.getLong("id");
         Long lat = decoded.getLong("latitud");
         Long log = decoded.getLong("longitud");
@@ -128,13 +133,12 @@ public class MovibusController {
         }
     }
 
-    public JsonNode desEnvolver(String crypted)
+    public JSONObject desEnvolver(String crypted)
     {
-        JsonNode plaintext;
-        String text="";
+        JSONObject plaintext = null;
         StringEnvelope env = new StringEnvelope();
         try {
-            text = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c");
+            plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
             System.out.println("Decryption failed: " + e);
