@@ -11,6 +11,13 @@ import models.PedidoMovibusPendiente;
 import play.libs.Json;
 import play.mvc.Result;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -53,10 +60,9 @@ public class PedidoMovibusController {
     public Result reportarPedidoTerminado() {
         JsonNode j = request().body().asJson();
         String coded=j.findPath("envelop").asString();
-        StringEnvelope env = new StringEnvelope();
-        JsonNode fin = env.unwrap(coded, "aa09cee77e1d606d5ab06500ac95729c").asJson();
-        Long id = new Long(fin.findPath("id").asInt());
-        int tiempoReal = fin.findPath("tiempo").asInt();
+        JsonNode fin = desEnvolver(coded);
+        Long id = fin.getLong("id");
+        int tiempoReal = fin.getInt("tiempo");
         PedidoMovibus pedidoMovibus = (PedidoMovibus) new Model.Finder(Long.class, PedidoMovibus.class).byId(id);
         pedidoMovibus.setTiempoReal(tiempoReal);
         List<PedidoMovibusPendiente> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibusPendiente.class).all();
@@ -110,7 +116,11 @@ public class PedidoMovibusController {
         }
     }
 
-    public Result getPedidoByMovibus(Long id) {
+    public Result getPedidoByMovibus() {
+        JsonNode j = request().body().asJson();
+        String coded=j.findPath("envelop").asString();
+        JsonNode fin = desEnvolver(coded);
+        Long id = fin.getLong("id");
         List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
         while(pedidoMovibusIterator.hasNext()) {
@@ -120,5 +130,44 @@ public class PedidoMovibusController {
             }
         }
         return ok(Json.toJson(Json.newObject()));
+    }
+    public JsonNode desEnvolver(String crypted)
+    {
+        JsonNode plaintext;
+        String text="";
+        StringEnvelope env = new StringEnvelope();
+        try {
+            text = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c");
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
+        JsonParser jp = factory.createJsonParser(text);
+        plaintext = mapper.readTree(jp);
+        return plaintext;
     }
 }

@@ -70,17 +70,19 @@ public class MovibusController {
         String coded=j.findPath("envelop").asText();
         j = desEnvolver(coded);
 
-        Double id = j.findPath("id").asDouble();
-        Double lat = j.findPath("latitud").asDouble();
-        Double log = j.findPath("longitud").asDouble();
+        Long id = decoded.getLong("id");
+        Long lat = decoded.getLong("latitud");
+        Long log = decoded.getLong("longitud");
+        Double lat2 = new Double(lat);
+        Double log2 = new Double(log);
         Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
         ObjectNode result = Json.newObject();
         if(movibusViejo == null)
             return ok(Json.toJson(result));
         else {
             Movibus movibusNuevo = movibusViejo;
-            movibusNuevo.setLatitud(lat);
-            movibusNuevo.setLongitud(log);
+            movibusNuevo.setLatitud(lat2);
+            movibusNuevo.setLongitud(log2);
             movibusViejo.update(movibusNuevo);
             movibusViejo.save();
             return ok(Json.toJson(movibusViejo));
