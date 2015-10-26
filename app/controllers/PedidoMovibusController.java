@@ -12,6 +12,13 @@ import play.libs.Json;
 import play.mvc.Result;
 import org.json.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -115,7 +122,16 @@ public class PedidoMovibusController {
         }
     }
 
-    public Result getPedidoByMovibus(Long id) {
+    public Result getPedidoByMovibus() {
+        JsonNode j = request().body().asJson();
+        String coded=j.findPath("envelop").asText();
+        JSONObject fin = desEnvolver(coded);
+        Long id = null;
+        try{
+            id = fin.getLong("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
         while(pedidoMovibusIterator.hasNext()) {
@@ -125,5 +141,41 @@ public class PedidoMovibusController {
             }
         }
         return ok(Json.toJson(Json.newObject()));
+    }
+    public JSONObject desEnvolver(String crypted)
+    {
+        JSONObject plaintext = null;
+        StringEnvelope env = new StringEnvelope();
+        try {
+            plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return plaintext;
     }
 }
