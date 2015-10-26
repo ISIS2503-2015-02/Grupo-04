@@ -124,9 +124,14 @@ public class PedidoMovibusController {
 
     public Result getPedidoByMovibus() {
         JsonNode j = request().body().asJson();
-        String coded=j.findPath("envelop").asString();
-        JsonNode fin = desEnvolver(coded);
-        Long id = fin.getLong("id");
+        String coded=j.findPath("envelop").asText();
+        JSONObject fin = desEnvolver(coded);
+        Long id = null;
+        try{
+            id = fin.getLong("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
         while(pedidoMovibusIterator.hasNext()) {
@@ -137,13 +142,12 @@ public class PedidoMovibusController {
         }
         return ok(Json.toJson(Json.newObject()));
     }
-    public JsonNode desEnvolver(String crypted)
+    public JSONObject desEnvolver(String crypted)
     {
-        JsonNode plaintext;
-        String text="";
+        JSONObject plaintext = null;
         StringEnvelope env = new StringEnvelope();
         try {
-            text = env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c");
+            plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
             System.out.println("Decryption failed: " + e);
@@ -169,11 +173,9 @@ public class PedidoMovibusController {
         } catch (InvalidKeyException e) {
             System.out.println("Decryption failed: " + e);
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        ObjectMapper mapper = new ObjectMapper();
-        JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
-        JsonParser jp = factory.createJsonParser(text);
-        plaintext = mapper.readTree(jp);
         return plaintext;
     }
 }

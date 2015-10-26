@@ -69,15 +69,19 @@ public class MovibusController {
 
         JsonNode j = Controller.request().body().asJson();
         String coded=j.findPath("envelop").asText();
-<<<<<<< HEAD
-        j = desEnvolver(coded);
-
-=======
+        Long id = null;
+        Long lat = null;
+        Long log =null;
         JSONObject decoded = desEnvolver(coded);
->>>>>>> origin/master
-        Long id = decoded.getLong("id");
-        Long lat = decoded.getLong("latitud");
-        Long log = decoded.getLong("longitud");
+        try{
+        id = decoded.getLong("id");
+        lat = decoded.getLong("latitud");
+        log = decoded.getLong("longitud");}
+        catch(Exception e)
+        {
+            System.out.println("Decryption failed: " + e);
+            e.printStackTrace();
+        }
         Double lat2 = new Double(lat);
         Double log2 = new Double(log);
         Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
@@ -164,11 +168,9 @@ public class MovibusController {
         } catch (InvalidKeyException e) {
             System.out.println("Decryption failed: " + e);
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        ObjectMapper mapper = new ObjectMapper();
-        JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
-        JsonParser jp = factory.createJsonParser(text);
-        plaintext = mapper.readTree(jp);
         return plaintext;
     }
 }
