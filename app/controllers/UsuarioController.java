@@ -7,6 +7,7 @@ import models.*;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
+import org.owasp.StringEnvelope;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,17 +15,43 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import org.json.*;
+import java.security.MessageDigest;
 
 import static play.mvc.Controller.request;
-import static play.mvc.Results.ok;
-
+import static play.mvc.Results.*;
+import org.json.*;
 public class UsuarioController {
     @BodyParser.Of(BodyParser.Json.class)
     public Result create() {
         JsonNode j = request().body().asJson();
-        Usuario usuario = Json.fromJson(j, Usuario.class);
-        usuario.save();
-        return ok(Json.toJson(usuario));
+        JSONObject objct = new JSONObject(j.findPath("envio").asText());
+        String hash = objct.remove("hashContent").toString();
+        String toHash = objct.toString();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(toHash.getBytes());
+            byte hola [] = md.digest();
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < hola.length; i++) {
+                if ((0xff & hola[i]) < 0x10) {
+                    hexString.append("0" + Integer.toHexString((0xFF & hola[i])));
+                }
+                else {
+                    hexString.append(Integer.toHexString(0xFF & hola[i]));
+                }
+            }
+            if(hash.equals(hexString.toString()))
+            {
+                Usuario usuario = Json.fromJson(j, Usuario.class);
+                usuario.save();
+                return ok(Json.toJson(usuario));
+
+            }
+        }
+        catch(Exception e){return internalServerError(e.getMessage());}
+    return internalServerError("holySh");
+
     }
 
     public Result read() {
@@ -59,6 +86,28 @@ public class UsuarioController {
             return ok(Json.toJson("error:Usuario no registrado."));
         }else {
             return ok(Json.toJson(usuario));
+        }
+    }
+
+  /**
+     * Devuelve un usuario dado el correo y la clave.
+     * @param pCedula clave del usuario.
+     * @param pCorreo correo del usuario.
+     * @return JSon con loa informacion del usuario.
+     */
+    public boolean login(String pCorreo, int pCedula){
+        List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
+        Usuario usuario = null;
+        for(Usuario u:users){
+            if(u.getCorreo().equals(pCorreo) && u.getCedula()== pCedula)
+            {
+                usuario = u;
+            }
+        }
+        if(usuario == null){
+            return false;
+        }else {
+            return true;
         }
     }
 
