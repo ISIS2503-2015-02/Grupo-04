@@ -23,41 +23,54 @@ import static play.mvc.Results.*;
 import org.json.*;
 public class UsuarioController {
     @BodyParser.Of(BodyParser.Json.class)
-    public Result create() throws  Exception{
+    public Result create() {
         JsonNode j = request().body().asJson();
-        JSONObject objct = null;
-
-        objct = new JSONObject(j.findPath("envio3").asText());
-
-        Object hash = objct.remove("hashContent");
-        String toHash = hash.toString();
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(toHash.getBytes());
-            byte hola [] = md.digest();
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < hola.length; i++) {
-                if ((0xff & hola[i]) < 0x10) {
-                    hexString.append("0" + Integer.toHexString((0xFF & hola[i])));
-                }
-                else {
-                    hexString.append(Integer.toHexString(0xFF & hola[i]));
-                }
-            }
-            if(hash.equals(hexString.toString()))
-            {
-                Usuario usuario = Json.fromJson(j, Usuario.class);
-                usuario.save();
-                return ok(Json.toJson(usuario));
-
-
-            }
-        }
-        catch(Exception e){return internalServerError(e.getMessage());}
-    return internalServerError("holySh");
-
+        Usuario usuario = Json.fromJson(j, Usuario.class);
+        usuario.save();
+        return ok(Json.toJson(usuario));
     }
 
+
+//        Iterator<JsonNode> it = j.elements();
+//        int i=0;
+//        String res[]=new String[2];
+//        while(it.hasNext()){
+//            res[i]= it.next().asText();
+//            i++;
+//        }
+//        String hashEntry = new JSONObject(res[0]).getString("hashContent");
+
+        //hashEntry = (new JSONObject(j.findPath("envio1").asText())).getString("hashContent");
+
+
+//        JSONObject body = new JSONObject(res[1]);
+        //JSONObject body = new JSONObject(j.findPath("envio2").asText());
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("MD5");
+//            md.update(j.findPath("envio2").asText().getBytes());
+//            byte hola [] = md.digest();
+//            StringBuffer hexString = new StringBuffer();
+//            for (int k = 0; k < hola.length; k++) {
+//                if ((0xff & hola[k]) < 0x10) {
+//                    hexString.append("0" + Integer.toHexString((0xFF & hola[k])));
+//                }
+//                else {
+//                    hexString.append(Integer.toHexString(0xFF & hola[k]));
+//               }
+//            }
+//            if(hashEntry.equals(hexString.toString()))
+//            {
+//                Usuario usuario = Json.fromJson(j, Usuario.class);
+//                usuario.save();
+//                return ok(Json.toJson(usuario));
+
+
+//            }
+//        }
+//        catch(Exception e){return internalServerError(e.getMessage());}
+//        return internalServerError("holySh");
+
+ //   }
     public Result read() {
         List<Usuario> usuarios = new Model.Finder(Long.class, Usuario.class).all();
         return ok(Json.toJson(usuarios));
