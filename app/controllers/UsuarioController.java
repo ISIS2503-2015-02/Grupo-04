@@ -23,11 +23,14 @@ import static play.mvc.Results.*;
 import org.json.*;
 public class UsuarioController {
     @BodyParser.Of(BodyParser.Json.class)
-    public Result create() {
+    public Result create() throws  Exception{
         JsonNode j = request().body().asJson();
-        JSONObject objct = new JSONObject(j.findPath("envio").asText());
-        String hash = objct.remove("hashContent").toString();
-        String toHash = objct.toString();
+        JSONObject objct = null;
+
+        objct = new JSONObject(j.findPath("envio3").asText());
+
+        Object hash = objct.remove("hashContent");
+        String toHash = hash.toString();
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(toHash.getBytes());
@@ -46,6 +49,7 @@ public class UsuarioController {
                 Usuario usuario = Json.fromJson(j, Usuario.class);
                 usuario.save();
                 return ok(Json.toJson(usuario));
+
 
             }
         }

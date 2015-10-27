@@ -66,13 +66,20 @@ public class MovibusController {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result posicion() {
+         Long id = null;
+        Long lat = null;
+        Long log = null;
+
 
         JsonNode j = Controller.request().body().asJson();
         String coded=j.findPath("envelop").asText();
         JSONObject decoded = desEnvolver(coded);
-        Long id = decoded.getLong("id");
-        Long lat = decoded.getLong("latitud");
-        Long log = decoded.getLong("longitud");
+        try {
+             id = decoded.getLong("id");
+             lat = decoded.getLong("latitud");
+             log = decoded.getLong("longitud");
+        }
+        catch(Exception e){System.out.println("Decryption failed" + e);}
         Double lat2 = new Double(lat);
         Double log2 = new Double(log);
         Movibus movibusViejo = (Movibus) new Model.Finder(Long.class, Movibus.class).byId(id);
@@ -160,6 +167,10 @@ public class MovibusController {
             System.out.println("Decryption failed: " + e);
             e.printStackTrace();
         }
+     catch (Exception e) {
+        System.out.println("Decryption failed: " + e);
+        e.printStackTrace();
+    }
         return plaintext;
     }
 }
