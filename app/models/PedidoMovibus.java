@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.LinkedList;
+
 
 @Entity
 public class PedidoMovibus extends Model{
@@ -18,7 +18,7 @@ public class PedidoMovibus extends Model{
     //-----------------------------------------------------------
     // Constantes
     //-----------------------------------------------------------
-    public final static int DISTANCIA_MAXIMA=10000;
+    public static final int DISTANCIA_MAXIMA=10000;
 
     //-----------------------------------------------------------
     // Constantes

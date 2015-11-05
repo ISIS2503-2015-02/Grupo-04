@@ -121,11 +121,7 @@ public class UsuarioController {
                 usuario = u;
             }
         }
-        if(usuario == null){
-            return false;
-        }else {
-            return true;
-        }
+        return usuario == null;
     }
 
     public Result solicitarMovibus(Long id) {
@@ -153,7 +149,7 @@ public class UsuarioController {
                 pedidoMovibusPendiente = new PedidoMovibusPendiente(usuario,new Date(),new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()),j.findPath("latitudUsuario").asDouble(),j.findPath("longitudUsuario").asDouble(),j.findPath("latitudDestino").asDouble(),j.findPath("longitudDestino").asDouble(),j.findPath("tiempoEstimado").asInt());
                 pedidoMovibusPendiente.save();
             } catch (ParseException e) {
-                e.printStackTrace();
+                LOGGER.info(e);
             }
             if(pedidoMovibusPendiente==null){
                 return ok(Json.toJson(usuario));
@@ -184,7 +180,7 @@ public class UsuarioController {
             try {
                 pedidoMovibus.setFechaEjecucion(new SimpleDateFormat("yyyy-mm-dd").parse(j.findPath("fechaEjecucion").asText()));
             } catch (ParseException e) {
-                e.printStackTrace();
+                LOGGER.info(e);
             }
             pedidoMovibus.setLatitudUsuario(j.findPath("latitudUsuario").asDouble());
             pedidoMovibus.setLongitudUsuario(j.findPath("longitudUsuario").asDouble());

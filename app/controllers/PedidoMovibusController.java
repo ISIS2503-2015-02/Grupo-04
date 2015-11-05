@@ -118,6 +118,7 @@ public class PedidoMovibusController {
                 }
             }
         }catch(Exception e){
+            LOGGER.info(e);
             return internalServerError(e.getMessage());
         }
     }
@@ -130,7 +131,7 @@ public class PedidoMovibusController {
         try{
             id = fin.getLong("id");
         } catch (JSONException e) {
-            e.printStackTrace();
+            LOGGER.info(e);
         }
         List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
@@ -151,30 +152,30 @@ public class PedidoMovibusController {
         }
         catch(IllegalArgumentException e){
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (NoSuchPaddingException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (UnsupportedEncodingException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (InvalidAlgorithmParameterException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (IllegalBlockSizeException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (BadPaddingException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (InvalidKeyException e) {
             System.out.println("Decryption failed: " + e);
-            e.printStackTrace();
+            LOGGER.info(e);
         } catch (JSONException e) {
-            e.printStackTrace();
+            LOGGER.info(e);
         }
         return plaintext;
     }

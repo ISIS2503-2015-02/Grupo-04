@@ -27,32 +27,32 @@ public class Tranvia extends Model {
     /**
      * Constante que representa el estado ocupado
      */
-    public final static int OCUPADO=0;
+    public static final int OCUPADO=0;
 
     /**
      * Constante que representa el estado disponible
      */
-    public final static int DISPONIBLE=1;
+    public static final int DISPONIBLE=1;
 
     /**
      * Constante que representa el estado problema
      */
-    public final static int PROBLEMA=2;
+    public static final int PROBLEMA=2;
 
     /**
      * Constante que representa la linea
      */
-    public final static int LINEA_A=0;
+    public static final int LINEA_A=0;
 
     /**
      * Constante que representa la linea
      */
-    public final static int LINEA_B=1;
+    public static final int LINEA_B=1;
 
     /**
      * Constante que representa la linea
      */
-    public final static int LINEA_C=2;
+    public static final int LINEA_C=2;
 
     //-----------------------------------------------------------
     // Atributos
@@ -110,13 +110,17 @@ public class Tranvia extends Model {
      * Metodo encargado de obtener el id del vehiculo
      * @return id
      */
-    public Long getId(){ return id;}
+    public Long getId(){
+        return id;
+    }
 
     /**
      * Metodo encargado de cambiar el id del tranvia
      * @param id
      */
-    public void setId(Long id){this.id=id;}
+    public void setId(Long id){
+        this.id=id;
+    }
 
     /**
      * Metodo encargado de obtener el identificador de la linea del tranvia
@@ -154,7 +158,9 @@ public class Tranvia extends Model {
      * Metodo encargado de obtener la longitud actual del tranvia
      * @return longitud
      */
-    public Double getLongitud() { return longitud; }
+    public Double getLongitud() {
+        return longitud;
+    }
 
     /**
      * Metodo encargado de cambiar el longitud del tranvia
@@ -211,8 +217,7 @@ public class Tranvia extends Model {
         Double latitud = j.findPath("latitud").asDouble();
         Double longitud = j.findPath("longitud").asDouble();
         int linea = j.findPath("linea").asInt();
-        Tranvia tranvia = new Tranvia(latitud, longitud, linea);
-        return tranvia;
+        return new Tranvia(latitud, longitud, linea);
     }
 
     public void update(Tranvia tranvia) {

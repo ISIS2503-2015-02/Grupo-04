@@ -23,15 +23,15 @@ public class Conductor extends Model {
     //-----------------------------------------------------------
     // Constantes
     //-----------------------------------------------------------
-    public final static int DISPONIBLE=0;
+    public static final int DISPONIBLE=0;
 
-    public final static int OCUPADO=1;
+    public static final int OCUPADO=1;
 
     //-----------------------------------------------------------
     // Cosa wtf
     //-----------------------------------------------------------
 
-    public static Finder<Long, Conductor> find = new Model.Finder<>(Long.class, Conductor.class);
+    public static final Finder<Long, Conductor> find = new Model.Finder<>(Long.class, Conductor.class);
 
     //-----------------------------------------------------------
     // Atributos

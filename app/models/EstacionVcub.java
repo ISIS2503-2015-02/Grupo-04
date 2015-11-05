@@ -47,7 +47,8 @@ public class EstacionVcub extends Model{
     // Constructores
     //------------------------------------------------------
 
-    public EstacionVcub() {}
+    public EstacionVcub() {
+    }
 
     public EstacionVcub(int capacidad, String nombre) {
         this.capacidad=capacidad;

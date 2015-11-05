@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.lang.Long;
 
 @Entity
 public class Reporte extends Model{
@@ -18,44 +17,44 @@ public class Reporte extends Model{
     /**
      * Constante que define que si el reporte es para realizar un pedido de biciletas a una estacion
      */
-    public final static String PEDIDO_BICICLETAS="Pedido bicicletas";
+    public static final String PEDIDO_BICICLETAS="Pedido bicicletas";
 
     /**
      * Constante que define que si el reporte es para reportar una emergencia de un tranvia
      */
-    public final static String EMERGENCIA_TRANVIA="Emergencia Tranvia";
+    public static final String EMERGENCIA_TRANVIA="Emergencia Tranvia";
 
-    public final static String EMERGENCIA_MOVIBUS="Emergencia Movibus";
+    public static final String EMERGENCIA_MOVIBUS="Emergencia Movibus";
 
     /**
      * Constante que representa el nivel bajo de emergencia
      */
-    public final static String MAGNITUD_BAJA="Baja";
+    public static final String MAGNITUD_BAJA="Baja";
 
     /**
      * Constante que representa el nivel medio de emergencia
      */
-    public final static String MAGNITUD_MEDIA="Media";
+    public static final String MAGNITUD_MEDIA="Media";
 
     /**
      * Constante que representa el nivel alto de emergencia
      */
-    public final static String MAGNITUD_ALTA="Alta";
+    public static final String MAGNITUD_ALTA="Alta";
 
     /**
      * Constante que representa estrellarse
      */
-    public final static int CHOQUE= 0;
+    public static final int CHOQUE= 0;
 
     /**
      * Constante que representa vararse
      */
-    public final static int DANIO= 1;
+    public static final int DANIO= 1;
 
     /**
      * Constante que representa robo
      */
-    public final static int ROBO= 2;
+    public static final int ROBO= 2;
 
 
     //---------------------------------------------------------------------
@@ -93,7 +92,8 @@ public class Reporte extends Model{
     // Constructores
     //---------------------------------------------------------------------
 
-    public Reporte() {}
+    public Reporte() {
+    }
 
     public Reporte(String tipoReporte, String descripcion, String magnitud, int tipoAccidente) {
         this.tipoReporte=tipoReporte;

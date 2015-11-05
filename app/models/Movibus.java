@@ -8,17 +8,10 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Clase que representa un movibus en el sistema
@@ -81,7 +74,7 @@ public class Movibus extends Model {
     // WTF
     //-------------------------------------------------------
 
-    public static Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
+    public static final Finder<Long, Movibus> find = new Model.Finder<>(Long.class, Movibus.class);
 
     //-------------------------------------------------------
     // Constructor
@@ -134,7 +127,9 @@ public class Movibus extends Model {
      * Metodo encargado de obtener la longitud del vehiculo
      * @return longitud
      */
-    public Double getLongitud() { return longitud; }
+    public Double getLongitud() {
+        return longitud;
+    }
 
     /**
      * Metodo encargado de cambiar la longitud del vehiculo
@@ -172,7 +167,9 @@ public class Movibus extends Model {
      * Metodo encargado de cambiar el valor de kilometraje del vehiculo
      * @param kilometraje
      */
-    public void setKilometraje(int kilometraje) {this.kilometraje=kilometraje;}
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje=kilometraje;
+    }
 
     /**
      * Metodo encargado de registrar la revision de un vehiculo
