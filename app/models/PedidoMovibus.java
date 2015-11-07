@@ -173,7 +173,7 @@ public class PedidoMovibus extends Model{
         this.longitudDestino=longitudDestino;
     }
 
-    public static PedidoMovibus bind(JsonNode j) {
+    public static PedidoMovibus bind() {
         return new PedidoMovibus();
     }
 }

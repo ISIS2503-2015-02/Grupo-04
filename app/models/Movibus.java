@@ -27,17 +27,17 @@ public class Movibus extends Model {
     /**
      * Constante que representa el estado disponible
      */
-    public final static int DISPONIBLE=0;
+    public static final int DISPONIBLE=0;
 
     /**
      * Constante que representa el estado ocupado
      */
-    public final static int OCUPADO=1;
+    public static final int OCUPADO=1;
 
     /**
      * Constante que representa el estado problema
      */
-    public final static int PROBLEMA=2;
+    public static final int PROBLEMA=2;
 
     //-----------------------------------------------------------
     // Atributos

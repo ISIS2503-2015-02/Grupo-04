@@ -156,9 +156,7 @@ var aEncriptar = JSON.stringify($scope.currentRecord);
 var hash = CryptoJS.MD5(aEncriptar);
              
 var envio3 = $.concat('{"hashContent":"'+hash+'"}', JSON.stringify($scope.currentRecord));
-
-           
-             var envio3 = '{"envio1":"{\"hashContent\":\"'+hash+'\"}","envio2":"'+JSON.stringify($scope.currentRecord)+'"}';
+var envio3 = '{"envio1":"{\"hashContent\":\"'+hash+'\"}","envio2":"'+JSON.stringify($scope.currentRecord)+'"}';
              
              $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){		              
                  usuario=data.id;

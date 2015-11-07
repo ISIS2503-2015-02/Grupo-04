@@ -24,32 +24,37 @@ public class TranviaLogic{
     /**
      * Constante que representa el estado ocupado
      */
-    public final static int OCUPADO=0;
+	public static final int OCUPADO=0;
 
     /**
      * Constante que representa el estado disponible
      */
-    public final static int DISPONIBLE=1;
+	public static final int DISPONIBLE=1;
 
     /**
      * Constante que representa el estado problema
      */
-    public final static int PROBLEMA=2;
+	public static final int PROBLEMA=2;
 
     /**
      * Constante que representa la linea 
      */
-    public final static int LINEA_A=0;
+	public static final int LINEA_A=0;
     
     /**
      * Constante que representa la linea 
      */
-    public final static int LINEA_B=1;
+	public static final int LINEA_B=1;
     
     /**
      * Constante que representa la linea 
      */
-    public final static int LINEA_C=2;
+	public static final int LINEA_C=2;
+
+    /**
+     * Constante que representa la ruta del archivo
+     */
+    public static final String RUTA_ARCHIVO="./data/data";
 
     /**
 	 * Atributos de datos.
@@ -58,21 +63,22 @@ public class TranviaLogic{
 	
 	//CONSTRUCTOR DE LA LOGICA
 	public TranviaLogic(){
-		try{ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
+		try{
+			ObjectInputStream ins = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO));
 			data = (TranviaSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
+            LOGGER.info(e);
 			data = new TranviaSerializable();
-			File file = new File("./data/data");
+			File file = new File(RUTA_ARCHIVO);
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-				System.out.println(e1.getMessage());
+                LOGGER.info(el);
 			}
 			getTranvia();
-			System.out.println(e.getMessage());
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+            LOGGER.info(e);
 		}
 	}
 	
@@ -90,9 +96,9 @@ public class TranviaLogic{
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
-			String at1[] = output.split(",");
+			String[] at1 = output.split(",");
 			for (String string : at1) {
-				String at2[] = string.split(":");
+				String[] at2 = string.split(":");
 				if(at2[0].equals("[{\"id\""))
 					data.setId(Long.parseLong(at2[1]));
 				if(at2[0].equals("\"longitud\""))
@@ -114,7 +120,7 @@ public class TranviaLogic{
 			System.out.println(data.getLinea());
 			conn.disconnect();
 		}catch(Exception e){
-			e.printStackTrace();
+            LOGGER.info(el);
 		}
 	}
 
@@ -177,7 +183,7 @@ public class TranviaLogic{
 	//PERSISTENCIA
 	public void persist(){
 		try{
-		FileOutputStream out = new FileOutputStream("./data/data");
+		FileOutputStream out = new FileOutputStream(RUTA_ARCHIVO);
 		ObjectOutputStream os = new ObjectOutputStream(out);
 		os.writeObject(data);
 		os.flush(); 

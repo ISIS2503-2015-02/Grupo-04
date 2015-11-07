@@ -82,7 +82,7 @@ public class MovibusController {
              log = decoded.getLong("longitud");
         }
         catch(Exception e){
-            System.out.println("Decryption failed" + e);
+           LOGGER.info(e);
         }
         Double lat2 = new Double(lat);
         Double log2 = new Double(log);
@@ -101,7 +101,7 @@ public class MovibusController {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result reportarAccidente(Long id) {
+    public Result reportarAccidente() {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
         String magnitud=j.findPath("magnitud").asText();
@@ -147,32 +147,23 @@ public class MovibusController {
             plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (NoSuchPaddingException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (UnsupportedEncodingException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (InvalidAlgorithmParameterException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (NoSuchAlgorithmException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (IllegalBlockSizeException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (BadPaddingException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         } catch (InvalidKeyException e) {
-            System.out.println(DECRYPTION + e);
             LOGGER.info(e);
         }
      catch (Exception e) {
-        System.out.println(DECRYPTION + e);
          LOGGER.info(e);
     }
         return plaintext;
