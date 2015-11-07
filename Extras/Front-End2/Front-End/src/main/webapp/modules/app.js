@@ -172,7 +172,15 @@ var envio3 = '{"envio1":"{\"hashContent\":\"'+hash+'\"}","envio2":"'+JSON.string
             }).error(function(data, status, headers, config) {
                  document.write(usuario+"  "+data);
             });
+                 this.login = function () {
+            $http.defaults.headers.post = { 'Content-Type':'application/json' };
+            $http.post('http://localhost:9000/usuario', JSON.stringify($scope.currentRecord),({headers:{'Content-Type':'application/json'}})).success(function(data,headers){
+            }).error(function(data, status, headers, config) {
+                 document.write(usuario+"  "+data);
+            });
+          };
         };
     });
+    
     
 })();

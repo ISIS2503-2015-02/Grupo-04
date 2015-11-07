@@ -113,6 +113,7 @@ public class UsuarioController {
      * @return JSon con loa informacion del usuario.
      */
     public boolean login(String pCorreo, int pCedula){
+        Long inicio = System.currentTimeMillis();
         List<Usuario> users=new Model.Finder(Long.class, Usuario.class).all();
         Usuario usuario = null;
         for(Usuario u:users){
