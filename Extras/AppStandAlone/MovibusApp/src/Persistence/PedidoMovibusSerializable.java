@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 
 import java.util.Date;
 public class PedidoMovibusSerializable
@@ -31,7 +31,7 @@ public class PedidoMovibusSerializable
 	public PedidoMovibusSerializable(Long id ,Date fechaPed, Date fechEj, Double[] lat, Double[] lon, int tempE, int temR, UsuarioSerializable usu, MovibusSerializable mov, ConductorSerializable cond, Double destLo, Double destLa)
     {
 		this.id=id;
-    	this.fechaEjecucion=fechEj;
+		this.fechaEjecucion=fechEj;
        	this.fechaPedido=fechaPed;
        	this.latitud=lat;
        	this.longitud=lon;

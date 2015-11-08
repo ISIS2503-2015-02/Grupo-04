@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 import java.io.Serializable;
 
 public class MovibusSerializable implements Serializable{

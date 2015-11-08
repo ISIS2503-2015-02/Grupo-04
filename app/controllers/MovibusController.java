@@ -19,6 +19,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import models.Logger;
 
 import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
@@ -82,7 +83,7 @@ public class MovibusController {
              log = decoded.getLong("longitud");
         }
         catch(Exception e){
-           LOGGER.info(e);
+            Logger.info(e);
         }
         Double lat2 = new Double(lat);
         Double log2 = new Double(log);
@@ -147,24 +148,24 @@ public class MovibusController {
             plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (NoSuchPaddingException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (InvalidAlgorithmParameterException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (IllegalBlockSizeException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (BadPaddingException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         } catch (InvalidKeyException e) {
-            LOGGER.info(e);
+            Logger.info(e);
         }
      catch (Exception e) {
-         LOGGER.info(e);
+         Logger.info(e);
     }
         return plaintext;
     }

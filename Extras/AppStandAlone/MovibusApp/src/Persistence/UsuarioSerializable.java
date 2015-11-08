@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 
 public class UsuarioSerializable {
 
@@ -6,7 +6,7 @@ public class UsuarioSerializable {
     // Atributos
     //---------------------------------------------------------------------
 	
-    private Long id;
+	private Long id;
 
     /**
      * Nombre del usuario.
@@ -39,7 +39,7 @@ public class UsuarioSerializable {
     //---------------------------------------------------------------------
 
     public UsuarioSerializable() {
-		// TODO Auto-generated constructor stub
+    	
 	}
 
 	public Long getId() {
@@ -69,6 +69,7 @@ public class UsuarioSerializable {
     public void setCelular(int celular) {
         this.celular=celular;
     }
+
     public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

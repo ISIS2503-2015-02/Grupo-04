@@ -1,4 +1,4 @@
-package Persistencia;
+package persistencia;
 
 import java.io.Serializable;
 
@@ -20,6 +20,7 @@ public class TranviaSerializable implements Serializable{
      */
     //Latitud
     private Double latitud;
+    
     //Longitud
     private Double longitud;
     
@@ -37,8 +38,8 @@ public class TranviaSerializable implements Serializable{
      * Linea asignada al tranvia
      */
     private int linea;
-
-	public Long getId() {
+    
+    public Long getId() {
 		return id;
 	}
 

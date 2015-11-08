@@ -1,4 +1,5 @@
 /Logic/
-/Persistencia/
 /Runner/
-/Simulator/
+/logic/
+/persistencia/
+/runner/

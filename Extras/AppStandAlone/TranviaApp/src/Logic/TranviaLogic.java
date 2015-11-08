@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Persistencia.TranviaSerializable;
+import persistencia.TranviaSerializable;
 
 
 public class TranviaLogic{
@@ -68,17 +68,17 @@ public class TranviaLogic{
 			data = (TranviaSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
-            LOGGER.info(e);
+			Logger.info(e);
 			data = new TranviaSerializable();
 			File file = new File(RUTA_ARCHIVO);
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-                LOGGER.info(el);
+				Logger.info(e1);
 			}
 			getTranvia();
 		}catch(Exception e){
-            LOGGER.info(e);
+			Logger.info(e);
 		}
 	}
 	
@@ -120,7 +120,7 @@ public class TranviaLogic{
 			System.out.println(data.getLinea());
 			conn.disconnect();
 		}catch(Exception e){
-            LOGGER.info(el);
+			Logger.info(e);
 		}
 	}
 
@@ -189,8 +189,7 @@ public class TranviaLogic{
 		os.flush(); 
 		os.close();
 		}catch(Exception e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 
 public class ConductorSerializable {
 
@@ -17,12 +17,12 @@ public class ConductorSerializable {
     }
 
     public ConductorSerializable() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
     public void setNombre(String nombre) {
-		this.nombre = nombre;
+        this.nombre = nombre;
 	}
 
 	public void setCedula(int cedula) {

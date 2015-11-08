@@ -1,4 +1,4 @@
-package Runer;
+package runer;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Logica.MovibusLogic;
-import Logica.PedidoMovibusLogic;
-import Persistence.MovibusSerializable;
-import Persistence.PedidoMovibusSerializable;
+import logica.Logger;
+import logica.MovibusLogic;
+import logica.PedidoMovibusLogic;
+import persistence.MovibusSerializable;
+import persistence.PedidoMovibusSerializable;
 
 public class Main  extends JFrame implements ActionListener{
-
 	private static final long serialVersionUID = 1L;
 
 	static MovibusLogic logic;
@@ -132,8 +132,7 @@ public class Main  extends JFrame implements ActionListener{
 	public static void main(String[] args){
 		logic = new MovibusLogic();
 		EnviPos envi = new EnviPos(logic);
-		envi.start();
-		Main main = new Main();		
+		envi.start();	
 	}
 
 	@Override
@@ -152,7 +151,7 @@ public class Main  extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getActionCommand().equals("revisar")){
+		if("revisar".equals(event.getActionCommand())){
 			if(logic.getId()!=null){
 				try {
 					logic2.getPedidoMovibus(logic.getId());
@@ -185,6 +184,7 @@ public class Main  extends JFrame implements ActionListener{
 						termP.setVisible(true);
 					}
 				} catch (Exception e) {
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.CENTER);
 					//					System.out.println("Error con el numero de identificacion");
@@ -218,6 +218,7 @@ public class Main  extends JFrame implements ActionListener{
 					termP.setVisible(true);
 				}
 				catch (Exception e) {
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
 					//					System.out.println("Error con el numero de identificacion");
@@ -240,6 +241,7 @@ public class Main  extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog( this, "No se ha iniciado sesion con un movibus.", "Error de inicio de sesion.", JOptionPane.ERROR_MESSAGE );
 					//				numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
 				}catch(Exception e){
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
 					//					numVc.setText("Error con el numero de identificacion.");
@@ -260,6 +262,7 @@ public class Main  extends JFrame implements ActionListener{
 					termP.add(success, BorderLayout.EAST);
 					//					numVc.setText("Numero de Vcubs rentadas : "+rta[1]);
 				}catch(Exception e){
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
 					//					numVc.setText("Error con el numero de identificacion.");
@@ -290,8 +293,7 @@ final static class EnviPos extends Thread{
 					logic3.reportePosicion();
 					System.out.println("Envio Posicion");
 				} catch (Exception e) {
-					System.out.println(e);
-					e.printStackTrace();
+					Logger.info(e);
 				}
 			}
 		}

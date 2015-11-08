@@ -1,4 +1,4 @@
-package Runner;
+package runner;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -8,12 +8,9 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import Logic.TranviaLogic;
+import logic.Logger;
+import logic.TranviaLogic;
 
 public class Main extends JFrame implements ActionListener{
 
@@ -40,7 +37,7 @@ public class Main extends JFrame implements ActionListener{
 				logic.reportarEmergencia("Breve descripcion de la emergencia", 0, "Baja");
 				System.out.println("PANIC");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				Logger.info(e1);
 			}
 		}
 	}
@@ -76,6 +73,7 @@ final class EnviarPosicion extends Thread{
 					logic.enviarPosicion();
 					System.out.println("Envio Posicion");
 				} catch (Exception e) {
+					Logger.info(e);
 				}
 			}
 		}

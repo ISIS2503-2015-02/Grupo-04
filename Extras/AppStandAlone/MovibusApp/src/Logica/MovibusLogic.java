@@ -1,4 +1,4 @@
-package Logica;
+package logica;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,24 +13,17 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import javax.crypto.KeyGenerator;
+import logica.Logger;
 
 import org.json.JSONObject;
 import org.owasp.StringEnvelope;
 
-import Persistence.MovibusSerializable;
-import Security.Security;
+import persistence.MovibusSerializable;
 
 
 public class MovibusLogic {
@@ -45,16 +38,16 @@ public class MovibusLogic {
 			data = (MovibusSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
+			Logger.info(e);
 			data = new MovibusSerializable();
 			File file = new File("./data/data");
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-				System.out.println(e1.getMessage());
+				Logger.info(e1);
 			}
-			System.out.println(e.getMessage());
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			Logger.info(e);
 		}
 	}
 
@@ -96,7 +89,7 @@ public class MovibusLogic {
 			System.out.println(data.getKilometraje());
 			conn.disconnect();
 		}catch(Exception e){
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 	
@@ -134,7 +127,6 @@ public class MovibusLogic {
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			e.printStackTrace();
 			throw e;
 		}
 	}
@@ -147,8 +139,7 @@ public class MovibusLogic {
 		os.flush(); 
 		os.close();
 		}catch(Exception e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 	
@@ -176,8 +167,7 @@ public class MovibusLogic {
 		serverPublicKey = kf.generatePublic(new X509EncodedKeySpec(llave));
 		
 		}catch(Exception e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			Logger.info(e);
 		}
 		
 	}
@@ -191,7 +181,6 @@ public class MovibusLogic {
 	}
 	
 	public MovibusSerializable getMovi() {
-		// TODO Auto-generated method stub
 		return data;
 	}
 }

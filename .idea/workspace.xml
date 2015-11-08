@@ -2,8 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a378a6d-c0d9-4e74-9b0b-5c2159e48fee" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/logic/EstacionVcubLogic.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/Logger.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/logic/Logger.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/Logger.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/runner/Main.java" />
+      <change type="DELETED" beforePath="C:\Users\template\Documents\Grupo-04\.sonar\.sonartmp\caches\persistit_tempvol_3478502278749793607.tmp" afterPath="" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\persistence\ConductorSerializable.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/persistence/ConductorSerializable.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\runer\Main.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/runer/Main.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\logica\MovibusLogic.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/logica/MovibusLogic.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\persistence\MovibusSerializable.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/persistence/MovibusSerializable.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\logica\PedidoMovibusLogic.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/logica/PedidoMovibusLogic.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\persistence\PedidoMovibusSerializable.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/persistence/PedidoMovibusSerializable.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\security\Security.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/security/Security.class" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\bin\persistence\UsuarioSerializable.class" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/persistence/UsuarioSerializable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/.classpath" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/.classpath" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/bin/.gitignore" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/bin/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/.gitignore" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/bin/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/bin/.gitignore" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/bin/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/ConductorSerializable.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/ConductorSerializable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/EstacionVcubController.java" afterPath="$PROJECT_DIR$/app/controllers/EstacionVcubController.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\EstacionVcubApp\src\persistencia\EstacionVcubSerializable.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/persistencia/EstacionVcubSerializable.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\TranviaApp\src\runner\Main.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/runner/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MovibusController.java" afterPath="$PROJECT_DIR$/app/controllers/MovibusController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/MovibusLogic.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/MovibusLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" afterPath="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/PedidoMovibusLogic.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/PedidoMovibusLogic.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\src\security\Security.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/security/Security.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\TranviaApp\src\logic\TranviaLogic.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/logic/TranviaLogic.java" />
+      <change type="MODIFICATION" beforePath="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\TranviaApp\src\persistencia\TranviaSerializable.java" afterPath="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/persistencia/TranviaSerializable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/UsuarioController.java" afterPath="$PROJECT_DIR$/app/controllers/UsuarioController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Extras/Front-End2/Front-End/src/main/webapp/modules/app.js" afterPath="$PROJECT_DIR$/Extras/Front-End2/Front-End/src/main/webapp/modules/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Yammz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,14 +55,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UsuarioController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/runer/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9297297">
-              <caret line="124" column="31" selection-start-line="124" selection-start-column="31" selection-end-line="124" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.13980263">
+              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,18 +83,29 @@
         <option value="$PROJECT_DIR$/conf/routes" />
         <option value="$PROJECT_DIR$/app/models/Usuario.java" />
         <option value="$PROJECT_DIR$/conf/application.conf" />
-        <option value="$PROJECT_DIR$/app/controllers/EstacionVcubController.java" />
         <option value="$PROJECT_DIR$/app/models/Reporte.java" />
         <option value="$PROJECT_DIR$/app/models/Tranvia.java" />
         <option value="$PROJECT_DIR$/app/models/EstacionVcub.java" />
         <option value="$PROJECT_DIR$/app/models/Conductor.java" />
-        <option value="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" />
-        <option value="$PROJECT_DIR$/app/controllers/MovibusController.java" />
         <option value="$PROJECT_DIR$/app/controllers/TranviaController.java" />
         <option value="$PROJECT_DIR$/app/models/Movibus.java" />
         <option value="$PROJECT_DIR$/app/models/PedidoMovibus.java" />
         <option value="$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/logic/TranviaLogic.java" />
+        <option value="$PROJECT_DIR$/app/controllers/EstacionVcubController.java" />
+        <option value="$PROJECT_DIR$/app/controllers/MovibusController.java" />
+        <option value="$PROJECT_DIR$/app/models/Logger.java" />
+        <option value="$PROJECT_DIR$/app/controllers/PedidoMovibusController.java" />
         <option value="$PROJECT_DIR$/app/controllers/UsuarioController.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/logic/EstacionVcubLogic.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/logic/Logger.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/runner/Main.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/PedidoMovibusLogic.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/MovibusLogic.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/ConductorSerializable.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/MovibusSerializable.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/PedidoMovibusSerializable.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/UsuarioSerializable.java" />
+        <option value="$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/runer/Main.java" />
       </list>
     </option>
   </component>
@@ -83,8 +122,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="876" />
+    <option name="width" value="1380" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -174,66 +213,6 @@
               <option name="myItemId" value="AppStandAlone" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TranviaApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yammz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grupo-04" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Extras" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppStandAlone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TranviaApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yammz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grupo-04" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Extras" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppStandAlone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TranviaApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -298,6 +277,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AppStandAlone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MovibusApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="runer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,6 +366,13 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\MovibusApp\src\logica" />
+      <recent name="C:\Users\template\Documents\Grupo-04\Extras\AppStandAlone\TranviaApp\src\logic" />
+      <recent name="C:\Users\template\Documents\Grupo-04\app\models" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -593,7 +591,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1380" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -605,7 +603,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21111111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2228739" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -632,205 +630,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/Reporte.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/EstacionVcub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="e#3162#3163#0" expanded="true" />
-            <element signature="e#3201#3202#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/PedidoMovibus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="115" selection-start-line="72" selection-start-column="115" selection-end-line="72" selection-end-column="115" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/PedidoMovibusPendiente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="71" selection-start-line="52" selection-start-column="71" selection-end-line="52" selection-end-column="71" />
-          <folding>
-            <element signature="e#2095#2096#0" expanded="false" />
-            <element signature="e#2120#2121#0" expanded="false" />
-            <element signature="e#2154#2155#0" expanded="false" />
-            <element signature="e#2180#2181#0" expanded="false" />
-            <element signature="e#2215#2216#0" expanded="false" />
-            <element signature="e#2245#2246#0" expanded="false" />
-            <element signature="e#2292#2293#0" expanded="false" />
-            <element signature="e#2328#2329#0" expanded="false" />
-            <element signature="e#2364#2365#0" expanded="false" />
-            <element signature="e#2398#2399#0" expanded="false" />
-            <element signature="e#2450#2451#0" expanded="false" />
-            <element signature="e#2496#2497#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
-            <element signature="e#2572#2573#0" expanded="false" />
-            <element signature="e#2630#2631#0" expanded="false" />
-            <element signature="e#2682#2683#0" expanded="false" />
-            <element signature="e#2723#2724#0" expanded="false" />
-            <element signature="e#2760#2761#0" expanded="false" />
-            <element signature="e#2820#2821#0" expanded="false" />
-            <element signature="e#2870#2871#0" expanded="false" />
-            <element signature="e#2912#2913#0" expanded="false" />
-            <element signature="e#2950#2951#0" expanded="false" />
-            <element signature="e#3012#3013#0" expanded="false" />
-            <element signature="e#3064#3065#0" expanded="false" />
-            <element signature="e#3105#3106#0" expanded="false" />
-            <element signature="e#3142#3143#0" expanded="false" />
-            <element signature="e#3202#3203#0" expanded="false" />
-            <element signature="e#3252#3253#0" expanded="false" />
-            <element signature="e#3294#3295#0" expanded="false" />
-            <element signature="e#3332#3333#0" expanded="false" />
-            <element signature="e#3394#3395#0" expanded="false" />
-            <element signature="e#3446#3447#0" expanded="false" />
-            <element signature="e#3484#3485#0" expanded="false" />
-            <element signature="e#3521#3522#0" expanded="false" />
-            <element signature="e#3578#3579#0" expanded="false" />
-            <element signature="e#3628#3629#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Tranvia.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Usuario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/routes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="96" selection-start-line="65" selection-start-column="96" selection-end-line="65" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Movibus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="24" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
-            <element signature="e#2510#2511#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Conductor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/EstacionVcubController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Reporte.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/EstacionVcub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#3162#3163#0" expanded="true" />
-            <element signature="e#3201#3202#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/PedidoMovibus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="115" selection-start-line="72" selection-start-column="115" selection-end-line="72" selection-end-column="115" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/PedidoMovibusPendiente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="71" selection-start-line="52" selection-start-column="71" selection-end-line="52" selection-end-column="71" />
-          <folding>
-            <element signature="e#2095#2096#0" expanded="false" />
-            <element signature="e#2120#2121#0" expanded="false" />
-            <element signature="e#2154#2155#0" expanded="false" />
-            <element signature="e#2180#2181#0" expanded="false" />
-            <element signature="e#2215#2216#0" expanded="false" />
-            <element signature="e#2245#2246#0" expanded="false" />
-            <element signature="e#2292#2293#0" expanded="false" />
-            <element signature="e#2328#2329#0" expanded="false" />
-            <element signature="e#2364#2365#0" expanded="false" />
-            <element signature="e#2398#2399#0" expanded="false" />
-            <element signature="e#2450#2451#0" expanded="false" />
-            <element signature="e#2496#2497#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
-            <element signature="e#2572#2573#0" expanded="false" />
-            <element signature="e#2630#2631#0" expanded="false" />
-            <element signature="e#2682#2683#0" expanded="false" />
-            <element signature="e#2723#2724#0" expanded="false" />
-            <element signature="e#2760#2761#0" expanded="false" />
-            <element signature="e#2820#2821#0" expanded="false" />
-            <element signature="e#2870#2871#0" expanded="false" />
-            <element signature="e#2912#2913#0" expanded="false" />
-            <element signature="e#2950#2951#0" expanded="false" />
-            <element signature="e#3012#3013#0" expanded="false" />
-            <element signature="e#3064#3065#0" expanded="false" />
-            <element signature="e#3105#3106#0" expanded="false" />
-            <element signature="e#3142#3143#0" expanded="false" />
-            <element signature="e#3202#3203#0" expanded="false" />
-            <element signature="e#3252#3253#0" expanded="false" />
-            <element signature="e#3294#3295#0" expanded="false" />
-            <element signature="e#3332#3333#0" expanded="false" />
-            <element signature="e#3394#3395#0" expanded="false" />
-            <element signature="e#3446#3447#0" expanded="false" />
-            <element signature="e#3484#3485#0" expanded="false" />
-            <element signature="e#3521#3522#0" expanded="false" />
-            <element signature="e#3578#3579#0" expanded="false" />
-            <element signature="e#3628#3629#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Tranvia.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -859,7 +664,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -912,7 +719,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -965,7 +774,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -995,13 +806,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="67" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ReporteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2034188">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1076,14 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.309375">
           <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/EstacionVcubController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.172414">
-          <caret line="75" column="27" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1178,30 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/MovibusController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55263156">
-          <caret line="149" column="27" selection-start-line="149" selection-start-column="12" selection-end-line="149" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/TranviaController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.23026316">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/PedidoMovibusController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4967105">
-          <caret line="8" column="27" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/PedidoMovibus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1224,21 +996,190 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ConductorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.17434211">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/MovibusController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5871711">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/EstacionVcubController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.9851974">
+          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19572368">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/PedidoMovibusController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84375">
+          <caret line="170" column="27" selection-start-line="170" selection-start-column="27" selection-end-line="170" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ReporteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19572368">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/TranviaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4046053">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/logic/TranviaLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5972973">
-          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.23519737">
+          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="56" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9297297">
-          <caret line="124" column="31" selection-start-line="124" selection-start-column="31" selection-end-line="124" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.30098686">
+          <caret line="178" column="17" selection-start-line="178" selection-start-column="17" selection-end-line="178" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/logic/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1118421">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/TranviaApp/src/logic/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/logic/EstacionVcubLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.027960526">
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
+            <element signature="e#1240#1241#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/PedidoMovibusLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27960527">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/EstacionVcubApp/src/runner/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30756578">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/ConductorSerializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5246711">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+          <folding>
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/logica/MovibusLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33552632">
+          <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/UsuarioSerializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2516447">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/PedidoMovibusSerializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19572368">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/persistence/MovibusSerializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55921054">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extras/AppStandAlone/MovibusApp/src/runer/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13980263">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>

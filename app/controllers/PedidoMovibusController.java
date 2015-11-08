@@ -11,6 +11,7 @@ import models.PedidoMovibusPendiente;
 import play.libs.Json;
 import play.mvc.Result;
 import org.json.*;
+import models.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -118,7 +119,7 @@ public class PedidoMovibusController {
                 }
             }
         }catch(Exception e){
-            LOGGER.info(e);
+           Logger.info(e);
             return internalServerError(e.getMessage());
         }
     }
@@ -131,7 +132,7 @@ public class PedidoMovibusController {
         try{
             id = fin.getLong("id");
         } catch (JSONException e) {
-            LOGGER.info(e);
+            Logger.infoJSON(e);
         }
         List<PedidoMovibus> pedidosMovibus = new Model.Finder(Long.class, PedidoMovibus.class).all();
         Iterator<PedidoMovibus> pedidoMovibusIterator = pedidosMovibus.iterator();
@@ -151,31 +152,23 @@ public class PedidoMovibusController {
             plaintext = new JSONObject(env.unwrap(crypted, "aa09cee77e1d606d5ab06500ac95729c"));
         }
         catch(IllegalArgumentException e){
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (NoSuchPaddingException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (UnsupportedEncodingException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (InvalidAlgorithmParameterException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (IllegalBlockSizeException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (BadPaddingException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (InvalidKeyException e) {
-            System.out.println("Decryption failed: " + e);
-            LOGGER.info(e);
+           Logger.info(e);
         } catch (JSONException e) {
-            LOGGER.info(e);
+           Logger.infoJSON(e);
         }
         return plaintext;
     }

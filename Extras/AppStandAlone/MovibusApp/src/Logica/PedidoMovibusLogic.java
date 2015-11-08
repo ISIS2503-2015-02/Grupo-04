@@ -1,4 +1,4 @@
-package Logica;
+package logica;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -18,13 +19,18 @@ import java.util.Date;
 import org.json.*;
 import org.owasp.StringEnvelope;
 
-import Persistence.ConductorSerializable;
-import Persistence.MovibusSerializable;
-import Persistence.PedidoMovibusSerializable;
-import Persistence.UsuarioSerializable;
+import persistence.ConductorSerializable;
+import persistence.MovibusSerializable;
+import persistence.PedidoMovibusSerializable;
+import persistence.UsuarioSerializable;
 
-public class PedidoMovibusLogic {
+public class PedidoMovibusLogic implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	PedidoMovibusSerializable data;
 	
 	public PedidoMovibusLogic()
@@ -39,11 +45,10 @@ public class PedidoMovibusLogic {
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-				System.out.println(e1.getMessage());
+				Logger.info(e1);
 			}
-			System.out.println(e.getMessage());
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			Logger.info(e);
 		}
 	}
 
@@ -159,7 +164,7 @@ public class PedidoMovibusLogic {
 			System.out.println("Movibus id:"+data.getMovibus().getId());
 			conn.disconnect();
 		}catch(Exception e){
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 	
@@ -216,8 +221,7 @@ public class PedidoMovibusLogic {
 		os.flush(); 
 		os.close();
 		}catch(Exception e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 }

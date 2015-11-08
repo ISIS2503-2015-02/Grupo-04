@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.EstacionVcub;
 import models.Reporte;
 import models.Usuario;
+import models.Logger;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -73,7 +74,7 @@ public class EstacionVcubController extends Controller {
         try {
             usuario.devolverVcubEnUso();
         }catch(Exception e){
-            LOGGER.info(e);
+           Logger.info(e);
             return ok(Json.toJson("error:"+e.getMessage()));
         }
         usuario.save();
