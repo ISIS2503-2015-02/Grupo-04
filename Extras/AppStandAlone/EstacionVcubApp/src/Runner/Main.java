@@ -1,10 +1,9 @@
-package Runner;
+package runner;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,10 +12,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Logic.EstacionVcubLogic;
+import logic.EstacionVcubLogic;
+import logic.Logger;
 
 public class Main extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	EstacionVcubLogic logic;
 	JPanel everything;
 	JPanel buts;
@@ -80,7 +85,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		Main main = new Main();
+		
 	}
 
 	@Override
@@ -91,8 +96,8 @@ public class Main extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getActionCommand().equals("retirar")){
-			if(!input.getText().equals("")){
+		if("retirar".equals(event.getActionCommand())){
+			if(!"".equals(input.getText())){
 				String[] rta = null;
 				try {
 					rta = logic.retiroVcub(Long.parseLong(input.getText())).split(":");
@@ -100,6 +105,7 @@ public class Main extends JFrame implements ActionListener{
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
 				} catch (Exception e) {
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Error con el numero de identificacion");
@@ -109,8 +115,8 @@ public class Main extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog( this, "Numero de identificacion invalido.", "Error de identificacion", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		if(event.getActionCommand().equals("devolver")){
-			if(!input.getText().equals("")){
+		if("devolver".equals(event.getActionCommand())){
+			if(!"".equals(input.getText())){
 				String[] rta=null;
 				try{
 					rta = logic.devolucionVcub(Long.parseLong(input.getText())).split(":");
@@ -118,6 +124,7 @@ public class Main extends JFrame implements ActionListener{
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
 				}catch(Exception e){
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText(e.getMessage());
@@ -128,7 +135,7 @@ public class Main extends JFrame implements ActionListener{
 			}
 		}
 		if(event.getActionCommand().equals("verificar")){
-			if(!input.getText().equals("") && !input.getText().equals("admin")){
+			if(!"".equals(input.getText()) && !"admin".equals(input.getText())){
 				String[] rta=null;
 				try{
 					rta = logic.verificarUsuario(Long.parseLong(input.getText())).split(":");
@@ -136,12 +143,13 @@ public class Main extends JFrame implements ActionListener{
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Numero de Vcubs rentadas : "+rta[1]);
 				}catch(Exception e){
+					Logger.info(e);
 					success.setText("Operacion Fallida");
 					vcubs.add(success, BorderLayout.CENTER);
 					numVc.setText("Error con el numero de identificacion.");
 				}
 				vcubs.setVisible(true);
-			}else if(input.getText().equals("admin")){
+			}else if("admin".equals(input.getText())){
 				vcubs.remove(success);
 				vcubs.add(refill, BorderLayout.CENTER);
 				numVc.setText("");
@@ -151,13 +159,14 @@ public class Main extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog( this, "Numero de identificacion invalido.", "Error de identificacion", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		if(event.getActionCommand().equals("refill")){
+		if("refill".equals(event.getActionCommand())){
 			try{
 				int rta = logic.llenarEstacion();
 				vcubs.remove(refill);
 				success.setText("Estacion llenada a capacidad maxima de : "+rta);
 				vcubs.add(success, BorderLayout.CENTER);
 			}catch(Exception e){
+				Logger.info(e);
 				vcubs.remove(refill);
 				success.setText("Error en la operacion.\nPor favor comuniquese con el dueño del servidor.");
 				vcubs.add(success, BorderLayout.CENTER);

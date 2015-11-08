@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,33 +9,46 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Persistencia.EstacionVcubSerializable;
+import persistencia.EstacionVcubSerializable;
 
-public class EstacionVcubLogic{
+public class EstacionVcubLogic implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constante que representa la ruta del archivo
+	 */
+	public static final String RUTA_ARCHIVO="./data/data";
+	
+	public static final String ACCEPT="Accept";
+	public static final String HEADER="application/json";
 
 	EstacionVcubSerializable data;
 
 	public EstacionVcubLogic(){
 		try{
-			ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
+			ObjectInputStream ins = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO)); 
 			data = (EstacionVcubSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
 			data = new EstacionVcubSerializable();
-			File file = new File("./data/data");
+			File file = new File(RUTA_ARCHIVO);
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-				System.out.println(e1.getMessage());
+				Logger.info(e1);
 			}
 			getEstacion();
-			System.out.println(e.getMessage());
+			Logger.info(e);
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			Logger.info(e);
 		}
 	}
 
@@ -49,7 +62,7 @@ public class EstacionVcubLogic{
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty(ACCEPT, HEADER);
 
 			if(conn.getResponseCode()!=200){
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
@@ -74,7 +87,7 @@ public class EstacionVcubLogic{
 			System.out.println(data.getVcubs());
 			conn.disconnect();
 		}catch(Exception e){
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 
@@ -85,7 +98,7 @@ public class EstacionVcubLogic{
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty(ACCEPT, HEADER);
 
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
@@ -101,7 +114,7 @@ public class EstacionVcubLogic{
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			Logger.info(e);
 			throw e;
 		}
 	}
@@ -113,7 +126,7 @@ public class EstacionVcubLogic{
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
-			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty(ACCEPT, HEADER);
 
 			if(conn.getResponseCode()!=200){
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode()+"  "+conn.getResponseMessage());
@@ -133,7 +146,7 @@ public class EstacionVcubLogic{
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			Logger.info(e);
 			throw e;
 		}
 	}
@@ -145,7 +158,7 @@ public class EstacionVcubLogic{
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
-			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty(ACCEPT, HEADER);
 
 			if(conn.getResponseCode()!=200){
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode()+"  "+conn.getResponseMessage());
@@ -178,7 +191,7 @@ public class EstacionVcubLogic{
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty(ACCEPT, HEADER);
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
 			System.out.println("Output from server .... \n");
@@ -204,14 +217,13 @@ public class EstacionVcubLogic{
 
 	public void persist(){
 		try{
-			FileOutputStream out = new FileOutputStream("./data/data");
+			FileOutputStream out = new FileOutputStream(RUTA_ARCHIVO);
 			ObjectOutputStream os = new ObjectOutputStream(out);
 			os.writeObject(data);
 			os.flush(); 
 			os.close();
 		}catch(Exception e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			Logger.info(e);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package Persistencia;
+package persistencia;
 
 import java.io.Serializable;
 
