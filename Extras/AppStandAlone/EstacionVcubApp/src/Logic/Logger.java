@@ -2,10 +2,10 @@ package logic;
 
 public class Logger {
 
-	public Logger() {
+	private Logger() {
 	}
 
 	public static void info(Exception e){
-		
+		System.out.println(e);
 	}
 }

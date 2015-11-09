@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.management.monitor.MonitorSettingException;
+
 import persistencia.TranviaSerializable;
 
 
@@ -55,6 +57,9 @@ public class TranviaLogic{
      * Constante que representa la ruta del archivo
      */
     public static final String RUTA_ARCHIVO="./data/data";
+    
+    
+    public static final String URL="http://172.24.100.35:9000/tranvia";
 
     /**
 	 * Atributos de datos.
@@ -85,39 +90,33 @@ public class TranviaLogic{
 	//PIDE LA INFORMACION DE UN TRANVIA A LA CENTRAL PARA SIMULARLO
 	public void getTranvia(){
 		try{
-			URL url = new URL("http://172.24.100.35:9000/tranvia");
+			URL url = new URL(URL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 			
 			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new TranviaException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
 			String[] at1 = output.split(",");
 			for (String string : at1) {
 				String[] at2 = string.split(":");
-				if(at2[0].equals("[{\"id\""))
+				if("[{\"id\"".equals(at2[0]))
 					data.setId(Long.parseLong(at2[1]));
-				if(at2[0].equals("\"longitud\""))
+				if("\"longitud\"".equals(at2[0]))
 					data.setLongitud(Double.parseDouble(at2[1]));
-				if(at2[0].equals("\"latitud\""))
+				if("\"latitud\"".equals(at2[0]))
 					data.setLatitud(Double.parseDouble(at2[1]));
-				if(at2[0].equals("\"estado\""))
+				if("\"estado\"".equals(at2[0]))
 					data.setEstado(Integer.parseInt(at2[1]));
-				if(at2[0].equals("\"Kilometraje\""))
+				if("\"Kilometraje\"".equals(at2[0]))
 					data.setKilometraje(Integer.parseInt(at2[1]));
-				if(at2[0].equals("\"linea\""))
+				if("\"linea\"".equals(at2[0]))
 					data.setKilometraje(Integer.parseInt(at2[1].replace("}","")));
 			}
-			System.out.println(data.getId());
-			System.out.println(data.getLongitud());
-			System.out.println(data.getLatitud());
-			System.out.println(data.getEstado());
-			System.out.println(data.getKilometraje());
-			System.out.println(data.getLinea());
 			conn.disconnect();
 		}catch(Exception e){
 			Logger.info(e);
@@ -130,33 +129,30 @@ public class TranviaLogic{
 		data.setLatitud(lat);
 	}
 	
-	public void enviarPosicion()throws Exception{
+	public void enviarPosicion()throws TranviaException{
 		try{
-			URL url = new URL("http://172.24.100.35:9000/tranvia/"+data.getId());
+			URL url = new URL(URL+data.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Accept", "application/json");
 			String input = "{\"longitud\":"+data.getLongitud()+",\"latitud\":"+data.getLatitud()+"}";
-			System.out.println(input);
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
 			os.flush();
-			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output=buff.readLine();
 			if(conn.getResponseCode()!=200)
-				System.out.println("Error enviando posicion: "+conn.getResponseCode()+conn.getContentType()+conn.getResponseMessage());
+				throw new TranviaException("Error enviando posicion: "+conn.getResponseCode()+conn.getContentType()+conn.getResponseMessage());
 			conn.disconnect();
 			System.out.println("Working");
 		}catch(Exception e){
-			throw e;
+			throw new TranviaException(e.getMessage());
 		}
 	}
 	
 	//EMERGENCIA
-	public String reportarEmergencia(String des, int tipoAcc, String mag)throws Exception{
+	public String reportarEmergencia(String des, int tipoAcc, String mag)throws TranviaException{
 		try{
-			URL url = new URL("http://172.24.100.35:9000/tranvia/"+data.getId()+"/reportarAccidente");
+			URL url = new URL(URL+data.getId()+"/reportarAccidente");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
@@ -169,14 +165,12 @@ public class TranviaLogic{
 			os.write(input.getBytes());
 			os.flush();
 			if(conn.getResponseCode()!=200)
-				System.out.println("Error enviando posicion: "+conn.getResponseCode()+" "+conn.getContentType()+" "+conn.getResponseMessage());
+				throw new TranviaException("Error enviando posicion: "+conn.getResponseCode()+" "+conn.getContentType()+" "+conn.getResponseMessage());
 			
-			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String output=buff.readLine();
 			conn.disconnect();
 			return "";
 		}catch(Exception e){
-			throw e;
+			throw new TranviaException(e.getMessage());
 		}
 	}
 	

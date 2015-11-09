@@ -16,10 +16,7 @@ import java.net.URL;
 import persistencia.EstacionVcubSerializable;
 
 public class EstacionVcubLogic implements Serializable{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -29,11 +26,12 @@ public class EstacionVcubLogic implements Serializable{
 	
 	public static final String ACCEPT="Accept";
 	public static final String HEADER="application/json";
+	public static final String URL="http://172.24.100.35:9000/estacionvcub";
 
-	EstacionVcubSerializable data;
+	private EstacionVcubSerializable data;
 
 	public EstacionVcubLogic(){
-		try{
+        try{
 			ObjectInputStream ins = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO)); 
 			data = (EstacionVcubSerializable)ins.readObject();
 			ins.close();
@@ -58,43 +56,39 @@ public class EstacionVcubLogic implements Serializable{
 
 	public void getEstacion(){
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub");
+			URL url = new URL(URL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty(ACCEPT, HEADER);
 
 			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new EstacionVcubException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
 			String at1[] = output.split(",");
 			for (String string : at1) {
 				String at2[] = string.split(":");
-				if(at2[0].equals("[{\"id\""))
+				if("[{\"id\"".equals(at2[0]))
 					data.setId(Long.parseLong(at2[1]));
-				if(at2[0].equals("\"nombre\""))
+				if("\"nombre\"".equals(at2[0]))
 					data.setNombre(at2[1].replaceAll("\"", "").replaceAll("}", "").replaceAll("]", ""));
-				if(at2[0].equals("\"capacidad\""))
+				if("\"capacidad\"".equals(at2[0]))
 					data.setCapacidad(Integer.parseInt(at2[1]));
-				if(at2[0].equals("\"vcubs\""))
+				if("\"vcubs\"".equals(at2[0]))
 					data.setVcubs(Integer.parseInt(at2[1]));
 			}
-			System.out.println(data.getNombre());
-			System.out.println(data.getId());
-			System.out.println(data.getCapacidad());
-			System.out.println(data.getVcubs());
 			conn.disconnect();
 		}catch(Exception e){
 			Logger.info(e);
 		}
 	}
 
-	public int llenarEstacion() throws Exception {
+	public int llenarEstacion() throws EstacionVcubException {
 		int rta=0;
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId());
+			URL url = new URL(URL+data.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
@@ -105,56 +99,52 @@ public class EstacionVcubLogic implements Serializable{
 			String at1[] = output.split(",");
 			for (String string : at1) {
 				String at2[] = string.split(":");
-				if(at2[0].equals("\"capacidad\""))
+				if("\"capacidad\"".equals(at2[0]))
 					data.setCapacidad(Integer.parseInt(at2[1]));
-				if(at2[0].equals("\"vcubs\""))
+				if("\"vcubs\"".equals(at2[0]))
 					data.setVcubs(Integer.parseInt(at2[1]));
 			}
 			rta = data.getCapacidad();
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			Logger.info(e);
-			throw e;
+			throw new EstacionVcubException(e.getMessage());
 		}
 	}
 
-	public String retiroVcub(Long usuarioCC) throws Exception{
+	public String retiroVcub(Long usuarioCC) throws EstacionVcubException{
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId()+"/usuario/"+usuarioCC);
+			URL url = new URL(URL+data.getId()+"/usuario/"+usuarioCC);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
 			conn.setRequestProperty(ACCEPT, HEADER);
 
 			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode()+"  "+conn.getResponseMessage());
+				throw new EstacionVcubException("Failed : HTTP error code : " + conn.getResponseCode()+"  "+conn.getResponseMessage());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
-			System.out.println("Output from server .... \n");
 			while((output = buff.readLine())!=null){
 				String[] at1 = output.split(",");
 				for (String string : at1) {
 					String[] at2=string.split(":");
-					if(at2[0].equals("\"vcubsEnUso\""))
+					if("\"vcubsEnUso\"".equals(at2[0]))
 						rta = at2[1]+":";
 				}
-				System.out.println(output);
 			}
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			Logger.info(e);
-			throw e;
+			throw new EstacionVcubException(e.getMessage());
 		}
 	}
 
-	public String devolucionVcub(Long usuarioCC) throws Exception{
+	public String devolucionVcub(Long usuarioCC) throws EstacionVcubException{
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.35:9000/estacionvcub/"+data.getId()+"/usuario/"+usuarioCC+"/devolver");
+			URL url = new URL(URL+data.getId()+"/usuario/"+usuarioCC+"/devolver");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("PUT");
@@ -165,53 +155,49 @@ public class EstacionVcubLogic implements Serializable{
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
-			System.out.println("Output from server .... \n");
 			while((output = buff.readLine())!=null){
 				String[] at1 = output.split(",");
 				for (String string : at1) {
 					String[] at2=string.split(":");
-					if(at2[0].equals("\"vcubsEnUso\""))
+					if("\"vcubsEnUso\"".equals(at2[0]))
 						rta = at2[1]+":";
-					if(at2[0].equals("\"error"))
+					else if ("\"error".equals(at2[0]))
 						throw new Exception(at2[1].replace("\"",""));
 				}
-				System.out.println(output);
 			}
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			throw e;
+			throw new EstacionVcubException(e.getMessage());
 		}
 	}
 
-	public String verificarUsuario(Long usuarioCC)throws Exception{
+	public String verificarUsuario(Long usuarioCC)throws EstacionVcubException{
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.35:9000/usuario/"+usuarioCC+"/login");
+			URL url = new URL(URL+usuarioCC+"/login");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty(ACCEPT, HEADER);
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
-			System.out.println("Output from server .... \n");
 			while((output = buff.readLine())!=null){
 				String[] at1 = output.split(",");
 				for (String string : at1) {
 					String[] at2=string.split(":");
-					if(at2[0].equals("\"vcubsEnUso\""))
+					if("\"vcubsEnUso\"".equals(at2[0]))
 						rta = rta + at2[1];
-					if(at2[0].equals("\"error\""))
+					if("\"error\"".equals(at2[0]))
 						throw new Exception(at2[1]);
-					if(at2[0].equals("\"nombre\""))
+					if("\"nombre\"".equals(at2[0]))
 						rta = at2[1]+":";
 				}
-				System.out.println(output);
 			}
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			throw e;
+			throw new EstacionVcubException(e.getMessage());
 		}
 	}
 

@@ -133,9 +133,9 @@ public class Usuario extends Model{
     /**
      * Metodo que se encarga de reducir en valor de 1 el numero de vCubs en uso por el usuario
      */
-    public void devolverVcubEnUso() throws Exception{
+    public void devolverVcubEnUso() throws PlayException{
         if(vcubsEnUso<=0) {
-            throw new Exception("No debe devolver mas vcubs.");
+            throw new PlayException("No debe devolver mas vcubs.");
         }else{
             this.vcubsEnUso--;
         }

@@ -31,7 +31,9 @@ public class PedidoMovibusLogic implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	PedidoMovibusSerializable data;
+	private static final String URL="http://172.24.100.49:9000/pedidoMovibus/";
+	
+	private PedidoMovibusSerializable data;
 	
 	public PedidoMovibusLogic()
 	{
@@ -40,6 +42,7 @@ public class PedidoMovibusLogic implements Serializable{
 			data = (PedidoMovibusSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
+			Logger.info(e);
 			data = new PedidoMovibusSerializable();
 			File file = new File("./data/data");
 			try {
@@ -63,14 +66,14 @@ public class PedidoMovibusLogic implements Serializable{
 	
 	public void getPedidoMovibus(Long long1){
 		try{
-			URL url = new URL("http://172.24.100.49:9000/pedidoMovibus/"+long1+"/byMovibus");
+			URL url = new URL(URL+long1+"/byMovibus");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 			
 			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new MovibusException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
@@ -157,22 +160,17 @@ public class PedidoMovibusLogic implements Serializable{
 			movi.setPosicionLong(posLong);
 			
 			data.setMovibus(movi);
-			
-			System.out.println(data.getId());
-			System.out.println("Conductor:"+data.getConductor().getNombre());
-			System.out.println("Usuario:"+data.getUsuario().getNombre());
-			System.out.println("Movibus id:"+data.getMovibus().getId());
 			conn.disconnect();
 		}catch(Exception e){
 			Logger.info(e);
 		}
 	}
 	
-	public String reportarTerminacion(int tempR) throws Exception{
+	public String reportarTerminacion(int tempR) throws MovibusException{
 		Long tem = new Long(tempR);
 		String rta="";
 		try{
-			URL url = new URL("http://172.24.100.49:9000/pedidoMovibus/reportarPedidoTerminado");
+			URL url = new URL(URL+"reportarPedidoTerminado");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
@@ -183,11 +181,10 @@ public class PedidoMovibusLogic implements Serializable{
 			movRepPos.put("id", data.getId());
 			movRepPos.put("tiempo",tem);
 			
-			StringEnvelope env = new StringEnvelope();
-			String cipherText = env.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
+			String cipherText = StringEnvelope.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
 			JSONObject movRepPos2   = new JSONObject();
 			
-			movRepPos2.put("envelop", movRepPos);
+			movRepPos2.put("envelop", cipherText);
 
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 			wr.write(movRepPos2.toString());
@@ -195,21 +192,19 @@ public class PedidoMovibusLogic implements Serializable{
 			
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output;
-			System.out.println("Output from server .... \n");
 			while((output = buff.readLine())!=null){
 				String[] at1 = output.split(",");
 				for (String string : at1) {
 					String[] at2=string.split(":");
-					if(at2[0].equals("\"error")){
-						throw new Exception(at2[1].replace("\"",""));
+					if("\"error".equals(at2[0])){
+						throw new MovibusException(at2[1].replace("\"",""));
 					}
 				}
-				System.out.println(output);
 			}
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			throw e;
+			throw new MovibusException(e.getMessage());
 		}
 	}
 	

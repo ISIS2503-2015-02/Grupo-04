@@ -14,8 +14,13 @@ import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import logica.MovibusException;
+
 public class Security {
 
+	private Security() {
+
+	}
 	/**
 	 * Metodo que hace un cifrado simetrico delos bytes de entrada.
 	 * @param msg El mensaje a encriptar.
@@ -28,14 +33,18 @@ public class Security {
 	 * @throws NoSuchAlgorithmException Si el algoritmo no es valido.
 	 * @throws NoSuchPaddingException Si el padding no es valido.
 	 */
-	public static byte[] symmetricEncryption (byte[] msg, Key key)
-			throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, 
-			NoSuchAlgorithmException, NoSuchPaddingException {
-		Cipher decifrador = Cipher.getInstance("RC4"); 
-		decifrador.init(Cipher.ENCRYPT_MODE, key); 
-		return decifrador.doFinal(msg);
+	public static byte[] symmetricEncryption (byte[] msg, Key key) throws MovibusException {
+		byte[] retorno=null;
+		try {
+			Cipher decifrador = Cipher.getInstance("RC4");
+			decifrador.init(Cipher.ENCRYPT_MODE, key); 
+			retorno=decifrador.doFinal(msg);
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que hace un descifrado simetrico de los bytes de entrada.
 	 * @param msg El mensaje a desencriptar.
@@ -48,14 +57,18 @@ public class Security {
 	 * @throws NoSuchAlgorithmException Si el algoritmo no es valido.
 	 * @throws NoSuchPaddingException Si el padding no es valido.
 	 */
-	public static byte[] symmetricDecryption (byte[] msg, Key key)
-			throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, 
-			NoSuchAlgorithmException, NoSuchPaddingException {
-		Cipher decifrador = Cipher.getInstance("RC4"); 
-		decifrador.init(Cipher.DECRYPT_MODE, key); 
-		return decifrador.doFinal(msg);
+	public static byte[] symmetricDecryption (byte[] msg, Key key) throws MovibusException {
+		byte[] retorno=null;
+		try {
+			Cipher decifrador = Cipher.getInstance("RC4"); 
+			decifrador.init(Cipher.DECRYPT_MODE, key); 
+			retorno= decifrador.doFinal(msg);
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que hace un cifrado asimetrico de los bytes de entrada.
 	 * @param msg El mensaje a encriptar.
@@ -68,14 +81,18 @@ public class Security {
 	 * @throws NoSuchAlgorithmException Si el algoritmo no es valido.
 	 * @throws NoSuchPaddingException Si el padding no es valido.
 	 */
-	public static byte[] asymmetricEncryption (byte[] msg, Key key , String algo) 
-			throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, 
-			NoSuchAlgorithmException, NoSuchPaddingException {
-		Cipher decifrador = Cipher.getInstance(algo); 
-		decifrador.init(Cipher.ENCRYPT_MODE, key); 
-		return decifrador.doFinal(msg);
+	public static byte[] asymmetricEncryption (byte[] msg, Key key , String algo) throws MovibusException {
+		byte[] retorno=null;
+		try {
+			Cipher decifrador = Cipher.getInstance(algo); 
+			decifrador.init(Cipher.ENCRYPT_MODE, key); 
+			retorno= decifrador.doFinal(msg);
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que hace un descifrado simetrico de los bytes de entrada.
 	 * @param msg El mensaje a desencriptar.
@@ -88,14 +105,18 @@ public class Security {
 	 * @throws NoSuchAlgorithmException Si el algoritmo no es valido.
 	 * @throws NoSuchPaddingException Si el padding no es valido.
 	 */
-	public static byte[] asymmetricDecryption (byte[] msg, Key key , String algo) 
-			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, 
-			IllegalBlockSizeException, BadPaddingException {
-		Cipher decifrador = Cipher.getInstance(algo); 
-		decifrador.init(Cipher.DECRYPT_MODE, key); 
-		return decifrador.doFinal(msg);
+	public static byte[] asymmetricDecryption (byte[] msg, Key key , String algo) throws MovibusException {
+		byte[] retorno=null;
+		try {
+			Cipher decifrador = Cipher.getInstance(algo); 
+			decifrador.init(Cipher.DECRYPT_MODE, key); 
+			retorno= decifrador.doFinal(msg);
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que genera un codigo HMAC a partir de una llave, un mensaje y un algoritmo.
 	 * @param msg El mensaje sobre el cual se va a aplicar el digest.
@@ -107,13 +128,17 @@ public class Security {
 	 * @throws IllegalStateException Si no fue posible hacer el digest.
 	 * @throws UnsupportedEncodingException Si la codificacion no es valida.
 	 */
-	public static byte[] hmacDigest(byte[] msg, Key key, String algo) throws NoSuchAlgorithmException,
-	InvalidKeyException, IllegalStateException, UnsupportedEncodingException {
-		Mac mac = Mac.getInstance(algo);
-		mac.init(key);
+	public static byte[] hmacDigest(byte[] msg, Key key, String algo) throws MovibusException {
+		byte[] retorno=null;
+		try {
+			Mac mac = Mac.getInstance(algo);
+			mac.init(key);
 
-		byte[] bytes = mac.doFinal(msg);
-		return bytes;
+			retorno = mac.doFinal(msg);
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		return retorno;
 	}
 
 	/**
@@ -125,8 +150,7 @@ public class Security {
 	 * @return La verificacion de que el mensaje y el codigo hmac coincidan.
 	 * @throws Exception Si hubo un error al generar un mensaje HMAC.
 	 */
-	public static boolean verificarIntegridad(byte[] msg, Key key, String algo, byte [] hash ) throws Exception
-	{
+	public static boolean verificarIntegridad(byte[] msg, Key key, String algo, byte [] hash ) throws MovibusException {
 		byte [] nuevo = hmacDigest(msg, key, algo);
 		if (nuevo.length != hash.length) {
 			return false;
@@ -144,15 +168,19 @@ public class Security {
 	 * @throws NoSuchProviderException Si no hay un proveedor de seguridad.
 	 * @throws NoSuchAlgorithmException Si el algoritmo no es valido.
 	 */
-	public static SecretKey keyGenGenerator() 
-			throws NoSuchAlgorithmException, NoSuchProviderException	{
+	public static SecretKey keyGenGenerator() throws MovibusException	{
 		int tamLlave = 128;
-		
+
 		KeyGenerator keyGen;
 		SecretKey key;
-		keyGen = KeyGenerator.getInstance("RC4","BC");
-		keyGen.init(tamLlave);
-		key = keyGen.generateKey();
+		try {
+			keyGen = KeyGenerator.getInstance("RC4","BC");
+			keyGen.init(tamLlave);
+			key = keyGen.generateKey();
+		} catch (Exception e) {
+			throw new MovibusException(e.getMessage());
+		} 
+		
 		return key;
 	}
 }

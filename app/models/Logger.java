@@ -1,16 +1,11 @@
 package models;
 
-import org.json.*;
-
 public class Logger {
 
-	public Logger() {
+	private Logger() {
 	}
 
 	public static void info(Exception e){
-		
-	}
-	public static void infoJSON(JSONException e){
-
+		System.out.println(e);
 	}
 }

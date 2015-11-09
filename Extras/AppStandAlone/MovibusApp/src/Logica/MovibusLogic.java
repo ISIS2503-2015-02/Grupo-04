@@ -28,8 +28,11 @@ import persistence.MovibusSerializable;
 
 public class MovibusLogic {
 
-	MovibusSerializable data;
-	public PublicKey serverPublicKey;
+	public static final String URL="http://172.24.100.49:9000/movibus/";
+	public static final String URL_SEGURIDAD="http://172.24.100.49:9000/seguridad/";
+	private MovibusSerializable data;
+	private PublicKey serverPublicKey;
+	
 	
 	public MovibusLogic()
 	{
@@ -57,14 +60,14 @@ public class MovibusLogic {
 	
 	public void getMovibus(Long idM){
 		try{
-			URL url = new URL("http://172.24.100.49:9000/movibus/"+idM);
+			URL url = new URL(URL+idM);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 			
 			if(conn.getResponseCode()!=200){
-				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+				throw new MovibusException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
@@ -81,27 +84,21 @@ public class MovibusLogic {
 			data.setKilometraje(kilom);
 			data.setPosicionLat(latpos);
 			data.setPosicionLong(lonpos);
-			
-			System.out.println(data.getId());
-			System.out.println(data.getEstad());
-			System.out.println(data.getPosicionLat());
-			System.out.println(data.getPosicionLong());
-			System.out.println(data.getKilometraje());
 			conn.disconnect();
 		}catch(Exception e){
 			Logger.info(e);
 		}
 	}
 	
-	public String reportePosicion() throws Exception{
+	public String reportePosicion() throws MovibusException{
 		String rta="";
 		try{
 			data = new MovibusSerializable();
-			data.setId(new Long(01));
+			data.setId(new Long(1));
 			data.setKilometraje(123);
 			data.setPosicionLat(12123.0);
 			data.setPosicionLong(123543.0);
-			URL url = new URL("http://172.24.100.35:9000/movibus/posicion");
+			URL url = new URL(URL+"posicion");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -115,11 +112,11 @@ public class MovibusLogic {
 			movRepPos.put("longitud",data.getPosicionLong());
 			movRepPos.put("latitud", data.getPosicionLat());
 			
-			StringEnvelope env = new StringEnvelope();
-			String cipherText = env.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
+			String cipherText = StringEnvelope.wrap(movRepPos.toString(), "aa09cee77e1d606d5ab06500ac95729c");
+			
 			JSONObject movRepPos2   = new JSONObject();
 			
-			movRepPos2.put("envelop", movRepPos);
+			movRepPos2.put("envelop", cipherText);
 
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 			wr.write(movRepPos.toString());
@@ -127,7 +124,7 @@ public class MovibusLogic {
 			conn.disconnect();
 			return rta;
 		}catch(Exception e){
-			throw e;
+			throw new MovibusException(e.getMessage());
 		}
 	}
 	
@@ -147,7 +144,7 @@ public class MovibusLogic {
 	{
 
 		try{
-		URL url1 = new URL("http://172.24.100.35:9000/seguridad");
+		URL url1 = new URL(URL_SEGURIDAD);
 		HttpURLConnection conn1 = (HttpURLConnection) url1.openConnection();
 		conn1.setRequestProperty("Content-Type", "application/json");
 		conn1.setRequestProperty("Accept", "application/json");
@@ -155,7 +152,7 @@ public class MovibusLogic {
 		
 
 		if(conn1.getResponseCode()!=200){
-			throw new RuntimeException("Failed : HTTP error code : " + conn1.getResponseCode());
+			throw new MovibusException("Failed : HTTP error code : " + conn1.getResponseCode());
 		}
 		BufferedReader buff = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
 		String output=buff.readLine();

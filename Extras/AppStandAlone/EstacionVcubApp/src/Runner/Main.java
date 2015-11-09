@@ -22,19 +22,19 @@ public class Main extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	EstacionVcubLogic logic;
-	JPanel everything;
-	JPanel buts;
-	JButton but1;
-	JButton but2;
-	JPanel userIn;
-	JLabel lab;
-	JTextField input;
-	JButton check;
-	JPanel vcubs;
-	JLabel success;
-	JLabel numVc;
-	JButton refill;
+	private EstacionVcubLogic logic;
+	private JPanel everything;
+	private JPanel buts;
+	private JButton but1;
+	private JButton but2;
+	private JPanel userIn;
+	private JLabel lab;
+	private JTextField input;
+	private JButton check;
+	private JPanel vcubs;
+	private JLabel success;
+	private JLabel numVc;
+	private JButton refill;
 
 	public Main(){
 		logic = new EstacionVcubLogic();
@@ -85,7 +85,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		
+		new Main();
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class Main extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog( this, "Numero de identificacion invalido.", "Error de identificacion", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		if(event.getActionCommand().equals("verificar")){
+		if("verificar".equals(event.getActionCommand())){
 			if(!"".equals(input.getText()) && !"admin".equals(input.getText())){
 				String[] rta=null;
 				try{

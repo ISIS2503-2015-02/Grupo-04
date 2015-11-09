@@ -28,7 +28,7 @@ public class UsuarioSerializable {
     // Constructor
     //---------------------------------------------------------------------
 
-    public UsuarioSerializable(String nombre,int cedula,int celular,String correo,long tarjetaBancaria) {
+    public UsuarioSerializable(String nombre,int cedula,int celular) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;

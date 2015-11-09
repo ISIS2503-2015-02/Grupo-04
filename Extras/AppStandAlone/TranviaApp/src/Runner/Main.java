@@ -32,10 +32,9 @@ public class Main extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("PANIC")){
+		if("PANIC".equals(e.getActionCommand())){
 			try {
 				logic.reportarEmergencia("Breve descripcion de la emergencia", 0, "Baja");
-				System.out.println("PANIC");
 			} catch (Exception e1) {
 				Logger.info(e1);
 			}
@@ -52,7 +51,6 @@ public class Main extends JFrame implements ActionListener{
 		logic = new TranviaLogic();
 		EnviarPosicion enviador = new EnviarPosicion(logic);
 		enviador.start();
-		Main main = new Main();
 	}
 
 
@@ -63,6 +61,7 @@ final class EnviarPosicion extends Thread{
 		this.logic  = logic;
 	}
 	
+	@Override
 	public void run(){
 		Date d = new Date();
 		while(true){
@@ -71,7 +70,6 @@ final class EnviarPosicion extends Thread{
 				d=c;
 				try {
 					logic.enviarPosicion();
-					System.out.println("Envio Posicion");
 				} catch (Exception e) {
 					Logger.info(e);
 				}

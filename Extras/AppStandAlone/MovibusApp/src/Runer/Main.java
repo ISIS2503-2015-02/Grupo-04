@@ -24,42 +24,42 @@ import persistence.PedidoMovibusSerializable;
 public class Main  extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
-	static MovibusLogic logic;
-	PedidoMovibusLogic logic2;
-	JPanel everything;
-	JPanel buts;
-	JButton but1;
-	JButton but2;
-	JPanel moviIn;
-	JPanel tempR;
-	JLabel lab;
-	JLabel tem;
-	JTextField input;
-	JTextField input2;
-	JButton check;
-	JButton check2;
-	JPanel termP;
-	JPanel info;
-	JPanel info2;
-	JLabel success;
-	JLabel idPed;
-	JLabel usNom;
-	JLabel conNom;
-	JLabel idBus;
-	JLabel cordDes;
-	JLabel cordct;
-	JLabel kilom;
-	JLabel idPed2;
-	JLabel usNom2;
-	JLabel conNom2;
-	JLabel idBus2;
-	JLabel cordDes2;
-	JLabel cordct2;
-	JLabel kilom2;
+	private static MovibusLogic logic;
+	private PedidoMovibusLogic logic2;
+	private JPanel everything;
+	private JPanel buts;
+	private JButton but1;
+	private JButton but2;
+	private JPanel moviIn;
+	private JPanel tempR;
+	private JLabel lab;
+	private JLabel tem;
+	private JTextField input;
+	private JTextField input2;
+	private JButton check;
+	private JButton check2;
+	private JPanel termP;
+	private JPanel info;
+	private JPanel info2;
+	private JLabel success;
+	private JLabel idPed;
+	private JLabel usNom;
+	private JLabel conNom;
+	private JLabel idBus;
+	private JLabel cordDes;
+	private JLabel cordct;
+	private JLabel kilom;
+	private JLabel idPed2;
+	private JLabel usNom2;
+	private JLabel conNom2;
+	private JLabel idBus2;
+	private JLabel cordDes2;
+	private JLabel cordct2;
+	private JLabel kilom2;
 	JButton refill;
 
 	public Main(){
-//		logic = new MovibusLogic();
+		logic = new MovibusLogic();
 		logic2 = new PedidoMovibusLogic();
 		this.setSize(500, 700);
 		this.setResizable(false);
@@ -187,14 +187,13 @@ public class Main  extends JFrame implements ActionListener{
 					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.CENTER);
-					//					System.out.println("Error con el numero de identificacion");
 				}
 				termP.setVisible(true);
 			}else{
 				JOptionPane.showMessageDialog( this, "No se ha iniciado sesion con un movibus.", "Error de inicio de sesion.", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		if(event.getActionCommand().equals("darinfo"))
+		if("darinfo".equals(event.getActionCommand()))
 		{
 			if(logic.getId()!=null){
 				try {
@@ -221,7 +220,6 @@ public class Main  extends JFrame implements ActionListener{
 					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
-					//					System.out.println("Error con el numero de identificacion");
 				}
 				this.termP.setVisible(true);
 			}
@@ -230,8 +228,8 @@ public class Main  extends JFrame implements ActionListener{
 			}
 		}
 
-		if(event.getActionCommand().equals("terminar")){
-			if(logic2.getId()!=null&&!input.getText().equals("")&&isNumeric(input2.getText())){
+		if("terminar".equals(event.getActionCommand())){
+			if(logic2.getId()!=null&&!"".equals(input.getText())&&isNumeric(input2.getText())){
 				try{
 					String tempoReal = input2.getText();
 					int tiempo = Integer.parseInt(tempoReal);
@@ -239,33 +237,28 @@ public class Main  extends JFrame implements ActionListener{
 					success.setText("Operacion Exitosa");
 					termP.add(success, BorderLayout.EAST);
 					JOptionPane.showMessageDialog( this, "No se ha iniciado sesion con un movibus.", "Error de inicio de sesion.", JOptionPane.ERROR_MESSAGE );
-					//				numVc.setText("Numero de Vcubs rentadas : "+rta[0]);
 				}catch(Exception e){
 					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
-					//					numVc.setText("Error con el numero de identificacion.");
 				}
 				termP.setVisible(true);
 			}else{
 				JOptionPane.showMessageDialog( this, "Numero de identificacion invalido.", "Error de identificacion", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		if(event.getActionCommand().equals("verificar")){
-			if(!input.getText().equals("")&&isNumeric(input.getText())){
+		if("verificar".equals(event.getActionCommand())){
+			if(!"".equals(input.getText())&&isNumeric(input.getText())){
 				try{
 					String idMovibusT = input.getText();
-					int idMovibusC = Integer.parseInt(idMovibusT);
-					long idM = new Long(idMovibusC);
-					logic.getMovibus(idM);
+					long idMovibusC = Long.parseLong(idMovibusT);
+					logic.getMovibus(idMovibusC);
 					success.setText("Movibus: " + input.getText());
 					termP.add(success, BorderLayout.EAST);
-					//					numVc.setText("Numero de Vcubs rentadas : "+rta[1]);
 				}catch(Exception e){
 					Logger.info(e);
 					success.setText("Operacion Fallida");
 					termP.add(success, BorderLayout.EAST);
-					//					numVc.setText("Error con el numero de identificacion.");
 				}
 				termP.setVisible(true);
 			}else{
@@ -283,6 +276,7 @@ final static class EnviPos extends Thread{
 		this.logic3  = logics;
 	}
 	
+	@Override
 	public void run(){
 		Date d = new Date();
 		while(true){
@@ -291,7 +285,7 @@ final static class EnviPos extends Thread{
 				d=c;
 				try {
 					logic3.reportePosicion();
-					System.out.println("Envio Posicion");
+					Logger.info2("Envio Posicion");
 				} catch (Exception e) {
 					Logger.info(e);
 				}
