@@ -2,14 +2,40 @@ package persistence;
 
 public class ConductorSerializable {
 
+    //----------------------------------------------------------------------------
+    // Atributos
+    //----------------------------------------------------------------------------
+
+	/**
+	 * id unico del conductor por el cual esta registrado en la base de datos del servidor
+	 */
     private Long id;
 
+    /**
+     * Nombre del conductor actual
+     */
     private String nombre;
 
+    /**
+     * Numero de la cedula del conductor actual
+     */
 	private int cedula;
 
+	/**
+	 * Numero del celular del constructor actual
+	 */
     private int celular;
 
+    //----------------------------------------------------------------------------
+    // Constructores
+    //----------------------------------------------------------------------------
+    
+    /**
+     * Constructor con parametros de la clase
+     * @param nombre nombre del conductor
+     * @param cedula numero de la cedula del conductor
+     * @param celular numero del celular del conductor
+     */
     public ConductorSerializable(String nombre, int cedula, int celular) {
         this.nombre=nombre;
         this.cedula=cedula;
@@ -20,6 +46,9 @@ public class ConductorSerializable {
 		
 	}
 
+    //----------------------------------------------------------------------------
+    // Metodos  GETTERS - SETTERS
+    //----------------------------------------------------------------------------
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

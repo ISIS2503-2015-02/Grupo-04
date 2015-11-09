@@ -28,19 +28,28 @@ public class UsuarioSerializable {
     // Constructor
     //---------------------------------------------------------------------
 
+    /**
+     * Metodo constructor de la clase con atributos pasadeos por paramentro
+     * @param nombre Nombre del usuario
+     * @param cedula Numero de la cedula del usuario
+     * @param celula Numero celular del usuario
+     */
     public UsuarioSerializable(String nombre,int cedula,int celular) {
         this.nombre=nombre;
         this.cedula=cedula;
         this.celular=celular;
     }
 
-    //---------------------------------------------------------------------
-    // Metodos
-    //---------------------------------------------------------------------
-
+    /**
+     * Metodo Contructor de la clase sin atributos pasados por parametro
+     */
     public UsuarioSerializable() {
     	
 	}
+    
+    //---------------------------------------------------------------------
+    // Metodos   	GETTERS - SETTERS
+    //---------------------------------------------------------------------
 
 	public Long getId() {
         return id;

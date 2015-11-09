@@ -4,11 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 public class PedidoMovibusSerializable implements Serializable {
 
+
+	//--------------------------------------------------------------------------------
+	// Constantes
+	//--------------------------------------------------------------------------------
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	//--------------------------------------------------------------------------------
+	// Atributos
+	//--------------------------------------------------------------------------------
+	    
 	private Long id;
 
 	private Date fechaPedido;
@@ -33,6 +41,10 @@ public class PedidoMovibusSerializable implements Serializable {
     
     private Double direccionDestinoLA;
 
+    //--------------------------------------------------------------------------------
+  	// Contructores
+  	//--------------------------------------------------------------------------------
+  	
 	public PedidoMovibusSerializable(Long id ,Date fechaPed, Date fechEj, Double[] lat, Double[] lon, int tempE, int temR, UsuarioSerializable usu, MovibusSerializable mov, ConductorSerializable cond, Double destLo, Double destLa)
     {
 		this.id=id;
@@ -50,6 +62,10 @@ public class PedidoMovibusSerializable implements Serializable {
            	
     }
 
+	//--------------------------------------------------------------------------------
+	// Metodos  GETTERS - SETTERS
+	//--------------------------------------------------------------------------------
+		
 	public PedidoMovibusSerializable()
 	{
 		

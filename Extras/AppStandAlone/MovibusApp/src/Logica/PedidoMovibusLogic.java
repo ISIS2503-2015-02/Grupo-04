@@ -26,51 +26,81 @@ import persistence.UsuarioSerializable;
 
 public class PedidoMovibusLogic implements Serializable{
 
+	//----------------------------------------------------------------------------
+	//  Constantes
+	//----------------------------------------------------------------------------
+	
 	/**
-	 * 
+	 * Algo del id del pedido
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Constante que nos da la URL base para realizar pedidos de servicios al servidor concernietes a PedidoMovibus
+	 */
 	private static final String URL="http://172.24.100.49:9000/pedidoMovibus/";
 	
-	private PedidoMovibusSerializable data;
+	//----------------------------------------------------------------------------
+	//  Atributos
+	//----------------------------------------------------------------------------
 	
-	public PedidoMovibusLogic()
-	{
-		try{
-			ObjectInputStream ins = new ObjectInputStream(new FileInputStream("./data/data")); 
-			data = (PedidoMovibusSerializable)ins.readObject();
-			ins.close();
-		}catch(FileNotFoundException e){
-			Logger.info(e);
-			data = new PedidoMovibusSerializable();
-			File file = new File("./data/data");
-			try {
-				file.createNewFile();
-			} catch (IOException e1) {
-				Logger.info(e1);
-			}
-		}catch(Exception e){
-			Logger.info(e);
-		}
+	/**
+	 * Atributo que guarda la logica del PedidoMovibusSerializable
+	 */
+	private PedidoMovibusSerializable data;
+
+	//----------------------------------------------------------------------------
+	//  Constructor
+	//----------------------------------------------------------------------------
+	
+	/**
+	 * Constructor que inicializa el atributo data con un PedidoMovibusSerializable sin datos
+	 */
+	public PedidoMovibusLogic(){
+		data = new PedidoMovibusSerializable();
 	}
 
+	//----------------------------------------------------------------------------
+	//   Metodos
+	//----------------------------------------------------------------------------
+	
+	/**
+	 * Nos da el id del pedido actual
+	 * @return Long que es el id del pedido actual si es q hay en caso contrario retorna null
+	 */
 	public Long getId(){
 		return data.getId();
 	}
 	
-	public PedidoMovibusSerializable getPedido()
-	{
+	/**
+	 * Metodo que nos da el pedidoMovibusSerializable actual
+	 * @return data, puede estar creada y no ser null, pero los datos de esta pueden no estar inicializados y ser null
+	 */
+	public PedidoMovibusSerializable getPedido(){
 		return data;
 	}
 	
+	/**
+	 * Metodo que le pide al servidor los datos de un pedidoMovibus basado en la id del movibus q se da por parametro
+	 * @param long1 id del movibus del cual se quiere informacion sobre su pedido actual
+	 */
 	public void getPedidoMovibus(Long long1){
 		try{
-			URL url = new URL(URL+long1+"/byMovibus");
+			//  Conrexion con el servidor y realizacion del pedido del servicio de dar pedido movibus
+			URL url = new URL(URL+"/byMovibus");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
+			// Envio de los datos de movibus
+			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			JSONObject p = new JSONObject();
+			StringEnvelope env = new StringEnvelope();
+			String ciphertext = StringEnvelope.wrap(long1.toString(), "key");    // Encryptado de los datos a enviar
+			p.put("id", ciphertext);
+			
+			wr.write(p.toString());
+			wr.flush();
 			
 			if(conn.getResponseCode()!=200){
 				throw new MovibusException("Failed : HTTP error code : " + conn.getResponseCode());
@@ -102,7 +132,7 @@ public class PedidoMovibusLogic implements Serializable{
 			data.setDireccionDestinoLA(latDi);
 			data.setDireccionDestinoLO(lonDi);
 			
-				//Longitudes y latitudes de la ruta
+			//Longitudes y latitudes de la ruta
 			JSONArray lats= j.getJSONArray("rutaLatitudes");
 			JSONArray longs= j.getJSONArray("rutaLongitudes");
 			Double[] latits=new Double[lats.length()];
@@ -166,9 +196,13 @@ public class PedidoMovibusLogic implements Serializable{
 		}
 	}
 	
-	public String reportarTerminacion(int tempR) throws MovibusException{
+	/**
+	 * Metodo que informa al servidor que se termino el pedido y el dice cuanto tiempo se demoro en este para q termine el pedido en el servidor
+	 * @param tempR int que indica el tiempo que se demoro en realizar el pedido
+	 * @throws MovibusException En caso de haber problemas de conexion con el servidor
+	 */
+	public void reportarTerminacion(int tempR) throws MovibusException{
 		Long tem = new Long(tempR);
-		String rta="";
 		try{
 			URL url = new URL(URL+"reportarPedidoTerminado");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -202,21 +236,8 @@ public class PedidoMovibusLogic implements Serializable{
 				}
 			}
 			conn.disconnect();
-			return rta;
 		}catch(Exception e){
 			throw new MovibusException(e.getMessage());
-		}
-	}
-	
-	public void persist(){
-		try{
-		FileOutputStream out = new FileOutputStream("./data/data");
-		ObjectOutputStream os = new ObjectOutputStream(out);
-		os.writeObject(data);
-		os.flush(); 
-		os.close();
-		}catch(Exception e){
-			Logger.info(e);
 		}
 	}
 }

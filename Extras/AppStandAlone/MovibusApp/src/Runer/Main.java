@@ -22,8 +22,17 @@ import persistence.MovibusSerializable;
 import persistence.PedidoMovibusSerializable;
 
 public class Main  extends JFrame implements ActionListener{
+	
+	//---------------------------------------------------------------------------
+	//   Constantes
+	//---------------------------------------------------------------------------
+	
 	private static final long serialVersionUID = 1L;
 
+	//---------------------------------------------------------------------------
+	//   Atributos
+	//---------------------------------------------------------------------------
+	
 	private static MovibusLogic logic;
 	private PedidoMovibusLogic logic2;
 	private JPanel everything;
@@ -56,10 +65,17 @@ public class Main  extends JFrame implements ActionListener{
 	private JLabel cordDes2;
 	private JLabel cordct2;
 	private JLabel kilom2;
-	JButton refill;
+	private JButton refill;
 
+
+	//---------------------------------------------------------------------------
+	//   MAIN
+	//---------------------------------------------------------------------------
+	
 	public Main(){
 		logic = new MovibusLogic();
+		logic.getPLlave();
+		JOptionPane.showMessageDialog( this, logic.serverPublicKey , "Llave Publica del server", JOptionPane.INFORMATION_MESSAGE );
 		logic2 = new PedidoMovibusLogic();
 		this.setSize(500, 700);
 		this.setResizable(false);
@@ -135,9 +151,13 @@ public class Main  extends JFrame implements ActionListener{
 		envi.start();	
 	}
 
+
+	//---------------------------------------------------------------------------
+	//   Metodos
+	//---------------------------------------------------------------------------
+	
 	@Override
 	public void dispose(){
-		logic.persist();
 		super.dispose();
 	}
 
