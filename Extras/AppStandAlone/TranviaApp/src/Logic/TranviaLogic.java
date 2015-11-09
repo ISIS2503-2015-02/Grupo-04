@@ -58,7 +58,9 @@ public class TranviaLogic{
      */
     public static final String RUTA_ARCHIVO="./data/data";
     
-    
+    /**
+     * Cosntante que representa la url del servidor central de TBC.
+     */
     public static final String URL="http://172.24.100.35:9000/tranvia";
 
     /**
@@ -66,13 +68,18 @@ public class TranviaLogic{
 	 */
 	TranviaSerializable data;
 	
-	//CONSTRUCTOR DE LA LOGICA
+	/**
+	 * Constructor de la logica de tranvia.
+	 * Busca un archivo de datos del tranvia, si no lo encuentra crea un archivo y pide informacion al servidor central
+	 */
 	public TranviaLogic(){
 		try{
+			//Busca informacion en un archivo de datos y la carga en la aplicacion
 			ObjectInputStream ins = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO));
 			data = (TranviaSerializable)ins.readObject();
 			ins.close();
 		}catch(FileNotFoundException e){
+			//Si no encuentra el archivo crea uno nuevo y lo llena con datos pedidos al servidor central.
 			Logger.info(e);
 			data = new TranviaSerializable();
 			File file = new File(RUTA_ARCHIVO);
@@ -81,24 +88,32 @@ public class TranviaLogic{
 			} catch (IOException e1) {
 				Logger.info(e1);
 			}
+			//Pide los datos al servidor central
 			getTranvia();
 		}catch(Exception e){
 			Logger.info(e);
 		}
 	}
 	
-	//PIDE LA INFORMACION DE UN TRANVIA A LA CENTRAL PARA SIMULARLO
+	/**
+	 * Pide los datos del tranvia al servidor central de TBC
+	 */
 	public void getTranvia(){
 		try{
+			//URL del servidor central
 			URL url = new URL(URL);
+			//Configura la conexion al servidor
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			//Realiza el request
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 			
 			if(conn.getResponseCode()!=200){
+				//En caso de error arroja una excepcion
 				throw new TranviaException("Failed : HTTP error code : " + conn.getResponseCode());
 			}
+			//Recoge los datos de respeusta del servidor y los guarda en el archivo de datos.
 			BufferedReader buff = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output=buff.readLine();
 			String[] at1 = output.split(",");
@@ -119,18 +134,28 @@ public class TranviaLogic{
 			}
 			conn.disconnect();
 		}catch(Exception e){
+			//En caso de error escribe la excepcion en el logger de la aplicacion.
 			Logger.info(e);
 		}
 	}
 
-	//POSICION
+	/**
+	 * Cambia la posicion del tranvia.
+	 * @param lonDouble Longitud actual del tranvia.
+	 * @param lat Double Latitud actual del Tranvia
+	 */
 	public void cambiarPosicion(Double lon, Double lat){
 		data.setLongitud(lon);
 		data.setLatitud(lat);
 	}
 	
+	/**
+	 * Envia la posicion al servidor central de TBC
+	 * @throws TranviaException
+	 */
 	public void enviarPosicion()throws TranviaException{
 		try{
+			//Prepara la conexion y arma el URL
 			URL url = new URL(URL+data.getId());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
@@ -140,18 +165,23 @@ public class TranviaLogic{
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
 			os.flush();
+			//En caso de error arroja una excepcion
 			if(conn.getResponseCode()!=200)
 				throw new TranviaException("Error enviando posicion: "+conn.getResponseCode()+conn.getContentType()+conn.getResponseMessage());
 			conn.disconnect();
 			System.out.println("Working");
 		}catch(Exception e){
+			//Arroja un excepcion en caso de error de conexion con el servidor.
 			throw new TranviaException(e.getMessage());
 		}
 	}
 	
-	//EMERGENCIA
+	/**
+	 * Reporta una emergencia en el tranvia al servidor central.
+	 */
 	public String reportarEmergencia(String des, int tipoAcc, String mag)throws TranviaException{
 		try{
+			//Arma la conexion y el request.
 			URL url = new URL(URL+data.getId()+"/reportarAccidente");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
@@ -164,17 +194,22 @@ public class TranviaLogic{
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
 			os.flush();
+			//En caso de error arroja una excepcion.
 			if(conn.getResponseCode()!=200)
 				throw new TranviaException("Error enviando posicion: "+conn.getResponseCode()+" "+conn.getContentType()+" "+conn.getResponseMessage());
 			
 			conn.disconnect();
 			return "";
 		}catch(Exception e){
+			//En caso de un error de conexion arroja una excepcion.
 			throw new TranviaException(e.getMessage());
 		}
 	}
 	
-	//PERSISTENCIA
+	/**
+	 * Manejador de persistencia de los datos del tranvia localmente.
+	 * Escribe los datos del tranvia en un archivo local para rapido acceso.
+	 */
 	public void persist(){
 		try{
 		FileOutputStream out = new FileOutputStream(RUTA_ARCHIVO);
