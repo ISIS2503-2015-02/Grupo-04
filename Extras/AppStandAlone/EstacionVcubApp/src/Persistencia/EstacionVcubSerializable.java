@@ -38,16 +38,24 @@ public class EstacionVcubSerializable implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	/**
+	 * Devuelve la capacidad actual de vcubs en la estacion
+	 * @return int Capacidad actual de vcubs en la estacion
+	 */
 	public int getCapacidad() {
 		return capacidad;
 	}
 	/**
-	 * Actualiza el id de la estacion.
+	 * Actualiza la capacidad de vcubs de la estacin estacion.
 	 * @param id Long nuevo id.
 	 */
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
+	/**
+	 * Devuelve la capacidad de vcubs de la estacion
+	 * @return int cantidad actual de vcubs
+	 */
 	public int getVcubs() {
 		return vcubs;
 	}
@@ -58,6 +66,10 @@ public class EstacionVcubSerializable implements Serializable{
 	public void setVcubs(int vcubs) {
 		this.vcubs = vcubs;
 	}
+	/**
+	 * Devuelve el nombre de la estacion.
+	 * @return String nombre de la estacion
+	 */
 	public String getNombre() {
 		return nombre;
 	}
