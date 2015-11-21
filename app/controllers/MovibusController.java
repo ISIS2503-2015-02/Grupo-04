@@ -102,7 +102,7 @@ public class MovibusController {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public Result reportarAccidente() {
+    public Result reportarAccidente(Long id) {
         JsonNode j = request().body().asJson();
         String descripcion = j.findPath("descripcion").asText();
         String magnitud=j.findPath("magnitud").asText();

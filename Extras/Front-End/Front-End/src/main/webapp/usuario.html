@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="mainApp">
+<html>
     <head>
         <title>TBC</title>
         <link rel="shortcut icon" href="bus21.ico">
@@ -81,7 +81,7 @@
                                                 <input class="form-control" placeholder="Tiempo estimado" name="tiempoEstimado" type="number" value="" ng-model="pedidoRecord.tiempoEstimado">
                                             </div>
                                             <div class="form-group" ng-class="{'has-success': form.fechaEjecucion.$valid && form.fechaEjecucion.$dirty, 'has-error': form.fechaEjecucion.$invalid && (form.fechaEjecucion.$dirty || form.$submitted)}">
-                                                <input class="form-control" placeholder="Fecha" name="fechaEjecucion" type="text" ng-model="currentRecord.fechaEjecucion" autofocus>
+                                                <input class="form-control" placeholder="Fecha" name="fechaEjecucion" type="text" ng-model="pedidoRecord.fechaEjecucion" autofocus>
                                             </div>
                                             <!-- Change this to a button or input when using this as a form -->
                                             <div class="btn-group">
