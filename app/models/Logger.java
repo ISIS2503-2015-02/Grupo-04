@@ -8,4 +8,9 @@ public class Logger {
 	public static void info(Exception e){
 		System.out.println(e);
 	}
+
+    public static void infoJSON(Exception e){
+        System.out.println(e);
+    }
+
 }
