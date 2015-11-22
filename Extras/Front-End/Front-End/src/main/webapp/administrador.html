@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mainApp">
     <head>
         <title>TBC</title>
         <link rel="shortcut icon" href="bus21.ico">
@@ -45,16 +45,16 @@
             </section>
             <!-- end home -->
 <!-- end divider -->
-            <div ng-if="adminToolbar.isSelected(1)">
+            <div ng-if="toolbar.isSelected(1)">
                 <tranvia></tranvia>
             </div>
-            <div ng-if="adminToolbar.isSelected(2)">
+            <div ng-if="toolbar.isSelected(2)">
                 <vcubs></vcubs>
             </div>
-            <div ng-if="adminToolbar.isSelected(3)">
+            <div ng-if="toolbar.isSelected(3)">
                 <movibus></movibus>
             </div>
-            <div ng-if="adminToolbar.isSelected(4)">
+            <div ng-if="toolbar.isSelected(4)">
                 <estadisticas></estadisticas>
             </div>
         <footer>
